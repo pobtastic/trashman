@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Trashman: Routine at 52032</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="52002.html">52002</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#52032">Map</a></td>
+<td class="next">
+Next: <a href="52069.html">52069</a>
+</td>
+</tr>
+</table>
+<div class="description">52032: Handler: Time</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routine at <a href="45355.html">45355</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">Handler_Time</td>
+<td class="address-2"><span id="52032"></span>52032</td>
+<td class="instruction">LD HL,49778</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>=<a href="49778.html">Time_Remaining</a>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="52035"></span>
+<div class="comments">
+<div class="paragraph">
+Fetch the small unit of time (e.g. for "250" this is "50").
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="52035"></span>52035</td>
+<td class="instruction">LD A,(HL)</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<span class="register">HL</span>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="52036"></span>
+<div class="comments">
+<div class="paragraph">
+Take off one unit of time (see <a href="../reference/pokes.html#infinite_time">Infinite Time</a>).
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="52036"></span>52036</td>
+<td class="instruction">SUB 1</td>
+<td class="comment-1" rowspan="2"><span class="register">A</span>-=1 with BCD conversion.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="52038"></span>52038</td>
+<td class="instruction">DAA</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="52039"></span>52039</td>
+<td class="instruction">LD (HL),A</td>
+<td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<span class="register">HL</span>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="52040"></span>52040</td>
+<td class="instruction">RET NC</td>
+<td class="comment-1" rowspan="1">Return if <span class="register">A</span> is higher than 0.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="52041"></span>
+<div class="comments">
+<div class="paragraph">
+We've ticked over the small unit, so move onto the larger unit.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="52041"></span>52041</td>
+<td class="instruction">INC HL</td>
+<td class="comment-1" rowspan="1">Increment <span class="register">HL</span> by one.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="52042"></span>
+<div class="comments">
+<div class="paragraph">
+Fetch the large unit of time (e.g. for "250" this is "2").
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="52042"></span>52042</td>
+<td class="instruction">LD A,(HL)</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<span class="register">HL</span>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="52043"></span>
+<div class="comments">
+<div class="paragraph">
+Take off one unit of time.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="52043"></span>52043</td>
+<td class="instruction">SUB 1</td>
+<td class="comment-1" rowspan="2"><span class="register">A</span>-=1 with BCD conversion.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="52045"></span>52045</td>
+<td class="instruction">DAA</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="52046"></span>52046</td>
+<td class="instruction">LD (HL),A</td>
+<td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<span class="register">HL</span>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="52047"></span>52047</td>
+<td class="instruction">JR NZ,<a href="52032.html#52060">Handler_Time_Up</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="52032.html#52060">Handler_Time_Up</a> if <span class="register">A</span> is not zero.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="52049"></span>
+<div class="comments">
+<div class="paragraph">
+Flash the bonus/ time countdown when the large unit is zero.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="52049"></span>52049</td>
+<td class="instruction">LD HL,22587</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>=22587 (attribute buffer address for the bonus/ time counter).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="52052"></span>52052</td>
+<td class="instruction">LD B,4</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=4 (counter).</td>
+</tr>
+<tr>
+<td class="asm-label">Handler_Time_Flash</td>
+<td class="address-2"><span id="52054"></span>52054</td>
+<td class="instruction">SET 7,(HL)</td>
+<td class="comment-1" rowspan="1">Set bit 7 (the flash bit) of *<span class="register">HL</span>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="52056"></span>52056</td>
+<td class="instruction">INC L</td>
+<td class="comment-1" rowspan="1">Increment <span class="register">L</span> by one.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="52057"></span>52057</td>
+<td class="instruction">DJNZ <a href="52032.html#52054">Handler_Time_Flash</a></td>
+<td class="comment-1" rowspan="1">Decrease counter by one and loop back to <a href="52032.html#52054">Handler_Time_Flash</a> until counter is zero.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="52059"></span>52059</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="52060"></span>
+<div class="comments">
+<div class="paragraph">
+Is there any time left?
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">Handler_Time_Up</td>
+<td class="address-2"><span id="52060"></span>52060</td>
+<td class="instruction">RET NC</td>
+<td class="comment-1" rowspan="1">Return if <span class="register">A</span> is higher than 0 (if there is still time left).</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="52061"></span>
+<div class="comments">
+<div class="paragraph">
+There's no time left, signify the game is over.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="52061"></span>52061</td>
+<td class="instruction">POP HL</td>
+<td class="comment-1" rowspan="2">Clear the stack.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="52062"></span>52062</td>
+<td class="instruction">POP HL</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="52063"></span>52063</td>
+<td class="instruction">LD HL,45064</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>=<a href="45064.html">45064</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="52066"></span>52066</td>
+<td class="instruction">SET 2,(HL)</td>
+<td class="comment-1" rowspan="1">Set bit 2 of *<span class="register">HL</span>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="52068"></span>52068</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="52002.html">52002</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#52032">Map</a></td>
+<td class="next">
+Next: <a href="52069.html">52069</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1984 New Generation Software; 2023 ArcadeGeek LTD.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.0.</div>
+<div class="repository">Link to <a href="https://github.com/pobtastic/trashman/">Source code</a>.</div>
+<div><a href="../../asm/CB40.html">Switch to hexadecimal</a>.</div>
+</footer>
+</body>
+</html>

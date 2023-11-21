@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Trashman: Routine at 42987</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="42977.html">42977</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#42987">Map</a></td>
+<td class="next">
+Next: <a href="42997.html">42997</a>
+</td>
+</tr>
+</table>
+<div class="description">42987: Handler: Debounce Controls</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routines at <a href="42892.html">42892</a>, <a href="42997.html">PressAnyKey</a> and <a href="43097.html">43097</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">Handler_Debounce_Controls</td>
+<td class="address-2"><span id="42987"></span>42987</td>
+<td class="instruction">HALT</td>
+<td class="comment-1" rowspan="1">Halt operation (suspend CPU until the next interrupt).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="42988"></span>42988</td>
+<td class="instruction">CALL <a href="46779.html">Handler_Controls</a></td>
+<td class="comment-1" rowspan="1">Fetch the controller response (into <span class="register">E</span>) by calling <a href="46779.html">Handler_Controls</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="42991"></span>42991</td>
+<td class="instruction">LD A,192</td>
+<td class="comment-1" rowspan="3">Jump to <a href="42987.html">Handler_Debounce_Controls</a> when the control reponse is 192 (192 == "no action").</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="42993"></span>42993</td>
+<td class="instruction">CP E</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="42994"></span>42994</td>
+<td class="instruction">JR NZ,<a href="42987.html#42987">Handler_Debounce_Controls</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="42996"></span>42996</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="42977.html">42977</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#42987">Map</a></td>
+<td class="next">
+Next: <a href="42997.html">42997</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1984 New Generation Software; 2023 ArcadeGeek LTD.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.0.</div>
+<div class="repository">Link to <a href="https://github.com/pobtastic/trashman/">Source code</a>.</div>
+<div><a href="../../asm/A7EB.html">Switch to hexadecimal</a>.</div>
+</footer>
+</body>
+</html>

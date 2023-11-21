@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Trashman: Routine at 43332</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="43220.html">43220</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#43332">Map</a></td>
+<td class="next">
+Next: <a href="43386.html">43386</a>
+</td>
+</tr>
+</table>
+<div class="description">43332: Initialise Street</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routine at <a href="42384.html">GameEntryPoint</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">InitialiseStreet</td>
+<td class="address-2"><span id="43332"></span>43332</td>
+<td class="instruction">LD HL,(43902)</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>=*<a href="43902.html">ActivePlayer</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="43335"></span>43335</td>
+<td class="instruction">INC HL</td>
+<td class="comment-1" rowspan="1">Increment <span class="register">HL</span> by one.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="43336"></span>
+<div class="comments">
+<div class="paragraph">
+Fetch the active players level.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="43336"></span>43336</td>
+<td class="instruction">LD A,(HL)</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<span class="register">HL</span>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="43337"></span>
+<div class="comments">
+<div class="paragraph">
+Point to the active players score.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="43337"></span>43337</td>
+<td class="instruction">INC HL</td>
+<td class="comment-1" rowspan="1">Increment <span class="register">HL</span> by one.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="43338"></span>
+<div class="comments">
+<div class="paragraph">
+Copy the players score to the active players score memory location.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="43338"></span>43338</td>
+<td class="instruction">LD DE,52118</td>
+<td class="comment-1" rowspan="1"><span class="register">DE</span>=<a href="52118.html">ActivePlayer_Score</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="43341"></span>43341</td>
+<td class="instruction">LD BC,3</td>
+<td class="comment-1" rowspan="1"><span class="register">BC</span>=0003.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="43344"></span>43344</td>
+<td class="instruction">LDIR</td>
+<td class="comment-1" rowspan="1">Copy <span class="register">HL</span> to <span class="register">DE</span> 0003 times.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="43346"></span>43346</td>
+<td class="instruction">LD E,A</td>
+<td class="comment-1" rowspan="1"><span class="register">E</span>=current level.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="43347"></span>43347</td>
+<td class="instruction">LD HL,47722</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>=<a href="46884.html#47721">47722</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="43350"></span>43350</td>
+<td class="instruction">LD (HL),0</td>
+<td class="comment-1" rowspan="1">Write 0 to *<span class="register">HL</span>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="43352"></span>43352</td>
+<td class="instruction">CP 10</td>
+<td class="comment-1" rowspan="2">Jump to <a href="43332.html#43358">InitialiseStreet_Max</a> if <span class="register">A</span> is lower than 10.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="43354"></span>43354</td>
+<td class="instruction">JR C,<a href="43332.html#43358">InitialiseStreet_Max</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="43356"></span>43356</td>
+<td class="instruction">LD (HL),8</td>
+<td class="comment-1" rowspan="1">Write 8 to *<span class="register">HL</span>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="43358"></span>
+<div class="comments">
+<div class="paragraph">
+Create an offset in <span class="register">DE</span> for the current level.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">InitialiseStreet_Max</td>
+<td class="address-2"><span id="43358"></span>43358</td>
+<td class="instruction">LD D,0</td>
+<td class="comment-1" rowspan="1"><span class="register">D</span>=0.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="43360"></span>43360</td>
+<td class="instruction">LD IX,45171</td>
+<td class="comment-1" rowspan="1"><span class="register">IX</span>=<a href="45171.html">Table_Levels</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="43364"></span>43364</td>
+<td class="instruction">ADD IX,DE</td>
+<td class="comment-1" rowspan="1"><span class="register">IX</span>+=<span class="register">DE</span>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="43366"></span>
+<div class="comments">
+<div class="paragraph">
+Fetch the pointer to the level data.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="43366"></span>43366</td>
+<td class="instruction">LD L,(IX+0)</td>
+<td class="comment-1" rowspan="1"><span class="register">L</span>=*<span class="register">IX</span>+0.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="43369"></span>43369</td>
+<td class="instruction">LD H,(IX+1)</td>
+<td class="comment-1" rowspan="1"><span class="register">H</span>=*<span class="register">IX</span>+1.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="43372"></span>43372</td>
+<td class="instruction">LD DE,49776</td>
+<td class="comment-1" rowspan="1"><span class="register">DE</span>=<a href="49776.html">String_NumberOfBins</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="43375"></span>43375</td>
+<td class="instruction">LD BC,535</td>
+<td class="comment-1" rowspan="1"><span class="register">BC</span>=0535.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="43378"></span>43378</td>
+<td class="instruction">LDIR</td>
+<td class="comment-1" rowspan="1">Copy all the level data to the active game, starting from <a href="49776.html">String_NumberOfBins</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="43380"></span>43380</td>
+<td class="instruction">LD A,0</td>
+<td class="comment-1" rowspan="2">Write 0 to <a href="45064.html">45064</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="43382"></span>43382</td>
+<td class="instruction">LD (45064),A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="43385"></span>43385</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="43220.html">43220</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#43332">Map</a></td>
+<td class="next">
+Next: <a href="43386.html">43386</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1984 New Generation Software; 2023 ArcadeGeek LTD.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.0.</div>
+<div class="repository">Link to <a href="https://github.com/pobtastic/trashman/">Source code</a>.</div>
+<div><a href="../../asm/A944.html">Switch to hexadecimal</a>.</div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Trashman: Routine at 51978</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="51891.html">51891</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#51978">Map</a></td>
+<td class="next">
+Next: <a href="52002.html">52002</a>
+</td>
+</tr>
+</table>
+<div class="description">51978: Print Bonus/ Score</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routine at <a href="45217.html">StartGame</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="51978"></span>
+<div class="comments">
+<div class="paragraph">
+Print the current "Bonus" value.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">Print_Bonus</td>
+<td class="address-2"><span id="51978"></span>51978</td>
+<td class="instruction">LD B,2</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=2 (counter).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="51980"></span>51980</td>
+<td class="instruction">LD DE,16443</td>
+<td class="comment-1" rowspan="1"><span class="register">DE</span>=16443 (screen buffer location).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="51983"></span>51983</td>
+<td class="instruction">LD HL,49778</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>=<a href="49778.html">Time_Remaining</a>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="51986"></span>
+<div class="comments">
+<div class="paragraph">
+Work backwards.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="51986"></span>51986</td>
+<td class="instruction">INC HL</td>
+<td class="comment-1" rowspan="1">Increment <span class="register">HL</span> by one.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="51987"></span>51987</td>
+<td class="instruction">CALL <a href="51891.html">PrintNumbers</a></td>
+<td class="comment-1" rowspan="1">Call <a href="51891.html">PrintNumbers</a>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="51990"></span>
+<div class="comments">
+<div class="paragraph">
+Print the current score.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="51990"></span>51990</td>
+<td class="instruction">LD DE,16416</td>
+<td class="comment-1" rowspan="1"><span class="register">DE</span>=16416 (screen buffer location).</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="51993"></span>
+<div class="comments">
+<div class="paragraph">
+This entry point is used by the routine at <a href="43220.html">Handler_NewsFlash</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">Print_Score</td>
+<td class="address-2"><span id="51993"></span>51993</td>
+<td class="instruction">LD B,3</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=3 (counter).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="51995"></span>51995</td>
+<td class="instruction">LD HL,52120</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>=<a href="52118.html#52120">52120</a> (last digit of <a href="52118.html">ActivePlayer_Score</a>).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="51998"></span>51998</td>
+<td class="instruction">CALL <a href="51891.html">PrintNumbers</a></td>
+<td class="comment-1" rowspan="1">Call <a href="51891.html">PrintNumbers</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="52001"></span>52001</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="51891.html">51891</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#51978">Map</a></td>
+<td class="next">
+Next: <a href="52002.html">52002</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1984 New Generation Software; 2023 ArcadeGeek LTD.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.0.</div>
+<div class="repository">Link to <a href="https://github.com/pobtastic/trashman/">Source code</a>.</div>
+<div><a href="../../asm/CB0A.html">Switch to hexadecimal</a>.</div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Trashman: Routine at A77E</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="A752.html">A752</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#a77e">Map</a></td>
+<td class="next">
+Next: <a href="A78C.html">A78C</a>
+</td>
+</tr>
+</table>
+<div class="description">A77E: Blank The Middle Of The Screen</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routines at <a href="A590.html">GameEntryPoint</a>, <a href="A89B.html">Handler_StreetIntroduction</a>, <a href="A8D4.html">Handler_NewsFlash</a>, <a href="A99F.html">FinishedStreet</a>, <a href="A9EF.html">Print_YoureFired</a>, <a href="AA33.html">FiredScreen</a>, <a href="AA69.html">Print_HighScoreTable</a> and <a href="AB12.html">Messaging_GameOver</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="a77e"></span>
+<div class="comments">
+<div class="paragraph">
+Writes 00 to the middle screen area.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">BlankMiddleScreenBuffer</td>
+<td class="address-2"><span id="a77e"></span>A77E</td>
+<td class="instruction">LD HL,$4800</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>=4800.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="a781"></span>A781</td>
+<td class="instruction">LD DE,$4801</td>
+<td class="comment-1" rowspan="1"><span class="register">DE</span>=4801.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="a784"></span>A784</td>
+<td class="instruction">LD BC,$07FF</td>
+<td class="comment-1" rowspan="1"><span class="register">BC</span>=07FF.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="a787"></span>A787</td>
+<td class="instruction">LD (HL),$00</td>
+<td class="comment-1" rowspan="1">Write 00 to *<span class="register">HL</span>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="a789"></span>A789</td>
+<td class="instruction">LDIR</td>
+<td class="comment-1" rowspan="1">Copy <span class="register">HL</span> to <span class="register">DE</span> 07FF more times.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="a78b"></span>A78B</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="A752.html">A752</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#a77e">Map</a></td>
+<td class="next">
+Next: <a href="A78C.html">A78C</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1984 New Generation Software; 2023 ArcadeGeek LTD.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.0.</div>
+<div class="repository">Link to <a href="https://github.com/pobtastic/trashman/">Source code</a>.</div>
+<div><a href="../dec/asm/42878.html">Switch to decimal</a>.</div>
+</footer>
+</body>
+</html>

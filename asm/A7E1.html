@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Trashman: Routine at A7E1</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="A78C.html">A78C</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#a7e1">Map</a></td>
+<td class="next">
+Next: <a href="A7EB.html">A7EB</a>
+</td>
+</tr>
+</table>
+<div class="description">A7E1: Handler: Press "Fire" To Continue</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routine at <a href="A7F5.html">PressAnyKey</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">Handler_Press_Fire</td>
+<td class="address-2"><span id="a7e1"></span>A7E1</td>
+<td class="instruction">HALT</td>
+<td class="comment-1" rowspan="1">Halt operation (suspend CPU until the next interrupt).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="a7e2"></span>A7E2</td>
+<td class="instruction">CALL <a href="B6BB.html">Handler_Controls</a></td>
+<td class="comment-1" rowspan="1">Fetch the controller response (into <span class="register">E</span>) by calling <a href="B6BB.html">Handler_Controls</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="a7e5"></span>A7E5</td>
+<td class="instruction">LD A,$80</td>
+<td class="comment-1" rowspan="3">If the "fire" key is not being pressed (80 == "fire") jump to <a href="A7E1.html">Handler_Press_Fire</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="a7e7"></span>A7E7</td>
+<td class="instruction">CP E</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="a7e8"></span>A7E8</td>
+<td class="instruction">JR NZ,<a href="A7E1.html#a7e1">Handler_Press_Fire</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="a7ea"></span>A7EA</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="A78C.html">A78C</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#a7e1">Map</a></td>
+<td class="next">
+Next: <a href="A7EB.html">A7EB</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1984 New Generation Software; 2023 ArcadeGeek LTD.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.0.</div>
+<div class="repository">Link to <a href="https://github.com/pobtastic/trashman/">Source code</a>.</div>
+<div><a href="../dec/asm/42977.html">Switch to decimal</a>.</div>
+</footer>
+</body>
+</html>

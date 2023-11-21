@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Trashman: Routine at 52124</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="52121.html">52121</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#52124">Map</a></td>
+<td class="next">
+Next: <a href="52285.html">52285</a>
+</td>
+</tr>
+</table>
+<div class="description">52124: Routine at CB9C</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routines at <a href="42892.html">42892</a>, <a href="42997.html">PressAnyKey</a> and <a href="45217.html">StartGame</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="address-2"><span id="52124"></span>52124</td>
+<td class="instruction">LD HL,52285</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>=<a href="52285.html">52285</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="52127"></span>52127</td>
+<td class="instruction">RES 7,(HL)</td>
+<td class="comment-1" rowspan="1">Reset bit 7 of *<span class="register">HL</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="52129"></span>52129</td>
+<td class="instruction">LD A,(HL)</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<span class="register">HL</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="52130"></span>52130</td>
+<td class="instruction">RRCA</td>
+<td class="comment-1" rowspan="1">Rotate <span class="register">A</span> right one bit (with carry).</td>
+</tr>
+<tr>
+<td class="address-1"><span id="52131"></span>52131</td>
+<td class="instruction">JR C,<a href="52124.html#52176">52176</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="52124.html#52176">52176</a> if the carry bit was set.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="52133"></span>52133</td>
+<td class="instruction">RRCA</td>
+<td class="comment-1" rowspan="1">Rotate <span class="register">A</span> right one bit (with carry).</td>
+</tr>
+<tr>
+<td class="address-1"><span id="52134"></span>52134</td>
+<td class="instruction">JR C,<a href="52124.html#52219">52219</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="52124.html#52219">52219</a> if the carry bit was set.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="52136"></span>52136</td>
+<td class="instruction">RRCA</td>
+<td class="comment-1" rowspan="1">Rotate <span class="register">A</span> right one bit (with carry).</td>
+</tr>
+<tr>
+<td class="address-1"><span id="52137"></span>52137</td>
+<td class="instruction">JR C,<a href="52124.html#52235">52235</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="52124.html#52235">52235</a> if the carry bit was set.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="52139"></span>52139</td>
+<td class="instruction">RRCA</td>
+<td class="comment-1" rowspan="1">Rotate <span class="register">A</span> right one bit (with carry).</td>
+</tr>
+<tr>
+<td class="address-1"><span id="52140"></span>52140</td>
+<td class="instruction">JR C,<a href="52124.html#52156">52156</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="52124.html#52156">52156</a> if the carry bit was set.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="52142"></span>52142</td>
+<td class="instruction">RRCA</td>
+<td class="comment-1" rowspan="1">Rotate <span class="register">A</span> right one bit (with carry).</td>
+</tr>
+<tr>
+<td class="address-1"><span id="52143"></span>52143</td>
+<td class="instruction">JR C,<a href="52124.html#52167">52167</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="52124.html#52167">52167</a> if the carry bit was set.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="52145"></span>52145</td>
+<td class="instruction">RRCA</td>
+<td class="comment-1" rowspan="1">Rotate <span class="register">A</span> right one bit (with carry).</td>
+</tr>
+<tr>
+<td class="address-1"><span id="52146"></span>52146</td>
+<td class="instruction">JR C,<a href="52124.html#52210">52210</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="52124.html#52210">52210</a> if the carry bit was set.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="52148"></span>52148</td>
+<td class="instruction">LD A,6</td>
+<td class="comment-1" rowspan="2">Set border to YELLOW.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="52150"></span>52150</td>
+<td class="instruction">OUT (254),A</td>
+</tr>
+<tr>
+<td class="address-1"><span id="52152"></span>52152</td>
+<td class="instruction">HALT</td>
+<td class="comment-1" rowspan="1">HALT.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="52153"></span>52153</td>
+<td class="instruction">RES 7,(HL)</td>
+<td class="comment-1" rowspan="1">Reset bit 7 of *<span class="register">HL</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="52155"></span>52155</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="52156"></span>52156</td>
+<td class="instruction">LD DE,112</td>
+<td class="comment-1" rowspan="1"><span class="register">DE</span>=0112.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="52159"></span>52159</td>
+<td class="instruction">LD (52283),DE</td>
+<td class="comment-1" rowspan="1">Write <span class="register">DE</span> to *<a href="52124.html#52283">52283</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="52163"></span>52163</td>
+<td class="instruction">RES 3,(HL)</td>
+<td class="comment-1" rowspan="1">Reset bit 3 of *<span class="register">HL</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="52165"></span>52165</td>
+<td class="instruction">JR <a href="52124.html#52176">52176</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="52124.html#52176">52176</a>.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="52167"></span>52167</td>
+<td class="instruction">LD DE,256</td>
+<td class="comment-1" rowspan="1"><span class="register">DE</span>=0256.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="52170"></span>52170</td>
+<td class="instruction">LD (52283),DE</td>
+<td class="comment-1" rowspan="1">Write <span class="register">DE</span> to *<a href="52124.html#52283">52283</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="52174"></span>52174</td>
+<td class="instruction">RES 4,(HL)</td>
+<td class="comment-1" rowspan="1">Reset bit 4 of *<span class="register">HL</span>.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="52176"></span>52176</td>
+<td class="instruction">RES 0,(HL)</td>
+<td class="comment-1" rowspan="1">Reset bit 0 of *<span class="register">HL</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="52178"></span>52178</td>
+<td class="instruction">LD A,6</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=6.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="52180"></span>52180</td>
+<td class="instruction">LD DE,65535</td>
+<td class="comment-1" rowspan="1"><span class="register">DE</span>=65535.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="52183"></span>52183</td>
+<td class="instruction">LD IX,(52283)</td>
+<td class="comment-1" rowspan="1"><span class="register">IX</span>=<a href="52124.html#52283">52283</a>.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="52187"></span>52187</td>
+<td class="instruction">ADD IX,DE</td>
+<td class="comment-1" rowspan="1"><span class="register">IX</span>+=<span class="register">DE</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="52189"></span>52189</td>
+<td class="instruction">JR NC,<a href="52124.html#52197">52197</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="52124.html#52197">52197</a> if {} is higher.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="52191"></span>52191</td>
+<td class="instruction">BIT 7,(HL)</td>
+<td class="comment-1" rowspan="1">Test bit 7 of *<span class="register">HL</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="52193"></span>52193</td>
+<td class="instruction">JR NZ,<a href="52124.html#52207">52207</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="52124.html#52207">52207</a> if {} is not zero.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="52195"></span>52195</td>
+<td class="instruction">JR <a href="52124.html#52187">52187</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="52124.html#52187">52187</a>.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="52197"></span>52197</td>
+<td class="instruction">BIT 7,(HL)</td>
+<td class="comment-1" rowspan="1">Test bit 7 of *<span class="register">HL</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="52199"></span>52199</td>
+<td class="instruction">JR NZ,<a href="52124.html#52207">52207</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="52124.html#52207">52207</a> if {} is not zero.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="52201"></span>52201</td>
+<td class="instruction">XOR %00011000</td>
+<td class="comment-1" rowspan="1">XOR bits 3-4 (if they are set, unset them and if they are unset, set them).</td>
+</tr>
+<tr>
+<td class="address-1"><span id="52203"></span>52203</td>
+<td class="instruction">OUT (254),A</td>
+<td class="comment-1" rowspan="1">OUT 254</td>
+</tr>
+<tr>
+<td class="address-1"><span id="52205"></span>52205</td>
+<td class="instruction">JR <a href="52124.html#52183">52183</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="52124.html#52183">52183</a>.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="52207"></span>52207</td>
+<td class="instruction">RES 7,(HL)</td>
+<td class="comment-1" rowspan="1">Reset bit 7 of *<span class="register">HL</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="52209"></span>52209</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="52210"></span>52210</td>
+<td class="instruction">RES 5,(HL)</td>
+<td class="comment-1" rowspan="1">Reset bit 5 of *<span class="register">HL</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="52212"></span>52212</td>
+<td class="instruction">LD C,0</td>
+<td class="comment-1" rowspan="1"><span class="register">C</span>=0.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="52214"></span>52214</td>
+<td class="instruction">LD DE,64</td>
+<td class="comment-1" rowspan="1"><span class="register">DE</span>=0064.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="52217"></span>52217</td>
+<td class="instruction">JR <a href="52124.html#52242">52242</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="52124.html#52242">52242</a>.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="52219"></span>52219</td>
+<td class="instruction">RES 1,(HL)</td>
+<td class="comment-1" rowspan="1">Reset bit 1 of *<span class="register">HL</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="52221"></span>52221</td>
+<td class="instruction">CALL <a href="49484.html#49613">49613</a></td>
+<td class="comment-1" rowspan="1">Call <a href="49484.html#49613">49613</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="52224"></span>52224</td>
+<td class="instruction">BIT 0,(IX+0)</td>
+<td class="comment-1" rowspan="1">Test bit 0 of *<span class="register">IX</span>+0.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="52228"></span>52228</td>
+<td class="instruction">JR NZ,<a href="52124.html#52136">52136</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="52124.html#52136">52136</a> if {} is not zero.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="52230"></span>52230</td>
+<td class="instruction">LD DE,32</td>
+<td class="comment-1" rowspan="1"><span class="register">DE</span>=0032.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="52233"></span>52233</td>
+<td class="instruction">JR <a href="52124.html#52240">52240</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="52124.html#52240">52240</a>.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="52235"></span>52235</td>
+<td class="instruction">RES 2,(HL)</td>
+<td class="comment-1" rowspan="1">Reset bit 2 of *<span class="register">HL</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="52237"></span>52237</td>
+<td class="instruction">LD DE,96</td>
+<td class="comment-1" rowspan="1"><span class="register">DE</span>=0096.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="52240"></span>52240</td>
+<td class="instruction">LD C,6</td>
+<td class="comment-1" rowspan="1"><span class="register">C</span>=6.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="52242"></span>52242</td>
+<td class="instruction">LD (52283),DE</td>
+<td class="comment-1" rowspan="1">Write <span class="register">DE</span> to *<a href="52124.html#52283">52283</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="52246"></span>52246</td>
+<td class="instruction">LD DE,65535</td>
+<td class="comment-1" rowspan="1"><span class="register">DE</span>=65535.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="52249"></span>52249</td>
+<td class="instruction">LD IX,(52283)</td>
+<td class="comment-1" rowspan="1"><span class="register">IX</span>=<a href="52124.html#52283">52283</a>.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="52253"></span>52253</td>
+<td class="instruction">ADD IX,DE</td>
+<td class="comment-1" rowspan="1"><span class="register">IX</span>+=<span class="register">DE</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="52255"></span>52255</td>
+<td class="instruction">JR NC,<a href="52124.html#52263">52263</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="52124.html#52263">52263</a> if {} is higher.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="52257"></span>52257</td>
+<td class="instruction">BIT 7,(HL)</td>
+<td class="comment-1" rowspan="1">Test bit 7 of *<span class="register">HL</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="52259"></span>52259</td>
+<td class="instruction">JR NZ,<a href="52124.html#52280">52280</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="52124.html#52280">52280</a> if {} is not zero.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="52261"></span>52261</td>
+<td class="instruction">JR <a href="52124.html#52253">52253</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="52124.html#52253">52253</a>.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="52263"></span>52263</td>
+<td class="instruction">BIT 7,(HL)</td>
+<td class="comment-1" rowspan="1">Test bit 7 of *<span class="register">HL</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="52265"></span>52265</td>
+<td class="instruction">JR NZ,<a href="52124.html#52280">52280</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="52124.html#52280">52280</a> if {} is not zero.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="52267"></span>52267</td>
+<td class="instruction">CALL <a href="49484.html#49613">49613</a></td>
+<td class="comment-1" rowspan="1">Call <a href="49484.html#49613">49613</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="52270"></span>52270</td>
+<td class="instruction">LD A,(49637)</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="49484.html#49637">49637</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="52273"></span>52273</td>
+<td class="instruction">AND %00011000</td>
+<td class="comment-1" rowspan="1">Keep only bits 3-4.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="52275"></span>52275</td>
+<td class="instruction">OR C</td>
+<td class="comment-1" rowspan="1">Set the bits from <span class="register">C</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="52276"></span>52276</td>
+<td class="instruction">OUT (254),A</td>
+<td class="comment-1" rowspan="1">OUT 254</td>
+</tr>
+<tr>
+<td class="address-1"><span id="52278"></span>52278</td>
+<td class="instruction">JR <a href="52124.html#52249">52249</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="52124.html#52249">52249</a>.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="52280"></span>52280</td>
+<td class="instruction">RES 7,(HL)</td>
+<td class="comment-1" rowspan="1">Reset bit 7 of *<span class="register">HL</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="52282"></span>52282</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="52283"></span>52283</td>
+<td class="instruction">DEFW 256</td>
+<td class="comment-1" rowspan="1"></td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="52121.html">52121</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#52124">Map</a></td>
+<td class="next">
+Next: <a href="52285.html">52285</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1984 New Generation Software; 2023 ArcadeGeek LTD.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.0.</div>
+<div class="repository">Link to <a href="https://github.com/pobtastic/trashman/">Source code</a>.</div>
+<div><a href="../../asm/CB9C.html">Switch to hexadecimal</a>.</div>
+</footer>
+</body>
+</html>

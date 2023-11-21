@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Trashman: Routine at 52069</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="52032.html">52032</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#52069">Map</a></td>
+<td class="next">
+Next: <a href="52118.html">52118</a>
+</td>
+</tr>
+</table>
+<div class="description">52069: Routine at CB65</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routine at <a href="47987.html">47987</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="address-2"><span id="52069"></span>52069</td>
+<td class="instruction">PUSH IX</td>
+<td class="comment-1" rowspan="1">Stash <span class="register">IX</span> on the stack.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="52071"></span>52071</td>
+<td class="instruction">LD IX,49778</td>
+<td class="comment-1" rowspan="1"><span class="register">IX</span>=<a href="49778.html">Time_Remaining</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="52075"></span>52075</td>
+<td class="instruction">LD A,(IX+0)</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=(<span class="register">IX</span>+0).</td>
+</tr>
+<tr>
+<td class="address-1"><span id="52078"></span>52078</td>
+<td class="instruction">ADD A,(HL)</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>+=*<span class="register">HL</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="52079"></span>52079</td>
+<td class="instruction">DAA</td>
+<td class="comment-1" rowspan="1">DAA.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="52080"></span>52080</td>
+<td class="instruction">LD (IX+0),A</td>
+<td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<span class="register">IX</span>+0.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="52083"></span>52083</td>
+<td class="instruction">INC HL</td>
+<td class="comment-1" rowspan="1">Increment <span class="register">HL</span> by one.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="52084"></span>52084</td>
+<td class="instruction">LD A,(IX+1)</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=(<span class="register">IX</span>+1).</td>
+</tr>
+<tr>
+<td class="address-1"><span id="52087"></span>52087</td>
+<td class="instruction">ADC A,(HL)</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>+=*<span class="register">HL</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="52088"></span>52088</td>
+<td class="instruction">DAA</td>
+<td class="comment-1" rowspan="1">DAA.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="52089"></span>52089</td>
+<td class="instruction">LD (IX+1),A</td>
+<td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<span class="register">IX</span>+1.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="52092"></span>52092</td>
+<td class="instruction">INC HL</td>
+<td class="comment-1" rowspan="1">Increment <span class="register">HL</span> by one.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="52093"></span>52093</td>
+<td class="instruction">JR Z,<a href="52069.html#52115">52115</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="52069.html#52115">52115</a> if {} is zero.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="52095"></span>52095</td>
+<td class="instruction">LD IX,22587</td>
+<td class="comment-1" rowspan="1"><span class="register">IX</span>=22587.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="52099"></span>52099</td>
+<td class="instruction">RES 7,(IX+0)</td>
+<td class="comment-1" rowspan="1">Reset bit 7 of *<span class="register">IX</span>+0.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="52103"></span>52103</td>
+<td class="instruction">RES 7,(IX+1)</td>
+<td class="comment-1" rowspan="1">Reset bit 7 of *<span class="register">IX</span>+1.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="52107"></span>52107</td>
+<td class="instruction">RES 7,(IX+2)</td>
+<td class="comment-1" rowspan="1">Reset bit 7 of *<span class="register">IX</span>+2.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="52111"></span>52111</td>
+<td class="instruction">RES 7,(IX+3)</td>
+<td class="comment-1" rowspan="1">Reset bit 7 of *<span class="register">IX</span>+3.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="52115"></span>52115</td>
+<td class="instruction">POP IX</td>
+<td class="comment-1" rowspan="1">Restore <span class="register">IX</span> from the stack.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="52117"></span>52117</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="52032.html">52032</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#52069">Map</a></td>
+<td class="next">
+Next: <a href="52118.html">52118</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1984 New Generation Software; 2023 ArcadeGeek LTD.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.0.</div>
+<div class="repository">Link to <a href="https://github.com/pobtastic/trashman/">Source code</a>.</div>
+<div><a href="../../asm/CB65.html">Switch to hexadecimal</a>.</div>
+</footer>
+</body>
+</html>

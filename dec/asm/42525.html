@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Trashman: Routine at 42525</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="42384.html">42384</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#42525">Map</a></td>
+<td class="next">
+Next: <a href="42542.html">42542</a>
+</td>
+</tr>
+</table>
+<div class="description">42525: Handler: Time Out</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routine at <a href="42384.html">GameEntryPoint</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="42525"></span>
+<div class="comments">
+<div class="paragraph">
+Fetch the active player.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">Handler_TimeOut</td>
+<td class="address-2"><span id="42525"></span>42525</td>
+<td class="instruction">LD HL,(43902)</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>=*<a href="43902.html">ActivePlayer</a>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="42528"></span>
+<div class="comments">
+<div class="paragraph">
+Action, decrease the active players lives by one.
+</div>
+<div class="paragraph">
+See <a href="../reference/pokes.html#infinite_lives">Infinite Lives</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="42528"></span>42528</td>
+<td class="instruction">DEC (HL)</td>
+<td class="comment-1" rowspan="1">Decrease *<span class="register">HL</span> by one.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="42529"></span>
+<div class="comments">
+<div class="paragraph">
+Is the player out of lives?
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="42529"></span>42529</td>
+<td class="instruction">LD A,(HL)</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<span class="register">HL</span>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="42530"></span>42530</td>
+<td class="instruction">AND %00000011</td>
+<td class="comment-1" rowspan="1">Keep only bits 0-1.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="42532"></span>42532</td>
+<td class="instruction">JR Z,<a href="42542.html">Handler_Fired</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="42542.html">Handler_Fired</a> if is zero.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="42534"></span>42534</td>
+<td class="instruction">CALL <a href="43503.html">Print_YoureFired</a></td>
+<td class="comment-1" rowspan="1">Call <a href="43503.html">Print_YoureFired</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="42537"></span>42537</td>
+<td class="instruction">CALL <a href="42997.html">PressAnyKey</a></td>
+<td class="comment-1" rowspan="1">Call <a href="42997.html">PressAnyKey</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="42540"></span>42540</td>
+<td class="instruction">JR <a href="42384.html#42477">GameEntryPoint_2</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="42384.html#42477">GameEntryPoint_2</a>.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="42384.html">42384</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#42525">Map</a></td>
+<td class="next">
+Next: <a href="42542.html">42542</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1984 New Generation Software; 2023 ArcadeGeek LTD.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.0.</div>
+<div class="repository">Link to <a href="https://github.com/pobtastic/trashman/">Source code</a>.</div>
+<div><a href="../../asm/A61D.html">Switch to hexadecimal</a>.</div>
+</footer>
+</body>
+</html>

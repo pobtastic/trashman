@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Trashman: Routine at 46064</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="46014.html">46014</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#46064">Map</a></td>
+<td class="next">
+Next: <a href="46102.html">46102</a>
+</td>
+</tr>
+</table>
+<div class="description">46064: Routine at B3F0</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routine at <a href="45217.html">StartGame</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="address-2"><span id="46064"></span>46064</td>
+<td class="instruction">LD IX,49811</td>
+<td class="comment-1" rowspan="1"><span class="register">IX</span>=<a href="49811.html">49811</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="46068"></span>46068</td>
+<td class="instruction">LD B,7</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=7.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="46070"></span>46070</td>
+<td class="instruction">PUSH BC</td>
+<td class="comment-1" rowspan="1">Stash <span class="register">BC</span> on the stack.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="46071"></span>46071</td>
+<td class="instruction">LD A,(IX+0)</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=(<span class="register">IX</span>+0).</td>
+</tr>
+<tr>
+<td class="address-1"><span id="46074"></span>46074</td>
+<td class="instruction">CP (IX+11)</td>
+<td class="comment-1" rowspan="1">Compare <span class="register">A</span> with *<span class="register">IX</span>+11.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="46077"></span>46077</td>
+<td class="instruction">CALL C,<a href="46064.html#46089">46089</a></td>
+<td class="comment-1" rowspan="1">Call <a href="46064.html#46089">46089</a> is lower.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="46080"></span>46080</td>
+<td class="instruction">LD BC,13</td>
+<td class="comment-1" rowspan="1"><span class="register">BC</span>=0013.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="46083"></span>46083</td>
+<td class="instruction">ADD IX,BC</td>
+<td class="comment-1" rowspan="1"><span class="register">IX</span>+=<span class="register">BC</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="46085"></span>46085</td>
+<td class="instruction">POP BC</td>
+<td class="comment-1" rowspan="1">Restore <span class="register">BC</span> from the stack.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="46086"></span>46086</td>
+<td class="instruction">DJNZ <a href="46064.html#46070">46070</a></td>
+<td class="comment-1" rowspan="1">Decrease counter by one and loop back to <a href="46064.html#46070">46070</a> until counter is zero.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="46088"></span>46088</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="46089"></span>46089</td>
+<td class="instruction">PUSH IX</td>
+<td class="comment-1" rowspan="1">Stash <span class="register">IX</span> on the stack.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="46091"></span>46091</td>
+<td class="instruction">CALL <a href="45806.html">45806</a></td>
+<td class="comment-1" rowspan="1">Call <a href="45806.html">45806</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="46094"></span>46094</td>
+<td class="instruction">POP IX</td>
+<td class="comment-1" rowspan="1">Restore <span class="register">IX</span> from the stack.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="46096"></span>46096</td>
+<td class="instruction">CALL <a href="45858.html">45858</a></td>
+<td class="comment-1" rowspan="1">Call <a href="45858.html">45858</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="46099"></span>46099</td>
+<td class="instruction">LD A,23</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=23.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="46101"></span>46101</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="46014.html">46014</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#46064">Map</a></td>
+<td class="next">
+Next: <a href="46102.html">46102</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1984 New Generation Software; 2023 ArcadeGeek LTD.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.0.</div>
+<div class="repository">Link to <a href="https://github.com/pobtastic/trashman/">Source code</a>.</div>
+<div><a href="../../asm/B3F0.html">Switch to hexadecimal</a>.</div>
+</footer>
+</body>
+</html>

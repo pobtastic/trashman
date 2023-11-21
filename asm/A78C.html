@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Trashman: Routine at A78C</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="A77E.html">A77E</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#a78c">Map</a></td>
+<td class="next">
+Next: <a href="A7E1.html">A7E1</a>
+</td>
+</tr>
+</table>
+<div class="description">A78C: Routine at A78C</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routine at <a href="A6D5.html">Player_Name</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="address-2"><span id="a78c"></span>A78C</td>
+<td class="instruction">LD A,($AB8A)</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="AB8A.html">Game_Flags</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a78f"></span>A78F</td>
+<td class="instruction">AND %11110000</td>
+<td class="comment-1" rowspan="1">Keep only bits 4-7.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a791"></span>A791</td>
+<td class="instruction">OR %00001000</td>
+<td class="comment-1" rowspan="1">Set bits 3.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a793"></span>A793</td>
+<td class="instruction">LD ($AB8A),A</td>
+<td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<a href="AB8A.html">Game_Flags</a>.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="a796"></span>A796</td>
+<td class="instruction">LD A,$00</td>
+<td class="comment-1" rowspan="2">Write 00 to *<a href="CC3D.html">CC3D</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a798"></span>A798</td>
+<td class="instruction">LD ($CC3D),A</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="a79b"></span>
+<div class="comments">
+<div class="paragraph">
+This entry point is used by the routine at <a href="A80C.html">A80C</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="address-2"><span id="a79b"></span>A79B</td>
+<td class="instruction">PUSH HL</td>
+<td class="comment-1" rowspan="1">Stash <span class="register">HL</span> on the stack.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a79c"></span>A79C</td>
+<td class="instruction">LD B,$0A</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=0A.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="a79e"></span>A79E</td>
+<td class="instruction">CALL <a href="CB9C.html">$CB9C</a></td>
+<td class="comment-1" rowspan="1">Call <a href="CB9C.html">CB9C</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a7a1"></span>A7A1</td>
+<td class="instruction">LD HL,$CC3D</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>=<a href="CC3D.html">CC3D</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a7a4"></span>A7A4</td>
+<td class="instruction">LD (HL),$00</td>
+<td class="comment-1" rowspan="1">Write 00 to *<span class="register">HL</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a7a6"></span>A7A6</td>
+<td class="instruction">DJNZ <a href="A78C.html#a79e">$A79E</a></td>
+<td class="comment-1" rowspan="1">Decrease counter by one and loop back to <a href="A78C.html#a79e">A79E</a> until counter is zero.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a7a8"></span>A7A8</td>
+<td class="instruction">LD (HL),$01</td>
+<td class="comment-1" rowspan="1">Write 01 to *<span class="register">HL</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a7aa"></span>A7AA</td>
+<td class="instruction">LD HL,$0080</td>
+<td class="comment-1" rowspan="2">Write 0080 <span class="register">HL</span> to *<a href="CB9C.html#cc3b">CC3B</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a7ad"></span>A7AD</td>
+<td class="instruction">LD ($CC3B),HL</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a7b0"></span>A7B0</td>
+<td class="instruction">CALL <a href="A6C7.html">Handler_DebounceSpace</a></td>
+<td class="comment-1" rowspan="1">Call <a href="A6C7.html">Handler_DebounceSpace</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a7b3"></span>A7B3</td>
+<td class="instruction">POP HL</td>
+<td class="comment-1" rowspan="1">Restore <span class="register">HL</span> from the stack.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a7b4"></span>A7B4</td>
+<td class="instruction">CALL <a href="B6BB.html">Handler_Controls</a></td>
+<td class="comment-1" rowspan="1">Call <a href="B6BB.html">Handler_Controls</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a7b7"></span>A7B7</td>
+<td class="instruction">LD A,E</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=<span class="register">E</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a7b8"></span>A7B8</td>
+<td class="instruction">CP $18</td>
+<td class="comment-1" rowspan="2">Jump to <a href="A80C.html">A80C</a> if <span class="register">A</span> is 18</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a7ba"></span>A7BA</td>
+<td class="instruction">JR Z,<a href="A80C.html">$A80C</a></td>
+</tr>
+<tr>
+<td class="address-1"><span id="a7bc"></span>A7BC</td>
+<td class="instruction">CP $08</td>
+<td class="comment-1" rowspan="2">Jump to <a href="A80C.html#a818">A818</a> if <span class="register">A</span> is 08.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a7be"></span>A7BE</td>
+<td class="instruction">JR Z,<a href="A80C.html#a818">$A818</a></td>
+</tr>
+<tr>
+<td class="address-1"><span id="a7c0"></span>A7C0</td>
+<td class="instruction">CP $80</td>
+<td class="comment-1" rowspan="2">Jump to <a href="A78C.html#a796">A796</a> if <span class="register">A</span> is not 80.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a7c2"></span>A7C2</td>
+<td class="instruction">JR NZ,<a href="A78C.html#a796">$A796</a></td>
+</tr>
+<tr>
+<td class="address-1"><span id="a7c4"></span>A7C4</td>
+<td class="instruction">PUSH HL</td>
+<td class="comment-1" rowspan="1">Stash <span class="register">HL</span> on the stack.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a7c5"></span>A7C5</td>
+<td class="instruction">LD HL,$0040</td>
+<td class="comment-1" rowspan="2">Write 0040 to *<a href="CB9C.html#cc3b">CC3B</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a7c8"></span>A7C8</td>
+<td class="instruction">LD ($CC3B),HL</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a7cb"></span>A7CB</td>
+<td class="instruction">LD HL,$AB8A</td>
+<td class="comment-1" rowspan="2">Decrease *<a href="AB8A.html">Game_Flags</a> by one.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a7ce"></span>A7CE</td>
+<td class="instruction">DEC (HL)</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a7cf"></span>A7CF</td>
+<td class="instruction">LD A,$07</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=07.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a7d1"></span>A7D1</td>
+<td class="instruction">AND (HL)</td>
+<td class="comment-1" rowspan="1">Merge the bits from *<span class="register">HL</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a7d2"></span>A7D2</td>
+<td class="instruction">JR Z,<a href="A78C.html#a7df">$A7DF</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="A78C.html#a7df">A7DF</a> if the result is zero.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a7d4"></span>A7D4</td>
+<td class="instruction">CALL <a href="A83A.html">$A83A</a></td>
+<td class="comment-1" rowspan="1">Call <a href="A83A.html">A83A</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a7d7"></span>A7D7</td>
+<td class="instruction">CALL <a href="A7EB.html">Handler_Debounce_Controls</a></td>
+<td class="comment-1" rowspan="1">Call <a href="A7EB.html">Handler_Debounce_Controls</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a7da"></span>A7DA</td>
+<td class="instruction">POP HL</td>
+<td class="comment-1" rowspan="1">Restore <span class="register">HL</span> from the stack.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a7db"></span>A7DB</td>
+<td class="instruction">INC HL</td>
+<td class="comment-1" rowspan="1">Increment <span class="register">HL</span> by one.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a7dc"></span>A7DC</td>
+<td class="instruction">HALT</td>
+<td class="comment-1" rowspan="1">HALT.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a7dd"></span>A7DD</td>
+<td class="instruction">JR <a href="A78C.html#a79b">$A79B</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="A78C.html#a79b">A79B</a>.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="a7df"></span>A7DF</td>
+<td class="instruction">POP HL</td>
+<td class="comment-1" rowspan="1">Restore <span class="register">HL</span> from the stack.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a7e0"></span>A7E0</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="A77E.html">A77E</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#a78c">Map</a></td>
+<td class="next">
+Next: <a href="A7E1.html">A7E1</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1984 New Generation Software; 2023 ArcadeGeek LTD.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.0.</div>
+<div class="repository">Link to <a href="https://github.com/pobtastic/trashman/">Source code</a>.</div>
+<div><a href="../dec/asm/42892.html">Switch to decimal</a>.</div>
+</footer>
+</body>
+</html>

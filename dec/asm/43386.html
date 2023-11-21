@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Trashman: Routine at 43386</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="43332.html">43332</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#43386">Map</a></td>
+<td class="next">
+Next: <a href="43423.html">43423</a>
+</td>
+</tr>
+</table>
+<div class="description">43386: Initialise New Game</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routine at <a href="42384.html">GameEntryPoint</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">InitialiseNewGame</td>
+<td class="address-2"><span id="43386"></span>43386</td>
+<td class="instruction">LD HL,43904</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>=<a href="43902.html#43904">1UP_Lives</a>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="43389"></span>
+<div class="comments">
+<div class="paragraph">
+Set starting lives.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="43389"></span>43389</td>
+<td class="instruction">LD (HL),3</td>
+<td class="comment-1" rowspan="1">Write 3 to *<span class="register">HL</span>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="43391"></span>43391</td>
+<td class="instruction">INC HL</td>
+<td class="comment-1" rowspan="1">Increment <span class="register">HL</span> by one.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="43392"></span>
+<div class="comments">
+<div class="paragraph">
+Set starting level.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="43392"></span>43392</td>
+<td class="instruction">LD (HL),0</td>
+<td class="comment-1" rowspan="1">Write 0 to *<span class="register">HL</span>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="43394"></span>43394</td>
+<td class="instruction">INC HL</td>
+<td class="comment-1" rowspan="1">Increment <span class="register">HL</span> by one.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="43395"></span>
+<div class="comments">
+<div class="paragraph">
+Set starting score to 0000.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="43395"></span>43395</td>
+<td class="instruction">LD (HL),0</td>
+<td class="comment-1" rowspan="1">Write 0 to *<span class="register">HL</span>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="43397"></span>43397</td>
+<td class="instruction">INC HL</td>
+<td class="comment-1" rowspan="1">Increment <span class="register">HL</span> by one.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="43398"></span>43398</td>
+<td class="instruction">LD (HL),0</td>
+<td class="comment-1" rowspan="1">Write 0 to *<span class="register">HL</span>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="43400"></span>43400</td>
+<td class="instruction">INC HL</td>
+<td class="comment-1" rowspan="1">Increment <span class="register">HL</span> by one.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="43401"></span>43401</td>
+<td class="instruction">LD (HL),0</td>
+<td class="comment-1" rowspan="1">Write 0 to *<span class="register">HL</span>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="43403"></span>43403</td>
+<td class="instruction">INC HL</td>
+<td class="comment-1" rowspan="1">Increment <span class="register">HL</span> by one.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="43404"></span>
+<div class="comments">
+<div class="paragraph">
+Remember where we are for the copy routine ahead.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="43404"></span>43404</td>
+<td class="instruction">LD E,L</td>
+<td class="comment-1" rowspan="1"><span class="register">E</span>=<span class="register">L</span>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="43405"></span>43405</td>
+<td class="instruction">LD D,H</td>
+<td class="comment-1" rowspan="1"><span class="register">D</span>=<span class="register">H</span>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="43406"></span>
+<div class="comments">
+<div class="paragraph">
+Set the active player to be 1UP.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="43406"></span>43406</td>
+<td class="instruction">LD HL,43904</td>
+<td class="comment-1" rowspan="2">Write <a href="43902.html#43904">1UP_Lives</a> to <a href="43902.html">ActivePlayer</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="43409"></span>43409</td>
+<td class="instruction">LD (43902),HL</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="43412"></span>43412</td>
+<td class="instruction">LD BC,5</td>
+<td class="comment-1" rowspan="1"><span class="register">BC</span>=0005.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="43415"></span>43415</td>
+<td class="instruction">LDIR</td>
+<td class="comment-1" rowspan="1">Copy the same values to 2UP.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="43417"></span>
+<div class="comments">
+<div class="paragraph">
+Reset the game flags for the new game.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="43417"></span>43417</td>
+<td class="instruction">LD HL,43914</td>
+<td class="comment-1" rowspan="2">Write 0 to <a href="43914.html">Game_Flags</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="43420"></span>43420</td>
+<td class="instruction">LD (HL),0</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="43422"></span>43422</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="43332.html">43332</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#43386">Map</a></td>
+<td class="next">
+Next: <a href="43423.html">43423</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1984 New Generation Software; 2023 ArcadeGeek LTD.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.0.</div>
+<div class="repository">Link to <a href="https://github.com/pobtastic/trashman/">Source code</a>.</div>
+<div><a href="../../asm/A97A.html">Switch to hexadecimal</a>.</div>
+</footer>
+</body>
+</html>

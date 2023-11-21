@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Trashman: Routine at 43066</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="43020.html">43020</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#43066">Map</a></td>
+<td class="next">
+Next: <a href="43097.html">43097</a>
+</td>
+</tr>
+</table>
+<div class="description">43066: Routine at A83A</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routines at <a href="42892.html">42892</a> and <a href="43020.html">43020</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="43066"></span>
+<div class="comments">
+<div class="paragraph">
+Who is in play, is it 1UP or 2UP?
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="address-2"><span id="43066"></span>43066</td>
+<td class="instruction">BIT 4,(HL)</td>
+<td class="comment-1" rowspan="1">Test bit 4 of *<span class="register">HL</span>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="43068"></span>
+<div class="comments">
+<div class="paragraph">
+Default to using the 1UP name.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="address-1"><span id="43068"></span>43068</td>
+<td class="instruction">LD HL,44198</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>=<a href="44175.html#44198">Name_1UP</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="43071"></span>43071</td>
+<td class="instruction">JR Z,<a href="43066.html#43076">43076</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="43066.html#43076">43076</a> if this is player one.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="43073"></span>
+<div class="comments">
+<div class="paragraph">
+Else, use the name for 2UP.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="address-1"><span id="43073"></span>43073</td>
+<td class="instruction">LD HL,44231</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>=<a href="44175.html#44231">Name_2UP</a>.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="43076"></span>43076</td>
+<td class="instruction">LD DE,18647</td>
+<td class="comment-1" rowspan="1"><span class="register">DE</span>=18647 (screen buffer location).</td>
+</tr>
+<tr>
+<td class="address-1"><span id="43079"></span>43079</td>
+<td class="instruction">CALL <a href="45185.html">PrintString</a></td>
+<td class="comment-1" rowspan="1">Call <a href="45185.html">PrintString</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="43082"></span>43082</td>
+<td class="instruction">LD A,(43914)</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="43914.html">Game_Flags</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="43085"></span>43085</td>
+<td class="instruction">AND %00001111</td>
+<td class="comment-1" rowspan="1">Keep only bits 0-3.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="43087"></span>43087</td>
+<td class="instruction">LD HL,20447</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>=20447 (screen buffer location).</td>
+</tr>
+<tr>
+<td class="address-1"><span id="43090"></span>43090</td>
+<td class="instruction">SUB L</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>-=<span class="register">L</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="43091"></span>43091</td>
+<td class="instruction">NEG</td>
+<td class="comment-1" rowspan="1">NEG.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="43093"></span>43093</td>
+<td class="instruction">LD L,A</td>
+<td class="comment-1" rowspan="1"><span class="register">L</span>=<span class="register">A</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="43094"></span>43094</td>
+<td class="instruction">LD (HL),255</td>
+<td class="comment-1" rowspan="1">Write 255 to *<span class="register">HL</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="43096"></span>43096</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="43020.html">43020</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#43066">Map</a></td>
+<td class="next">
+Next: <a href="43097.html">43097</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1984 New Generation Software; 2023 ArcadeGeek LTD.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.0.</div>
+<div class="repository">Link to <a href="https://github.com/pobtastic/trashman/">Source code</a>.</div>
+<div><a href="../../asm/A83A.html">Switch to hexadecimal</a>.</div>
+</footer>
+</body>
+</html>

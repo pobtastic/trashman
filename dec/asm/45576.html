@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Trashman: Routine at 45576</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="45527.html">45527</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#45576">Map</a></td>
+<td class="next">
+Next: <a href="45715.html">45715</a>
+</td>
+</tr>
+</table>
+<div class="description">45576: Routine at B208</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routine at <a href="46481.html">46481</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="address-2"><span id="45576"></span>45576</td>
+<td class="instruction">LD IX,(49783)</td>
+<td class="comment-1" rowspan="1"><span class="register">IX</span>=*<a href="49783.html">49783</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="45580"></span>45580</td>
+<td class="instruction">LD L,(IX+48)</td>
+<td class="comment-1" rowspan="1"><span class="register">L</span>=*<span class="register">IX</span>+48.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="45583"></span>45583</td>
+<td class="instruction">LD H,(IX+49)</td>
+<td class="comment-1" rowspan="1"><span class="register">H</span>=*<span class="register">IX</span>+49.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="45586"></span>45586</td>
+<td class="instruction">LD DE,256</td>
+<td class="comment-1" rowspan="1"><span class="register">DE</span>=0256.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="45589"></span>45589</td>
+<td class="instruction">ADD HL,DE</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>+=<span class="register">DE</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="45590"></span>45590</td>
+<td class="instruction">LD DE,28800</td>
+<td class="comment-1" rowspan="1"><span class="register">DE</span>=<a href="28800.html">ShadowBuffer_Pixels</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="45593"></span>45593</td>
+<td class="instruction">LD BC,1056</td>
+<td class="comment-1" rowspan="1"><span class="register">BC</span>=1056.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="45596"></span>45596</td>
+<td class="instruction">CALL <a href="45715.html">PlayareaCopier</a></td>
+<td class="comment-1" rowspan="1">Call <a href="45715.html">PlayareaCopier</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="45599"></span>45599</td>
+<td class="instruction">PUSH IX</td>
+<td class="comment-1" rowspan="1">Stash <span class="register">IX</span> on the stack.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="45601"></span>45601</td>
+<td class="instruction">LD BC,50</td>
+<td class="comment-1" rowspan="1"><span class="register">BC</span>=0050.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="45604"></span>45604</td>
+<td class="instruction">ADD IX,BC</td>
+<td class="comment-1" rowspan="1"><span class="register">IX</span>+=<span class="register">BC</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="45606"></span>45606</td>
+<td class="instruction">CALL <a href="45527.html#45535">45535</a></td>
+<td class="comment-1" rowspan="1">Call <a href="45527.html#45535">45535</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="45609"></span>45609</td>
+<td class="instruction">POP IX</td>
+<td class="comment-1" rowspan="1">Restore <span class="register">IX</span> from the stack.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="45611"></span>45611</td>
+<td class="instruction">LD L,(IX+24)</td>
+<td class="comment-1" rowspan="1"><span class="register">L</span>=*<span class="register">IX</span>+24.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="45614"></span>45614</td>
+<td class="instruction">LD H,(IX+25)</td>
+<td class="comment-1" rowspan="1"><span class="register">H</span>=*<span class="register">IX</span>+25.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="45617"></span>45617</td>
+<td class="instruction">LD BC,3104</td>
+<td class="comment-1" rowspan="1"><span class="register">BC</span>=3104.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="45620"></span>45620</td>
+<td class="instruction">CALL <a href="45715.html">PlayareaCopier</a></td>
+<td class="comment-1" rowspan="1">Call <a href="45715.html">PlayareaCopier</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="45623"></span>45623</td>
+<td class="instruction">PUSH IX</td>
+<td class="comment-1" rowspan="1">Stash <span class="register">IX</span> on the stack.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="45625"></span>45625</td>
+<td class="instruction">LD BC,26</td>
+<td class="comment-1" rowspan="1"><span class="register">BC</span>=0026.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="45628"></span>45628</td>
+<td class="instruction">ADD IX,BC</td>
+<td class="comment-1" rowspan="1"><span class="register">IX</span>+=<span class="register">BC</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="45630"></span>45630</td>
+<td class="instruction">CALL <a href="45527.html">45527</a></td>
+<td class="comment-1" rowspan="1">Call <a href="45527.html">45527</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="45633"></span>45633</td>
+<td class="instruction">POP IX</td>
+<td class="comment-1" rowspan="1">Restore <span class="register">IX</span> from the stack.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="45635"></span>45635</td>
+<td class="instruction">LD L,(IX+0)</td>
+<td class="comment-1" rowspan="1"><span class="register">L</span>=*<span class="register">IX</span>+0.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="45638"></span>45638</td>
+<td class="instruction">LD H,(IX+1)</td>
+<td class="comment-1" rowspan="1"><span class="register">H</span>=*<span class="register">IX</span>+1.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="45641"></span>45641</td>
+<td class="instruction">LD BC,1056</td>
+<td class="comment-1" rowspan="1"><span class="register">BC</span>=1056.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="45644"></span>45644</td>
+<td class="instruction">CALL <a href="45715.html">PlayareaCopier</a></td>
+<td class="comment-1" rowspan="1">Call <a href="45715.html">PlayareaCopier</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="45647"></span>45647</td>
+<td class="instruction">LD L,(IX+60)</td>
+<td class="comment-1" rowspan="1"><span class="register">L</span>=*<span class="register">IX</span>+60.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="45650"></span>45650</td>
+<td class="instruction">LD H,(IX+61)</td>
+<td class="comment-1" rowspan="1"><span class="register">H</span>=*<span class="register">IX</span>+61.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="45653"></span>45653</td>
+<td class="instruction">LD DE,256</td>
+<td class="comment-1" rowspan="1"><span class="register">DE</span>=0256.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="45656"></span>45656</td>
+<td class="instruction">ADD HL,DE</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>+=<span class="register">DE</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="45657"></span>45657</td>
+<td class="instruction">LD DE,28863</td>
+<td class="comment-1" rowspan="1"><span class="register">DE</span>=<a href="28863.html">28863</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="45660"></span>45660</td>
+<td class="instruction">LD BC,1040</td>
+<td class="comment-1" rowspan="1"><span class="register">BC</span>=1040.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="45663"></span>45663</td>
+<td class="instruction">CALL <a href="45732.html">45732</a></td>
+<td class="comment-1" rowspan="1">Call <a href="45732.html">45732</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="45666"></span>45666</td>
+<td class="instruction">PUSH IX</td>
+<td class="comment-1" rowspan="1">Stash <span class="register">IX</span> on the stack.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="45668"></span>45668</td>
+<td class="instruction">LD BC,62</td>
+<td class="comment-1" rowspan="1"><span class="register">BC</span>=0062.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="45671"></span>45671</td>
+<td class="instruction">ADD IX,BC</td>
+<td class="comment-1" rowspan="1"><span class="register">IX</span>+=<span class="register">BC</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="45673"></span>45673</td>
+<td class="instruction">CALL <a href="45527.html#45535">45535</a></td>
+<td class="comment-1" rowspan="1">Call <a href="45527.html#45535">45535</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="45676"></span>45676</td>
+<td class="instruction">POP IX</td>
+<td class="comment-1" rowspan="1">Restore <span class="register">IX</span> from the stack.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="45678"></span>45678</td>
+<td class="instruction">LD L,(IX+36)</td>
+<td class="comment-1" rowspan="1"><span class="register">L</span>=*<span class="register">IX</span>+36.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="45681"></span>45681</td>
+<td class="instruction">LD H,(IX+37)</td>
+<td class="comment-1" rowspan="1"><span class="register">H</span>=*<span class="register">IX</span>+37.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="45684"></span>45684</td>
+<td class="instruction">LD BC,3088</td>
+<td class="comment-1" rowspan="1"><span class="register">BC</span>=3088.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="45687"></span>45687</td>
+<td class="instruction">CALL <a href="45732.html">45732</a></td>
+<td class="comment-1" rowspan="1">Call <a href="45732.html">45732</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="45690"></span>45690</td>
+<td class="instruction">PUSH IX</td>
+<td class="comment-1" rowspan="1">Stash <span class="register">IX</span> on the stack.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="45692"></span>45692</td>
+<td class="instruction">LD BC,38</td>
+<td class="comment-1" rowspan="1"><span class="register">BC</span>=0038.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="45695"></span>45695</td>
+<td class="instruction">ADD IX,BC</td>
+<td class="comment-1" rowspan="1"><span class="register">IX</span>+=<span class="register">BC</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="45697"></span>45697</td>
+<td class="instruction">CALL <a href="45527.html">45527</a></td>
+<td class="comment-1" rowspan="1">Call <a href="45527.html">45527</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="45700"></span>45700</td>
+<td class="instruction">POP IX</td>
+<td class="comment-1" rowspan="1">Restore <span class="register">IX</span> from the stack.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="45702"></span>45702</td>
+<td class="instruction">LD L,(IX+12)</td>
+<td class="comment-1" rowspan="1"><span class="register">L</span>=*<span class="register">IX</span>+12.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="45705"></span>45705</td>
+<td class="instruction">LD H,(IX+13)</td>
+<td class="comment-1" rowspan="1"><span class="register">H</span>=*<span class="register">IX</span>+13.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="45708"></span>45708</td>
+<td class="instruction">LD BC,1040</td>
+<td class="comment-1" rowspan="1"><span class="register">BC</span>=1040.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="45711"></span>45711</td>
+<td class="instruction">CALL <a href="45732.html">45732</a></td>
+<td class="comment-1" rowspan="1">Call <a href="45732.html">45732</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="45714"></span>45714</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="45527.html">45527</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#45576">Map</a></td>
+<td class="next">
+Next: <a href="45715.html">45715</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1984 New Generation Software; 2023 ArcadeGeek LTD.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.0.</div>
+<div class="repository">Link to <a href="https://github.com/pobtastic/trashman/">Source code</a>.</div>
+<div><a href="../../asm/B208.html">Switch to hexadecimal</a>.</div>
+</footer>
+</body>
+</html>

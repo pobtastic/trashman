@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Trashman: Pokes</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Pokes">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Pokes</td>
+</tr>
+</table>
+<ul class="contents">
+<li><a href="#infinite_time">Infinite Time</a></li>
+<li><a href="#infinite_lives">Infinite Lives</a></li>
+<li><a href="#immunity">Immunity</a></li>
+<li><a href="#time_left_for_current_level__#n$00-#n$99_">Time left for current level (00-99)</a></li>
+</ul>
+<div><span id="infinite_time"></span></div>
+<div class="box box-1">
+<div class="box-title">Infinite Time</div>
+<div class="paragraph">
+<code>
+<div>POKE <a href="../asm/CB40.html#cb44">CB45</a>,00</div>
+</code>
+</div>
+<div class="paragraph">
+This removes the code which subtracts one unit from the time.
+<table>
+<tbody>
+<tr>
+<td class="address-1"><a href="../asm/CB40.html#cb44">CB44</a></td>
+<td class="instruction">SUB 01</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div><span id="infinite_lives"></span></div>
+<div class="box box-2">
+<div class="box-title">Infinite Lives</div>
+<div class="paragraph">
+<code>
+<div>POKE <a href="../asm/A61D.html#a620">A620</a>,00</div>
+</code>
+</div>
+<div class="paragraph">
+This simply removes the following command, which would otherwise decrease the players lives.
+<table>
+<tbody>
+<tr>
+<td class="address-1"><a href="../asm/A61D.html#a620">A620</a></td>
+<td class="instruction">DEC (<span class="register">HL</span>)</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div><span id="immunity"></span></div>
+<div class="box box-1">
+<div class="box-title">Immunity</div>
+<div class="paragraph">
+<code>
+<div>POKE <a href="../asm/BF50.html#bf59">BF59</a>,C9</div>
+<div>POKE <a href="../asm/A590.html#a5d9">A5D9</a>,2A</div>
+</code>
+</div>
+<div class="paragraph">
+This alters:
+<table>
+<tbody>
+<tr>
+<td class="address-1"><a href="../asm/BF50.html#bf59">BF59</a></td>
+<td class="instruction">RET NZ</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="paragraph">
+To simply return regardless of the flag:
+<table>
+<tbody>
+<tr>
+<td class="address-1"><a href="../asm/BF50.html#bf59">BF59</a></td>
+<td class="instruction">RET</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="paragraph">
+And also changes:
+<table>
+<tbody>
+<tr>
+<td class="address-1"><a href="../asm/A590.html#a5d9">A5D9</a></td>
+<td class="instruction">JP NZ,<a href="../asm/A62E.html#a667">A667</a></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="paragraph">
+To the following (which is overwritten immediately, so just never actions the jump):
+<table>
+<tbody>
+<tr>
+<td class="address-1"><a href="../asm/A590.html#a5d9">A5D9</a></td>
+<td class="instruction">LD <span class="register">HL</span>,<a href="../asm/A62E.html#a667">A667</a></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div><span id="time_left_for_current_level__#n$00-#n$99_"></span></div>
+<div class="box box-2">
+<div class="box-title">Time left for current level (00-99)</div>
+<div class="paragraph">
+<code>
+<div>POKE <a href="../asm/C272.html">C272</a>,<em>nn</em></div>
+<div>POKE <a href="../asm/C272.html#c273">C273</a>,<em>nn</em></div>
+</code>
+</div>
+<div class="paragraph">
+For example, to set 2000 seconds:
+<code>
+<div>POKE <a href="../asm/C272.html">C272</a>,00</div>
+<div>POKE <a href="../asm/C272.html#c273">C273</a>,20</div>
+</code>
+</div>
+<div class="paragraph">
+Or, to set 750 seconds:
+<code>
+<div>POKE <a href="../asm/C272.html">C272</a>,50</div>
+<div>POKE <a href="../asm/C272.html#c273">C273</a>,07</div>
+</code>
+</div>
+</div>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1984 New Generation Software; 2023 ArcadeGeek LTD.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.0.</div>
+<div class="repository">Link to <a href="https://github.com/pobtastic/trashman/">Source code</a>.</div>
+<div><a href="../dec/reference/pokes.html">Switch to decimal</a>.</div>
+</footer>
+</body>
+</html>

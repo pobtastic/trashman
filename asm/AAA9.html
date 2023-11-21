@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Trashman: Routine at AAA9</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="AA69.html">AA69</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#aaa9">Map</a></td>
+<td class="next">
+Next: <a href="AB12.html">AB12</a>
+</td>
+</tr>
+</table>
+<div class="description">AAA9: New High Score</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routines at <a href="A590.html">GameEntryPoint</a> and <a href="A62E.html">Handler_Fired</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">NewHighScore</td>
+<td class="address-2"><span id="aaa9"></span>AAA9</td>
+<td class="instruction">LD IX,$B043</td>
+<td class="comment-1" rowspan="1"><span class="register">IX</span>=<a href="B043.html">Table_HighScore</a>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="aaad"></span>
+<div class="comments">
+<div class="paragraph">
+The game stores four high scores.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="aaad"></span>AAAD</td>
+<td class="instruction">LD B,$04</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=04.</td>
+</tr>
+<tr>
+<td class="asm-label">NewHighScore_CheckLoop</td>
+<td class="address-2"><span id="aaaf"></span>AAAF</td>
+<td class="instruction">LD HL,($AB7E)</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>=*<a href="AB7E.html">ActivePlayer</a>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="aab2"></span>
+<div class="comments">
+<div class="paragraph">
+Move to the last digit of the active score (the hundreds of thousands).
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="aab2"></span>AAB2</td>
+<td class="instruction">LD DE,$0004</td>
+<td class="comment-1" rowspan="2"><span class="register">HL</span>+=0004.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="aab5"></span>AAB5</td>
+<td class="instruction">ADD HL,DE</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="aab6"></span>AAB6</td>
+<td class="instruction">LD A,(HL)</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<span class="register">HL</span>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="aab7"></span>AAB7</td>
+<td class="instruction">CP (IX+$0B)</td>
+<td class="comment-1" rowspan="2">Jump to <a href="AAA9.html#aac9">NewHighScore_1</a> if <span class="register">A</span> is higher than *<span class="register">IX</span>+0B.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="aaba"></span>AABA</td>
+<td class="instruction">JR NC,<a href="AAA9.html#aac9">NewHighScore_1</a></td>
+</tr>
+<tr>
+<td class="asm-label">NewHighScore_0</td>
+<td class="address-2"><span id="aabc"></span>AABC</td>
+<td class="instruction">LD DE,$000C</td>
+<td class="comment-1" rowspan="1"><span class="register">DE</span>=000C.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="aabf"></span>AABF</td>
+<td class="instruction">ADD IX,DE</td>
+<td class="comment-1" rowspan="1"><span class="register">IX</span>+=<span class="register">DE</span>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="aac1"></span>AAC1</td>
+<td class="instruction">DJNZ <a href="AAA9.html#aaaf">NewHighScore_CheckLoop</a></td>
+<td class="comment-1" rowspan="1">Decrease counter by one and loop back to <a href="AAA9.html#aaaf">NewHighScore_CheckLoop</a> until counter is zero.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="aac3"></span>AAC3</td>
+<td class="instruction">LD HL,$AB8A</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>=<a href="AB8A.html">Game_Flags</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="aac6"></span>AAC6</td>
+<td class="instruction">RES 0,(HL)</td>
+<td class="comment-1" rowspan="1">Reset bit 0 of *<span class="register">HL</span>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="aac8"></span>AAC8</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+<tr>
+<td class="asm-label">NewHighScore_1</td>
+<td class="address-2"><span id="aac9"></span>AAC9</td>
+<td class="instruction">JR NZ,<a href="AAA9.html#aadd">NewHighScore_2</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="AAA9.html#aadd">NewHighScore_2</a> if {} is not zero.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="aacb"></span>AACB</td>
+<td class="instruction">DEC HL</td>
+<td class="comment-1" rowspan="1">Decrease <span class="register">HL</span> by one.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="aacc"></span>AACC</td>
+<td class="instruction">LD A,(HL)</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<span class="register">HL</span>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="aacd"></span>AACD</td>
+<td class="instruction">CP (IX+$0A)</td>
+<td class="comment-1" rowspan="2">Jump to <a href="AAA9.html#aabc">NewHighScore_0</a> if <span class="register">A</span> is lower than *<span class="register">IX</span>+0A.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="aad0"></span>AAD0</td>
+<td class="instruction">JR C,<a href="AAA9.html#aabc">NewHighScore_0</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="aad2"></span>AAD2</td>
+<td class="instruction">JR NZ,<a href="AAA9.html#aadd">NewHighScore_2</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="AAA9.html#aadd">NewHighScore_2</a> if it is not zero.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="aad4"></span>AAD4</td>
+<td class="instruction">DEC HL</td>
+<td class="comment-1" rowspan="1">Decrease <span class="register">HL</span> by one.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="aad5"></span>AAD5</td>
+<td class="instruction">LD A,(HL)</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<span class="register">HL</span>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="aad6"></span>AAD6</td>
+<td class="instruction">CP (IX+$09)</td>
+<td class="comment-1" rowspan="2">Jump to <a href="AAA9.html#aabc">NewHighScore_0</a> if <span class="register">A</span> is lower than *<span class="register">IX</span>+09.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="aad9"></span>AAD9</td>
+<td class="instruction">JR C,<a href="AAA9.html#aabc">NewHighScore_0</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="aadb"></span>AADB</td>
+<td class="instruction">JR Z,<a href="AAA9.html#aabc">NewHighScore_0</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="AAA9.html#aabc">NewHighScore_0</a> if it is zero.</td>
+</tr>
+<tr>
+<td class="asm-label">NewHighScore_2</td>
+<td class="address-2"><span id="aadd"></span>AADD</td>
+<td class="instruction">DEC B</td>
+<td class="comment-1" rowspan="1">Decrease <span class="register">B</span> by one.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="aade"></span>AADE</td>
+<td class="instruction">JR Z,<a href="AAA9.html#aaef">NewHighScore_Write</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="AAA9.html#aaef">NewHighScore_Write</a> if <span class="register">B</span> is zero.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="aae0"></span>AAE0</td>
+<td class="instruction">LD A,$00</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=00.</td>
+</tr>
+<tr>
+<td class="asm-label">NewHighScore_3</td>
+<td class="address-2"><span id="aae2"></span>AAE2</td>
+<td class="instruction">ADD A,$0C</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>+=0C.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="aae4"></span>AAE4</td>
+<td class="instruction">DJNZ <a href="AAA9.html#aae2">NewHighScore_3</a></td>
+<td class="comment-1" rowspan="1">Decrease counter by one and loop back to <a href="AAA9.html#aae2">NewHighScore_3</a> until counter is zero.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="aae6"></span>AAE6</td>
+<td class="instruction">LD C,A</td>
+<td class="comment-1" rowspan="1"><span class="register">C</span>=<span class="register">A</span>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="aae7"></span>AAE7</td>
+<td class="instruction">LD HL,$B066</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>=<a href="B043.html#b066">B066</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="aaea"></span>AAEA</td>
+<td class="instruction">LD DE,$B072</td>
+<td class="comment-1" rowspan="1"><span class="register">DE</span>=<a href="B043.html#b072">B072</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="aaed"></span>AAED</td>
+<td class="instruction">LDDR</td>
+<td class="comment-1" rowspan="1">LDDR.</td>
+</tr>
+<tr>
+<td class="asm-label">NewHighScore_Write</td>
+<td class="address-2"><span id="aaef"></span>AAEF</td>
+<td class="instruction">PUSH IX</td>
+<td class="comment-1" rowspan="2"><span class="register">DE</span>=<span class="register">IX</span>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="aaf1"></span>AAF1</td>
+<td class="instruction">POP DE</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="aaf2"></span>AAF2</td>
+<td class="instruction">LD HL,$AB8A</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>=<a href="AB8A.html">Game_Flags</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="aaf5"></span>AAF5</td>
+<td class="instruction">SET 0,(HL)</td>
+<td class="comment-1" rowspan="1">Set bit 0 of *<span class="register">HL</span>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="aaf7"></span>
+<div class="comments">
+<div class="paragraph">
+Who is in play, is it 1UP or 2UP?
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="aaf7"></span>AAF7</td>
+<td class="instruction">BIT 4,(HL)</td>
+<td class="comment-1" rowspan="1">Test bit 4 of *<span class="register">HL</span>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="aaf9"></span>
+<div class="comments">
+<div class="paragraph">
+Default to using the 1UP name.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="aaf9"></span>AAF9</td>
+<td class="instruction">LD HL,$ACA6</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>=<a href="AC8F.html#aca6">Name_1UP</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="aafc"></span>AAFC</td>
+<td class="instruction">JR Z,<a href="AAA9.html#ab01">NewHighScore_WriteName</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="AAA9.html#ab01">NewHighScore_WriteName</a> if this is player one.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="aafe"></span>
+<div class="comments">
+<div class="paragraph">
+Else, use the name for 2UP.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="aafe"></span>AAFE</td>
+<td class="instruction">LD HL,$ACC7</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>=<a href="AC8F.html#acc7">Name_2UP</a>.</td>
+</tr>
+<tr>
+<td class="asm-label">NewHighScore_WriteName</td>
+<td class="address-2"><span id="ab01"></span>AB01</td>
+<td class="instruction">LD BC,$0008</td>
+<td class="comment-1" rowspan="1"><span class="register">BC</span>=0008.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ab04"></span>AB04</td>
+<td class="instruction">LDIR</td>
+<td class="comment-1" rowspan="1">Copy the exact number of bytes of the players name to the high score entry.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ab06"></span>AB06</td>
+<td class="instruction">INC DE</td>
+<td class="comment-1" rowspan="1">Increment <span class="register">DE</span> by one.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ab07"></span>AB07</td>
+<td class="instruction">LD HL,($AB7E)</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>=*<a href="AB7E.html">ActivePlayer</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ab0a"></span>AB0A</td>
+<td class="instruction">INC HL</td>
+<td class="comment-1" rowspan="2">Increment <span class="register">HL</span> by two.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ab0b"></span>AB0B</td>
+<td class="instruction">INC HL</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="ab0c"></span>
+<div class="comments">
+<div class="paragraph">
+Scores are held using three bytes.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ab0c"></span>AB0C</td>
+<td class="instruction">LD BC,$0003</td>
+<td class="comment-1" rowspan="1"><span class="register">BC</span>=0003.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ab0f"></span>AB0F</td>
+<td class="instruction">LDIR</td>
+<td class="comment-1" rowspan="1">Copy the three score digits for the current player into the high score entry.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ab11"></span>AB11</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="AA69.html">AA69</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#aaa9">Map</a></td>
+<td class="next">
+Next: <a href="AB12.html">AB12</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1984 New Generation Software; 2023 ArcadeGeek LTD.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.0.</div>
+<div class="repository">Link to <a href="https://github.com/pobtastic/trashman/">Source code</a>.</div>
+<div><a href="../dec/asm/43689.html">Switch to decimal</a>.</div>
+</footer>
+</body>
+</html>

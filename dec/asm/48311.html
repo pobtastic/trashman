@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Trashman: Routine at 48311</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="47987.html">47987</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#48311">Map</a></td>
+<td class="next">
+Next: <a href="48397.html">48397</a>
+</td>
+</tr>
+</table>
+<div class="description">48311: Routine at BCB7</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routine at <a href="45217.html">StartGame</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="address-2"><span id="48311"></span>48311</td>
+<td class="instruction">LD IX,(49783)</td>
+<td class="comment-1" rowspan="1"><span class="register">IX</span>=*<a href="49783.html">49783</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48315"></span>48315</td>
+<td class="instruction">BIT 2,(IX+33)</td>
+<td class="comment-1" rowspan="1"></td>
+</tr>
+<tr>
+<td class="address-1"><span id="48319"></span>48319</td>
+<td class="instruction">RES 2,(IX+33)</td>
+<td class="comment-1" rowspan="1"></td>
+</tr>
+<tr>
+<td class="address-1"><span id="48323"></span>48323</td>
+<td class="instruction">CALL NZ,<a href="48311.html#48365">48365</a></td>
+<td class="comment-1" rowspan="1">Call <a href="48311.html#48365">48365</a> if not zero.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48326"></span>48326</td>
+<td class="instruction">BIT 3,(IX+33)</td>
+<td class="comment-1" rowspan="1"></td>
+</tr>
+<tr>
+<td class="address-1"><span id="48330"></span>48330</td>
+<td class="instruction">RES 3,(IX+33)</td>
+<td class="comment-1" rowspan="1"></td>
+</tr>
+<tr>
+<td class="address-1"><span id="48334"></span>48334</td>
+<td class="instruction">CALL NZ,<a href="48311.html#48365">48365</a></td>
+<td class="comment-1" rowspan="1">Call <a href="48311.html#48365">48365</a> if not zero.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48337"></span>48337</td>
+<td class="instruction">LD DE,12</td>
+<td class="comment-1" rowspan="1"><span class="register">DE</span>=0012.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48340"></span>48340</td>
+<td class="instruction">ADD IX,DE</td>
+<td class="comment-1" rowspan="1"><span class="register">IX</span>+=<span class="register">DE</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48342"></span>48342</td>
+<td class="instruction">BIT 2,(IX+33)</td>
+<td class="comment-1" rowspan="1"></td>
+</tr>
+<tr>
+<td class="address-1"><span id="48346"></span>48346</td>
+<td class="instruction">RES 2,(IX+33)</td>
+<td class="comment-1" rowspan="1"></td>
+</tr>
+<tr>
+<td class="address-1"><span id="48350"></span>48350</td>
+<td class="instruction">CALL NZ,<a href="48311.html#48365">48365</a></td>
+<td class="comment-1" rowspan="1">Call <a href="48311.html#48365">48365</a> if not zero.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48353"></span>48353</td>
+<td class="instruction">BIT 3,(IX+33)</td>
+<td class="comment-1" rowspan="1"></td>
+</tr>
+<tr>
+<td class="address-1"><span id="48357"></span>48357</td>
+<td class="instruction">RES 3,(IX+33)</td>
+<td class="comment-1" rowspan="1"></td>
+</tr>
+<tr>
+<td class="address-1"><span id="48361"></span>48361</td>
+<td class="instruction">CALL NZ,<a href="48311.html#48365">48365</a></td>
+<td class="comment-1" rowspan="1">Call <a href="48311.html#48365">48365</a> if not zero.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48364"></span>48364</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="48365"></span>48365</td>
+<td class="instruction">LD L,(IX+34)</td>
+<td class="comment-1" rowspan="1"><span class="register">L</span>=(<span class="register">IX</span>+34).</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48368"></span>48368</td>
+<td class="instruction">LD E,L</td>
+<td class="comment-1" rowspan="1"><span class="register">E</span>=<span class="register">L</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48369"></span>48369</td>
+<td class="instruction">LD A,(IX+35)</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=(<span class="register">IX</span>+35).</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48372"></span>48372</td>
+<td class="instruction">CP 0</td>
+<td class="comment-1" rowspan="2">Return if <span class="register">A</span> is 0.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48374"></span>48374</td>
+<td class="instruction">RET Z</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48375"></span>48375</td>
+<td class="instruction">LD C,A</td>
+<td class="comment-1" rowspan="1"><span class="register">C</span>=<span class="register">A</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48376"></span>48376</td>
+<td class="instruction">AND %00000011</td>
+<td class="comment-1" rowspan="1">Keep only bits 0-1.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48378"></span>48378</td>
+<td class="instruction">OR %00111000</td>
+<td class="comment-1" rowspan="1">Set bits 3-5.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48380"></span>48380</td>
+<td class="instruction">LD H,A</td>
+<td class="comment-1" rowspan="1"><span class="register">H</span>=<span class="register">A</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48381"></span>48381</td>
+<td class="instruction">ADD HL,HL</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>+=<span class="register">HL</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48382"></span>48382</td>
+<td class="instruction">LD A,C</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=<span class="register">C</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48383"></span>48383</td>
+<td class="instruction">LD BC,258</td>
+<td class="comment-1" rowspan="1"><span class="register">BC</span>=258.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48386"></span>48386</td>
+<td class="instruction">RLCA</td>
+<td class="comment-1" rowspan="1">RLCA.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48387"></span>48387</td>
+<td class="instruction">RLCA</td>
+<td class="comment-1" rowspan="1">RLCA.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48388"></span>48388</td>
+<td class="instruction">RLCA</td>
+<td class="comment-1" rowspan="1">RLCA.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48389"></span>48389</td>
+<td class="instruction">AND %00111000</td>
+<td class="comment-1" rowspan="1">Keep only bits 3-5.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48391"></span>48391</td>
+<td class="instruction">OR %01000000</td>
+<td class="comment-1" rowspan="1">Set bit 6.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48393"></span>48393</td>
+<td class="instruction">LD D,A</td>
+<td class="comment-1" rowspan="1"><span class="register">D</span>=<span class="register">A</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48394"></span>48394</td>
+<td class="instruction">JP <a href="45940.html#45964">Copier</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="45940.html#45964">Copier</a>.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="47987.html">47987</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#48311">Map</a></td>
+<td class="next">
+Next: <a href="48397.html">48397</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1984 New Generation Software; 2023 ArcadeGeek LTD.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.0.</div>
+<div class="repository">Link to <a href="https://github.com/pobtastic/trashman/">Source code</a>.</div>
+<div><a href="../../asm/BCB7.html">Switch to hexadecimal</a>.</div>
+</footer>
+</body>
+</html>

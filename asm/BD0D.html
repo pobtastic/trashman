@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Trashman: Routine at BD0D</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="BCB7.html">BCB7</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#bd0d">Map</a></td>
+<td class="next">
+Next: <a href="BD48.html">BD48</a>
+</td>
+</tr>
+</table>
+<div class="description">BD0D: Routine at BD0D</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routine at <a href="B0A1.html">StartGame</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="address-2"><span id="bd0d"></span>BD0D</td>
+<td class="instruction">LD IX,$C2D4</td>
+<td class="comment-1" rowspan="1"><span class="register">IX</span>=<a href="C2D4.html">C2D4</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="bd11"></span>BD11</td>
+<td class="instruction">LD B,$02</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=02 (counter).</td>
+</tr>
+<tr>
+<td class="address-2"><span id="bd13"></span>BD13</td>
+<td class="instruction">PUSH BC</td>
+<td class="comment-1" rowspan="1">Stash <span class="register">BC</span> on the stack.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="bd14"></span>BD14</td>
+<td class="instruction">PUSH IX</td>
+<td class="comment-1" rowspan="1">Stash <span class="register">IX</span> on the stack.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="bd16"></span>BD16</td>
+<td class="instruction">CALL <a href="BD0D.html#bd24">$BD24</a></td>
+<td class="comment-1" rowspan="1">Call <a href="BD0D.html#bd24">BD24</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="bd19"></span>BD19</td>
+<td class="instruction">POP IX</td>
+<td class="comment-1" rowspan="1">Restore <span class="register">IX</span> from the stack.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="bd1b"></span>BD1B</td>
+<td class="instruction">LD BC,$000D</td>
+<td class="comment-1" rowspan="1"><span class="register">BC</span>=000D.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="bd1e"></span>BD1E</td>
+<td class="instruction">ADD IX,BC</td>
+<td class="comment-1" rowspan="1"><span class="register">IX</span>+=<span class="register">BC</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="bd20"></span>BD20</td>
+<td class="instruction">POP BC</td>
+<td class="comment-1" rowspan="1">Restore <span class="register">BC</span> from the stack.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="bd21"></span>BD21</td>
+<td class="instruction">DJNZ <a href="BD0D.html#bd13">$BD13</a></td>
+<td class="comment-1" rowspan="1">Decrease counter by one and loop back to <a href="BD0D.html#bd13">BD13</a> until counter is zero.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="bd23"></span>BD23</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="bd24"></span>BD24</td>
+<td class="instruction">CALL <a href="C023.html">$C023</a></td>
+<td class="comment-1" rowspan="1">Call <a href="C023.html">C023</a>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="bd27"></span>
+<div class="comments">
+<div class="paragraph">
+This entry point is used by the routine at <a href="B591.html">B591</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="address-2"><span id="bd27"></span>BD27</td>
+<td class="instruction">LD A,(IX+$00)</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<span class="register">IX</span>+00.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="bd2a"></span>BD2A</td>
+<td class="instruction">CP $17</td>
+<td class="comment-1" rowspan="2">Return if <span class="register">A</span> is higher than 17.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="bd2c"></span>BD2C</td>
+<td class="instruction">RET NC</td>
+</tr>
+<tr>
+<td class="address-1"><span id="bd2d"></span>BD2D</td>
+<td class="instruction">CALL <a href="C13E.html">$C13E</a></td>
+<td class="comment-1" rowspan="1">Call <a href="C13E.html">C13E</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="bd30"></span>BD30</td>
+<td class="instruction">LD DE,$0040</td>
+<td class="comment-1" rowspan="1"><span class="register">DE</span>=0040.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="bd33"></span>BD33</td>
+<td class="instruction">LD B,(IX+$03)</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=*<span class="register">IX</span>+03.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="bd36"></span>BD36</td>
+<td class="instruction">BIT 0,(IX+$07)</td>
+<td class="comment-1" rowspan="2">Jump to <a href="BD0D.html#bd42">BD42</a> if bit 0 of *<span class="register">IX</span>+07 is not zero.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="bd3a"></span>BD3A</td>
+<td class="instruction">JR NZ,<a href="BD0D.html#bd42">$BD42</a></td>
+</tr>
+<tr>
+<td class="address-2"><span id="bd3c"></span>BD3C</td>
+<td class="instruction">RES 6,(HL)</td>
+<td class="comment-1" rowspan="1">Reset bit 6 of *<span class="register">HL</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="bd3e"></span>BD3E</td>
+<td class="instruction">ADD HL,DE</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>+=<span class="register">DE</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="bd3f"></span>BD3F</td>
+<td class="instruction">DJNZ <a href="BD0D.html#bd3c">$BD3C</a></td>
+<td class="comment-1" rowspan="1">Decrease counter by one and loop back to <a href="BD0D.html#bd3c">BD3C</a> until counter is zero.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="bd41"></span>BD41</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="bd42"></span>BD42</td>
+<td class="instruction">SET 6,(HL)</td>
+<td class="comment-1" rowspan="1">Set bit 6 of *<span class="register">HL</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="bd44"></span>BD44</td>
+<td class="instruction">ADD HL,DE</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>+=<span class="register">DE</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="bd45"></span>BD45</td>
+<td class="instruction">DJNZ <a href="BD0D.html#bd42">$BD42</a></td>
+<td class="comment-1" rowspan="1">Decrease counter by one and loop back to <a href="BD0D.html#bd42">BD42</a> until counter is zero.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="bd47"></span>BD47</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="BCB7.html">BCB7</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#bd0d">Map</a></td>
+<td class="next">
+Next: <a href="BD48.html">BD48</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1984 New Generation Software; 2023 ArcadeGeek LTD.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.0.</div>
+<div class="repository">Link to <a href="https://github.com/pobtastic/trashman/">Source code</a>.</div>
+<div><a href="../dec/asm/48397.html">Switch to decimal</a>.</div>
+</footer>
+</body>
+</html>

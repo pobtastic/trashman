@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Trashman: Routine at A89B</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="A895.html">A895</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#a89b">Map</a></td>
+<td class="next">
+Next: <a href="A8D4.html">A8D4</a>
+</td>
+</tr>
+</table>
+<div class="description">A89B: Handler: Street Introduction</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routine at <a href="A590.html">GameEntryPoint</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">Handler_StreetIntroduction</td>
+<td class="address-2"><span id="a89b"></span>A89B</td>
+<td class="instruction">CALL <a href="A77E.html">BlankMiddleScreenBuffer</a></td>
+<td class="comment-1" rowspan="1">Call <a href="A77E.html">BlankMiddleScreenBuffer</a>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="a89e"></span>
+<div class="comments">
+<div class="paragraph">
+Print "Trashman ".
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="a89e"></span>A89E</td>
+<td class="instruction">LD HL,$ACFA</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>=<a href="ACFA.html">Messaging_Trashman</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="a8a1"></span>A8A1</td>
+<td class="instruction">LD DE,$4840</td>
+<td class="comment-1" rowspan="1"><span class="register">DE</span>=4840 (screen buffer location).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="a8a4"></span>A8A4</td>
+<td class="instruction">CALL <a href="B081.html">PrintString</a></td>
+<td class="comment-1" rowspan="1">Call <a href="B081.html">PrintString</a>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="a8a7"></span>
+<div class="comments">
+<div class="paragraph">
+Who is in play, is it 1UP or 2UP?
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="a8a7"></span>A8A7</td>
+<td class="instruction">LD HL,$AB8A</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>=<a href="AB8A.html">Game_Flags</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="a8aa"></span>A8AA</td>
+<td class="instruction">BIT 4,(HL)</td>
+<td class="comment-1" rowspan="1">Test bit 4 of *<span class="register">HL</span>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="a8ac"></span>
+<div class="comments">
+<div class="paragraph">
+Default to using the 1UP name.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="a8ac"></span>A8AC</td>
+<td class="instruction">LD HL,$ACA6</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>=<a href="AC8F.html#aca6">Name_1UP</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="a8af"></span>A8AF</td>
+<td class="instruction">JR Z,<a href="A89B.html#a8b4">StreetIntro_PrintName</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="A89B.html#a8b4">StreetIntro_PrintName</a> if this is player one.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="a8b1"></span>
+<div class="comments">
+<div class="paragraph">
+Else, use the name for 2UP.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="a8b1"></span>A8B1</td>
+<td class="instruction">LD HL,$ACC7</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>=<a href="AC8F.html#acc7">Name_2UP</a>.</td>
+</tr>
+<tr>
+<td class="asm-label">StreetIntro_PrintName</td>
+<td class="address-2"><span id="a8b4"></span>A8B4</td>
+<td class="instruction">CALL <a href="B081.html">PrintString</a></td>
+<td class="comment-1" rowspan="1">Call <a href="B081.html">PrintString</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="a8b7"></span>A8B7</td>
+<td class="instruction">DEC DE</td>
+<td class="comment-1" rowspan="1">Decrease <span class="register">DE</span> by one.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="a8b8"></span>
+<div class="comments">
+<div class="paragraph">
+Print " go and collect".
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="a8b8"></span>A8B8</td>
+<td class="instruction">LD HL,$AD04</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>=<a href="ACFA.html#ad04">Messaging_GoCollect</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="a8bb"></span>A8BB</td>
+<td class="instruction">CALL <a href="B081.html">PrintString</a></td>
+<td class="comment-1" rowspan="1">Call <a href="B081.html">PrintString</a>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="a8be"></span>
+<div class="comments">
+<div class="paragraph">
+Prints the number of bins to collect.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="a8be"></span>A8BE</td>
+<td class="instruction">LD HL,($C270)</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>=*<a href="C270.html">String_NumberOfBins</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="a8c1"></span>A8C1</td>
+<td class="instruction">LD DE,$4880</td>
+<td class="comment-1" rowspan="1"><span class="register">DE</span>=4880 (screen buffer location).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="a8c4"></span>A8C4</td>
+<td class="instruction">CALL <a href="B081.html">PrintString</a></td>
+<td class="comment-1" rowspan="1">Call <a href="B081.html">PrintString</a>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="a8c7"></span>
+<div class="comments">
+<div class="paragraph">
+Print " bins from ".
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="a8c7"></span>A8C7</td>
+<td class="instruction">LD HL,$AD14</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>=<a href="ACFA.html#ad14">Messaging_BinsFrom</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="a8ca"></span>A8CA</td>
+<td class="instruction">CALL <a href="B081.html">PrintString</a></td>
+<td class="comment-1" rowspan="1">Call <a href="B081.html">PrintString</a>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="a8cd"></span>
+<div class="comments">
+<div class="paragraph">
+Print the current street name.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="a8cd"></span>A8CD</td>
+<td class="instruction">LD HL,$C280</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>=<a href="C280.html">Messaging_RoadName</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="a8d0"></span>A8D0</td>
+<td class="instruction">CALL <a href="B081.html">PrintString</a></td>
+<td class="comment-1" rowspan="1">Call <a href="B081.html">PrintString</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="a8d3"></span>A8D3</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="A895.html">A895</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#a89b">Map</a></td>
+<td class="next">
+Next: <a href="A8D4.html">A8D4</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1984 New Generation Software; 2023 ArcadeGeek LTD.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.0.</div>
+<div class="repository">Link to <a href="https://github.com/pobtastic/trashman/">Source code</a>.</div>
+<div><a href="../dec/asm/43163.html">Switch to decimal</a>.</div>
+</footer>
+</body>
+</html>

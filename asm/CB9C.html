@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Trashman: Routine at CB9C</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="CB99.html">CB99</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#cb9c">Map</a></td>
+<td class="next">
+Next: <a href="CC3D.html">CC3D</a>
+</td>
+</tr>
+</table>
+<div class="description">CB9C: Routine at CB9C</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routines at <a href="A78C.html">A78C</a>, <a href="A7F5.html">PressAnyKey</a> and <a href="B0A1.html">StartGame</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="address-2"><span id="cb9c"></span>CB9C</td>
+<td class="instruction">LD HL,$CC3D</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>=<a href="CC3D.html">CC3D</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="cb9f"></span>CB9F</td>
+<td class="instruction">RES 7,(HL)</td>
+<td class="comment-1" rowspan="1">Reset bit 7 of *<span class="register">HL</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="cba1"></span>CBA1</td>
+<td class="instruction">LD A,(HL)</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<span class="register">HL</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="cba2"></span>CBA2</td>
+<td class="instruction">RRCA</td>
+<td class="comment-1" rowspan="1">Rotate <span class="register">A</span> right one bit (with carry).</td>
+</tr>
+<tr>
+<td class="address-1"><span id="cba3"></span>CBA3</td>
+<td class="instruction">JR C,<a href="CB9C.html#cbd0">$CBD0</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="CB9C.html#cbd0">CBD0</a> if the carry bit was set.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="cba5"></span>CBA5</td>
+<td class="instruction">RRCA</td>
+<td class="comment-1" rowspan="1">Rotate <span class="register">A</span> right one bit (with carry).</td>
+</tr>
+<tr>
+<td class="address-1"><span id="cba6"></span>CBA6</td>
+<td class="instruction">JR C,<a href="CB9C.html#cbfb">$CBFB</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="CB9C.html#cbfb">CBFB</a> if the carry bit was set.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="cba8"></span>CBA8</td>
+<td class="instruction">RRCA</td>
+<td class="comment-1" rowspan="1">Rotate <span class="register">A</span> right one bit (with carry).</td>
+</tr>
+<tr>
+<td class="address-1"><span id="cba9"></span>CBA9</td>
+<td class="instruction">JR C,<a href="CB9C.html#cc0b">$CC0B</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="CB9C.html#cc0b">CC0B</a> if the carry bit was set.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="cbab"></span>CBAB</td>
+<td class="instruction">RRCA</td>
+<td class="comment-1" rowspan="1">Rotate <span class="register">A</span> right one bit (with carry).</td>
+</tr>
+<tr>
+<td class="address-1"><span id="cbac"></span>CBAC</td>
+<td class="instruction">JR C,<a href="CB9C.html#cbbc">$CBBC</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="CB9C.html#cbbc">CBBC</a> if the carry bit was set.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="cbae"></span>CBAE</td>
+<td class="instruction">RRCA</td>
+<td class="comment-1" rowspan="1">Rotate <span class="register">A</span> right one bit (with carry).</td>
+</tr>
+<tr>
+<td class="address-1"><span id="cbaf"></span>CBAF</td>
+<td class="instruction">JR C,<a href="CB9C.html#cbc7">$CBC7</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="CB9C.html#cbc7">CBC7</a> if the carry bit was set.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="cbb1"></span>CBB1</td>
+<td class="instruction">RRCA</td>
+<td class="comment-1" rowspan="1">Rotate <span class="register">A</span> right one bit (with carry).</td>
+</tr>
+<tr>
+<td class="address-1"><span id="cbb2"></span>CBB2</td>
+<td class="instruction">JR C,<a href="CB9C.html#cbf2">$CBF2</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="CB9C.html#cbf2">CBF2</a> if the carry bit was set.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="cbb4"></span>CBB4</td>
+<td class="instruction">LD A,$06</td>
+<td class="comment-1" rowspan="2">Set border to YELLOW.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="cbb6"></span>CBB6</td>
+<td class="instruction">OUT ($FE),A</td>
+</tr>
+<tr>
+<td class="address-1"><span id="cbb8"></span>CBB8</td>
+<td class="instruction">HALT</td>
+<td class="comment-1" rowspan="1">HALT.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="cbb9"></span>CBB9</td>
+<td class="instruction">RES 7,(HL)</td>
+<td class="comment-1" rowspan="1">Reset bit 7 of *<span class="register">HL</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="cbbb"></span>CBBB</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="cbbc"></span>CBBC</td>
+<td class="instruction">LD DE,$0070</td>
+<td class="comment-1" rowspan="1"><span class="register">DE</span>=0070.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="cbbf"></span>CBBF</td>
+<td class="instruction">LD ($CC3B),DE</td>
+<td class="comment-1" rowspan="1">Write <span class="register">DE</span> to *<a href="CB9C.html#cc3b">CC3B</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="cbc3"></span>CBC3</td>
+<td class="instruction">RES 3,(HL)</td>
+<td class="comment-1" rowspan="1">Reset bit 3 of *<span class="register">HL</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="cbc5"></span>CBC5</td>
+<td class="instruction">JR <a href="CB9C.html#cbd0">$CBD0</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="CB9C.html#cbd0">CBD0</a>.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="cbc7"></span>CBC7</td>
+<td class="instruction">LD DE,$0100</td>
+<td class="comment-1" rowspan="1"><span class="register">DE</span>=0100.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="cbca"></span>CBCA</td>
+<td class="instruction">LD ($CC3B),DE</td>
+<td class="comment-1" rowspan="1">Write <span class="register">DE</span> to *<a href="CB9C.html#cc3b">CC3B</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="cbce"></span>CBCE</td>
+<td class="instruction">RES 4,(HL)</td>
+<td class="comment-1" rowspan="1">Reset bit 4 of *<span class="register">HL</span>.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="cbd0"></span>CBD0</td>
+<td class="instruction">RES 0,(HL)</td>
+<td class="comment-1" rowspan="1">Reset bit 0 of *<span class="register">HL</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="cbd2"></span>CBD2</td>
+<td class="instruction">LD A,$06</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=06.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="cbd4"></span>CBD4</td>
+<td class="instruction">LD DE,$FFFF</td>
+<td class="comment-1" rowspan="1"><span class="register">DE</span>=FFFF.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="cbd7"></span>CBD7</td>
+<td class="instruction">LD IX,($CC3B)</td>
+<td class="comment-1" rowspan="1"><span class="register">IX</span>=<a href="CB9C.html#cc3b">CC3B</a>.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="cbdb"></span>CBDB</td>
+<td class="instruction">ADD IX,DE</td>
+<td class="comment-1" rowspan="1"><span class="register">IX</span>+=<span class="register">DE</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="cbdd"></span>CBDD</td>
+<td class="instruction">JR NC,<a href="CB9C.html#cbe5">$CBE5</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="CB9C.html#cbe5">CBE5</a> if {} is higher.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="cbdf"></span>CBDF</td>
+<td class="instruction">BIT 7,(HL)</td>
+<td class="comment-1" rowspan="1">Test bit 7 of *<span class="register">HL</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="cbe1"></span>CBE1</td>
+<td class="instruction">JR NZ,<a href="CB9C.html#cbef">$CBEF</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="CB9C.html#cbef">CBEF</a> if {} is not zero.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="cbe3"></span>CBE3</td>
+<td class="instruction">JR <a href="CB9C.html#cbdb">$CBDB</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="CB9C.html#cbdb">CBDB</a>.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="cbe5"></span>CBE5</td>
+<td class="instruction">BIT 7,(HL)</td>
+<td class="comment-1" rowspan="1">Test bit 7 of *<span class="register">HL</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="cbe7"></span>CBE7</td>
+<td class="instruction">JR NZ,<a href="CB9C.html#cbef">$CBEF</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="CB9C.html#cbef">CBEF</a> if {} is not zero.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="cbe9"></span>CBE9</td>
+<td class="instruction">XOR %00011000</td>
+<td class="comment-1" rowspan="1">XOR bits 3-4 (if they are set, unset them and if they are unset, set them).</td>
+</tr>
+<tr>
+<td class="address-1"><span id="cbeb"></span>CBEB</td>
+<td class="instruction">OUT ($FE),A</td>
+<td class="comment-1" rowspan="1">OUT FE</td>
+</tr>
+<tr>
+<td class="address-1"><span id="cbed"></span>CBED</td>
+<td class="instruction">JR <a href="CB9C.html#cbd7">$CBD7</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="CB9C.html#cbd7">CBD7</a>.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="cbef"></span>CBEF</td>
+<td class="instruction">RES 7,(HL)</td>
+<td class="comment-1" rowspan="1">Reset bit 7 of *<span class="register">HL</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="cbf1"></span>CBF1</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="cbf2"></span>CBF2</td>
+<td class="instruction">RES 5,(HL)</td>
+<td class="comment-1" rowspan="1">Reset bit 5 of *<span class="register">HL</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="cbf4"></span>CBF4</td>
+<td class="instruction">LD C,$00</td>
+<td class="comment-1" rowspan="1"><span class="register">C</span>=00.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="cbf6"></span>CBF6</td>
+<td class="instruction">LD DE,$0040</td>
+<td class="comment-1" rowspan="1"><span class="register">DE</span>=0040.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="cbf9"></span>CBF9</td>
+<td class="instruction">JR <a href="CB9C.html#cc12">$CC12</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="CB9C.html#cc12">CC12</a>.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="cbfb"></span>CBFB</td>
+<td class="instruction">RES 1,(HL)</td>
+<td class="comment-1" rowspan="1">Reset bit 1 of *<span class="register">HL</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="cbfd"></span>CBFD</td>
+<td class="instruction">CALL <a href="C14C.html#c1cd">$C1CD</a></td>
+<td class="comment-1" rowspan="1">Call <a href="C14C.html#c1cd">C1CD</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="cc00"></span>CC00</td>
+<td class="instruction">BIT 0,(IX+$00)</td>
+<td class="comment-1" rowspan="1">Test bit 0 of *<span class="register">IX</span>+00.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="cc04"></span>CC04</td>
+<td class="instruction">JR NZ,<a href="CB9C.html#cba8">$CBA8</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="CB9C.html#cba8">CBA8</a> if {} is not zero.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="cc06"></span>CC06</td>
+<td class="instruction">LD DE,$0020</td>
+<td class="comment-1" rowspan="1"><span class="register">DE</span>=0020.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="cc09"></span>CC09</td>
+<td class="instruction">JR <a href="CB9C.html#cc10">$CC10</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="CB9C.html#cc10">CC10</a>.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="cc0b"></span>CC0B</td>
+<td class="instruction">RES 2,(HL)</td>
+<td class="comment-1" rowspan="1">Reset bit 2 of *<span class="register">HL</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="cc0d"></span>CC0D</td>
+<td class="instruction">LD DE,$0060</td>
+<td class="comment-1" rowspan="1"><span class="register">DE</span>=0060.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="cc10"></span>CC10</td>
+<td class="instruction">LD C,$06</td>
+<td class="comment-1" rowspan="1"><span class="register">C</span>=06.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="cc12"></span>CC12</td>
+<td class="instruction">LD ($CC3B),DE</td>
+<td class="comment-1" rowspan="1">Write <span class="register">DE</span> to *<a href="CB9C.html#cc3b">CC3B</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="cc16"></span>CC16</td>
+<td class="instruction">LD DE,$FFFF</td>
+<td class="comment-1" rowspan="1"><span class="register">DE</span>=FFFF.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="cc19"></span>CC19</td>
+<td class="instruction">LD IX,($CC3B)</td>
+<td class="comment-1" rowspan="1"><span class="register">IX</span>=<a href="CB9C.html#cc3b">CC3B</a>.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="cc1d"></span>CC1D</td>
+<td class="instruction">ADD IX,DE</td>
+<td class="comment-1" rowspan="1"><span class="register">IX</span>+=<span class="register">DE</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="cc1f"></span>CC1F</td>
+<td class="instruction">JR NC,<a href="CB9C.html#cc27">$CC27</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="CB9C.html#cc27">CC27</a> if {} is higher.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="cc21"></span>CC21</td>
+<td class="instruction">BIT 7,(HL)</td>
+<td class="comment-1" rowspan="1">Test bit 7 of *<span class="register">HL</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="cc23"></span>CC23</td>
+<td class="instruction">JR NZ,<a href="CB9C.html#cc38">$CC38</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="CB9C.html#cc38">CC38</a> if {} is not zero.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="cc25"></span>CC25</td>
+<td class="instruction">JR <a href="CB9C.html#cc1d">$CC1D</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="CB9C.html#cc1d">CC1D</a>.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="cc27"></span>CC27</td>
+<td class="instruction">BIT 7,(HL)</td>
+<td class="comment-1" rowspan="1">Test bit 7 of *<span class="register">HL</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="cc29"></span>CC29</td>
+<td class="instruction">JR NZ,<a href="CB9C.html#cc38">$CC38</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="CB9C.html#cc38">CC38</a> if {} is not zero.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="cc2b"></span>CC2B</td>
+<td class="instruction">CALL <a href="C14C.html#c1cd">$C1CD</a></td>
+<td class="comment-1" rowspan="1">Call <a href="C14C.html#c1cd">C1CD</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="cc2e"></span>CC2E</td>
+<td class="instruction">LD A,($C1E5)</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="C14C.html#c1e5">C1E5</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="cc31"></span>CC31</td>
+<td class="instruction">AND %00011000</td>
+<td class="comment-1" rowspan="1">Keep only bits 3-4.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="cc33"></span>CC33</td>
+<td class="instruction">OR C</td>
+<td class="comment-1" rowspan="1">Set the bits from <span class="register">C</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="cc34"></span>CC34</td>
+<td class="instruction">OUT ($FE),A</td>
+<td class="comment-1" rowspan="1">OUT FE</td>
+</tr>
+<tr>
+<td class="address-1"><span id="cc36"></span>CC36</td>
+<td class="instruction">JR <a href="CB9C.html#cc19">$CC19</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="CB9C.html#cc19">CC19</a>.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="cc38"></span>CC38</td>
+<td class="instruction">RES 7,(HL)</td>
+<td class="comment-1" rowspan="1">Reset bit 7 of *<span class="register">HL</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="cc3a"></span>CC3A</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="cc3b"></span>CC3B</td>
+<td class="instruction">DEFW $0100</td>
+<td class="comment-1" rowspan="1"></td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="CB99.html">CB99</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#cb9c">Map</a></td>
+<td class="next">
+Next: <a href="CC3D.html">CC3D</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1984 New Generation Software; 2023 ArcadeGeek LTD.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.0.</div>
+<div class="repository">Link to <a href="https://github.com/pobtastic/trashman/">Source code</a>.</div>
+<div><a href="../dec/asm/52124.html">Switch to decimal</a>.</div>
+</footer>
+</body>
+</html>

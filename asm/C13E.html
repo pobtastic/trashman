@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Trashman: Routine at C13E</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="C023.html">C023</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#c13e">Map</a></td>
+<td class="next">
+Next: <a href="C14C.html">C14C</a>
+</td>
+</tr>
+</table>
+<div class="description">C13E: Routine at C13E</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routines at <a href="BD0D.html">BD0D</a> and <a href="C023.html">C023</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="address-2"><span id="c13e"></span>C13E</td>
+<td class="instruction">LD H,(IX+$06)</td>
+<td class="comment-1" rowspan="1"><span class="register">H</span>=*<span class="register">IX</span>+06.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="c141"></span>C141</td>
+<td class="instruction">LD L,(IX+$05)</td>
+<td class="comment-1" rowspan="1"><span class="register">L</span>=*<span class="register">IX</span>+05.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="c144"></span>
+<div class="comments">
+<div class="paragraph">
+This entry point is used by the routines at <a href="B1D7.html">B1D7</a>, <a href="B724.html">B724</a> and <a href="BB73.html">BB73</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="address-2"><span id="c144"></span>C144</td>
+<td class="instruction">ADD HL,HL</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>*=02.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="c145"></span>C145</td>
+<td class="instruction">LD A,$07</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=07.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="c147"></span>C147</td>
+<td class="instruction">AND H</td>
+<td class="comment-1" rowspan="1">Merge the bits from <span class="register">H</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="c148"></span>C148</td>
+<td class="instruction">OR %01110000</td>
+<td class="comment-1" rowspan="1">Set bits 4-6.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="c14a"></span>C14A</td>
+<td class="instruction">LD H,A</td>
+<td class="comment-1" rowspan="1"><span class="register">H</span>=<span class="register">A</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="c14b"></span>C14B</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="C023.html">C023</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#c13e">Map</a></td>
+<td class="next">
+Next: <a href="C14C.html">C14C</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1984 New Generation Software; 2023 ArcadeGeek LTD.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.0.</div>
+<div class="repository">Link to <a href="https://github.com/pobtastic/trashman/">Source code</a>.</div>
+<div><a href="../dec/asm/49470.html">Switch to decimal</a>.</div>
+</footer>
+</body>
+</html>

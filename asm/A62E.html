@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Trashman: Routine at A62E</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="A61D.html">A61D</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#a62e">Map</a></td>
+<td class="next">
+Next: <a href="A675.html">A675</a>
+</td>
+</tr>
+</table>
+<div class="description">A62E: Handler: Fired</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routine at <a href="A61D.html">Handler_TimeOut</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">Handler_Fired</td>
+<td class="address-2"><span id="a62e"></span>A62E</td>
+<td class="instruction">CALL <a href="A99F.html#a9c5">CopyScore_ActiveScore</a></td>
+<td class="comment-1" rowspan="1">Call <a href="A99F.html#a9c5">CopyScore_ActiveScore</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="a631"></span>A631</td>
+<td class="instruction">CALL <a href="AAA9.html">NewHighScore</a></td>
+<td class="comment-1" rowspan="1">Call <a href="AAA9.html">NewHighScore</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="a634"></span>A634</td>
+<td class="instruction">CALL <a href="AA33.html">FiredScreen</a></td>
+<td class="comment-1" rowspan="1">Call <a href="AA33.html">FiredScreen</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="a637"></span>A637</td>
+<td class="instruction">CALL <a href="A7F5.html">PressAnyKey</a></td>
+<td class="comment-1" rowspan="1">Call <a href="A7F5.html">PressAnyKey</a>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="a63a"></span>
+<div class="comments">
+<div class="paragraph">
+Who is in play, is it 1UP or 2UP?
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">Handler_Fired_0</td>
+<td class="address-2"><span id="a63a"></span>A63A</td>
+<td class="instruction">LD HL,$AB8A</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>=<a href="AB8A.html">Game_Flags</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="a63d"></span>A63D</td>
+<td class="instruction">BIT 4,(HL)</td>
+<td class="comment-1" rowspan="2">Jump to <a href="A62E.html#a645">Handler_Fired_2UP</a> if this is player two.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="a63f"></span>A63F</td>
+<td class="instruction">JR NZ,<a href="A62E.html#a645">Handler_Fired_2UP</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="a641"></span>A641</td>
+<td class="instruction">RES 6,(HL)</td>
+<td class="comment-1" rowspan="1">Reset bit 6 of *<span class="register">HL</span>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="a643"></span>A643</td>
+<td class="instruction">JR <a href="A62E.html#a647">Handler_Fired_1</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="A62E.html#a647">Handler_Fired_1</a>.</td>
+</tr>
+<tr>
+<td class="asm-label">Handler_Fired_2UP</td>
+<td class="address-2"><span id="a645"></span>A645</td>
+<td class="instruction">RES 7,(HL)</td>
+<td class="comment-1" rowspan="1">Reset bit 7 of *<span class="register">HL</span>.</td>
+</tr>
+<tr>
+<td class="asm-label">Handler_Fired_1</td>
+<td class="address-2"><span id="a647"></span>A647</td>
+<td class="instruction">BIT 0,(HL)</td>
+<td class="comment-1" rowspan="1">Test bit 0 of *<span class="register">HL</span>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="a649"></span>A649</td>
+<td class="instruction">JR NZ,<a href="A62E.html#a659">Handler_Fired_2</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="A62E.html#a659">Handler_Fired_2</a> if is not zero.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="a64b"></span>A64B</td>
+<td class="instruction">CALL <a href="A9D4.html">SwitchPlayers</a></td>
+<td class="comment-1" rowspan="1">Call <a href="A9D4.html">SwitchPlayers</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="a64e"></span>A64E</td>
+<td class="instruction">JP C,<a href="A590.html#a5bb">GameEntryPoint_1</a></td>
+<td class="comment-1" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="a651"></span>A651</td>
+<td class="instruction">CALL <a href="AA69.html">Print_HighScoreTable</a></td>
+<td class="comment-1" rowspan="1">Call <a href="AA69.html">Print_HighScoreTable</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="a654"></span>A654</td>
+<td class="instruction">CALL <a href="A7F5.html">PressAnyKey</a></td>
+<td class="comment-1" rowspan="1">Call <a href="A7F5.html">PressAnyKey</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="a657"></span>A657</td>
+<td class="instruction">JR <a href="A62E.html#a672">Handler_Fired_BackToMenu</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="A62E.html#a672">Handler_Fired_BackToMenu</a>.</td>
+</tr>
+<tr>
+<td class="asm-label">Handler_Fired_2</td>
+<td class="address-2"><span id="a659"></span>A659</td>
+<td class="instruction">CALL <a href="AA69.html">Print_HighScoreTable</a></td>
+<td class="comment-1" rowspan="1">Call <a href="AA69.html">Print_HighScoreTable</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="a65c"></span>A65C</td>
+<td class="instruction">CALL <a href="A7F5.html">PressAnyKey</a></td>
+<td class="comment-1" rowspan="1">Call <a href="A7F5.html">PressAnyKey</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="a65f"></span>A65F</td>
+<td class="instruction">CALL <a href="A9D4.html">SwitchPlayers</a></td>
+<td class="comment-1" rowspan="1">Call <a href="A9D4.html">SwitchPlayers</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="a662"></span>A662</td>
+<td class="instruction">JP C,<a href="A590.html#a5bb">GameEntryPoint_1</a></td>
+<td class="comment-1" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="a665"></span>A665</td>
+<td class="instruction">JR <a href="A62E.html#a672">Handler_Fired_BackToMenu</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="A62E.html#a672">Handler_Fired_BackToMenu</a>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="a667"></span>
+<div class="comments">
+<div class="paragraph">
+This entry point is used by the routine at <a href="A590.html">GameEntryPoint</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">Handler_Fired_3</td>
+<td class="address-2"><span id="a667"></span>A667</td>
+<td class="instruction">CALL <a href="A99F.html#a9c5">CopyScore_ActiveScore</a></td>
+<td class="comment-1" rowspan="1">Call <a href="A99F.html#a9c5">CopyScore_ActiveScore</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="a66a"></span>A66A</td>
+<td class="instruction">CALL <a href="AAA9.html">NewHighScore</a></td>
+<td class="comment-1" rowspan="1">Call <a href="AAA9.html">NewHighScore</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="a66d"></span>A66D</td>
+<td class="instruction">CALL <a href="A8D4.html">Handler_NewsFlash</a></td>
+<td class="comment-1" rowspan="1">Call <a href="A8D4.html">Handler_NewsFlash</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="a670"></span>A670</td>
+<td class="instruction">JR <a href="A62E.html#a63a">Handler_Fired_0</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="A62E.html#a63a">Handler_Fired_0</a>.</td>
+</tr>
+<tr>
+<td class="asm-label">Handler_Fired_BackToMenu</td>
+<td class="address-2"><span id="a672"></span>A672</td>
+<td class="instruction">JP <a href="A590.html#a5a3">GameEntryPoint_0</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="A590.html#a5a3">GameEntryPoint_0</a>.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="A61D.html">A61D</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#a62e">Map</a></td>
+<td class="next">
+Next: <a href="A675.html">A675</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1984 New Generation Software; 2023 ArcadeGeek LTD.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.0.</div>
+<div class="repository">Link to <a href="https://github.com/pobtastic/trashman/">Source code</a>.</div>
+<div><a href="../dec/asm/42542.html">Switch to decimal</a>.</div>
+</footer>
+</body>
+</html>

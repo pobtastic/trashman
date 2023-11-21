@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Trashman: Routine at B3F0</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="B3BE.html">B3BE</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#b3f0">Map</a></td>
+<td class="next">
+Next: <a href="B416.html">B416</a>
+</td>
+</tr>
+</table>
+<div class="description">B3F0: Routine at B3F0</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routine at <a href="B0A1.html">StartGame</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="address-2"><span id="b3f0"></span>B3F0</td>
+<td class="instruction">LD IX,$C293</td>
+<td class="comment-1" rowspan="1"><span class="register">IX</span>=<a href="C293.html">C293</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="b3f4"></span>B3F4</td>
+<td class="instruction">LD B,$07</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=07.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="b3f6"></span>B3F6</td>
+<td class="instruction">PUSH BC</td>
+<td class="comment-1" rowspan="1">Stash <span class="register">BC</span> on the stack.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="b3f7"></span>B3F7</td>
+<td class="instruction">LD A,(IX+$00)</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=(<span class="register">IX</span>+00).</td>
+</tr>
+<tr>
+<td class="address-1"><span id="b3fa"></span>B3FA</td>
+<td class="instruction">CP (IX+$0B)</td>
+<td class="comment-1" rowspan="1">Compare <span class="register">A</span> with *<span class="register">IX</span>+0B.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="b3fd"></span>B3FD</td>
+<td class="instruction">CALL C,<a href="B3F0.html#b409">$B409</a></td>
+<td class="comment-1" rowspan="1">Call <a href="B3F0.html#b409">B409</a> is lower.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="b400"></span>B400</td>
+<td class="instruction">LD BC,$000D</td>
+<td class="comment-1" rowspan="1"><span class="register">BC</span>=000D.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="b403"></span>B403</td>
+<td class="instruction">ADD IX,BC</td>
+<td class="comment-1" rowspan="1"><span class="register">IX</span>+=<span class="register">BC</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="b405"></span>B405</td>
+<td class="instruction">POP BC</td>
+<td class="comment-1" rowspan="1">Restore <span class="register">BC</span> from the stack.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="b406"></span>B406</td>
+<td class="instruction">DJNZ <a href="B3F0.html#b3f6">$B3F6</a></td>
+<td class="comment-1" rowspan="1">Decrease counter by one and loop back to <a href="B3F0.html#b3f6">B3F6</a> until counter is zero.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="b408"></span>B408</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="b409"></span>B409</td>
+<td class="instruction">PUSH IX</td>
+<td class="comment-1" rowspan="1">Stash <span class="register">IX</span> on the stack.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="b40b"></span>B40B</td>
+<td class="instruction">CALL <a href="B2EE.html">$B2EE</a></td>
+<td class="comment-1" rowspan="1">Call <a href="B2EE.html">B2EE</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="b40e"></span>B40E</td>
+<td class="instruction">POP IX</td>
+<td class="comment-1" rowspan="1">Restore <span class="register">IX</span> from the stack.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="b410"></span>B410</td>
+<td class="instruction">CALL <a href="B322.html">$B322</a></td>
+<td class="comment-1" rowspan="1">Call <a href="B322.html">B322</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="b413"></span>B413</td>
+<td class="instruction">LD A,$17</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=17.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="b415"></span>B415</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="B3BE.html">B3BE</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#b3f0">Map</a></td>
+<td class="next">
+Next: <a href="B416.html">B416</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1984 New Generation Software; 2023 ArcadeGeek LTD.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.0.</div>
+<div class="repository">Link to <a href="https://github.com/pobtastic/trashman/">Source code</a>.</div>
+<div><a href="../dec/asm/46064.html">Switch to decimal</a>.</div>
+</footer>
+</body>
+</html>

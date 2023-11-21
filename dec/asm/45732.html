@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Trashman: Routine at 45732</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="45715.html">45715</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#45732">Map</a></td>
+<td class="next">
+Next: <a href="45760.html">45760</a>
+</td>
+</tr>
+</table>
+<div class="description">45732: Routine at B2A4</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routine at <a href="45576.html">45576</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="address-2"><span id="45732"></span>45732</td>
+<td class="instruction">PUSH BC</td>
+<td class="comment-1" rowspan="2">Stash <span class="register">BC</span> and <span class="register">DE</span> on the stack.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="45733"></span>45733</td>
+<td class="instruction">PUSH DE</td>
+</tr>
+<tr>
+<td class="address-2"><span id="45734"></span>45734</td>
+<td class="instruction">INC HL</td>
+<td class="comment-1" rowspan="1">Increment <span class="register">HL</span> by one.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="45735"></span>45735</td>
+<td class="instruction">LD A,(HL)</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<span class="register">HL</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="45736"></span>45736</td>
+<td class="instruction">XOR %00000100</td>
+<td class="comment-1" rowspan="1">Reset bit 2.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="45738"></span>45738</td>
+<td class="instruction">LD (DE),A</td>
+<td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<span class="register">DE</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="45739"></span>45739</td>
+<td class="instruction">DEC HL</td>
+<td class="comment-1" rowspan="1">Decrease <span class="register">HL</span> by one.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="45740"></span>45740</td>
+<td class="instruction">DEC DE</td>
+<td class="comment-1" rowspan="1">Decrease <span class="register">DE</span> by one.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="45741"></span>45741</td>
+<td class="instruction">LD A,(HL)</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<span class="register">HL</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="45742"></span>45742</td>
+<td class="instruction">LD (DE),A</td>
+<td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<span class="register">DE</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="45743"></span>45743</td>
+<td class="instruction">INC HL</td>
+<td class="comment-1" rowspan="2">Increment <span class="register">HL</span> by two.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="45744"></span>45744</td>
+<td class="instruction">INC HL</td>
+</tr>
+<tr>
+<td class="address-1"><span id="45745"></span>45745</td>
+<td class="instruction">DEC DE</td>
+<td class="comment-1" rowspan="1">Decrease <span class="register">DE</span> by one.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="45746"></span>45746</td>
+<td class="instruction">DEC C</td>
+<td class="comment-1" rowspan="1">Decrease <span class="register">C</span> by one.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="45747"></span>45747</td>
+<td class="instruction">JR NZ,<a href="45732.html#45734">45734</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="45732.html#45734">45734</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="45749"></span>45749</td>
+<td class="instruction">EX DE,HL</td>
+<td class="comment-1" rowspan="1">Exchange the <span class="register">DE</span> register with the shadow <span class="register">HL</span> register.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="45750"></span>45750</td>
+<td class="instruction">POP HL</td>
+<td class="comment-1" rowspan="1">Restore <span class="register">HL</span> from the stack.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="45751"></span>45751</td>
+<td class="instruction">LD BC,64</td>
+<td class="comment-1" rowspan="1"><span class="register">BC</span>=0064.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="45754"></span>45754</td>
+<td class="instruction">ADD HL,BC</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>+=<span class="register">BC</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="45755"></span>45755</td>
+<td class="instruction">EX DE,HL</td>
+<td class="comment-1" rowspan="1">Exchange the <span class="register">DE</span> register with the shadow <span class="register">HL</span> register.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="45756"></span>45756</td>
+<td class="instruction">POP BC</td>
+<td class="comment-1" rowspan="1">Restore <span class="register">BC</span> from the stack.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="45757"></span>45757</td>
+<td class="instruction">DJNZ <a href="45732.html#45732">45732</a></td>
+<td class="comment-1" rowspan="1">Decrease counter by one and loop back to <a href="45732.html">45732</a> until counter is zero.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="45759"></span>45759</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="45715.html">45715</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#45732">Map</a></td>
+<td class="next">
+Next: <a href="45760.html">45760</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1984 New Generation Software; 2023 ArcadeGeek LTD.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.0.</div>
+<div class="repository">Link to <a href="https://github.com/pobtastic/trashman/">Source code</a>.</div>
+<div><a href="../../asm/B2A4.html">Switch to hexadecimal</a>.</div>
+</footer>
+</body>
+</html>

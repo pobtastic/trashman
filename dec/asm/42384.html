@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Trashman: Routine at 42384</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="30815.html">30815</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#42384">Map</a></td>
+<td class="next">
+Next: <a href="42525.html">42525</a>
+</td>
+</tr>
+</table>
+<div class="description">42384: Game Entry Point</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">GameEntryPoint</td>
+<td class="address-2"><span id="42384"></span>42384</td>
+<td class="instruction">LD A,0</td>
+<td class="comment-1" rowspan="2">Write 0 to *<a href="52285.html">52285</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="42386"></span>42386</td>
+<td class="instruction">LD (52285),A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="42389"></span>42389</td>
+<td class="instruction">LD A,159</td>
+<td class="comment-1" rowspan="2"><span class="register">I</span>=159.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="42391"></span>42391</td>
+<td class="instruction">LD I,A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="42393"></span>42393</td>
+<td class="instruction">IM 2</td>
+<td class="comment-1" rowspan="1">Set interrupt mode 2.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="42395"></span>42395</td>
+<td class="instruction">EI</td>
+<td class="comment-1" rowspan="1">Enable interrupts.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="42396"></span>42396</td>
+<td class="instruction">LD A,R</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=<span class="register">R</span>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="42398"></span>42398</td>
+<td class="instruction">OR %10000000</td>
+<td class="comment-1" rowspan="1">Set bit 7.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="42400"></span>42400</td>
+<td class="instruction">LD (49637),A</td>
+<td class="comment-1" rowspan="1">Write <span class="register">A</span> to <a href="49484.html#49637">49637</a>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="42403"></span>
+<div class="comments">
+<div class="paragraph">
+This entry point is used by the routines at <a href="42542.html">Handler_Fired</a> and <a href="42695.html">Handler_DebounceSpace</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">GameEntryPoint_0</td>
+<td class="address-2"><span id="42403"></span>42403</td>
+<td class="instruction">CALL <a href="42816.html">BlankMiddleAttributeBuffer</a></td>
+<td class="comment-1" rowspan="1">Call <a href="42816.html">BlankMiddleAttributeBuffer</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="42406"></span>42406</td>
+<td class="instruction">CALL <a href="42878.html">BlankMiddleScreenBuffer</a></td>
+<td class="comment-1" rowspan="1">Call <a href="42878.html">BlankMiddleScreenBuffer</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="42409"></span>42409</td>
+<td class="instruction">CALL <a href="42613.html">GameMenu</a></td>
+<td class="comment-1" rowspan="1">Call <a href="42613.html">GameMenu</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="42412"></span>42412</td>
+<td class="instruction">CALL <a href="42816.html">BlankMiddleAttributeBuffer</a></td>
+<td class="comment-1" rowspan="1">Call <a href="42816.html">BlankMiddleAttributeBuffer</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="42415"></span>42415</td>
+<td class="instruction">CALL <a href="42878.html">BlankMiddleScreenBuffer</a></td>
+<td class="comment-1" rowspan="1">Call <a href="42878.html">BlankMiddleScreenBuffer</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="42418"></span>42418</td>
+<td class="instruction">CALL <a href="43386.html">InitialiseNewGame</a></td>
+<td class="comment-1" rowspan="1">Call <a href="43386.html">InitialiseNewGame</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="42421"></span>42421</td>
+<td class="instruction">CALL <a href="42709.html">Player_Name</a></td>
+<td class="comment-1" rowspan="1">Call <a href="42709.html">Player_Name</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="42424"></span>42424</td>
+<td class="instruction">CALL <a href="42878.html">BlankMiddleScreenBuffer</a></td>
+<td class="comment-1" rowspan="1">Call <a href="42878.html">BlankMiddleScreenBuffer</a>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="42427"></span>
+<div class="comments">
+<div class="paragraph">
+This entry point is used by the routine at <a href="42542.html">Handler_Fired</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">GameEntryPoint_1</td>
+<td class="address-2"><span id="42427"></span>42427</td>
+<td class="instruction">CALL <a href="43332.html">InitialiseStreet</a></td>
+<td class="comment-1" rowspan="1">Call <a href="43332.html">InitialiseStreet</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="42430"></span>42430</td>
+<td class="instruction">CALL <a href="43163.html">Handler_StreetIntroduction</a></td>
+<td class="comment-1" rowspan="1">Call <a href="43163.html">Handler_StreetIntroduction</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="42433"></span>42433</td>
+<td class="instruction">CALL <a href="42997.html">PressAnyKey</a></td>
+<td class="comment-1" rowspan="1">Call <a href="42997.html">PressAnyKey</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="42436"></span>42436</td>
+<td class="instruction">CALL <a href="45217.html">StartGame</a></td>
+<td class="comment-1" rowspan="1">Call <a href="45217.html">StartGame</a>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="42439"></span>
+<div class="comments">
+<div class="paragraph">
+The game has ended ... check why.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="42439"></span>42439</td>
+<td class="instruction">LD A,(45064)</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="45064.html">45064</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="42442"></span>42442</td>
+<td class="instruction">BIT 2,A</td>
+<td class="comment-1" rowspan="2">Jump to <a href="42525.html">Handler_TimeOut</a> if the bonus/ time counter reached zero.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="42444"></span>42444</td>
+<td class="instruction">JR NZ,<a href="42525.html">Handler_TimeOut</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="42446"></span>42446</td>
+<td class="instruction">LD HL,49778</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>=<a href="49778.html">Time_Remaining</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="42449"></span>42449</td>
+<td class="instruction">CALL <a href="52002.html">AddPointsToScore</a></td>
+<td class="comment-1" rowspan="1">Call <a href="52002.html">AddPointsToScore</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="42452"></span>42452</td>
+<td class="instruction">LD A,(45064)</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="45064.html">45064</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="42455"></span>42455</td>
+<td class="instruction">BIT 0,A</td>
+<td class="comment-1" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="42457"></span>42457</td>
+<td class="instruction">JP NZ,<a href="42542.html#42599">Handler_Fired_3</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="42542.html#42599">Handler_Fired_3</a> if is not zero.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="42460"></span>42460</td>
+<td class="instruction">LD HL,(43902)</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>=*<a href="43902.html">ActivePlayer</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="42463"></span>42463</td>
+<td class="instruction">INC HL</td>
+<td class="comment-1" rowspan="1">Increment <span class="register">HL</span> by one.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="42464"></span>42464</td>
+<td class="instruction">LD A,12</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=12.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="42466"></span>42466</td>
+<td class="instruction">CP (HL)</td>
+<td class="comment-1" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="42467"></span>42467</td>
+<td class="instruction">JR Z,<a href="42384.html#42487">GameEntryPoint_3</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="42384.html#42487">GameEntryPoint_3</a> if is zero.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="42469"></span>42469</td>
+<td class="instruction">INC (HL)</td>
+<td class="comment-1" rowspan="2">Increment *<span class="register">HL</span> by two.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="42470"></span>42470</td>
+<td class="instruction">INC (HL)</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="42471"></span>42471</td>
+<td class="instruction">CALL <a href="43423.html">FinishedStreet</a></td>
+<td class="comment-1" rowspan="1">Call <a href="43423.html">FinishedStreet</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="42474"></span>42474</td>
+<td class="instruction">CALL <a href="42997.html">PressAnyKey</a></td>
+<td class="comment-1" rowspan="1">Call <a href="42997.html">PressAnyKey</a>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="42477"></span>
+<div class="comments">
+<div class="paragraph">
+This entry point is used by the routine at <a href="42525.html">Handler_TimeOut</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">GameEntryPoint_2</td>
+<td class="address-2"><span id="42477"></span>42477</td>
+<td class="instruction">CALL <a href="43476.html">SwitchPlayers</a></td>
+<td class="comment-1" rowspan="1">Call <a href="43476.html">SwitchPlayers</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="42480"></span>42480</td>
+<td class="instruction">JR C,<a href="42384.html#42427">GameEntryPoint_1</a></td>
+<td class="comment-1" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="42482"></span>42482</td>
+<td class="instruction">CALL <a href="43476.html">SwitchPlayers</a></td>
+<td class="comment-1" rowspan="1">Call <a href="43476.html">SwitchPlayers</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="42485"></span>42485</td>
+<td class="instruction">JR <a href="42384.html#42427">GameEntryPoint_1</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="42384.html#42427">GameEntryPoint_1</a>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="42487"></span>
+<div class="comments">
+<div class="paragraph">
+Who is in play, is it 1UP or 2UP?
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">GameEntryPoint_3</td>
+<td class="address-2"><span id="42487"></span>42487</td>
+<td class="instruction">LD HL,43914</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>=<a href="43914.html">Game_Flags</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="42490"></span>42490</td>
+<td class="instruction">BIT 4,(HL)</td>
+<td class="comment-1" rowspan="1">Test bit 4 of *<span class="register">HL</span>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="42492"></span>42492</td>
+<td class="instruction">JR NZ,<a href="42384.html#42498">GameEntryPoint_4</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="42384.html#42498">GameEntryPoint_4</a> if this is player two.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="42494"></span>42494</td>
+<td class="instruction">RES 6,(HL)</td>
+<td class="comment-1" rowspan="1">Reset bit 6 of *<span class="register">HL</span>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="42496"></span>42496</td>
+<td class="instruction">JR <a href="42384.html#42500">GameEntryPoint_5</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="42384.html#42500">GameEntryPoint_5</a>.</td>
+</tr>
+<tr>
+<td class="asm-label">GameEntryPoint_4</td>
+<td class="address-2"><span id="42498"></span>42498</td>
+<td class="instruction">RES 7,(HL)</td>
+<td class="comment-1" rowspan="1">Reset bit 7 of *<span class="register">HL</span>.</td>
+</tr>
+<tr>
+<td class="asm-label">GameEntryPoint_5</td>
+<td class="address-2"><span id="42500"></span>42500</td>
+<td class="instruction">CALL <a href="43423.html#43461">CopyScore_ActiveScore</a></td>
+<td class="comment-1" rowspan="1">Call <a href="43423.html#43461">CopyScore_ActiveScore</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="42503"></span>42503</td>
+<td class="instruction">CALL <a href="43689.html">NewHighScore</a></td>
+<td class="comment-1" rowspan="1">Call <a href="43689.html">NewHighScore</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="42506"></span>42506</td>
+<td class="instruction">CALL <a href="43794.html">Messaging_GameOver</a></td>
+<td class="comment-1" rowspan="1">Call <a href="43794.html">Messaging_GameOver</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="42509"></span>42509</td>
+<td class="instruction">CALL <a href="42997.html">PressAnyKey</a></td>
+<td class="comment-1" rowspan="1">Call <a href="42997.html">PressAnyKey</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="42512"></span>42512</td>
+<td class="instruction">CALL <a href="43625.html">Print_HighScoreTable</a></td>
+<td class="comment-1" rowspan="1">Call <a href="43625.html">Print_HighScoreTable</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="42515"></span>42515</td>
+<td class="instruction">CALL <a href="42997.html">PressAnyKey</a></td>
+<td class="comment-1" rowspan="1">Call <a href="42997.html">PressAnyKey</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="42518"></span>42518</td>
+<td class="instruction">CALL <a href="43476.html">SwitchPlayers</a></td>
+<td class="comment-1" rowspan="1">Call <a href="43476.html">SwitchPlayers</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="42521"></span>42521</td>
+<td class="instruction">JR C,<a href="42384.html#42427">GameEntryPoint_1</a></td>
+<td class="comment-1" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="42523"></span>42523</td>
+<td class="instruction">JR <a href="42384.html#42403">GameEntryPoint_0</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="42384.html#42403">GameEntryPoint_0</a>.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="30815.html">30815</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#42384">Map</a></td>
+<td class="next">
+Next: <a href="42525.html">42525</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1984 New Generation Software; 2023 ArcadeGeek LTD.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.0.</div>
+<div class="repository">Link to <a href="https://github.com/pobtastic/trashman/">Source code</a>.</div>
+<div><a href="../../asm/A590.html">Switch to hexadecimal</a>.</div>
+</footer>
+</body>
+</html>

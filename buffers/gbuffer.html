@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Trashman: Game status buffer</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="GameStatusBuffer">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Game status buffer</td>
+</tr>
+</table>
+<div class="map-intro"></div>
+<table class="map">
+<tr>
+<th>Address</th>
+<th class="map-length">Length</th>
+<th>Description</th>
+</tr>
+<tr>
+<td class="map-g"><span id="ab7e"></span><a href="../asm/AB7E.html">AB7E</a></td>
+<td class="map-length">12</td>
+<td class="map-g-desc">
+<div class="map-entry-title-11"><a class="map-entry-title" href="../asm/AB7E.html">Pointer To Active Player</a></div>
+<div class="map-entry-desc">
+</div>
+</td>
+</tr>
+<tr>
+<td class="map-g"><span id="ab8a"></span><a href="../asm/AB8A.html">AB8A</a></td>
+<td class="map-length">1</td>
+<td class="map-g-desc">
+<div class="map-entry-title-11"><a class="map-entry-title" href="../asm/AB8A.html">Game Flags</a></div>
+<div class="map-entry-desc">
+<div class="paragraph">
+<table class="default">
+<tr>
+<th colspan="4" rowspan="1">Bits</th>
+</tr>
+<tr>
+<th colspan="1" rowspan="1">0</th>
+<th colspan="1" rowspan="1">1</th>
+<th colspan="1" rowspan="1">2</th>
+<th colspan="1" rowspan="1">3</th>
+</tr>
+<tr>
+<td class="centre" colspan="1" rowspan="1">To-do</td>
+<td class="centre" colspan="1" rowspan="1">To-do</td>
+<td class="centre" colspan="1" rowspan="1">To-do</td>
+<td class="centre" colspan="1" rowspan="1">To-do</td>
+</tr>
+<tr>
+<th colspan="1" rowspan="1">4</th>
+<th colspan="1" rowspan="1">5</th>
+<th colspan="1" rowspan="1">6</th>
+<th colspan="1" rowspan="1">7</th>
+</tr>
+<tr>
+<td class="centre" colspan="1" rowspan="1">Active player</td>
+<td class="centre" colspan="1" rowspan="1">To-do</td>
+<td class="centre" colspan="1" rowspan="1">To-do</td>
+<td class="centre" colspan="1" rowspan="1">To-do</td>
+</tr>
+</table>
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="map-g"><span id="b043"></span><a href="../asm/B043.html">B043</a></td>
+<td class="map-length">48</td>
+<td class="map-g-desc">
+<div class="map-entry-title-11"><a class="map-entry-title" href="../asm/B043.html">High Score Table</a></div>
+<div class="map-entry-desc">
+</div>
+</td>
+</tr>
+<tr>
+<td class="map-g"><span id="c270"></span><a href="../asm/C270.html">C270</a></td>
+<td class="map-length">2</td>
+<td class="map-g-desc">
+<div class="map-entry-title-11"><a class="map-entry-title" href="../asm/C270.html">Number Of Bins String</a></div>
+<div class="map-entry-desc">
+<div class="paragraph">
+Points to the string which contains the number of bins to collect for the current street. <table class="default">
+<tr>
+<td class="centre" colspan="1" rowspan="1"><a href="../asm/B01E.html">Messaging_Five</a></td>
+</tr>
+<tr>
+<td class="centre" colspan="1" rowspan="1"><a href="../asm/B01E.html#b023">Messaging_Six</a></td>
+</tr>
+<tr>
+<td class="centre" colspan="1" rowspan="1"><a href="../asm/B01E.html#b027">Messaging_Seven</a></td>
+</tr>
+<tr>
+<td class="centre" colspan="1" rowspan="1"><a href="../asm/B01E.html#b02d">Messaging_Eight</a></td>
+</tr>
+<tr>
+<td class="centre" colspan="1" rowspan="1"><a href="../asm/B01E.html#b033">Messaging_Nine</a></td>
+</tr>
+<tr>
+<td class="centre" colspan="1" rowspan="1"><a href="../asm/B01E.html#b038">Messaging_Ten</a></td>
+</tr>
+<tr>
+<td class="centre" colspan="1" rowspan="1"><a href="../asm/B01E.html#b03c">Messaging_Twelve</a></td>
+</tr>
+</table>
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="map-g"><span id="c272"></span><a href="../asm/C272.html">C272</a></td>
+<td class="map-length">2</td>
+<td class="map-g-desc">
+<div class="map-entry-title-11"><a class="map-entry-title" href="../asm/C272.html">Time Remaining</a></div>
+<div class="map-entry-desc">
+<div class="paragraph">
+Time Remaining equates to how much bonus the player receives when the level is completed. Stored as e.g.
+</div>
+<div class="paragraph">
+<table class="default">
+<tr>
+<th colspan="1" rowspan="1">Location</th>
+<th colspan="1" rowspan="1">Value</th>
+</tr>
+<tr>
+<td class="centre" colspan="1" rowspan="1"><a href="../asm/C272.html">C272</a></td>
+<td class="centre" colspan="1" rowspan="1">50</td>
+</tr>
+<tr>
+<td class="centre" colspan="1" rowspan="1"><a href="../asm/C272.html#c273">C273</a></td>
+<td class="centre" colspan="1" rowspan="1">02</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+For "250" seconds/ bonus points remaining.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="map-g"><span id="c274"></span><a href="../asm/C274.html">C274</a></td>
+<td class="map-length">2</td>
+<td class="map-g-desc">
+<div class="map-entry-title-11"><a class="map-entry-title" href="../asm/C274.html">Game status buffer entry at C274</a></div>
+<div class="map-entry-desc">
+</div>
+</td>
+</tr>
+<tr>
+<td class="map-g"><span id="c276"></span><a href="../asm/C276.html">C276</a></td>
+<td class="map-length">1</td>
+<td class="map-g-desc">
+<div class="map-entry-title-11"><a class="map-entry-title" href="../asm/C276.html">Game status buffer entry at C276</a></div>
+<div class="map-entry-desc">
+</div>
+</td>
+</tr>
+<tr>
+<td class="map-g"><span id="c277"></span><a href="../asm/C277.html">C277</a></td>
+<td class="map-length">2</td>
+<td class="map-g-desc">
+<div class="map-entry-title-11"><a class="map-entry-title" href="../asm/C277.html">Game status buffer entry at C277</a></div>
+<div class="map-entry-desc">
+</div>
+</td>
+</tr>
+<tr>
+<td class="map-g"><span id="c279"></span><a href="../asm/C279.html">C279</a></td>
+<td class="map-length">1</td>
+<td class="map-g-desc">
+<div class="map-entry-title-11"><a class="map-entry-title" href="../asm/C279.html">Game status buffer entry at C279</a></div>
+<div class="map-entry-desc">
+</div>
+</td>
+</tr>
+<tr>
+<td class="map-g"><span id="c27a"></span><a href="../asm/C27A.html">C27A</a></td>
+<td class="map-length">6</td>
+<td class="map-g-desc">
+<div class="map-entry-title-11"><a class="map-entry-title" href="../asm/C27A.html">Game status buffer entry at C27A</a></div>
+<div class="map-entry-desc">
+</div>
+</td>
+</tr>
+<tr>
+<td class="map-g"><span id="c28e"></span><a href="../asm/C28E.html">C28E</a></td>
+<td class="map-length">2</td>
+<td class="map-g-desc">
+<div class="map-entry-title-11"><a class="map-entry-title" href="../asm/C28E.html">Game status buffer entry at C28E</a></div>
+<div class="map-entry-desc">
+</div>
+</td>
+</tr>
+<tr>
+<td class="map-g"><span id="c290"></span><a href="../asm/C290.html">C290</a></td>
+<td class="map-length">3</td>
+<td class="map-g-desc">
+<div class="map-entry-title-11"><a class="map-entry-title" href="../asm/C290.html">Game status buffer entry at C290</a></div>
+<div class="map-entry-desc">
+</div>
+</td>
+</tr>
+<tr>
+<td class="map-g"><span id="c293"></span><a href="../asm/C293.html">C293</a></td>
+<td class="map-length">65</td>
+<td class="map-g-desc">
+<div class="map-entry-title-11"><a class="map-entry-title" href="../asm/C293.html">Game status buffer entry at C293</a></div>
+<div class="map-entry-desc">
+</div>
+</td>
+</tr>
+<tr>
+<td class="map-g"><span id="c2d4"></span><a href="../asm/C2D4.html">C2D4</a></td>
+<td class="map-length">26</td>
+<td class="map-g-desc">
+<div class="map-entry-title-11"><a class="map-entry-title" href="../asm/C2D4.html">Game status buffer entry at C2D4</a></div>
+<div class="map-entry-desc">
+</div>
+</td>
+</tr>
+<tr>
+<td class="map-g"><span id="c2ee"></span><a href="../asm/C2EE.html">C2EE</a></td>
+<td class="map-length">128</td>
+<td class="map-g-desc">
+<div class="map-entry-title-11"><a class="map-entry-title" href="../asm/C2EE.html">Game status buffer entry at C2EE</a></div>
+<div class="map-entry-desc">
+</div>
+</td>
+</tr>
+<tr>
+<td class="map-g"><span id="c36e"></span><a href="../asm/C36E.html">C36E</a></td>
+<td class="map-length">27</td>
+<td class="map-g-desc">
+<div class="map-entry-title-11"><a class="map-entry-title" href="../asm/C36E.html">Game status buffer entry at C36E</a></div>
+<div class="map-entry-desc">
+</div>
+</td>
+</tr>
+<tr>
+<td class="map-g"><span id="c389"></span><a href="../asm/C389.html">C389</a></td>
+<td class="map-length">3</td>
+<td class="map-g-desc">
+<div class="map-entry-title-11"><a class="map-entry-title" href="../asm/C389.html">Game status buffer entry at C389</a></div>
+<div class="map-entry-desc">
+</div>
+</td>
+</tr>
+<tr>
+<td class="map-g"><span id="c38c"></span><a href="../asm/C38C.html">C38C</a></td>
+<td class="map-length">1</td>
+<td class="map-g-desc">
+<div class="map-entry-title-11"><a class="map-entry-title" href="../asm/C38C.html">Game status buffer entry at C38C</a></div>
+<div class="map-entry-desc">
+</div>
+</td>
+</tr>
+<tr>
+<td class="map-g"><span id="c38d"></span><a href="../asm/C38D.html">C38D</a></td>
+<td class="map-length">1830</td>
+<td class="map-g-desc">
+<div class="map-entry-title-11"><a class="map-entry-title" href="../asm/C38D.html">Game status buffer entry at C38D</a></div>
+<div class="map-entry-desc">
+</div>
+</td>
+</tr>
+<tr>
+<td class="map-g"><span id="cb96"></span><a href="../asm/CB96.html">CB96</a></td>
+<td class="map-length">3</td>
+<td class="map-g-desc">
+<div class="map-entry-title-11"><a class="map-entry-title" href="../asm/CB96.html">Active Players Score</a></div>
+<div class="map-entry-desc">
+<div class="paragraph">
+The current players score for display. Stored as e.g.
+</div>
+<div class="paragraph">
+<table class="default">
+<tr>
+<th colspan="1" rowspan="1">Location</th>
+<th colspan="1" rowspan="1">Value</th>
+</tr>
+<tr>
+<td class="centre" colspan="1" rowspan="1"><a href="../asm/CB96.html">CB96</a></td>
+<td class="centre" colspan="1" rowspan="1">33</td>
+</tr>
+<tr>
+<td class="centre" colspan="1" rowspan="1"><a href="../asm/CB96.html#cb97">CB97</a></td>
+<td class="centre" colspan="1" rowspan="1">22</td>
+</tr>
+<tr>
+<td class="centre" colspan="1" rowspan="1"><a href="../asm/CB96.html#cb98">CB98</a></td>
+<td class="centre" colspan="1" rowspan="1">11</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+For a score of "112233" points.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="map-g"><span id="cb99"></span><a href="../asm/CB99.html">CB99</a></td>
+<td class="map-length">3</td>
+<td class="map-g-desc">
+<div class="map-entry-title-11"><a class="map-entry-title" href="../asm/CB99.html">Inactive Players Score?</a></div>
+<div class="map-entry-desc">
+<div class="paragraph">
+See <a href="../asm/CB96.html">ActivePlayer_Score</a> for explanation.
+</div>
+</div>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1984 New Generation Software; 2023 ArcadeGeek LTD.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.0.</div>
+<div class="repository">Link to <a href="https://github.com/pobtastic/trashman/">Source code</a>.</div>
+<div><a href="../dec/buffers/gbuffer.html">Switch to decimal</a>.</div>
+</footer>
+</body>
+</html>

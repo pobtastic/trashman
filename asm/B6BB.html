@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Trashman: Routine at B6BB</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="B64C.html">B64C</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#b6bb">Map</a></td>
+<td class="next">
+Next: <a href="B6BF.html">B6BF</a>
+</td>
+</tr>
+</table>
+<div class="description">B6BB: Handler: Controls</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routines at <a href="A78C.html">A78C</a>, <a href="A7E1.html">Handler_Press_Fire</a>, <a href="A7EB.html">Handler_Debounce_Controls</a>, <a href="A859.html">A859</a> and <a href="B724.html">B724</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="b6bb"></span>
+<div class="comments">
+<div class="paragraph">
+Self-modifying code, the target address here is updated from <a href="A675.html#a6c0">GameMenu_WriteControl</a> to set the selected controller routine.
+</div>
+<div class="paragraph">
+This will be one of the following: <table class="default">
+<tr>
+<td class="" colspan="1" rowspan="1"><a href="B6BF.html">Handler_Controls_Keyboard</a></td>
+</tr>
+<tr>
+<td class="" colspan="1" rowspan="1"><a href="B6E5.html">Handler_Controls_Kempston</a></td>
+</tr>
+<tr>
+<td class="" colspan="1" rowspan="1"><a href="B703.html">Handler_Controls_Interface2</a></td>
+</tr>
+</table>
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">Handler_Controls</td>
+<td class="address-2"><span id="b6bb"></span>B6BB</td>
+<td class="instruction">CALL <a href="B6BF.html">Handler_Controls_Keyboard</a></td>
+<td class="comment-1" rowspan="1">Call <a href="B6BF.html">Handler_Controls_Keyboard</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="b6be"></span>B6BE</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="B64C.html">B64C</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#b6bb">Map</a></td>
+<td class="next">
+Next: <a href="B6BF.html">B6BF</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1984 New Generation Software; 2023 ArcadeGeek LTD.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.0.</div>
+<div class="repository">Link to <a href="https://github.com/pobtastic/trashman/">Source code</a>.</div>
+<div><a href="../dec/asm/46779.html">Switch to decimal</a>.</div>
+</footer>
+</body>
+</html>

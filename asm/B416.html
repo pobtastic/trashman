@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Trashman: Routine at B416</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="B3F0.html">B3F0</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#b416">Map</a></td>
+<td class="next">
+Next: <a href="B44A.html">B44A</a>
+</td>
+</tr>
+</table>
+<div class="description">B416: Routine at B416</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routines at <a href="B0A1.html">StartGame</a>, <a href="B591.html">B591</a> and <a href="BF50.html">BF50</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="address-2"><span id="b416"></span>B416</td>
+<td class="instruction">LD IX,$C36E</td>
+<td class="comment-1" rowspan="1"><span class="register">IX</span>=<a href="C36E.html">C36E</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="b41a"></span>B41A</td>
+<td class="instruction">BIT 0,(IX+$18)</td>
+<td class="comment-1" rowspan="1">Test bit 0 of *<span class="register">IX</span>+18.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="b41e"></span>B41E</td>
+<td class="instruction">JR Z,<a href="B416.html#b425">$B425</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="B416.html#b425">B425</a> if {} is zero.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="b420"></span>B420</td>
+<td class="instruction">BIT 7,(IX+$18)</td>
+<td class="comment-1" rowspan="1">Test bit 7 of *<span class="register">IX</span>+18.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="b424"></span>B424</td>
+<td class="instruction">RET NZ</td>
+<td class="comment-1" rowspan="1">Return if {} is not zero.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="b425"></span>B425</td>
+<td class="instruction">RES 7,(IX+$18)</td>
+<td class="comment-1" rowspan="1">Reset bit 7 of *<span class="register">IX</span>+18.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="b429"></span>B429</td>
+<td class="instruction">CALL <a href="B2C0.html">$B2C0</a></td>
+<td class="comment-1" rowspan="1">Call <a href="B2C0.html">B2C0</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="b42c"></span>B42C</td>
+<td class="instruction">LD IX,$C36E</td>
+<td class="comment-1" rowspan="1"><span class="register">IX</span>=<a href="C36E.html">C36E</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="b430"></span>B430</td>
+<td class="instruction">CALL <a href="B374.html">$B374</a></td>
+<td class="comment-1" rowspan="1">Call <a href="B374.html">B374</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="b433"></span>B433</td>
+<td class="instruction">BIT 1,(IX+$17)</td>
+<td class="comment-1" rowspan="1">Test bit 1 of *<span class="register">IX</span>+17.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="b437"></span>B437</td>
+<td class="instruction">JR NZ,<a href="B416.html#b440">$B440</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="B416.html#b440">B440</a> if {} is not zero.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="b439"></span>B439</td>
+<td class="instruction">CALL <a href="B4B8.html">$B4B8</a></td>
+<td class="comment-1" rowspan="1">Call <a href="B4B8.html">B4B8</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="b43c"></span>B43C</td>
+<td class="instruction">CALL <a href="B469.html">$B469</a></td>
+<td class="comment-1" rowspan="1">Call <a href="B469.html">B469</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="b43f"></span>B43F</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="b440"></span>B440</td>
+<td class="instruction">BIT 0,(IX+$18)</td>
+<td class="comment-1" rowspan="1">Test bit 0 of *<span class="register">IX</span>+18.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="b444"></span>B444</td>
+<td class="instruction">RET Z</td>
+<td class="comment-1" rowspan="1">Return if {} is zero.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="b445"></span>B445</td>
+<td class="instruction">SET 7,(IX+$18)</td>
+<td class="comment-1" rowspan="1">Set bit 7 of *<span class="register">IX</span>+18.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="b449"></span>B449</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="B3F0.html">B3F0</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#b416">Map</a></td>
+<td class="next">
+Next: <a href="B44A.html">B44A</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1984 New Generation Software; 2023 ArcadeGeek LTD.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.0.</div>
+<div class="repository">Link to <a href="https://github.com/pobtastic/trashman/">Source code</a>.</div>
+<div><a href="../dec/asm/46102.html">Switch to decimal</a>.</div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Trashman: Routine at AA69</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="AA33.html">AA33</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#aa69">Map</a></td>
+<td class="next">
+Next: <a href="AAA9.html">AAA9</a>
+</td>
+</tr>
+</table>
+<div class="description">AA69: Print High Score Table</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routines at <a href="A590.html">GameEntryPoint</a> and <a href="A62E.html">Handler_Fired</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">Print_HighScoreTable</td>
+<td class="address-2"><span id="aa69"></span>AA69</td>
+<td class="instruction">CALL <a href="A77E.html">BlankMiddleScreenBuffer</a></td>
+<td class="comment-1" rowspan="1">Call <a href="A77E.html">BlankMiddleScreenBuffer</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="aa6c"></span>AA6C</td>
+<td class="instruction">CALL <a href="A740.html">BlankMiddleAttributeBuffer</a></td>
+<td class="comment-1" rowspan="1">Call <a href="A740.html">BlankMiddleAttributeBuffer</a>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="aa6f"></span>
+<div class="comments">
+<div class="paragraph">
+Print "TRASHMAN OF THE YEAR NOMINATIONS".
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="aa6f"></span>AA6F</td>
+<td class="instruction">LD DE,$4820</td>
+<td class="comment-1" rowspan="1"><span class="register">DE</span>=4820 (screen buffer location).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="aa72"></span>AA72</td>
+<td class="instruction">LD HL,$AE07</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>=<a href="AE07.html">Messaging_Nominations</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="aa75"></span>AA75</td>
+<td class="instruction">CALL <a href="B081.html">PrintString</a></td>
+<td class="comment-1" rowspan="1">Call <a href="B081.html">PrintString</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="aa78"></span>AA78</td>
+<td class="instruction">LD HL,$4840</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>=4840 (screen buffer location).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="aa7b"></span>AA7B</td>
+<td class="instruction">LD B,$20</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=20.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="aa7d"></span>AA7D</td>
+<td class="instruction">CALL <a href="A895.html">Concealer</a></td>
+<td class="comment-1" rowspan="1">Call <a href="A895.html">Concealer</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="aa80"></span>AA80</td>
+<td class="instruction">LD DE,$4865</td>
+<td class="comment-1" rowspan="1"><span class="register">DE</span>=4865 (screen buffer location).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="aa83"></span>AA83</td>
+<td class="instruction">LD HL,$B043</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>=<a href="B043.html">Table_HighScore</a>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="aa86"></span>
+<div class="comments">
+<div class="paragraph">
+The game holds four high scores.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="aa86"></span>AA86</td>
+<td class="instruction">LD B,$04</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=04 (counter).</td>
+</tr>
+<tr>
+<td class="asm-label">Print_HighScoreTable_Loop</td>
+<td class="address-2"><span id="aa88"></span>AA88</td>
+<td class="instruction">PUSH BC</td>
+<td class="comment-1" rowspan="1">Stash the counter held in <span class="register">BC</span> on the stack.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="aa89"></span>
+<div class="comments">
+<div class="paragraph">
+Print the players name for this position.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="aa89"></span>AA89</td>
+<td class="instruction">CALL <a href="B081.html">PrintString</a></td>
+<td class="comment-1" rowspan="1">Call <a href="B081.html">PrintString</a>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="aa8c"></span>
+<div class="comments">
+<div class="paragraph">
+Score are held backwards, so add three to point to the last digit.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="aa8c"></span>AA8C</td>
+<td class="instruction">LD BC,$0003</td>
+<td class="comment-1" rowspan="1"><span class="register">BC</span>=0003.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="aa8f"></span>AA8F</td>
+<td class="instruction">ADD HL,BC</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>+=<span class="register">BC</span>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="aa90"></span>
+<div class="comments">
+<div class="paragraph">
+Store the pointer for easily moving onto the next entry.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="aa90"></span>AA90</td>
+<td class="instruction">PUSH HL</td>
+<td class="comment-1" rowspan="1">Stash <span class="register">HL</span> on the stack.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="aa91"></span>AA91</td>
+<td class="instruction">EX DE,HL</td>
+<td class="comment-1" rowspan="1">Exchange the <span class="register">DE</span> register with the shadow <span class="register">HL</span> register.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="aa92"></span>AA92</td>
+<td class="instruction">ADD HL,BC</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>+=<span class="register">BC</span>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="aa93"></span>AA93</td>
+<td class="instruction">EX DE,HL</td>
+<td class="comment-1" rowspan="1">Exchange the <span class="register">DE</span> register with the shadow <span class="register">HL</span> register.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="aa94"></span>
+<div class="comments">
+<div class="paragraph">
+Scores are held using three bytes.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="aa94"></span>AA94</td>
+<td class="instruction">LD B,$03</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=03 (counter).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="aa96"></span>AA96</td>
+<td class="instruction">CALL <a href="CAB3.html">PrintNumbers</a></td>
+<td class="comment-1" rowspan="1">Call <a href="CAB3.html">PrintNumbers</a>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="aa99"></span>
+<div class="comments">
+<div class="paragraph">
+Print the "pts" suffix.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="aa99"></span>AA99</td>
+<td class="instruction">LD HL,$AE28</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>=<a href="AE07.html#ae28">Messaging_Pts</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="aa9c"></span>AA9C</td>
+<td class="instruction">CALL <a href="B081.html">PrintString</a></td>
+<td class="comment-1" rowspan="1">Call <a href="B081.html">PrintString</a>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="aa9f"></span>
+<div class="comments">
+<div class="paragraph">
+Update the screen buffer address for the next entry.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="aa9f"></span>AA9F</td>
+<td class="instruction">LD A,E</td>
+<td class="comment-1" rowspan="3"><span class="register">E</span>+=0A.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="aaa0"></span>AAA0</td>
+<td class="instruction">ADD A,$0A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="aaa2"></span>AAA2</td>
+<td class="instruction">LD E,A</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="aaa3"></span>
+<div class="comments">
+<div class="paragraph">
+Restore the stashed pointer, and move onto the next entry.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="aaa3"></span>AAA3</td>
+<td class="instruction">POP HL</td>
+<td class="comment-1" rowspan="1">Restore <span class="register">HL</span> from the stack.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="aaa4"></span>AAA4</td>
+<td class="instruction">INC HL</td>
+<td class="comment-1" rowspan="1">Increment <span class="register">HL</span> by one.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="aaa5"></span>
+<div class="comments">
+<div class="paragraph">
+Fetch the counter, and loop until all the positions have been displayed.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="aaa5"></span>AAA5</td>
+<td class="instruction">POP BC</td>
+<td class="comment-1" rowspan="1">Restore the counter to <span class="register">BC</span> from the stack.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="aaa6"></span>AAA6</td>
+<td class="instruction">DJNZ <a href="AA69.html#aa88">Print_HighScoreTable_Loop</a></td>
+<td class="comment-1" rowspan="1">Decrease counter by one and loop back to <a href="AA69.html#aa88">Print_HighScoreTable_Loop</a> until counter is zero.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="aaa8"></span>AAA8</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="AA33.html">AA33</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#aa69">Map</a></td>
+<td class="next">
+Next: <a href="AAA9.html">AAA9</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1984 New Generation Software; 2023 ArcadeGeek LTD.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.0.</div>
+<div class="repository">Link to <a href="https://github.com/pobtastic/trashman/">Source code</a>.</div>
+<div><a href="../dec/asm/43625.html">Switch to decimal</a>.</div>
+</footer>
+</body>
+</html>

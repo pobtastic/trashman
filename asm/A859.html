@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Trashman: Routine at A859</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="A83A.html">A83A</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#a859">Map</a></td>
+<td class="next">
+Next: <a href="A884.html">A884</a>
+</td>
+</tr>
+</table>
+<div class="description">A859: Routine at A859</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routine at <a href="A6D5.html">Player_Name</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="address-2"><span id="a859"></span>A859</td>
+<td class="instruction">CALL <a href="A7EB.html">Handler_Debounce_Controls</a></td>
+<td class="comment-1" rowspan="1">Call <a href="A7EB.html">Handler_Debounce_Controls</a>.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="a85c"></span>A85C</td>
+<td class="instruction">LD B,$0A</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=0A.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="a85e"></span>A85E</td>
+<td class="instruction">HALT</td>
+<td class="comment-1" rowspan="1">HALT.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a85f"></span>A85F</td>
+<td class="instruction">DJNZ <a href="A859.html#a85e">$A85E</a></td>
+<td class="comment-1" rowspan="1">Decrease counter by one and loop back to <a href="A859.html#a85e">A85E</a> until counter is zero.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a861"></span>A861</td>
+<td class="instruction">CALL <a href="B6BB.html">Handler_Controls</a></td>
+<td class="comment-1" rowspan="1">Call <a href="B6BB.html">Handler_Controls</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a864"></span>A864</td>
+<td class="instruction">LD A,E</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=<span class="register">E</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a865"></span>A865</td>
+<td class="instruction">CP $18</td>
+<td class="comment-1" rowspan="2">Jump to <a href="A859.html#a872">A872</a> if <span class="register">A</span> is 18.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a867"></span>A867</td>
+<td class="instruction">JR Z,<a href="A859.html#a872">$A872</a></td>
+</tr>
+<tr>
+<td class="address-1"><span id="a869"></span>A869</td>
+<td class="instruction">CP $08</td>
+<td class="comment-1" rowspan="2">Jump to <a href="A859.html#a872">A872</a> if <span class="register">A</span> is 08.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a86b"></span>A86B</td>
+<td class="instruction">JR Z,<a href="A859.html#a872">$A872</a></td>
+</tr>
+<tr>
+<td class="address-1"><span id="a86d"></span>A86D</td>
+<td class="instruction">CP $80</td>
+<td class="comment-1" rowspan="2">Jump to <a href="A859.html#a85c">A85C</a> if <span class="register">A</span> is not 80.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a86f"></span>A86F</td>
+<td class="instruction">JR NZ,<a href="A859.html#a85c">$A85C</a></td>
+</tr>
+<tr>
+<td class="address-1"><span id="a871"></span>A871</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="a872"></span>A872</td>
+<td class="instruction">LD HL,$AB8A</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>=<a href="AB8A.html">Game_Flags</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a875"></span>A875</td>
+<td class="instruction">LD A,$20</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=20.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a877"></span>A877</td>
+<td class="instruction">XOR (HL)</td>
+<td class="comment-1" rowspan="1">Reset the bits from *<span class="register">HL</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a878"></span>A878</td>
+<td class="instruction">LD (HL),A</td>
+<td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<span class="register">HL</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a879"></span>A879</td>
+<td class="instruction">CALL <a href="A884.html">Handler_Yes_No</a></td>
+<td class="comment-1" rowspan="1">Call <a href="A884.html">Handler_Yes_No</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a87c"></span>A87C</td>
+<td class="instruction">LD BC,$0080</td>
+<td class="comment-1" rowspan="1"><span class="register">BC</span>=0080.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a87f"></span>A87F</td>
+<td class="instruction">CALL <a href="A7F5.html#a7fe">PressAnyKey_1</a></td>
+<td class="comment-1" rowspan="1">Call <a href="A7F5.html#a7fe">PressAnyKey_1</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="a882"></span>A882</td>
+<td class="instruction">JR <a href="A859.html#a859">$A859</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="A859.html">A859</a>.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="A83A.html">A83A</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#a859">Map</a></td>
+<td class="next">
+Next: <a href="A884.html">A884</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1984 New Generation Software; 2023 ArcadeGeek LTD.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.0.</div>
+<div class="repository">Link to <a href="https://github.com/pobtastic/trashman/">Source code</a>.</div>
+<div><a href="../dec/asm/43097.html">Switch to decimal</a>.</div>
+</footer>
+</body>
+</html>

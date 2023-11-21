@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Trashman: Routine at A9D4</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="A99F.html">A99F</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#a9d4">Map</a></td>
+<td class="next">
+Next: <a href="A9EF.html">A9EF</a>
+</td>
+</tr>
+</table>
+<div class="description">A9D4: Switch Players?</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routines at <a href="A590.html">GameEntryPoint</a> and <a href="A62E.html">Handler_Fired</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">SwitchPlayers</td>
+<td class="address-2"><span id="a9d4"></span>A9D4</td>
+<td class="instruction">LD A,($AB8A)</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="AB8A.html">Game_Flags</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="a9d7"></span>A9D7</td>
+<td class="instruction">XOR %00010000</td>
+<td class="comment-1" rowspan="1">Reset bit 4.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="a9d9"></span>A9D9</td>
+<td class="instruction">LD ($AB8A),A</td>
+<td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<a href="AB8A.html">Game_Flags</a>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="a9dc"></span>
+<div class="comments">
+<div class="paragraph">
+Default to using 1UP.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="a9dc"></span>A9DC</td>
+<td class="instruction">LD HL,$AB80</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>=<a href="AB7E.html#ab80">1UP_Lives</a>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="a9df"></span>
+<div class="comments">
+<div class="paragraph">
+Who is in play, is it 1UP or 2UP?
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="a9df"></span>A9DF</td>
+<td class="instruction">BIT 4,A</td>
+<td class="comment-1" rowspan="2">Jump to <a href="A9D4.html#a9e6">SwitchPlayers_Write</a> if bit 4 of <span class="register">A</span> is zero.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="a9e1"></span>A9E1</td>
+<td class="instruction">JR Z,<a href="A9D4.html#a9e6">SwitchPlayers_Write</a></td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="a9e3"></span>
+<div class="comments">
+<div class="paragraph">
+Else, use 2UP.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="a9e3"></span>A9E3</td>
+<td class="instruction">LD HL,$AB85</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>=<a href="AB7E.html#ab85">2UP_Lives</a>.</td>
+</tr>
+<tr>
+<td class="asm-label">SwitchPlayers_Write</td>
+<td class="address-2"><span id="a9e6"></span>A9E6</td>
+<td class="instruction">LD ($AB7E),HL</td>
+<td class="comment-1" rowspan="1">Write <span class="register">HL</span> to *<a href="AB7E.html">ActivePlayer</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="a9e9"></span>A9E9</td>
+<td class="instruction">RLCA</td>
+<td class="comment-1" rowspan="1">Rotate <span class="register">A</span> left (with carry).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="a9ea"></span>A9EA</td>
+<td class="instruction">BIT 5,A</td>
+<td class="comment-1" rowspan="2">Return if bit 5 of <span class="register">A</span> is not zero.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="a9ec"></span>A9EC</td>
+<td class="instruction">RET NZ</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="a9ed"></span>A9ED</td>
+<td class="instruction">RLCA</td>
+<td class="comment-1" rowspan="1">Rotate <span class="register">A</span> left (with carry).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="a9ee"></span>A9EE</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="A99F.html">A99F</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#a9d4">Map</a></td>
+<td class="next">
+Next: <a href="A9EF.html">A9EF</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1984 New Generation Software; 2023 ArcadeGeek LTD.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.0.</div>
+<div class="repository">Link to <a href="https://github.com/pobtastic/trashman/">Source code</a>.</div>
+<div><a href="../dec/asm/43476.html">Switch to decimal</a>.</div>
+</footer>
+</body>
+</html>

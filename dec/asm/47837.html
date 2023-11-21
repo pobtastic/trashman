@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Trashman: Routine at 47837</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="46884.html">46884</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#47837">Map</a></td>
+<td class="next">
+Next: <a href="47926.html">47926</a>
+</td>
+</tr>
+</table>
+<div class="description">47837: Routine at BADD</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routine at <a href="45217.html">StartGame</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="address-2"><span id="47837"></span>47837</td>
+<td class="instruction">LD IX,50030</td>
+<td class="comment-1" rowspan="1"><span class="register">IX</span>=<a href="50030.html">50030</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="47841"></span>47841</td>
+<td class="instruction">LD B,(IX+10)</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=(<span class="register">IX</span>+10).</td>
+</tr>
+<tr>
+<td class="address-1"><span id="47844"></span>47844</td>
+<td class="instruction">LD C,(IX+11)</td>
+<td class="comment-1" rowspan="1"><span class="register">C</span>=(<span class="register">IX</span>+11).</td>
+</tr>
+<tr>
+<td class="address-1"><span id="47847"></span>47847</td>
+<td class="instruction">LD DE,32</td>
+<td class="comment-1" rowspan="1"><span class="register">DE</span>=0032.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="47850"></span>47850</td>
+<td class="instruction">LD L,(IX+12)</td>
+<td class="comment-1" rowspan="1"><span class="register">L</span>=(<span class="register">IX</span>+12).</td>
+</tr>
+<tr>
+<td class="address-1"><span id="47853"></span>47853</td>
+<td class="instruction">LD H,(IX+13)</td>
+<td class="comment-1" rowspan="1"><span class="register">H</span>=(<span class="register">IX</span>+13).</td>
+</tr>
+<tr>
+<td class="address-1"><span id="47856"></span>47856</td>
+<td class="instruction">SET 5,H</td>
+<td class="comment-1" rowspan="1">Set bit 5 of <span class="register">H</span>.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="47858"></span>47858</td>
+<td class="instruction">LD A,L</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=<span class="register">L</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="47859"></span>47859</td>
+<td class="instruction">AND %00011111</td>
+<td class="comment-1" rowspan="1">Keep only bits 0-4.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="47861"></span>47861</td>
+<td class="instruction">CP 0</td>
+<td class="comment-1" rowspan="1">Compare <span class="register">A</span> with 0.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="47863"></span>47863</td>
+<td class="instruction">JR C,<a href="47837.html#47878">47878</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="47837.html#47878">47878</a> if {} is lower.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="47865"></span>47865</td>
+<td class="instruction">CP 0</td>
+<td class="comment-1" rowspan="1">Compare <span class="register">A</span> with 0.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="47867"></span>47867</td>
+<td class="instruction">JR NC,<a href="47837.html#47878">47878</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="47837.html#47878">47878</a> if {} is higher.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="47869"></span>47869</td>
+<td class="instruction">PUSH HL</td>
+<td class="comment-1" rowspan="2">Stash <span class="register">HL</span> and <span class="register">BC</span> on the stack.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="47870"></span>47870</td>
+<td class="instruction">PUSH BC</td>
+</tr>
+<tr>
+<td class="address-2"><span id="47871"></span>47871</td>
+<td class="instruction">SET 6,(HL)</td>
+<td class="comment-1" rowspan="1">Set bit 6 of *<span class="register">HL</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="47873"></span>47873</td>
+<td class="instruction">ADD HL,DE</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>+=<span class="register">DE</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="47874"></span>47874</td>
+<td class="instruction">DJNZ <a href="47837.html#47871">47871</a></td>
+<td class="comment-1" rowspan="1">Decrease counter by one and loop back to <a href="47837.html#47871">47871</a> until counter is zero.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="47876"></span>47876</td>
+<td class="instruction">POP BC</td>
+<td class="comment-1" rowspan="2">Restore <span class="register">BC</span> and <span class="register">HL</span> from the stack.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="47877"></span>47877</td>
+<td class="instruction">POP HL</td>
+</tr>
+<tr>
+<td class="address-2"><span id="47878"></span>47878</td>
+<td class="instruction">INC HL</td>
+<td class="comment-1" rowspan="1">Increment <span class="register">HL</span> by one.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="47879"></span>47879</td>
+<td class="instruction">DEC C</td>
+<td class="comment-1" rowspan="1">Decrease <span class="register">C</span> by one.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="47880"></span>47880</td>
+<td class="instruction">JR NZ,<a href="47837.html#47858">47858</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="47837.html#47858">47858</a> if {} is not zero.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="47882"></span>47882</td>
+<td class="instruction">LD C,(IX+11)</td>
+<td class="comment-1" rowspan="1"><span class="register">C</span>=(<span class="register">IX</span>+11).</td>
+</tr>
+<tr>
+<td class="address-1"><span id="47885"></span>47885</td>
+<td class="instruction">LD L,(IX+12)</td>
+<td class="comment-1" rowspan="1"><span class="register">L</span>=(<span class="register">IX</span>+12).</td>
+</tr>
+<tr>
+<td class="address-1"><span id="47888"></span>47888</td>
+<td class="instruction">LD A,(IX+13)</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=(<span class="register">IX</span>+13).</td>
+</tr>
+<tr>
+<td class="address-1"><span id="47891"></span>47891</td>
+<td class="instruction">LD DE,64</td>
+<td class="comment-1" rowspan="1"><span class="register">DE</span>=0064.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="47894"></span>47894</td>
+<td class="instruction">AND %00000011</td>
+<td class="comment-1" rowspan="1">Keep only bits 0-1.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="47896"></span>47896</td>
+<td class="instruction">OR %00111000</td>
+<td class="comment-1" rowspan="1">Set bits 3-5.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="47898"></span>47898</td>
+<td class="instruction">LD H,A</td>
+<td class="comment-1" rowspan="1"><span class="register">H</span>=<span class="register">A</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="47899"></span>47899</td>
+<td class="instruction">ADD HL,HL</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>+=<span class="register">HL</span>.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="47900"></span>47900</td>
+<td class="instruction">INC HL</td>
+<td class="comment-1" rowspan="1">Increment <span class="register">HL</span> by one.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="47901"></span>47901</td>
+<td class="instruction">LD A,L</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=<span class="register">L</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="47902"></span>47902</td>
+<td class="instruction">AND %00111111</td>
+<td class="comment-1" rowspan="1">Keep only bits 0-5.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="47904"></span>47904</td>
+<td class="instruction">CP 0</td>
+<td class="comment-1" rowspan="1">Compare <span class="register">A</span> with 0.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="47906"></span>47906</td>
+<td class="instruction">JR C,<a href="47837.html#47921">47921</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="47837.html#47921">47921</a> if {} is lower.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="47908"></span>47908</td>
+<td class="instruction">CP 0</td>
+<td class="comment-1" rowspan="1">Compare <span class="register">A</span> with 0.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="47910"></span>47910</td>
+<td class="instruction">JR NC,<a href="47837.html#47921">47921</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="47837.html#47921">47921</a> if {} is higher.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="47912"></span>47912</td>
+<td class="instruction">PUSH HL</td>
+<td class="comment-1" rowspan="2">Stash <span class="register">HL</span> and <span class="register">BC</span> on the stack.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="47913"></span>47913</td>
+<td class="instruction">PUSH BC</td>
+</tr>
+<tr>
+<td class="address-2"><span id="47914"></span>47914</td>
+<td class="instruction">RES 7,(HL)</td>
+<td class="comment-1" rowspan="1">Reset bit 7 of *<span class="register">HL</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="47916"></span>47916</td>
+<td class="instruction">ADD HL,DE</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>+=<span class="register">DE</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="47917"></span>47917</td>
+<td class="instruction">DJNZ <a href="47837.html#47914">47914</a></td>
+<td class="comment-1" rowspan="1">Decrease counter by one and loop back to <a href="47837.html#47914">47914</a> until counter is zero.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="47919"></span>47919</td>
+<td class="instruction">POP BC</td>
+<td class="comment-1" rowspan="2">Restore <span class="register">BC</span> and <span class="register">HL</span> from the stack.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="47920"></span>47920</td>
+<td class="instruction">POP HL</td>
+</tr>
+<tr>
+<td class="address-2"><span id="47921"></span>47921</td>
+<td class="instruction">INC HL</td>
+<td class="comment-1" rowspan="1">Increment <span class="register">HL</span> by one.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="47922"></span>47922</td>
+<td class="instruction">DEC C</td>
+<td class="comment-1" rowspan="1">Decrease <span class="register">C</span> by one.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="47923"></span>47923</td>
+<td class="instruction">JR NZ,<a href="47837.html#47900">47900</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="47837.html#47900">47900</a> if {} is not zero.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="47925"></span>47925</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="46884.html">46884</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#47837">Map</a></td>
+<td class="next">
+Next: <a href="47926.html">47926</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1984 New Generation Software; 2023 ArcadeGeek LTD.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.0.</div>
+<div class="repository">Link to <a href="https://github.com/pobtastic/trashman/">Source code</a>.</div>
+<div><a href="../../asm/BADD.html">Switch to hexadecimal</a>.</div>
+</footer>
+</body>
+</html>

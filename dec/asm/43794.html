@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Trashman: Routine at 43794</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="43689.html">43689</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#43794">Map</a></td>
+<td class="next">
+Next: <a href="43902.html">43902</a>
+</td>
+</tr>
+</table>
+<div class="description">43794: Messaging: Game Over</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routine at <a href="42384.html">GameEntryPoint</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">Messaging_GameOver</td>
+<td class="address-2"><span id="43794"></span>43794</td>
+<td class="instruction">CALL <a href="42816.html">BlankMiddleAttributeBuffer</a></td>
+<td class="comment-1" rowspan="1">Call <a href="42816.html">BlankMiddleAttributeBuffer</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="43797"></span>43797</td>
+<td class="instruction">CALL <a href="42878.html">BlankMiddleScreenBuffer</a></td>
+<td class="comment-1" rowspan="1">Call <a href="42878.html">BlankMiddleScreenBuffer</a>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="43800"></span>
+<div class="comments">
+<div class="paragraph">
+Print "ACADEMY OF TRASHMEN DIPLOMA".
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="43800"></span>43800</td>
+<td class="instruction">LD HL,44814</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>=<a href="44814.html">Messaging_TrashmenDiploma</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="43803"></span>43803</td>
+<td class="instruction">LD DE,18466</td>
+<td class="comment-1" rowspan="1"><span class="register">DE</span>=18466 (screen buffer location).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="43806"></span>43806</td>
+<td class="instruction">CALL <a href="45185.html">PrintString</a></td>
+<td class="comment-1" rowspan="1">Call <a href="45185.html">PrintString</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="43809"></span>43809</td>
+<td class="instruction">LD HL,18498</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>=18498 (screen buffer location).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="43812"></span>43812</td>
+<td class="instruction">LD B,27</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=27.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="43814"></span>43814</td>
+<td class="instruction">CALL <a href="43157.html">Concealer</a></td>
+<td class="comment-1" rowspan="1">Call <a href="43157.html">Concealer</a>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="43817"></span>
+<div class="comments">
+<div class="paragraph">
+Print "This is to certify that ".
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="43817"></span>43817</td>
+<td class="instruction">LD HL,44842</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>=<a href="44842.html">Messaging_Certify_1</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="43820"></span>43820</td>
+<td class="instruction">LD DE,18528</td>
+<td class="comment-1" rowspan="1"><span class="register">DE</span>=18528 (screen buffer location).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="43823"></span>43823</td>
+<td class="instruction">CALL <a href="45185.html">PrintString</a></td>
+<td class="comment-1" rowspan="1">Call <a href="45185.html">PrintString</a>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="43826"></span>
+<div class="comments">
+<div class="paragraph">
+Who is in play, is it 1UP or 2UP?
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="43826"></span>43826</td>
+<td class="instruction">LD HL,43914</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>=<a href="43914.html">Game_Flags</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="43829"></span>43829</td>
+<td class="instruction">BIT 4,(HL)</td>
+<td class="comment-1" rowspan="1">Test bit 4 of *<span class="register">HL</span>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="43831"></span>
+<div class="comments">
+<div class="paragraph">
+Default to using the 1UP name.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="43831"></span>43831</td>
+<td class="instruction">LD HL,44198</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>=<a href="44175.html#44198">Name_1UP</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="43834"></span>43834</td>
+<td class="instruction">JR Z,<a href="43794.html#43839">Messaging_GameOver_PrintName</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="43794.html#43839">Messaging_GameOver_PrintName</a> if this is player one.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="43836"></span>
+<div class="comments">
+<div class="paragraph">
+Else, use the name for 2UP.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="43836"></span>43836</td>
+<td class="instruction">LD HL,44231</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>=<a href="44175.html#44231">Name_2UP</a>.</td>
+</tr>
+<tr>
+<td class="asm-label">Messaging_GameOver_PrintName</td>
+<td class="address-2"><span id="43839"></span>43839</td>
+<td class="instruction">CALL <a href="45185.html">PrintString</a></td>
+<td class="comment-1" rowspan="1">Call <a href="45185.html">PrintString</a>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="43842"></span>
+<div class="comments">
+<div class="paragraph">
+Print "has    completed  a  course   in TRASHMANSHIP , and may  go forth to rid the world of trash.".
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="43842"></span>43842</td>
+<td class="instruction">LD DE,18560</td>
+<td class="comment-1" rowspan="1"><span class="register">DE</span>=18560 (screen buffer location).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="43845"></span>43845</td>
+<td class="instruction">LD HL,44867</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>=<a href="44842.html#44867">Messaging_Certify_2</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="43848"></span>43848</td>
+<td class="instruction">CALL <a href="45185.html">PrintString</a></td>
+<td class="comment-1" rowspan="1">Call <a href="45185.html">PrintString</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="43851"></span>43851</td>
+<td class="instruction">CALL <a href="42997.html">PressAnyKey</a></td>
+<td class="comment-1" rowspan="1">Call <a href="42997.html">PressAnyKey</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="43854"></span>43854</td>
+<td class="instruction">CALL <a href="42878.html">BlankMiddleScreenBuffer</a></td>
+<td class="comment-1" rowspan="1">Call <a href="42878.html">BlankMiddleScreenBuffer</a>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="43857"></span>
+<div class="comments">
+<div class="paragraph">
+Print "Your score was ".
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="43857"></span>43857</td>
+<td class="instruction">LD HL,44958</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>=<a href="44842.html#44958">Messaging_Certify_3</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="43860"></span>43860</td>
+<td class="instruction">LD DE,18498</td>
+<td class="comment-1" rowspan="1"><span class="register">DE</span>=18498 (screen buffer location).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="43863"></span>43863</td>
+<td class="instruction">CALL <a href="45185.html">PrintString</a></td>
+<td class="comment-1" rowspan="1">Call <a href="45185.html">PrintString</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="43866"></span>43866</td>
+<td class="instruction">CALL <a href="43794.html#43891">Messaging_GameOver_Score</a></td>
+<td class="comment-1" rowspan="1">Call <a href="43794.html#43891">Messaging_GameOver_Score</a>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="43869"></span>
+<div class="comments">
+<div class="paragraph">
+Print " pts.".
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="43869"></span>43869</td>
+<td class="instruction">LD HL,44584</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>=<a href="44551.html#44584">Messaging_Pts</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="43872"></span>43872</td>
+<td class="instruction">CALL <a href="45185.html">PrintString</a></td>
+<td class="comment-1" rowspan="1">Call <a href="45185.html">PrintString</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="43875"></span>43875</td>
+<td class="instruction">LD HL,43914</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>=<a href="43914.html">Game_Flags</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="43878"></span>43878</td>
+<td class="instruction">BIT 0,(HL)</td>
+<td class="comment-1" rowspan="2">Return if bit 0 of *<span class="register">HL</span> is set.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="43880"></span>43880</td>
+<td class="instruction">RET Z</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="43881"></span>
+<div class="comments">
+<div class="paragraph">
+Print "Your  success  has  given you  a well earned  nomination  for the TRASHMAN OF THE YEAR.".
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="43881"></span>43881</td>
+<td class="instruction">LD HL,44974</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>=<a href="44842.html#44974">Messaging_Certify_4</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="43884"></span>43884</td>
+<td class="instruction">LD DE,18560</td>
+<td class="comment-1" rowspan="1"><span class="register">DE</span>=18560 (screen buffer location).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="43887"></span>43887</td>
+<td class="instruction">CALL <a href="45185.html">PrintString</a></td>
+<td class="comment-1" rowspan="1">Call <a href="45185.html">PrintString</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="43890"></span>43890</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="43891"></span>
+<div class="comments">
+<div class="paragraph">
+Print the active players score.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">Messaging_GameOver_Score</td>
+<td class="address-2"><span id="43891"></span>43891</td>
+<td class="instruction">LD HL,52118</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>=<a href="52118.html">ActivePlayer_Score</a>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="43894"></span>
+<div class="comments">
+<div class="paragraph">
+Move to the last digit of the score (prep for printing).
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="43894"></span>43894</td>
+<td class="instruction">INC HL</td>
+<td class="comment-1" rowspan="2">Increment <span class="register">HL</span> by two.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="43895"></span>43895</td>
+<td class="instruction">INC HL</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="43896"></span>43896</td>
+<td class="instruction">LD B,3</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=3 (the score is held by three bytes).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="43898"></span>43898</td>
+<td class="instruction">CALL <a href="51891.html">PrintNumbers</a></td>
+<td class="comment-1" rowspan="1">Call <a href="51891.html">PrintNumbers</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="43901"></span>43901</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="43689.html">43689</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#43794">Map</a></td>
+<td class="next">
+Next: <a href="43902.html">43902</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1984 New Generation Software; 2023 ArcadeGeek LTD.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.0.</div>
+<div class="repository">Link to <a href="https://github.com/pobtastic/trashman/">Source code</a>.</div>
+<div><a href="../../asm/AB12.html">Switch to hexadecimal</a>.</div>
+</footer>
+</body>
+</html>

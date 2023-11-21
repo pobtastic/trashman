@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Trashman: Routine at A9EF</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="A9D4.html">A9D4</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#a9ef">Map</a></td>
+<td class="next">
+Next: <a href="AA33.html">AA33</a>
+</td>
+</tr>
+</table>
+<div class="description">A9EF: Print The "You're Fired" Screen</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routine at <a href="A61D.html">Handler_TimeOut</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">Print_YoureFired</td>
+<td class="address-2"><span id="a9ef"></span>A9EF</td>
+<td class="instruction">CALL <a href="A77E.html">BlankMiddleScreenBuffer</a></td>
+<td class="comment-1" rowspan="1">Call <a href="A77E.html">BlankMiddleScreenBuffer</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="a9f2"></span>A9F2</td>
+<td class="instruction">CALL <a href="A740.html">BlankMiddleAttributeBuffer</a></td>
+<td class="comment-1" rowspan="1">Call <a href="A740.html">BlankMiddleAttributeBuffer</a>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="a9f5"></span>
+<div class="comments">
+<div class="paragraph">
+Print "Trashman ".
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="a9f5"></span>A9F5</td>
+<td class="instruction">LD HL,$ACFA</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>=<a href="ACFA.html">Messaging_Trashman</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="a9f8"></span>A9F8</td>
+<td class="instruction">LD DE,$4840</td>
+<td class="comment-1" rowspan="1"><span class="register">DE</span>=4840 (screen buffer location).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="a9fb"></span>A9FB</td>
+<td class="instruction">CALL <a href="B081.html">PrintString</a></td>
+<td class="comment-1" rowspan="1">Call <a href="B081.html">PrintString</a>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="a9fe"></span>
+<div class="comments">
+<div class="paragraph">
+Who is in play, is it 1UP or 2UP?
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="a9fe"></span>A9FE</td>
+<td class="instruction">LD HL,$AB8A</td>
+<td class="comment-1" rowspan="2">Test if bit 4 of <a href="AB8A.html">Game_Flags</a> is set.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="aa01"></span>AA01</td>
+<td class="instruction">BIT 4,(HL)</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="aa03"></span>
+<div class="comments">
+<div class="paragraph">
+Default to using the 1UP name.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="aa03"></span>AA03</td>
+<td class="instruction">LD HL,$ACA6</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>=<a href="AC8F.html#aca6">Name_1UP</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="aa06"></span>AA06</td>
+<td class="instruction">JR Z,<a href="A9EF.html#aa0b">Print_YoureFired_Write</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="A9EF.html#aa0b">Print_YoureFired_Write</a> if this is player one.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="aa08"></span>
+<div class="comments">
+<div class="paragraph">
+Else, use the name for 2UP.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="aa08"></span>AA08</td>
+<td class="instruction">LD HL,$ACC7</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>=<a href="AC8F.html#acc7">Name_2UP</a>.</td>
+</tr>
+<tr>
+<td class="asm-label">Print_YoureFired_Write</td>
+<td class="address-2"><span id="aa0b"></span>AA0B</td>
+<td class="instruction">CALL <a href="B081.html">PrintString</a></td>
+<td class="comment-1" rowspan="1">Call <a href="B081.html">PrintString</a>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="aa0e"></span>
+<div class="comments">
+<div class="paragraph">
+Overwrite the ")" from the players name string.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="aa0e"></span>AA0E</td>
+<td class="instruction">DEC DE</td>
+<td class="comment-1" rowspan="1">Decrease <span class="register">DE</span> by one.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="aa0f"></span>
+<div class="comments">
+<div class="paragraph">
+Print ", you're  slow." messaging.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="aa0f"></span>AA0F</td>
+<td class="instruction">LD HL,$AE33</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>=<a href="AE33.html">Messaging_Fired_1</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="aa12"></span>AA12</td>
+<td class="instruction">CALL <a href="B081.html">PrintString</a></td>
+<td class="comment-1" rowspan="1">Call <a href="B081.html">PrintString</a>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="aa15"></span>
+<div class="comments">
+<div class="paragraph">
+Print the road name.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="aa15"></span>AA15</td>
+<td class="instruction">LD HL,$C280</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>=<a href="C280.html">Messaging_RoadName</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="aa18"></span>AA18</td>
+<td class="instruction">CALL <a href="B081.html">PrintString</a></td>
+<td class="comment-1" rowspan="1">Call <a href="B081.html">PrintString</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="aa1b"></span>AA1B</td>
+<td class="instruction">LD HL,($AB7E)</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>=*<a href="AB7E.html">ActivePlayer</a>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="aa1e"></span>
+<div class="comments">
+<div class="paragraph">
+This assumes the default number of lives is being used, and displays a string for the number of times Trashman has been fired.
+</div>
+<div class="paragraph">
+As this only tests bit 0, any poke like <a href="../reference/pokes.html#infinite_lives">Infinite Lives</a> will make this behave oddly.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="aa1e"></span>AA1E</td>
+<td class="instruction">BIT 0,(HL)</td>
+<td class="comment-1" rowspan="1">Test bit 0 of *<span class="register">HL</span>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="aa20"></span>AA20</td>
+<td class="instruction">LD HL,$B009</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>=<a href="B009.html">Messaging_Once</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="aa23"></span>AA23</td>
+<td class="instruction">JR NZ,<a href="A9EF.html#aa28">Print_YoureFired_WriteTimes</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="A9EF.html#aa28">Print_YoureFired_WriteTimes</a> if this isn't the last life.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="aa25"></span>AA25</td>
+<td class="instruction">LD HL,$B013</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>=<a href="B013.html">Messaging_Twice</a>.</td>
+</tr>
+<tr>
+<td class="asm-label">Print_YoureFired_WriteTimes</td>
+<td class="address-2"><span id="aa28"></span>AA28</td>
+<td class="instruction">CALL <a href="B081.html">PrintString</a></td>
+<td class="comment-1" rowspan="1">Call <a href="B081.html">PrintString</a>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="aa2b"></span>
+<div class="comments">
+<div class="paragraph">
+Print " more and you're fired.".
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="aa2b"></span>AA2B</td>
+<td class="instruction">LD HL,$AE71</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>=<a href="AE33.html#ae71">Messaging_Fired_2</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="aa2e"></span>AA2E</td>
+<td class="instruction">CALL <a href="B081.html">PrintString</a></td>
+<td class="comment-1" rowspan="1">Call <a href="B081.html">PrintString</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="aa31"></span>AA31</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="aa32"></span>AA32</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="A9D4.html">A9D4</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#a9ef">Map</a></td>
+<td class="next">
+Next: <a href="AA33.html">AA33</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1984 New Generation Software; 2023 ArcadeGeek LTD.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.0.</div>
+<div class="repository">Link to <a href="https://github.com/pobtastic/trashman/">Source code</a>.</div>
+<div><a href="../dec/asm/43503.html">Switch to decimal</a>.</div>
+</footer>
+</body>
+</html>

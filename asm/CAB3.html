@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Trashman: Routine at CAB3</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="C38D.html">C38D</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#cab3">Map</a></td>
+<td class="next">
+Next: <a href="CB0A.html">CB0A</a>
+</td>
+</tr>
+</table>
+<div class="description">CAB3: Print Numbers</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routines at <a href="AA69.html">Print_HighScoreTable</a>, <a href="AB12.html">Messaging_GameOver</a> and <a href="CB0A.html">Print_Bonus</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">PrintNumbers</td>
+<td class="address-2"><span id="cab3"></span>CAB3</td>
+<td class="instruction">LD A,$00</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=00.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cab5"></span>CAB5</td>
+<td class="instruction">RLD</td>
+<td class="comment-1" rowspan="1">RLD.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cab7"></span>CAB7</td>
+<td class="instruction">PUSH AF</td>
+<td class="comment-1" rowspan="1">Stash <span class="register">AF</span> on the stack.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cab8"></span>CAB8</td>
+<td class="instruction">CP $00</td>
+<td class="comment-1" rowspan="2">Jump to <a href="CAB3.html#cada">PrintNumbers_1</a> if <span class="register">A</span> is not 00.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="caba"></span>CABA</td>
+<td class="instruction">JR NZ,<a href="CAB3.html#cada">PrintNumbers_1</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cabc"></span>CABC</td>
+<td class="instruction">LD A,$20</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=20.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cabe"></span>CABE</td>
+<td class="instruction">CALL <a href="CAB3.html#caef">PrintNumbers_Print</a></td>
+<td class="comment-1" rowspan="1">Call <a href="CAB3.html#caef">PrintNumbers_Print</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cac1"></span>CAC1</td>
+<td class="instruction">POP AF</td>
+<td class="comment-1" rowspan="1">Restore <span class="register">AF</span> from the stack.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cac2"></span>CAC2</td>
+<td class="instruction">RLD</td>
+<td class="comment-1" rowspan="1">RLD.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cac4"></span>CAC4</td>
+<td class="instruction">PUSH AF</td>
+<td class="comment-1" rowspan="1">Stash <span class="register">AF</span> on the stack.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cac5"></span>CAC5</td>
+<td class="instruction">CP $00</td>
+<td class="comment-1" rowspan="2">Jump to <a href="CAB3.html#cae3">PrintNumbers_2</a> if <span class="register">A</span> is not 00.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cac7"></span>CAC7</td>
+<td class="instruction">JR NZ,<a href="CAB3.html#cae3">PrintNumbers_2</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cac9"></span>CAC9</td>
+<td class="instruction">LD A,$20</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=20.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cacb"></span>CACB</td>
+<td class="instruction">CALL <a href="CAB3.html#caef">PrintNumbers_Print</a></td>
+<td class="comment-1" rowspan="1">Call <a href="CAB3.html#caef">PrintNumbers_Print</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cace"></span>CACE</td>
+<td class="instruction">POP AF</td>
+<td class="comment-1" rowspan="1">Restore <span class="register">AF</span> from the stack.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cacf"></span>CACF</td>
+<td class="instruction">RLD</td>
+<td class="comment-1" rowspan="1">RLD.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cad1"></span>CAD1</td>
+<td class="instruction">DEC HL</td>
+<td class="comment-1" rowspan="1">Decrease <span class="register">HL</span> by one.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cad2"></span>CAD2</td>
+<td class="instruction">DJNZ <a href="CAB3.html#cab3">PrintNumbers</a></td>
+<td class="comment-1" rowspan="1">Decrease counter by one and loop back to <a href="CAB3.html">PrintNumbers</a> until counter is zero.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cad4"></span>CAD4</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+<tr>
+<td class="asm-label">PrintNumbers_0</td>
+<td class="address-2"><span id="cad5"></span>CAD5</td>
+<td class="instruction">LD A,$00</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=00.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cad7"></span>CAD7</td>
+<td class="instruction">RLD</td>
+<td class="comment-1" rowspan="1">RLD.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cad9"></span>CAD9</td>
+<td class="instruction">PUSH AF</td>
+<td class="comment-1" rowspan="1">Stash <span class="register">AF</span> on the stack.</td>
+</tr>
+<tr>
+<td class="asm-label">PrintNumbers_1</td>
+<td class="address-2"><span id="cada"></span>CADA</td>
+<td class="instruction">ADD A,$30</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>+=30.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cadc"></span>CADC</td>
+<td class="instruction">CALL <a href="CAB3.html#caef">PrintNumbers_Print</a></td>
+<td class="comment-1" rowspan="1">Call <a href="CAB3.html#caef">PrintNumbers_Print</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cadf"></span>CADF</td>
+<td class="instruction">POP AF</td>
+<td class="comment-1" rowspan="1">Restore <span class="register">AF</span> from the stack.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cae0"></span>CAE0</td>
+<td class="instruction">RLD</td>
+<td class="comment-1" rowspan="1">RLD.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cae2"></span>CAE2</td>
+<td class="instruction">PUSH AF</td>
+<td class="comment-1" rowspan="1">Stash <span class="register">AF</span> on the stack.</td>
+</tr>
+<tr>
+<td class="asm-label">PrintNumbers_2</td>
+<td class="address-2"><span id="cae3"></span>CAE3</td>
+<td class="instruction">ADD A,$30</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>+=30.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cae5"></span>CAE5</td>
+<td class="instruction">CALL <a href="CAB3.html#caef">PrintNumbers_Print</a></td>
+<td class="comment-1" rowspan="1">Call <a href="CAB3.html#caef">PrintNumbers_Print</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cae8"></span>CAE8</td>
+<td class="instruction">POP AF</td>
+<td class="comment-1" rowspan="1">Restore <span class="register">AF</span> from the stack.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cae9"></span>CAE9</td>
+<td class="instruction">RLD</td>
+<td class="comment-1" rowspan="1">RLD.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="caeb"></span>CAEB</td>
+<td class="instruction">DEC HL</td>
+<td class="comment-1" rowspan="1">Decrease <span class="register">HL</span> by one.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="caec"></span>CAEC</td>
+<td class="instruction">DJNZ <a href="CAB3.html#cad5">PrintNumbers_0</a></td>
+<td class="comment-1" rowspan="1">Decrease counter by one and loop back to <a href="CAB3.html#cad5">PrintNumbers_0</a> until counter is zero.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="caee"></span>CAEE</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="caef"></span>
+<div class="comments">
+<div class="paragraph">
+This is similar in functionality to <a href="B081.html">PrintString</a>. It differs as it doesn't use a terminator rather the length is known.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">PrintNumbers_Print</td>
+<td class="address-2"><span id="caef"></span>CAEF</td>
+<td class="instruction">PUSH HL</td>
+<td class="comment-1" rowspan="2">Stash <span class="register">HL</span> and <span class="register">BC</span> on the stack.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="caf0"></span>CAF0</td>
+<td class="instruction">PUSH BC</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="caf1"></span>CAF1</td>
+<td class="instruction">LD L,A</td>
+<td class="comment-1" rowspan="1"><span class="register">L</span>=<span class="register">A</span>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="caf2"></span>CAF2</td>
+<td class="instruction">LD H,$00</td>
+<td class="comment-1" rowspan="1"><span class="register">H</span>=00.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="caf4"></span>CAF4</td>
+<td class="instruction">ADD HL,HL</td>
+<td class="comment-1" rowspan="3"><span class="register">HL</span>*=08.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="caf5"></span>CAF5</td>
+<td class="instruction">ADD HL,HL</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="caf6"></span>CAF6</td>
+<td class="instruction">ADD HL,HL</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="caf7"></span>CAF7</td>
+<td class="instruction">LD BC,$E417</td>
+<td class="comment-1" rowspan="1"><span class="register">BC</span>=<a href="E417.html">Font</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cafa"></span>CAFA</td>
+<td class="instruction">DEC B</td>
+<td class="comment-1" rowspan="1">Decrease <span class="register">B</span> by one.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cafb"></span>CAFB</td>
+<td class="instruction">ADD HL,BC</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>+=<span class="register">BC</span>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cafc"></span>CAFC</td>
+<td class="instruction">PUSH DE</td>
+<td class="comment-1" rowspan="1">Stash <span class="register">DE</span> on the stack.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cafd"></span>CAFD</td>
+<td class="instruction">LD B,$08</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=08 (counter).</td>
+</tr>
+<tr>
+<td class="asm-label">PrintNumbers_Print_Loop</td>
+<td class="address-2"><span id="caff"></span>CAFF</td>
+<td class="instruction">LD A,(HL)</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<span class="register">HL</span>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cb00"></span>CB00</td>
+<td class="instruction">LD (DE),A</td>
+<td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<span class="register">DE</span>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cb01"></span>CB01</td>
+<td class="instruction">INC HL</td>
+<td class="comment-1" rowspan="1">Increment <span class="register">HL</span> by one.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cb02"></span>CB02</td>
+<td class="instruction">INC D</td>
+<td class="comment-1" rowspan="1">Increment <span class="register">D</span> by one.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cb03"></span>CB03</td>
+<td class="instruction">DJNZ <a href="CAB3.html#caff">PrintNumbers_Print_Loop</a></td>
+<td class="comment-1" rowspan="1">Decrease counter by one and loop back to <a href="CAB3.html#caff">PrintNumbers_Print_Loop</a> until counter is zero.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cb05"></span>CB05</td>
+<td class="instruction">POP DE</td>
+<td class="comment-1" rowspan="1">Restore <span class="register">DE</span> from the stack.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cb06"></span>CB06</td>
+<td class="instruction">INC DE</td>
+<td class="comment-1" rowspan="1">Increment <span class="register">DE</span> by one.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cb07"></span>CB07</td>
+<td class="instruction">POP BC</td>
+<td class="comment-1" rowspan="2">Restore <span class="register">BC</span> and <span class="register">HL</span> from the stack.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cb08"></span>CB08</td>
+<td class="instruction">POP HL</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="cb09"></span>CB09</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="C38D.html">C38D</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#cab3">Map</a></td>
+<td class="next">
+Next: <a href="CB0A.html">CB0A</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1984 New Generation Software; 2023 ArcadeGeek LTD.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.0.</div>
+<div class="repository">Link to <a href="https://github.com/pobtastic/trashman/">Source code</a>.</div>
+<div><a href="../dec/asm/51891.html">Switch to decimal</a>.</div>
+</footer>
+</body>
+</html>

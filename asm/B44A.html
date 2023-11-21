@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Trashman: Routine at B44A</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="B416.html">B416</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#b44a">Map</a></td>
+<td class="next">
+Next: <a href="B469.html">B469</a>
+</td>
+</tr>
+</table>
+<div class="description">B44A: Routine at B44A</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routine at <a href="B0A1.html">StartGame</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="address-2"><span id="b44a"></span>B44A</td>
+<td class="instruction">LD IX,$C356</td>
+<td class="comment-1" rowspan="1"><span class="register">IX</span>=<a href="C2EE.html#c356">C356</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="b44e"></span>B44E</td>
+<td class="instruction">BIT 3,(IX+$17)</td>
+<td class="comment-1" rowspan="2">Return if bit 3 of *<span class="register">IX</span>+17 is zero.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="b452"></span>B452</td>
+<td class="instruction">RET Z</td>
+</tr>
+<tr>
+<td class="address-1"><span id="b453"></span>B453</td>
+<td class="instruction">CALL <a href="B2C0.html">$B2C0</a></td>
+<td class="comment-1" rowspan="1">Call <a href="B2C0.html">B2C0</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="b456"></span>B456</td>
+<td class="instruction">LD IX,$C356</td>
+<td class="comment-1" rowspan="1"><span class="register">IX</span>=<a href="C2EE.html#c356">C356</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="b45a"></span>B45A</td>
+<td class="instruction">CALL <a href="B374.html">$B374</a></td>
+<td class="comment-1" rowspan="1">Call <a href="B374.html">B374</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="b45d"></span>B45D</td>
+<td class="instruction">BIT 1,(IX+$17)</td>
+<td class="comment-1" rowspan="2">Return if bit 1 of *<span class="register">IX</span>+17 is not zero.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="b461"></span>B461</td>
+<td class="instruction">RET NZ</td>
+</tr>
+<tr>
+<td class="address-1"><span id="b462"></span>B462</td>
+<td class="instruction">CALL <a href="B4B8.html">$B4B8</a></td>
+<td class="comment-1" rowspan="1">Call <a href="B4B8.html">B4B8</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="b465"></span>B465</td>
+<td class="instruction">CALL <a href="B469.html">$B469</a></td>
+<td class="comment-1" rowspan="1">Call <a href="B469.html">B469</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="b468"></span>B468</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="B416.html">B416</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#b44a">Map</a></td>
+<td class="next">
+Next: <a href="B469.html">B469</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1984 New Generation Software; 2023 ArcadeGeek LTD.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.0.</div>
+<div class="repository">Link to <a href="https://github.com/pobtastic/trashman/">Source code</a>.</div>
+<div><a href="../dec/asm/46154.html">Switch to decimal</a>.</div>
+</footer>
+</body>
+</html>

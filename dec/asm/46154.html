@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Trashman: Routine at 46154</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="46102.html">46102</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#46154">Map</a></td>
+<td class="next">
+Next: <a href="46185.html">46185</a>
+</td>
+</tr>
+</table>
+<div class="description">46154: Routine at B44A</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routine at <a href="45217.html">StartGame</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="address-2"><span id="46154"></span>46154</td>
+<td class="instruction">LD IX,50006</td>
+<td class="comment-1" rowspan="1"><span class="register">IX</span>=<a href="49902.html#50006">50006</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="46158"></span>46158</td>
+<td class="instruction">BIT 3,(IX+23)</td>
+<td class="comment-1" rowspan="2">Return if bit 3 of *<span class="register">IX</span>+23 is zero.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="46162"></span>46162</td>
+<td class="instruction">RET Z</td>
+</tr>
+<tr>
+<td class="address-1"><span id="46163"></span>46163</td>
+<td class="instruction">CALL <a href="45760.html">45760</a></td>
+<td class="comment-1" rowspan="1">Call <a href="45760.html">45760</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="46166"></span>46166</td>
+<td class="instruction">LD IX,50006</td>
+<td class="comment-1" rowspan="1"><span class="register">IX</span>=<a href="49902.html#50006">50006</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="46170"></span>46170</td>
+<td class="instruction">CALL <a href="45940.html">45940</a></td>
+<td class="comment-1" rowspan="1">Call <a href="45940.html">45940</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="46173"></span>46173</td>
+<td class="instruction">BIT 1,(IX+23)</td>
+<td class="comment-1" rowspan="2">Return if bit 1 of *<span class="register">IX</span>+23 is not zero.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="46177"></span>46177</td>
+<td class="instruction">RET NZ</td>
+</tr>
+<tr>
+<td class="address-1"><span id="46178"></span>46178</td>
+<td class="instruction">CALL <a href="46264.html">46264</a></td>
+<td class="comment-1" rowspan="1">Call <a href="46264.html">46264</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="46181"></span>46181</td>
+<td class="instruction">CALL <a href="46185.html">46185</a></td>
+<td class="comment-1" rowspan="1">Call <a href="46185.html">46185</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="46184"></span>46184</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="46102.html">46102</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#46154">Map</a></td>
+<td class="next">
+Next: <a href="46185.html">46185</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1984 New Generation Software; 2023 ArcadeGeek LTD.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.0.</div>
+<div class="repository">Link to <a href="https://github.com/pobtastic/trashman/">Source code</a>.</div>
+<div><a href="../../asm/B44A.html">Switch to hexadecimal</a>.</div>
+</footer>
+</body>
+</html>

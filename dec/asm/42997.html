@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Trashman: Routine at 42997</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="42987.html">42987</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#42997">Map</a></td>
+<td class="next">
+Next: <a href="43020.html">43020</a>
+</td>
+</tr>
+</table>
+<div class="description">42997: Press Any Key</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routines at <a href="42384.html">GameEntryPoint</a>, <a href="42525.html">Handler_TimeOut</a>, <a href="42542.html">Handler_Fired</a>, <a href="43220.html">Handler_NewsFlash</a> and <a href="43794.html">Messaging_GameOver</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="42997"></span>
+<div class="comments">
+<div class="paragraph">
+Not technically <em>any key</em> but any control button.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">PressAnyKey</td>
+<td class="address-2"><span id="42997"></span>42997</td>
+<td class="instruction">CALL <a href="42987.html">Handler_Debounce_Controls</a></td>
+<td class="comment-1" rowspan="1">Call <a href="42987.html">Handler_Debounce_Controls</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="43000"></span>43000</td>
+<td class="instruction">CALL <a href="42977.html">Handler_Press_Fire</a></td>
+<td class="comment-1" rowspan="1">Call <a href="42977.html">Handler_Press_Fire</a>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="43003"></span>
+<div class="comments">
+<div class="paragraph">
+This entry point is used by the routines at <a href="42613.html">GameMenu</a> and <a href="42709.html">Player_Name</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">PressAnyKey_0</td>
+<td class="address-2"><span id="43003"></span>43003</td>
+<td class="instruction">LD BC,64</td>
+<td class="comment-1" rowspan="1"><span class="register">BC</span>=0064.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="43006"></span>
+<div class="comments">
+<div class="paragraph">
+This entry point is used by the routine at <a href="43097.html">43097</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">PressAnyKey_1</td>
+<td class="address-2"><span id="43006"></span>43006</td>
+<td class="instruction">LD (52283),BC</td>
+<td class="comment-1" rowspan="1">Write <span class="register">BC</span> to *<a href="52124.html#52283">52283</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="43010"></span>43010</td>
+<td class="instruction">HALT</td>
+<td class="comment-1" rowspan="1">HALT.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="43011"></span>43011</td>
+<td class="instruction">LD A,1</td>
+<td class="comment-1" rowspan="2">Write 1 to *<a href="52285.html">52285</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="43013"></span>43013</td>
+<td class="instruction">LD (52285),A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="43016"></span>43016</td>
+<td class="instruction">CALL <a href="52124.html">52124</a></td>
+<td class="comment-1" rowspan="1">Call <a href="52124.html">52124</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="43019"></span>43019</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="42987.html">42987</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#42997">Map</a></td>
+<td class="next">
+Next: <a href="43020.html">43020</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1984 New Generation Software; 2023 ArcadeGeek LTD.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.0.</div>
+<div class="repository">Link to <a href="https://github.com/pobtastic/trashman/">Source code</a>.</div>
+<div><a href="../../asm/A7F5.html">Switch to hexadecimal</a>.</div>
+</footer>
+</body>
+</html>
