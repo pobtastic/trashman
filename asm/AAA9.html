@@ -169,18 +169,19 @@ Move to the last digit of the active score (the hundreds of thousands).
 <td class="asm-label"></td>
 <td class="address-1"><span id="aacd"></span>AACD</td>
 <td class="instruction">CP (IX+$0A)</td>
-<td class="comment-1" rowspan="2">Jump to <a href="AAA9.html#aabc">NewHighScore_0</a> if <span class="register">A</span> is lower than *<span class="register">IX</span>+0A.</td>
+<td class="comment-1" rowspan="1">Compare <span class="register">A</span> with *<span class="register">IX</span>+0A.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="aad0"></span>AAD0</td>
 <td class="instruction">JR C,<a href="AAA9.html#aabc">NewHighScore_0</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="AAA9.html#aabc">NewHighScore_0</a> if {} is lower.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="aad2"></span>AAD2</td>
 <td class="instruction">JR NZ,<a href="AAA9.html#aadd">NewHighScore_2</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="AAA9.html#aadd">NewHighScore_2</a> if it is not zero.</td>
+<td class="comment-1" rowspan="1">Jump to <a href="AAA9.html#aadd">NewHighScore_2</a> if {} is not zero.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -198,18 +199,19 @@ Move to the last digit of the active score (the hundreds of thousands).
 <td class="asm-label"></td>
 <td class="address-1"><span id="aad6"></span>AAD6</td>
 <td class="instruction">CP (IX+$09)</td>
-<td class="comment-1" rowspan="2">Jump to <a href="AAA9.html#aabc">NewHighScore_0</a> if <span class="register">A</span> is lower than *<span class="register">IX</span>+09.</td>
+<td class="comment-1" rowspan="1">Compare <span class="register">A</span> with *<span class="register">IX</span>+09.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="aad9"></span>AAD9</td>
 <td class="instruction">JR C,<a href="AAA9.html#aabc">NewHighScore_0</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="AAA9.html#aabc">NewHighScore_0</a> if {} is lower.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="aadb"></span>AADB</td>
 <td class="instruction">JR Z,<a href="AAA9.html#aabc">NewHighScore_0</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="AAA9.html#aabc">NewHighScore_0</a> if it is zero.</td>
+<td class="comment-1" rowspan="1">Jump to <a href="AAA9.html#aabc">NewHighScore_0</a> if {} is zero.</td>
 </tr>
 <tr>
 <td class="asm-label">NewHighScore_2</td>
@@ -221,7 +223,7 @@ Move to the last digit of the active score (the hundreds of thousands).
 <td class="asm-label"></td>
 <td class="address-1"><span id="aade"></span>AADE</td>
 <td class="instruction">JR Z,<a href="AAA9.html#aaef">NewHighScore_Write</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="AAA9.html#aaef">NewHighScore_Write</a> if <span class="register">B</span> is zero.</td>
+<td class="comment-1" rowspan="1">Jump to <a href="AAA9.html#aaef">NewHighScore_Write</a> if {} is zero.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>

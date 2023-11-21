@@ -34,7 +34,7 @@ Next: <a href="45732.html">45732</a>
 </td>
 </tr>
 </table>
-<div class="description">45715: Playarea Copier</div>
+<div class="description">45715: Routine at B293</div>
 <table class="disassembly">
 <tr>
 <td class="routine-comment" colspan="5">
@@ -43,91 +43,63 @@ Next: <a href="45732.html">45732</a>
 Used by the routines at <a href="45576.html">45576</a> and <a href="49187.html">49187</a>.
 </div>
 </div>
-<table class="input">
-<tr class="asm-input-header">
-<th colspan="2">Input</th>
-</tr>
-<tr>
-<td class="register">BC</td>
-<td class="register-desc">Number of bytes to copy (needs changing)</td>
-</tr>
-<tr>
-<td class="register">DE</td>
-<td class="register-desc">Target address</td>
-</tr>
-<tr>
-<td class="register">HL</td>
-<td class="register-desc">Source data</td>
-</tr>
-</table>
 </td>
 </tr>
 <tr>
-<td class="asm-label">PlayareaCopier</td>
 <td class="address-2"><span id="45715"></span>45715</td>
 <td class="instruction">PUSH BC</td>
 <td class="comment-1" rowspan="2">Stash <span class="register">BC</span> and <span class="register">DE</span> on the stack.</td>
 </tr>
 <tr>
-<td class="asm-label"></td>
 <td class="address-1"><span id="45716"></span>45716</td>
 <td class="instruction">PUSH DE</td>
 </tr>
 <tr>
-<td class="asm-label"></td>
 <td class="address-1"><span id="45717"></span>45717</td>
 <td class="instruction">LD B,0</td>
 <td class="comment-1" rowspan="1"><span class="register">B</span>=0.</td>
 </tr>
 <tr>
-<td class="asm-label"></td>
 <td class="address-1"><span id="45719"></span>45719</td>
 <td class="instruction">LDIR</td>
-<td class="comment-1" rowspan="1">Copy <span class="register">HL</span> to <span class="register">DE</span> the number of times held by <span class="register">BC</span>.</td>
+<td class="comment-1" rowspan="1">LDIR.</td>
 </tr>
 <tr>
-<td class="asm-label"></td>
 <td class="address-1"><span id="45721"></span>45721</td>
 <td class="instruction">EX DE,HL</td>
 <td class="comment-1" rowspan="1">Exchange the <span class="register">DE</span> register with the shadow <span class="register">HL</span> register.</td>
 </tr>
 <tr>
-<td class="asm-label"></td>
 <td class="address-1"><span id="45722"></span>45722</td>
 <td class="instruction">POP HL</td>
 <td class="comment-1" rowspan="1">Restore <span class="register">HL</span> from the stack.</td>
 </tr>
 <tr>
-<td class="asm-label"></td>
 <td class="address-1"><span id="45723"></span>45723</td>
 <td class="instruction">LD BC,64</td>
-<td class="comment-1" rowspan="2"><span class="register">HL</span>+=0064.</td>
+<td class="comment-1" rowspan="1"><span class="register">BC</span>=0064.</td>
 </tr>
 <tr>
-<td class="asm-label"></td>
 <td class="address-1"><span id="45726"></span>45726</td>
 <td class="instruction">ADD HL,BC</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>+=<span class="register">BC</span>.</td>
 </tr>
 <tr>
-<td class="asm-label"></td>
 <td class="address-1"><span id="45727"></span>45727</td>
 <td class="instruction">EX DE,HL</td>
-<td class="comment-1" rowspan="1">Switch the <span class="register">DE</span> and <span class="register">HL</span> registers back.</td>
+<td class="comment-1" rowspan="1">Exchange the <span class="register">DE</span> register with the shadow <span class="register">HL</span> register.</td>
 </tr>
 <tr>
-<td class="asm-label"></td>
 <td class="address-1"><span id="45728"></span>45728</td>
 <td class="instruction">POP BC</td>
 <td class="comment-1" rowspan="1">Restore <span class="register">BC</span> from the stack.</td>
 </tr>
 <tr>
-<td class="asm-label"></td>
 <td class="address-1"><span id="45729"></span>45729</td>
-<td class="instruction">DJNZ <a href="45715.html#45715">PlayareaCopier</a></td>
-<td class="comment-1" rowspan="1">Decrease counter by one and loop back to <a href="45715.html">PlayareaCopier</a> until counter is zero.</td>
+<td class="instruction">DJNZ <a href="45715.html#45715">45715</a></td>
+<td class="comment-1" rowspan="1">Decrease counter by one and loop back to <a href="45715.html">45715</a> until counter is zero.</td>
 </tr>
 <tr>
-<td class="asm-label"></td>
 <td class="address-1"><span id="45731"></span>45731</td>
 <td class="instruction">RET</td>
 <td class="comment-1" rowspan="1">Return.</td>

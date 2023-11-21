@@ -123,16 +123,17 @@ This entry point is used by the routine at <a href="B591.html">B591</a>.
 <tr>
 <td class="address-1"><span id="bd2a"></span>BD2A</td>
 <td class="instruction">CP $17</td>
-<td class="comment-1" rowspan="2">Return if <span class="register">A</span> is higher than 17.</td>
+<td class="comment-1" rowspan="1">Compare <span class="register">A</span> with 17.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="bd2c"></span>BD2C</td>
 <td class="instruction">RET NC</td>
+<td class="comment-1" rowspan="1">Return is {} is higher.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="bd2d"></span>BD2D</td>
-<td class="instruction">CALL <a href="C13E.html">$C13E</a></td>
-<td class="comment-1" rowspan="1">Call <a href="C13E.html">C13E</a>.</td>
+<td class="instruction">CALL <a href="C023.html#c13e">$C13E</a></td>
+<td class="comment-1" rowspan="1">Call <a href="C023.html#c13e">C13E</a>.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="bd30"></span>BD30</td>
@@ -147,11 +148,12 @@ This entry point is used by the routine at <a href="B591.html">B591</a>.
 <tr>
 <td class="address-1"><span id="bd36"></span>BD36</td>
 <td class="instruction">BIT 0,(IX+$07)</td>
-<td class="comment-1" rowspan="2">Jump to <a href="BD0D.html#bd42">BD42</a> if bit 0 of *<span class="register">IX</span>+07 is not zero.</td>
+<td class="comment-1" rowspan="1">Test bit 0 of *<span class="register">IX</span>+07.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="bd3a"></span>BD3A</td>
 <td class="instruction">JR NZ,<a href="BD0D.html#bd42">$BD42</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="BD0D.html#bd42">BD42</a> if {} is not zero.</td>
 </tr>
 <tr>
 <td class="address-2"><span id="bd3c"></span>BD3C</td>

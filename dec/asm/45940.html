@@ -46,64 +46,54 @@ Used by the routines at <a href="46102.html">46102</a> and <a href="46154.html">
 </td>
 </tr>
 <tr>
-<td class="asm-label"></td>
 <td class="address-2"><span id="45940"></span>45940</td>
 <td class="instruction">LD L,(IX+5)</td>
 <td class="comment-1" rowspan="1"><span class="register">L</span>=(<span class="register">IX</span>+5).</td>
 </tr>
 <tr>
-<td class="asm-label"></td>
 <td class="address-1"><span id="45943"></span>45943</td>
 <td class="instruction">LD A,(IX+6)</td>
 <td class="comment-1" rowspan="1"><span class="register">A</span>=(<span class="register">IX</span>+6).</td>
 </tr>
 <tr>
-<td class="asm-label"></td>
 <td class="address-1"><span id="45946"></span>45946</td>
 <td class="instruction">AND %00000011</td>
 <td class="comment-1" rowspan="1">Keep only bits 0-1.</td>
 </tr>
 <tr>
-<td class="asm-label"></td>
 <td class="address-1"><span id="45948"></span>45948</td>
 <td class="instruction">OR %00111000</td>
 <td class="comment-1" rowspan="1">Set bits 3-5.</td>
 </tr>
 <tr>
-<td class="asm-label"></td>
 <td class="address-1"><span id="45950"></span>45950</td>
 <td class="instruction">LD H,A</td>
 <td class="comment-1" rowspan="1"><span class="register">H</span>=<span class="register">A</span>.</td>
 </tr>
 <tr>
-<td class="asm-label"></td>
 <td class="address-1"><span id="45951"></span>45951</td>
 <td class="instruction">ADD HL,HL</td>
 <td class="comment-1" rowspan="1"><span class="register">HL</span>+=<span class="register">HL</span>.</td>
 </tr>
 <tr>
-<td class="asm-label"></td>
 <td class="address-1"><span id="45952"></span>45952</td>
 <td class="instruction">LD E,(IX+1)</td>
-<td class="comment-1" rowspan="1"><span class="register">E</span>=*<span class="register">IX</span>+1.</td>
+<td class="comment-1" rowspan="1"><span class="register">E</span>=(<span class="register">IX</span>+1).</td>
 </tr>
 <tr>
-<td class="asm-label"></td>
 <td class="address-1"><span id="45955"></span>45955</td>
 <td class="instruction">LD D,(IX+2)</td>
-<td class="comment-1" rowspan="1"><span class="register">D</span>=*<span class="register">IX</span>+2.</td>
+<td class="comment-1" rowspan="1"><span class="register">D</span>=(<span class="register">IX</span>+2).</td>
 </tr>
 <tr>
-<td class="asm-label"></td>
 <td class="address-1"><span id="45958"></span>45958</td>
 <td class="instruction">LD C,(IX+3)</td>
-<td class="comment-1" rowspan="1"><span class="register">C</span>=*<span class="register">IX</span>+3.</td>
+<td class="comment-1" rowspan="1"><span class="register">C</span>=(<span class="register">IX</span>+3).</td>
 </tr>
 <tr>
-<td class="asm-label"></td>
 <td class="address-1"><span id="45961"></span>45961</td>
 <td class="instruction">LD B,(IX+4)</td>
-<td class="comment-1" rowspan="1"><span class="register">B</span>=*<span class="register">IX</span>+4.</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=(<span class="register">IX</span>+4).</td>
 </tr>
 <tr>
 <td class="routine-comment" colspan="5">
@@ -116,224 +106,189 @@ This entry point is used by the routines at <a href="46481.html">46481</a> and <
 </td>
 </tr>
 <tr>
-<td class="asm-label">Copier</td>
 <td class="address-2"><span id="45964"></span>45964</td>
 <td class="instruction">PUSH BC</td>
 <td class="comment-1" rowspan="4">Stash <span class="register">BC</span>, <span class="register">DE</span>, <span class="register">HL</span> and <span class="register">HL</span> on the stack.</td>
 </tr>
 <tr>
-<td class="asm-label"></td>
 <td class="address-1"><span id="45965"></span>45965</td>
 <td class="instruction">PUSH DE</td>
 </tr>
 <tr>
-<td class="asm-label"></td>
 <td class="address-1"><span id="45966"></span>45966</td>
 <td class="instruction">PUSH HL</td>
 </tr>
 <tr>
-<td class="asm-label"></td>
 <td class="address-2"><span id="45967"></span>45967</td>
 <td class="instruction">PUSH HL</td>
 </tr>
 <tr>
-<td class="asm-label"></td>
 <td class="address-1"><span id="45968"></span>45968</td>
 <td class="instruction">LD B,(HL)</td>
 <td class="comment-1" rowspan="1"><span class="register">B</span>=*<span class="register">HL</span>.</td>
 </tr>
 <tr>
-<td class="asm-label"></td>
 <td class="address-1"><span id="45969"></span>45969</td>
 <td class="instruction">INC HL</td>
 <td class="comment-1" rowspan="1">Increment <span class="register">HL</span> by one.</td>
 </tr>
 <tr>
-<td class="asm-label"></td>
 <td class="address-1"><span id="45970"></span>45970</td>
 <td class="instruction">LD H,(HL)</td>
 <td class="comment-1" rowspan="1"><span class="register">H</span>=*<span class="register">HL</span>.</td>
 </tr>
 <tr>
-<td class="asm-label"></td>
 <td class="address-1"><span id="45971"></span>45971</td>
 <td class="instruction">SET 7,H</td>
 <td class="comment-1" rowspan="1">Set bit 7 of <span class="register">H</span>.</td>
 </tr>
 <tr>
-<td class="asm-label"></td>
 <td class="address-1"><span id="45973"></span>45973</td>
 <td class="instruction">LD L,B</td>
 <td class="comment-1" rowspan="1"><span class="register">L</span>=<span class="register">B</span>.</td>
 </tr>
 <tr>
-<td class="asm-label"></td>
 <td class="address-1"><span id="45974"></span>45974</td>
 <td class="instruction">LD B,8</td>
 <td class="comment-1" rowspan="1"><span class="register">B</span>=8.</td>
 </tr>
 <tr>
-<td class="asm-label"></td>
 <td class="address-2"><span id="45976"></span>45976</td>
 <td class="instruction">LD A,(HL)</td>
 <td class="comment-1" rowspan="1"><span class="register">A</span>=*<span class="register">HL</span>.</td>
 </tr>
 <tr>
-<td class="asm-label"></td>
 <td class="address-1"><span id="45977"></span>45977</td>
 <td class="instruction">LD (DE),A</td>
 <td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<span class="register">DE</span>.</td>
 </tr>
 <tr>
-<td class="asm-label"></td>
 <td class="address-1"><span id="45978"></span>45978</td>
 <td class="instruction">INC HL</td>
 <td class="comment-1" rowspan="1">Increment <span class="register">HL</span> by one.</td>
 </tr>
 <tr>
-<td class="asm-label"></td>
 <td class="address-1"><span id="45979"></span>45979</td>
 <td class="instruction">INC D</td>
 <td class="comment-1" rowspan="1">Increment <span class="register">D</span> by one.</td>
 </tr>
 <tr>
-<td class="asm-label"></td>
 <td class="address-1"><span id="45980"></span>45980</td>
 <td class="instruction">DJNZ <a href="45940.html#45976">45976</a></td>
 <td class="comment-1" rowspan="1">Decrease counter by one and loop back to <a href="45940.html#45976">45976</a> until counter is zero.</td>
 </tr>
 <tr>
-<td class="asm-label"></td>
 <td class="address-1"><span id="45982"></span>45982</td>
 <td class="instruction">DEC C</td>
 <td class="comment-1" rowspan="1">Decrease <span class="register">C</span> by one.</td>
 </tr>
 <tr>
-<td class="asm-label"></td>
 <td class="address-1"><span id="45983"></span>45983</td>
 <td class="instruction">JR Z,<a href="45940.html#46004">46004</a></td>
 <td class="comment-1" rowspan="1">Jump to <a href="45940.html#46004">46004</a> if {} is zero.</td>
 </tr>
 <tr>
-<td class="asm-label"></td>
 <td class="address-1"><span id="45985"></span>45985</td>
 <td class="instruction">LD A,E</td>
-<td class="comment-1" rowspan="3"><span class="register">E</span>+=32.</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=<span class="register">E</span>.</td>
 </tr>
 <tr>
-<td class="asm-label"></td>
 <td class="address-1"><span id="45986"></span>45986</td>
 <td class="instruction">ADD A,32</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>+=32.</td>
 </tr>
 <tr>
-<td class="asm-label"></td>
 <td class="address-1"><span id="45988"></span>45988</td>
 <td class="instruction">LD E,A</td>
+<td class="comment-1" rowspan="1"><span class="register">E</span>=<span class="register">A</span>.</td>
 </tr>
 <tr>
-<td class="asm-label"></td>
 <td class="address-1"><span id="45989"></span>45989</td>
 <td class="instruction">JR C,<a href="45940.html#45995">45995</a></td>
 <td class="comment-1" rowspan="1">Jump to <a href="45940.html#45995">45995</a> if {} is lower.</td>
 </tr>
 <tr>
-<td class="asm-label"></td>
 <td class="address-1"><span id="45991"></span>45991</td>
 <td class="instruction">LD A,D</td>
-<td class="comment-1" rowspan="3"><span class="register">D</span>-=8.</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=<span class="register">D</span>.</td>
 </tr>
 <tr>
-<td class="asm-label"></td>
 <td class="address-1"><span id="45992"></span>45992</td>
 <td class="instruction">SUB 8</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>-=8.</td>
 </tr>
 <tr>
-<td class="asm-label"></td>
 <td class="address-1"><span id="45994"></span>45994</td>
 <td class="instruction">LD D,A</td>
+<td class="comment-1" rowspan="1"><span class="register">D</span>=<span class="register">A</span>.</td>
 </tr>
 <tr>
-<td class="asm-label"></td>
 <td class="address-2"><span id="45995"></span>45995</td>
 <td class="instruction">POP HL</td>
 <td class="comment-1" rowspan="1">Restore <span class="register">HL</span> from the stack.</td>
 </tr>
 <tr>
-<td class="asm-label"></td>
 <td class="address-1"><span id="45996"></span>45996</td>
 <td class="instruction">LD A,C</td>
 <td class="comment-1" rowspan="1"><span class="register">A</span>=<span class="register">C</span>.</td>
 </tr>
 <tr>
-<td class="asm-label"></td>
 <td class="address-1"><span id="45997"></span>45997</td>
 <td class="instruction">LD BC,64</td>
 <td class="comment-1" rowspan="1"><span class="register">BC</span>=0064.</td>
 </tr>
 <tr>
-<td class="asm-label"></td>
 <td class="address-1"><span id="46000"></span>46000</td>
 <td class="instruction">ADD HL,BC</td>
 <td class="comment-1" rowspan="1"><span class="register">HL</span>+=<span class="register">BC</span>.</td>
 </tr>
 <tr>
-<td class="asm-label"></td>
 <td class="address-1"><span id="46001"></span>46001</td>
 <td class="instruction">LD C,A</td>
 <td class="comment-1" rowspan="1"><span class="register">C</span>=<span class="register">A</span>.</td>
 </tr>
 <tr>
-<td class="asm-label"></td>
 <td class="address-1"><span id="46002"></span>46002</td>
 <td class="instruction">JR <a href="45940.html#45967">45967</a></td>
 <td class="comment-1" rowspan="1">Jump to <a href="45940.html#45967">45967</a>.</td>
 </tr>
 <tr>
-<td class="asm-label"></td>
 <td class="address-2"><span id="46004"></span>46004</td>
 <td class="instruction">POP HL</td>
 <td class="comment-1" rowspan="4">Restore <span class="register">HL</span>, <span class="register">HL</span>, <span class="register">DE</span> and <span class="register">BC</span> from the stack.</td>
 </tr>
 <tr>
-<td class="asm-label"></td>
 <td class="address-1"><span id="46005"></span>46005</td>
 <td class="instruction">POP HL</td>
 </tr>
 <tr>
-<td class="asm-label"></td>
 <td class="address-1"><span id="46006"></span>46006</td>
 <td class="instruction">POP DE</td>
 </tr>
 <tr>
-<td class="asm-label"></td>
 <td class="address-1"><span id="46007"></span>46007</td>
 <td class="instruction">POP BC</td>
 </tr>
 <tr>
-<td class="asm-label"></td>
 <td class="address-1"><span id="46008"></span>46008</td>
 <td class="instruction">INC E</td>
 <td class="comment-1" rowspan="1">Increment <span class="register">E</span> by one.</td>
 </tr>
 <tr>
-<td class="asm-label"></td>
 <td class="address-1"><span id="46009"></span>46009</td>
 <td class="instruction">INC L</td>
 <td class="comment-1" rowspan="2">Increment <span class="register">L</span> by two.</td>
 </tr>
 <tr>
-<td class="asm-label"></td>
 <td class="address-1"><span id="46010"></span>46010</td>
 <td class="instruction">INC L</td>
 </tr>
 <tr>
-<td class="asm-label"></td>
 <td class="address-1"><span id="46011"></span>46011</td>
-<td class="instruction">DJNZ <a href="45940.html#45964">Copier</a></td>
-<td class="comment-1" rowspan="1">Decrease counter by one and loop back to <a href="45940.html#45964">Copier</a> until counter is zero.</td>
+<td class="instruction">DJNZ <a href="45940.html#45964">45964</a></td>
+<td class="comment-1" rowspan="1">Decrease counter by one and loop back to <a href="45940.html#45964">45964</a> until counter is zero.</td>
 </tr>
 <tr>
-<td class="asm-label"></td>
 <td class="address-1"><span id="46013"></span>46013</td>
 <td class="instruction">RET</td>
 <td class="comment-1" rowspan="1">Return.</td>
