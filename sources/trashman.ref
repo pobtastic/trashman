@@ -1,0 +1,59 @@
+;
+; SkoolKit ref file for Trashman
+;
+; To build the HTML disassembly, run these commands:
+;   tap2sna.py @trashman.t2s
+;   sna2skool.py -H -c trashman.ctl trashman.z80 > trashman.skool
+;   skool2html.py -H trashman.skool -T dark
+
+[Config]
+Expand=#INCLUDE(Expand)
+RefFiles=bases.ref;analytics.ref;changelog.ref;pokes.ref
+GameDir=trashman
+
+[Game]
+Game=Trashman
+Logo=#SCR$01,$0B,$0A,$0A,$05(/images/logo)
+Copyright=&copy; 1984 New Generation Software; 2023 ArcadeGeek LTD.
+Repository=https://github.com/pobtastic/trashman/
+StyleSheet=skoolkit.css;skoolkit-dark.css
+LinkInternalOperands=1
+AddressAnchor={address#IF({base}==16)(:04x)}
+
+[PageHeaders]
+GameIndex=The complete<>RAM disassembly (work in progress)
+
+[Index]
+MemoryMaps
+Graphics
+DataTables
+Reference
+
+[Expand]
+#DEF(#COLOUR(id)
+  #LET(ink=$id&$07)#IF({ink}>=$00)(INK:
+    #MAP({ink})(
+      UNKNOWN,
+      0:BLACK,
+      1:BLUE,
+      2:RED,
+      3:MAGENTA,
+      4:GREEN,
+      5:CYAN,
+      6:YELLOW,
+      7:WHITE)),
+  #LET(paper=$id>>$03&$07)#IF({paper}>=$00)(PAPER:
+    #MAP({paper})(
+      UNKNOWN,
+      0:BLACK,
+      1:BLUE,
+      2:RED,
+      3:MAGENTA,
+      4:GREEN,
+      5:CYAN,
+      6:YELLOW,
+      7:WHITE))
+  #LET(bright=$id&$40)#IF({bright}>$00)((BRIGHT))
+  #LET(flash=$id&$80)#IF({flash}>$00)(FLASH: ON))
+
+#DEF(#POKE #LINK:Pokes)

@@ -1,0 +1,95 @@
+; Copyright 2023 Paul Maddern (paul@arcadegeek.co.uk)
+
+[Poke:Infinite Time]
+<code>
+<div>POKE #R$CB44(#N$CB45),#N$00</div>
+</code>
+
+This removes the code which subtracts one unit from the time.
+<table>
+  <tbody>
+    <tr>
+      <td class="address-1">#R$CB44</td>
+      <td class="instruction">SUB #N$01</td>
+    </tr>
+  </tbody>
+</table>
+
+[Poke:Infinite Lives]
+<code>
+<div>POKE #R$A620,#N$00</div>
+</code>
+
+This simply removes the following command, which would otherwise decrease the players lives.
+<table>
+  <tbody>
+    <tr>
+      <td class="address-1">#R$A620</td>
+      <td class="instruction">DEC (#REGhl)</td>
+    </tr>
+  </tbody>
+</table>
+
+[Poke:Immunity]
+<code>
+<div>POKE #R$BF59,#N$C9</div>
+<div>POKE #R$A5D9,#N$2A</div>
+</code>
+
+This alters:
+<table>
+  <tbody>
+    <tr>
+      <td class="address-1">#R$BF59</td>
+      <td class="instruction">RET NZ</td>
+    </tr>
+  </tbody>
+</table>
+
+To simply return regardless of the flag:
+<table>
+  <tbody>
+    <tr>
+      <td class="address-1">#R$BF59</td>
+      <td class="instruction">RET</td>
+    </tr>
+  </tbody>
+</table>
+
+And also changes:
+<table>
+  <tbody>
+    <tr>
+      <td class="address-1">#R$A5D9</td>
+      <td class="instruction">JP NZ,#R$A667(#N$A667)</td>
+    </tr>
+  </tbody>
+</table>
+
+To the following (which is overwritten immediately, so just never actions the jump):
+<table>
+  <tbody>
+    <tr>
+      <td class="address-1">#R$A5D9</td>
+      <td class="instruction">LD #REGhl,#R$A667(#N$A667)</td>
+    </tr>
+  </tbody>
+</table>
+
+[Poke:Time left for current level (#N$00-#N$99)]
+<code>
+<div>POKE #R$C272(#N$C272),<em>nn</em></div>
+<div>POKE #R$C273(#N$C273),<em>nn</em></div>
+</code>
+
+For example, to set 2000 seconds:
+<code>
+<div>POKE #R$C272(#N$C272),#N$00</div>
+<div>POKE #R$C273(#N$C273),#N$20</div>
+</code>
+
+Or, to set 750 seconds:
+<code>
+<div>POKE #R$C272(#N$C272),#N$50</div>
+<div>POKE #R$C273(#N$C273),#N$07</div>
+</code>
