@@ -152,22 +152,20 @@ Used by the routine at <a href="B0A1.html">StartGame</a>.
 <tr>
 <td class="address-1"><span id="bf7c"></span>BF7C</td>
 <td class="instruction">CP $0C</td>
-<td class="comment-1" rowspan="1">Compare <span class="register">A</span> with 0C.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="BF50.html#bf8e">BF8E</a> if <span class="register">A</span> is lower than 0C.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="bf7e"></span>BF7E</td>
 <td class="instruction">JR C,<a href="BF50.html#bf8e">$BF8E</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="BF50.html#bf8e">BF8E</a> if {} is lower.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="bf80"></span>BF80</td>
 <td class="instruction">CP $14</td>
-<td class="comment-1" rowspan="1">Compare <span class="register">A</span> with 14.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="BF50.html#bf8e">BF8E</a> if <span class="register">A</span> is higher than 14.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="bf82"></span>BF82</td>
 <td class="instruction">JR NC,<a href="BF50.html#bf8e">$BF8E</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="BF50.html#bf8e">BF8E</a> if {} is higher.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="bf84"></span>BF84</td>
@@ -293,13 +291,13 @@ Used by the routine at <a href="B0A1.html">StartGame</a>.
 </tr>
 <tr>
 <td class="address-2"><span id="bfb9"></span>BFB9</td>
-<td class="instruction">CALL <a href="C023.html#c1cd">$C1CD</a></td>
-<td class="comment-1" rowspan="1">Call <a href="C023.html#c1cd">C1CD</a>.</td>
+<td class="instruction">CALL <a href="C14C.html#c1cd">$C1CD</a></td>
+<td class="comment-1" rowspan="1">Call <a href="C14C.html#c1cd">C1CD</a>.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="bfbc"></span>BFBC</td>
 <td class="instruction">LD A,($C1E5)</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="C023.html#c1e5">C1E5</a>.</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="C14C.html#c1e5">C1E5</a>.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="bfbf"></span>BFBF</td>

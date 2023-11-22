@@ -30,7 +30,7 @@ Prev: <a href="45806.html">45806</a>
 </td>
 <td class="up">Up: <a href="../maps/all.html#45858">Map</a></td>
 <td class="next">
-Next: <a href="45934.html">45934</a>
+Next: <a href="45940.html">45940</a>
 </td>
 </tr>
 </table>
@@ -48,12 +48,12 @@ Used by the routine at <a href="46064.html">46064</a>.
 <tr>
 <td class="address-2"><span id="45858"></span>45858</td>
 <td class="instruction">LD L,(IX+5)</td>
-<td class="comment-1" rowspan="1"><span class="register">L</span>=(<span class="register">IX</span>+5).</td>
+<td class="comment-1" rowspan="1"><span class="register">L</span>=*<span class="register">IX</span>+5.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="45861"></span>45861</td>
 <td class="instruction">LD A,(IX+6)</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=(<span class="register">IX</span>+6).</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<span class="register">IX</span>+6.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="45864"></span>45864</td>
@@ -78,22 +78,22 @@ Used by the routine at <a href="46064.html">46064</a>.
 <tr>
 <td class="address-1"><span id="45870"></span>45870</td>
 <td class="instruction">LD E,(IX+1)</td>
-<td class="comment-1" rowspan="1"><span class="register">E</span>=(<span class="register">IX</span>+1).</td>
+<td class="comment-1" rowspan="1"><span class="register">E</span>=*<span class="register">IX</span>+1.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="45873"></span>45873</td>
 <td class="instruction">LD D,(IX+2)</td>
-<td class="comment-1" rowspan="1"><span class="register">D</span>=(<span class="register">IX</span>+2).</td>
+<td class="comment-1" rowspan="1"><span class="register">D</span>=*<span class="register">IX</span>+2.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="45876"></span>45876</td>
 <td class="instruction">LD C,(IX+3)</td>
-<td class="comment-1" rowspan="1"><span class="register">C</span>=(<span class="register">IX</span>+3).</td>
+<td class="comment-1" rowspan="1"><span class="register">C</span>=*<span class="register">IX</span>+3.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="45879"></span>45879</td>
 <td class="instruction">LD B,(IX+4)</td>
-<td class="comment-1" rowspan="1"><span class="register">B</span>=(<span class="register">IX</span>+4).</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=*<span class="register">IX</span>+4.</td>
 </tr>
 <tr>
 <td class="address-2"><span id="45882"></span>45882</td>
@@ -130,12 +130,11 @@ Used by the routine at <a href="46064.html">46064</a>.
 <tr>
 <td class="address-1"><span id="45889"></span>45889</td>
 <td class="instruction">BIT 7,H</td>
-<td class="comment-1" rowspan="1">Test bit 7 of <span class="register">H</span>.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="45858.html#45934">45934</a> if bit 7 of <span class="register">H</span> is zero.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="45891"></span>45891</td>
-<td class="instruction">JR Z,<a href="45934.html">45934</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="45934.html">45934</a> if {} is zero.</td>
+<td class="instruction">JR Z,<a href="45858.html#45934">45934</a></td>
 </tr>
 <tr>
 <td class="address-1"><span id="45893"></span>45893</td>
@@ -173,16 +172,6 @@ Used by the routine at <a href="46064.html">46064</a>.
 <td class="comment-1" rowspan="1">Decrease counter by one and loop back to <a href="45858.html#45896">45896</a> until counter is zero.</td>
 </tr>
 <tr>
-<td class="routine-comment" colspan="5">
-<span id="45902"></span>
-<div class="comments">
-<div class="paragraph">
-This entry point is used by the routine at <a href="45934.html">45934</a>.
-</div>
-</div>
-</td>
-</tr>
-<tr>
 <td class="address-2"><span id="45902"></span>45902</td>
 <td class="instruction">DEC C</td>
 <td class="comment-1" rowspan="1">Decrease <span class="register">C</span> by one.</td>
@@ -190,22 +179,20 @@ This entry point is used by the routine at <a href="45934.html">45934</a>.
 <tr>
 <td class="address-1"><span id="45903"></span>45903</td>
 <td class="instruction">JR Z,<a href="45858.html#45924">45924</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="45858.html#45924">45924</a> if {} is zero.</td>
+<td class="comment-1" rowspan="1">Jump to <a href="45858.html#45924">45924</a> if <span class="register">C</span> is zero.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="45905"></span>45905</td>
 <td class="instruction">LD A,E</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=<span class="register">E</span>.</td>
+<td class="comment-1" rowspan="3"><span class="register">E</span>+=32.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="45906"></span>45906</td>
 <td class="instruction">ADD A,32</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>+=32.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="45908"></span>45908</td>
 <td class="instruction">LD E,A</td>
-<td class="comment-1" rowspan="1"><span class="register">E</span>=<span class="register">A</span>.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="45909"></span>45909</td>
@@ -215,17 +202,15 @@ This entry point is used by the routine at <a href="45934.html">45934</a>.
 <tr>
 <td class="address-1"><span id="45911"></span>45911</td>
 <td class="instruction">LD A,D</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=<span class="register">D</span>.</td>
+<td class="comment-1" rowspan="3"><span class="register">D</span>-=8.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="45912"></span>45912</td>
 <td class="instruction">SUB 8</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>-=8.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="45914"></span>45914</td>
 <td class="instruction">LD D,A</td>
-<td class="comment-1" rowspan="1"><span class="register">D</span>=<span class="register">A</span>.</td>
 </tr>
 <tr>
 <td class="address-2"><span id="45915"></span>45915</td>
@@ -240,12 +225,11 @@ This entry point is used by the routine at <a href="45934.html">45934</a>.
 <tr>
 <td class="address-1"><span id="45917"></span>45917</td>
 <td class="instruction">LD BC,64</td>
-<td class="comment-1" rowspan="1"><span class="register">BC</span>=0064.</td>
+<td class="comment-1" rowspan="2"><span class="register">HL</span>+=0064.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="45920"></span>45920</td>
 <td class="instruction">ADD HL,BC</td>
-<td class="comment-1" rowspan="1"><span class="register">HL</span>+=<span class="register">BC</span>.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="45921"></span>45921</td>
@@ -298,6 +282,24 @@ This entry point is used by the routine at <a href="45934.html">45934</a>.
 <td class="instruction">RET</td>
 <td class="comment-1" rowspan="1">Return.</td>
 </tr>
+<tr>
+<td class="address-2"><span id="45934"></span>45934</td>
+<td class="instruction">LD A,D</td>
+<td class="comment-1" rowspan="3"><span class="register">D</span>+=8.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="45935"></span>45935</td>
+<td class="instruction">ADD A,8</td>
+</tr>
+<tr>
+<td class="address-1"><span id="45937"></span>45937</td>
+<td class="instruction">LD D,A</td>
+</tr>
+<tr>
+<td class="address-1"><span id="45938"></span>45938</td>
+<td class="instruction">JR <a href="45858.html#45902">45902</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="45858.html#45902">45902</a>.</td>
+</tr>
 </table>
 <table class="asm-navigation">
 <tr>
@@ -306,7 +308,7 @@ Prev: <a href="45806.html">45806</a>
 </td>
 <td class="up">Up: <a href="../maps/all.html#45858">Map</a></td>
 <td class="next">
-Next: <a href="45934.html">45934</a>
+Next: <a href="45940.html">45940</a>
 </td>
 </tr>
 </table>

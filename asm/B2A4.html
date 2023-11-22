@@ -116,7 +116,7 @@ Used by the routine at <a href="B208.html">B208</a>.
 <tr>
 <td class="address-1"><span id="b2b3"></span>B2B3</td>
 <td class="instruction">JR NZ,<a href="B2A4.html#b2a6">$B2A6</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="B2A4.html#b2a6">B2A6</a>.</td>
+<td class="comment-1" rowspan="1">Jump to <a href="B2A4.html#b2a6">B2A6</a> until <span class="register">C</span> is zero.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="b2b5"></span>B2B5</td>
@@ -131,12 +131,11 @@ Used by the routine at <a href="B208.html">B208</a>.
 <tr>
 <td class="address-1"><span id="b2b7"></span>B2B7</td>
 <td class="instruction">LD BC,$0040</td>
-<td class="comment-1" rowspan="1"><span class="register">BC</span>=0040.</td>
+<td class="comment-1" rowspan="2"><span class="register">HL</span>+=0040.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="b2ba"></span>B2BA</td>
 <td class="instruction">ADD HL,BC</td>
-<td class="comment-1" rowspan="1"><span class="register">HL</span>+=<span class="register">BC</span>.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="b2bb"></span>B2BB</td>

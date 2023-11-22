@@ -48,17 +48,17 @@ Used by the routine at <a href="45576.html">45576</a>.
 <tr>
 <td class="address-2"><span id="45527"></span>45527</td>
 <td class="instruction">LD L,(IX+0)</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1"><span class="register">L</span>=*<span class="register">IX</span>+0.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="45530"></span>45530</td>
 <td class="instruction">LD H,(IX+1)</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1"><span class="register">H</span>=*<span class="register">IX</span>+1.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="45533"></span>45533</td>
 <td class="instruction">JR <a href="45527.html#45554">45554</a></td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Jump to <a href="45527.html#45554">45554</a>.</td>
 </tr>
 <tr>
 <td class="routine-comment" colspan="5">
@@ -73,107 +73,104 @@ This entry point is used by the routine at <a href="45576.html">45576</a>.
 <tr>
 <td class="address-2"><span id="45535"></span>45535</td>
 <td class="instruction">LD L,(IX+0)</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1"><span class="register">L</span>=*<span class="register">IX</span>+0.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="45538"></span>45538</td>
 <td class="instruction">LD H,(IX+1)</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1"><span class="register">H</span>=*<span class="register">IX</span>+1.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="45541"></span>45541</td>
 <td class="instruction">LD BC,65152</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="2"><span class="register">HL</span>+=65152.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="45544"></span>45544</td>
 <td class="instruction">ADD HL,BC</td>
-<td class="comment-0" rowspan="1"></td>
 </tr>
 <tr>
 <td class="address-1"><span id="45545"></span>45545</td>
 <td class="instruction">PUSH HL</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Stash <span class="register">HL</span> on the stack.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="45546"></span>45546</td>
 <td class="instruction">LD BC,30752</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1"><span class="register">BC</span>=30752.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="45549"></span>45549</td>
 <td class="instruction">AND A</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Set flags.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="45550"></span>45550</td>
 <td class="instruction">SBC HL,BC</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>-=<span class="register">BC</span>.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="45552"></span>45552</td>
 <td class="instruction">POP HL</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Restore <span class="register">HL</span> from the stack.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="45553"></span>45553</td>
 <td class="instruction">RET C</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Return if the subtract had any carry.</td>
 </tr>
 <tr>
 <td class="address-2"><span id="45554"></span>45554</td>
 <td class="instruction">BIT 6,(IX+7)</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="2">Return if bit 6 of <span class="register">IX</span>+7 is not zero.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="45558"></span>45558</td>
 <td class="instruction">RET NZ</td>
-<td class="comment-0" rowspan="1"></td>
 </tr>
 <tr>
 <td class="address-1"><span id="45559"></span>45559</td>
 <td class="instruction">LD BC,32</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="2"><span class="register">HL</span>+=0032.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="45562"></span>45562</td>
 <td class="instruction">ADD HL,BC</td>
-<td class="comment-0" rowspan="1"></td>
 </tr>
 <tr>
 <td class="address-1"><span id="45563"></span>45563</td>
-<td class="instruction">CALL <a href="49187.html#49476">49476</a></td>
-<td class="comment-0" rowspan="1"></td>
+<td class="instruction">CALL <a href="49470.html#49476">49476</a></td>
+<td class="comment-1" rowspan="1">Call <a href="49470.html#49476">49476</a>.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="45566"></span>45566</td>
 <td class="instruction">LD A,(IX+2)</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<span class="register">IX</span>+2.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="45569"></span>45569</td>
 <td class="instruction">LD (HL),A</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<span class="register">HL</span>.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="45570"></span>45570</td>
 <td class="instruction">INC HL</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Increment <span class="register">HL</span> by one.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="45571"></span>45571</td>
 <td class="instruction">LD A,(IX+3)</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<span class="register">IX</span>+3.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="45574"></span>45574</td>
 <td class="instruction">LD (HL),A</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<span class="register">HL</span>.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="45575"></span>45575</td>
 <td class="instruction">RET</td>
-<td class="comment-0" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Return.</td>
 </tr>
 </table>
 <table class="asm-navigation">

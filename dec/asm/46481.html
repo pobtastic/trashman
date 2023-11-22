@@ -87,12 +87,12 @@ Used by the routines at <a href="45217.html">StartGame</a> and <a href="46884.ht
 <tr>
 <td class="address-1"><span id="46503"></span>46503</td>
 <td class="instruction">LD L,(IX+16)</td>
-<td class="comment-1" rowspan="1"><span class="register">L</span>=(<span class="register">IX</span>+16).</td>
+<td class="comment-1" rowspan="1"><span class="register">L</span>=*<span class="register">IX</span>+16.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="46506"></span>46506</td>
 <td class="instruction">LD H,(IX+17)</td>
-<td class="comment-1" rowspan="1"><span class="register">H</span>=(<span class="register">IX</span>+17).</td>
+<td class="comment-1" rowspan="1"><span class="register">H</span>=*<span class="register">IX</span>+17.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="46509"></span>46509</td>
@@ -147,7 +147,7 @@ Used by the routines at <a href="45217.html">StartGame</a> and <a href="46884.ht
 <tr>
 <td class="address-2"><span id="46535"></span>46535</td>
 <td class="instruction">LD A,(IX+0)</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=(<span class="register">IX</span>+0).</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<span class="register">IX</span>+0.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="46538"></span>46538</td>
@@ -192,7 +192,7 @@ Used by the routines at <a href="45217.html">StartGame</a> and <a href="46884.ht
 <tr>
 <td class="address-2"><span id="46559"></span>46559</td>
 <td class="instruction">LD A,(IX+0)</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=(<span class="register">IX</span>+0).</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<span class="register">IX</span>+0.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="46562"></span>46562</td>
@@ -289,8 +289,8 @@ This entry point is used by the routine at <a href="46264.html">46264</a>.
 </tr>
 <tr>
 <td class="address-1"><span id="46598"></span>46598</td>
-<td class="instruction">CALL <a href="45355.html#45383">45383</a></td>
-<td class="comment-1" rowspan="1">Call <a href="45355.html#45383">45383</a>.</td>
+<td class="instruction">CALL <a href="45383.html">45383</a></td>
+<td class="comment-1" rowspan="1">Call <a href="45383.html">45383</a>.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="46601"></span>46601</td>
@@ -365,7 +365,7 @@ This entry point is used by the routine at <a href="46264.html">46264</a>.
 <tr>
 <td class="address-1"><span id="46637"></span>46637</td>
 <td class="instruction">LD HL,28800</td>
-<td class="comment-1" rowspan="1"><span class="register">HL</span>=<a href="23792.html#28800">28800</a>.</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>=<a href="28800.html">ShadowBuffer_Pixels</a>.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="46640"></span>46640</td>
@@ -375,22 +375,22 @@ This entry point is used by the routine at <a href="46264.html">46264</a>.
 <tr>
 <td class="address-1"><span id="46643"></span>46643</td>
 <td class="instruction">LD DE,16448</td>
-<td class="comment-1" rowspan="1"><span class="register">DE</span>=16448.</td>
+<td class="comment-1" rowspan="1"><span class="register">DE</span>=16448 (screen buffer location).</td>
 </tr>
 <tr>
 <td class="address-1"><span id="46646"></span>46646</td>
-<td class="instruction">CALL <a href="45940.html#45964">45964</a></td>
-<td class="comment-1" rowspan="1">Call <a href="45940.html#45964">45964</a>.</td>
+<td class="instruction">CALL <a href="45940.html#45964">Copier</a></td>
+<td class="comment-1" rowspan="1">Call <a href="45940.html#45964">Copier</a>.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="46649"></span>46649</td>
 <td class="instruction">LD HL,30784</td>
-<td class="comment-1" rowspan="1"><span class="register">HL</span>=<a href="30784.html">30784</a>.</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>=<a href="30784.html">ShadowBuffer_Attributes</a>.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="46652"></span>46652</td>
 <td class="instruction">LD IX,22592</td>
-<td class="comment-1" rowspan="1"><span class="register">IX</span>=<a href="16384.html#22592">22592</a>.</td>
+<td class="comment-1" rowspan="1"><span class="register">IX</span>=<a href="16384.html#22592">22592</a> (attribute buffer location).</td>
 </tr>
 <tr>
 <td class="address-1"><span id="46656"></span>46656</td>
