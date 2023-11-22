@@ -13,11 +13,23 @@ i $5B00
 
 b $5CF0
 
+b $7080
+@ $7080 label=ShadowBuffer_Pixels
+
 b $70BF
 
 b $7840
+@ $7840 label=ShadowBuffer_Attributes
 
 b $785F
+
+b $95B0
+D $95B0 #UDGARRAY$20,attr=$07,scale=$04,step=$20;$95B0-$96D0-$01-$100(street)
+  $95B0,$140,$20
+
+b $A200
+  $A200 #UDG(#PC)
+L $A200,$08,$72
 
 c $A590 Game Entry Point
 @ $A590 label=GameEntryPoint
@@ -264,11 +276,6 @@ c $A78C
   $A791,$02,b$01 Set bit 3.
   $A793,$03 Write #REGa back to #R$AB8A.
   $A796,$05 Write #N$00 to #R$CC3D.
-  $A78C,$03 #REGa=*#R$AB8A.
-  $A78F,$02,b$01 Keep only bits 4-7.
-  $A791,$02,b$01 Set bits 3.
-  $A793,$03 Write #REGa to *#R$AB8A.
-  $A796,$05 Write #N$00 to *#R$CC3D.
   $A79B,$01 Stash #REGhl on the stack.
   $A79C,$02 #REGb=#N$0A.
   $A79E,$03 Call #R$CB9C.
@@ -736,16 +743,14 @@ N $AAB2 Move to the last digit of the active score (the hundreds of thousands).
   $AAC9,$02 Jump to #R$AADD if {} is not zero.
   $AACB,$01 Decrease #REGhl by one.
   $AACC,$01 #REGa=*#REGhl.
-  $AACD,$03 Compare #REGa with *#REGix+#N$0A.
-  $AAD0,$02 Jump to #R$AABC if {} is lower.
-  $AAD2,$02 Jump to #R$AADD if {} is not zero.
+  $AACD,$05 Jump to #R$AABC if #REGa is lower than *#REGix+#N$0A.
+  $AAD2,$02 Jump to #R$AADD if it is not zero.
   $AAD4,$01 Decrease #REGhl by one.
   $AAD5,$01 #REGa=*#REGhl.
-  $AAD6,$03 Compare #REGa with *#REGix+#N$09.
-  $AAD9,$02 Jump to #R$AABC if {} is lower.
-  $AADB,$02 Jump to #R$AABC if {} is zero.
+  $AAD6,$05 Jump to #R$AABC if #REGa is lower than *#REGix+#N$09.
+  $AADB,$02 Jump to #R$AABC if it is zero.
   $AADD,$01 Decrease #REGb by one.
-  $AADE,$02 Jump to #R$AAEF if {} is zero.
+  $AADE,$02 Jump to #R$AAEF if #REGb is zero.
   $AAE0,$02 #REGa=#N$00.
   $AAE2,$02 #REGa+=#N$0C.
   $AAE4,$02 Decrease counter by one and loop back to #R$AAE2 until counter is zero.
@@ -1120,6 +1125,8 @@ c $B12B
   $B143,$02 Write #N$01 to *#REGhl.
   $B145,$01 Return.
 B $B146,$01
+
+c $B147
   $B147,$04 #REGix=*#R$C277.
   $B14B,$03 #REGl=*#REGix+#N$30.
   $B14E,$03 #REGh=*#REGix+#N$31.
@@ -1164,7 +1171,7 @@ B $B146,$01
 c $B1B2
   $B1B2,$02 Stash #REGbc and #REGde on the stack.
   $B1B4,$02 #REGb=#N$00.
-  $B1B6,$02 LDIR.
+  $B1B6,$02 Copy #REGhl to #REGde the number of times held by #REGbc.
   $B1B8,$01 Exchange the #REGde register with the shadow #REGhl register.
   $B1B9,$01 Restore #REGhl from the stack.
   $B1BA,$03 #REGbc=#N($0020,$04,$04).
@@ -1192,6 +1199,28 @@ c $B1C3
   $B1D6,$01 Return.
 
 c $B1D7
+  $B1D7,$03 #REGl=*#REGix+#N$00.
+  $B1DA,$03 #REGh=*#REGix+#N$01.
+  $B1DD,$02 Jump to #R$B1F2.
+
+  $B1DF,$03 #REGl=*#REGix+#N$00.
+  $B1E2,$03 #REGh=*#REGix+#N$01.
+  $B1E5,$04 #REGhl+=#N$FE80.
+  $B1E9,$01 Stash #REGhl on the stack.
+  $B1EA,$03 #REGbc=#N$7820.
+  $B1ED,$01 Set flags.
+  $B1EE,$02 #REGhl-=#REGbc.
+  $B1F0,$01 Restore #REGhl from the stack.
+  $B1F1,$01 Return if the subtract had any carry.
+  $B1F2,$05 Return if bit 6 of #REGix+#N$07 is not zero.
+  $B1F7,$04 #REGhl+=#N($0020,$04,$04).
+  $B1FB,$03 Call #R$C144.
+  $B1FE,$03 #REGa=*#REGix+#N$02.
+  $B201,$01 Write #REGa to *#REGhl.
+  $B202,$01 Increment #REGhl by one.
+  $B203,$03 #REGa=*#REGix+#N$03.
+  $B206,$01 Write #REGa to *#REGhl.
+  $B207,$01 Return.
 
 c $B208
   $B208,$04 #REGix=*#R$C277.
@@ -1218,7 +1247,7 @@ c $B208
   $B241,$02 Restore #REGix from the stack.
   $B243,$03 #REGl=*#REGix+#N$00.
   $B246,$03 #REGh=*#REGix+#N$01.
-  $B249,$03 #REGbc=#N($2001,$04,$04).
+  $B249,$03 #REGbc=#N($0420,$04,$04).
   $B24C,$03 Call #R$B293.
   $B24F,$03 #REGl=*#REGix+#N$3C.
   $B252,$03 #REGh=*#REGix+#N$3D.
@@ -1247,15 +1276,18 @@ c $B208
   $B28F,$03 Call #R$B2A4.
   $B292,$01 Return.
 
-c $B293
+c $B293 Playarea Copier
+@ $B293 label=PlayareaCopier
+R $B293 BC Number of bytes to copy (needs changing)
+R $B293 DE Target address
+R $B293 HL Source data
   $B293,$02 Stash #REGbc and #REGde on the stack.
   $B295,$02 #REGb=#N$00.
-  $B297,$02 LDIR.
+  $B297,$02 Copy #REGhl to #REGde the number of times held by #REGbc.
   $B299,$01 Exchange the #REGde register with the shadow #REGhl register.
   $B29A,$01 Restore #REGhl from the stack.
-  $B29B,$03 #REGbc=#N($0040,$04,$04).
-  $B29E,$01 #REGhl+=#REGbc.
-  $B29F,$01 Exchange the #REGde register with the shadow #REGhl register.
+  $B29B,$04 #REGhl+=#N($0040,$04,$04).
+  $B29F,$01 Switch the #REGde and #REGhl registers back.
   $B2A0,$01 Restore #REGbc from the stack.
   $B2A1,$02 Decrease counter by one and loop back to #R$B293 until counter is zero.
   $B2A3,$01 Return.
@@ -1273,21 +1305,20 @@ c $B2A4
   $B2AF,$02 Increment #REGhl by two.
   $B2B1,$01 Decrease #REGde by one.
   $B2B2,$01 Decrease #REGc by one.
-  $B2B3,$02 Jump to #R$B2A6.
+  $B2B3,$02 Jump to #R$B2A6 until #REGc is zero.
   $B2B5,$01 Exchange the #REGde register with the shadow #REGhl register.
   $B2B6,$01 Restore #REGhl from the stack.
-  $B2B7,$03 #REGbc=#N($0040,$04,$04).
-  $B2BA,$01 #REGhl+=#REGbc.
+  $B2B7,$04 #REGhl+=#N($0040,$04,$04).
   $B2BB,$01 Exchange the #REGde register with the shadow #REGhl register.
   $B2BC,$01 Restore #REGbc from the stack.
   $B2BD,$02 Decrease counter by one and loop back to #R$B2A4 until counter is zero.
   $B2BF,$01 Return.
 
 c $B2C0
-  $B2C0,$03 #REGl=(#REGix+#N$05).
-  $B2C3,$03 #REGh=(#REGix+#N$06).
-  $B2C6,$03 #REGc=(#REGix+#N$04).
-  $B2C9,$03 #REGb=(#REGix+#N$03).
+  $B2C0,$03 #REGl=*#REGix+#N$05.
+  $B2C3,$03 #REGh=*#REGix+#N$06.
+  $B2C6,$03 #REGc=*#REGix+#N$04.
+  $B2C9,$03 #REGb=*#REGix+#N$03.
   $B2CC,$03 #REGix=#REGhl (using the stack).
   $B2CF,$02 Set bit 5 of #REGh.
   $B2D1,$03 #REGde=#N($0020,$04,$04).
@@ -1306,10 +1337,10 @@ c $B2C0
   $B2ED,$01 Return.
 
 c $B2EE
-  $B2EE,$03 #REGl=(#REGix+#N$05).
-  $B2F1,$03 #REGh=(#REGix+#N$06).
-  $B2F4,$03 #REGc=(#REGix+#N$04).
-  $B2F7,$03 #REGb=(#REGix+#N$03).
+  $B2EE,$03 #REGl=*#REGix+#N$05.
+  $B2F1,$03 #REGh=*#REGix+#N$06.
+  $B2F4,$03 #REGc=*#REGix+#N$04.
+  $B2F7,$03 #REGb=*#REGix+#N$03.
   $B2FA,$03 #REGix=#REGhl (using the stack).
   $B2FD,$02 Set bit 5 of #REGh.
   $B2FF,$03 #REGde=#N($0020,$04,$04).
@@ -1331,22 +1362,21 @@ c $B2EE
   $B321,$01 Return.
 
 c $B322
-  $B322,$03 #REGl=(#REGix+#N$05).
-  $B325,$03 #REGa=(#REGix+#N$06).
+  $B322,$03 #REGl=*#REGix+#N$05.
+  $B325,$03 #REGa=*#REGix+#N$06.
   $B328,$02,b$01 Keep only bits 0-1.
   $B32A,$02,b$01 Set bits 3-5.
   $B32C,$01 #REGh=#REGa.
   $B32D,$01 #REGhl+=#REGhl.
-  $B32E,$03 #REGe=(#REGix+#N$01).
-  $B331,$03 #REGd=(#REGix+#N$02).
-  $B334,$03 #REGc=(#REGix+#N$03).
-  $B337,$03 #REGb=(#REGix+#N$04).
+  $B32E,$03 #REGe=*#REGix+#N$01.
+  $B331,$03 #REGd=*#REGix+#N$02.
+  $B334,$03 #REGc=*#REGix+#N$03.
+  $B337,$03 #REGb=*#REGix+#N$04.
   $B33A,$04 Stash #REGbc, #REGde, #REGhl and #REGhl on the stack.
   $B33E,$01 #REGb=*#REGhl.
   $B33F,$01 Increment #REGhl by one.
   $B340,$01 #REGh=*#REGhl.
-  $B341,$02 Test bit 7 of #REGh.
-  $B343,$02 Jump to #R$B36E if {} is zero.
+  $B341,$04 Jump to #R$B36E if bit 7 of #REGh is zero.
   $B345,$01 #REGl=#REGb.
   $B346,$02 #REGb=#N$08.
   $B348,$01 #REGa=*#REGhl.
@@ -1355,18 +1385,13 @@ c $B322
   $B34B,$01 Increment #REGd by one.
   $B34C,$02 Decrease counter by one and loop back to #R$B348 until counter is zero.
   $B34E,$01 Decrease #REGc by one.
-  $B34F,$02 Jump to #R$B364 if {} is zero.
-  $B351,$01 #REGa=#REGe.
-  $B352,$02 #REGa+=#N$20.
-  $B354,$01 #REGe=#REGa.
+  $B34F,$02 Jump to #R$B364 if #REGc is zero.
+  $B351,$04 #REGe+=#N$20.
   $B355,$02 Jump to #R$B35B if {} is lower.
-  $B357,$01 #REGa=#REGd.
-  $B358,$02 #REGa-=#N$08.
-  $B35A,$01 #REGd=#REGa.
+  $B357,$04 #REGd-=#N$08.
   $B35B,$01 Restore #REGhl from the stack.
   $B35C,$01 #REGa=#REGc.
-  $B35D,$03 #REGbc=#N($0040,$04,$04).
-  $B360,$01 #REGhl+=#REGbc.
+  $B35D,$04 #REGhl+=#N($0040,$04,$04).
   $B361,$01 #REGc=#REGa.
   $B362,$02 Jump to #R$B33D.
   $B364,$04 Restore #REGhl, #REGhl, #REGde and #REGbc from the stack.
@@ -1374,24 +1399,23 @@ c $B322
   $B369,$02 Increment #REGl by two.
   $B36B,$02 Decrease counter by one and loop back to #R$B33A until counter is zero.
   $B36D,$01 Return.
-
-c $B36E
-  $B36E,$01 #REGa=#REGd.
-  $B36F,$02 #REGa+=#N$08.
-  $B371,$01 #REGd=#REGa.
+N $B36E
+  $B36E,$04 #REGd+=#N$08.
   $B372,$02 Jump to #R$B34E.
 
 c $B374
-  $B374,$03 #REGl=(#REGix+#N$05).
-  $B377,$03 #REGa=(#REGix+#N$06).
+  $B374,$03 #REGl=*#REGix+#N$05.
+  $B377,$03 #REGa=*#REGix+#N$06.
   $B37A,$02,b$01 Keep only bits 0-1.
   $B37C,$02,b$01 Set bits 3-5.
   $B37E,$01 #REGh=#REGa.
   $B37F,$01 #REGhl+=#REGhl.
-  $B380,$03 #REGe=(#REGix+#N$01).
-  $B383,$03 #REGd=(#REGix+#N$02).
-  $B386,$03 #REGc=(#REGix+#N$03).
-  $B389,$03 #REGb=(#REGix+#N$04).
+  $B380,$03 #REGe=*#REGix+#N$01.
+  $B383,$03 #REGd=*#REGix+#N$02.
+  $B386,$03 #REGc=*#REGix+#N$03.
+  $B389,$03 #REGb=*#REGix+#N$04.
+
+@ $B38C label=Copier
   $B38C,$04 Stash #REGbc, #REGde, #REGhl and #REGhl on the stack.
   $B390,$01 #REGb=*#REGhl.
   $B391,$01 Increment #REGhl by one.
@@ -1406,13 +1430,9 @@ c $B374
   $B39C,$02 Decrease counter by one and loop back to #R$B398 until counter is zero.
   $B39E,$01 Decrease #REGc by one.
   $B39F,$02 Jump to #R$B3B4 if {} is zero.
-  $B3A1,$01 #REGa=#REGe.
-  $B3A2,$02 #REGa+=#N$20.
-  $B3A4,$01 #REGe=#REGa.
+  $B3A1,$04 #REGe+=#N$20.
   $B3A5,$02 Jump to #R$B3AB if {} is lower.
-  $B3A7,$01 #REGa=#REGd.
-  $B3A8,$02 #REGa-=#N$08.
-  $B3AA,$01 #REGd=#REGa.
+  $B3A7,$04 #REGd-=#N$08.
   $B3AB,$01 Restore #REGhl from the stack.
   $B3AC,$01 #REGa=#REGc.
   $B3AD,$03 #REGbc=#N($0040,$04,$04).
@@ -1429,15 +1449,15 @@ c $B3BE
   $B3BE,$04 #REGix=#R$C2EE.
   $B3C2,$02 #REGb=#N$08.
   $B3C4,$01 Stash #REGbc on the stack.
-  $B3C5,$03 #REGa=(#REGix+#N$00).
+  $B3C5,$03 #REGa=*#REGix+#N$00.
   $B3C8,$03 Compare #REGa with *#REGix+#N$0B.
   $B3CB,$02 Jump to #R$B3E7 if {} is higher.
   $B3CD,$03 Call #R$C057.
-  $B3D0,$03 #REGl=(#REGix+#N$05).
-  $B3D3,$03 #REGh=(#REGix+#N$06).
+  $B3D0,$03 #REGl=*#REGix+#N$05.
+  $B3D3,$03 #REGh=*#REGix+#N$06.
   $B3D6,$02 Set bit 5 of #REGh.
   $B3D8,$03 #REGbc=#N($001F,$04,$04).
-  $B3DB,$03 #REGa=(#REGix+#N$03).
+  $B3DB,$03 #REGa=*#REGix+#N$03.
   $B3DE,$02 Set bit 6 of *#REGhl.
   $B3E0,$01 Increment #REGl by one.
   $B3E1,$02 Set bit 6 of *#REGhl.
@@ -1454,7 +1474,7 @@ c $B3F0
   $B3F0,$04 #REGix=#R$C293.
   $B3F4,$02 #REGb=#N$07.
   $B3F6,$01 Stash #REGbc on the stack.
-  $B3F7,$03 #REGa=(#REGix+#N$00).
+  $B3F7,$03 #REGa=*#REGix+#N$00.
   $B3FA,$03 Compare #REGa with *#REGix+#N$0B.
   $B3FD,$03 Call #R$B409 is lower.
   $B400,$03 #REGbc=#N($000D,$04,$04).
@@ -1501,13 +1521,13 @@ c $B44A
   $B468,$01 Return.
 
 c $B469
-  $B469,$03 #REGe=(#REGix+#N$08).
-  $B46C,$03 #REGd=(#REGix+#N$09).
-  $B46F,$03 #REGl=(#REGix+#N$0E).
-  $B472,$03 #REGh=(#REGix+#N$0F).
-  $B475,$03 #REGc=(#REGix+#N$0A).
+  $B469,$03 #REGe=*#REGix+#N$08.
+  $B46C,$03 #REGd=*#REGix+#N$09.
+  $B46F,$03 #REGl=*#REGix+#N$0E.
+  $B472,$03 #REGh=*#REGix+#N$0F.
+  $B475,$03 #REGc=*#REGix+#N$0A.
   $B478,$01 Decrease #REGc by one.
-  $B479,$03 #REGb=(#REGix+#N$0B).
+  $B479,$03 #REGb=*#REGix+#N$0B.
   $B47C,$03 Stash #REGbc, #REGde and #REGhl on the stack.
   $B47F,$02 #REGb=#N$08.
   $B481,$01 #REGa=*#REGde.
@@ -1533,24 +1553,24 @@ c $B469
   $B4A0,$02 Jump to #R$B47F.
   $B4A2,$01 Restore #REGhl from the stack.
   $B4A3,$02 #REGd=#N$00.
-  $B4A5,$03 #REGe=(#REGix+#N$16).
+  $B4A5,$03 #REGe=*#REGix+#N$16.
   $B4A8,$01 #REGhl+=#REGde.
   $B4A9,$01 Restore #REGde from the stack.
   $B4AA,$01 Increment #REGe by one.
   $B4AB,$01 Restore #REGbc from the stack.
   $B4AC,$02 Decrease counter by one and loop back to #R$B47C until counter is zero.
-  $B4AE,$03 #REGb=(#REGix+#N$0B).
+  $B4AE,$03 #REGb=*#REGix+#N$0B.
   $B4B1,$04 Shift *#REGix+#N$17 right.
   $B4B5,$02 Decrease counter by one and loop back to #R$B4B1 until counter is zero.
   $B4B7,$01 Return.
 
 c $B4B8
-  $B4B8,$03 #REGb=(#REGix+#N$0B).
-  $B4BB,$03 #REGl=(#REGix+#N$0C).
-  $B4BE,$03 #REGh=(#REGix+#N$0D).
+  $B4B8,$03 #REGb=*#REGix+#N$0B.
+  $B4BB,$03 #REGl=*#REGix+#N$0C.
+  $B4BE,$03 #REGh=*#REGix+#N$0D.
   $B4C1,$03 #REGde=#N($0020,$04,$04).
   $B4C4,$01 Stash #REGhl on the stack.
-  $B4C5,$03 #REGc=(#REGix+#N$0A).
+  $B4C5,$03 #REGc=*#REGix+#N$0A.
   $B4C8,$01 Decrease #REGc by one.
   $B4C9,$01 #REGa=*#REGhl.
   $B4CA,$02,b$01 Keep only bits 3-6.
@@ -1574,7 +1594,7 @@ c $B4B8
   $B4EE,$01 Restore #REGhl from the stack.
   $B4EF,$01 Increment #REGl by one.
   $B4F0,$02 Decrease counter by one and loop back to #R$B4C4 until counter is zero.
-  $B4F2,$03 #REGb=(#REGix+#N$0B).
+  $B4F2,$03 #REGb=*#REGix+#N$0B.
   $B4F5,$04 Rotate *#REGix+#N$17 right (with carry).
   $B4F9,$02 Decrease counter by one and loop back to #R$B4F5 until counter is zero.
   $B4FB,$01 Return.
@@ -1585,8 +1605,8 @@ c $B4B8
   $B508,$03 #REGa=*#R$C276.
   $B50B,$02 #REGa-=#N$0C.
   $B50D,$03 #REGa=#R$C276.
-  $B510,$03 #REGl=(#REGix+#N$10).
-  $B513,$03 #REGh=(#REGix+#N$11).
+  $B510,$03 #REGl=*#REGix+#N$10.
+  $B513,$03 #REGh=*#REGix+#N$11.
   $B516,$03 #REGde=#R$FE80.
   $B519,$01 #REGhl+=#REGde.
   $B51A,$03 Write #REGl to *#REGix+#N$10.
@@ -1597,7 +1617,7 @@ c $B4B8
   $B527,$04 #REGix=#R$C2EE.
   $B52B,$02 #REGb=#N$08.
   $B52D,$03 #REGde=#N($000D,$04,$04).
-  $B530,$03 #REGa=(#REGix+#N$00).
+  $B530,$03 #REGa=*#REGix+#N$00.
   $B533,$02 #REGa+=#N$0C.
   $B535,$03 Write #REGa to *#REGix+#N$00.
   $B538,$02 #REGix+=#REGde.
@@ -1606,7 +1626,7 @@ c $B4B8
   $B540,$02 #REGb=#N$04.
   $B542,$03 #REGhl=#R$C38C.
   $B545,$03 #REGde=#N($000D,$04,$04).
-  $B548,$03 #REGa=(#REGix+#N$00).
+  $B548,$03 #REGa=*#REGix+#N$00.
   $B54B,$02 #REGa+=#N$0C.
   $B54D,$03 Jump to #R$B557 if #REGa is higher than *#REGhl.
   $B550,$04 Jump to #R$B557 if #REGa is lower than #N$20.
@@ -1616,7 +1636,7 @@ c $B4B8
   $B55A,$02 #REGix+=#REGde.
   $B55C,$02 Decrease counter by one and loop back to #R$B548 until counter is zero.
   $B55E,$02 #REGb=#N$03.
-  $B560,$03 #REGa=(#REGix+#N$00).
+  $B560,$03 #REGa=*#REGix+#N$00.
   $B563,$02 #REGa+=#N$0C.
   $B565,$03 Write #REGa to *#REGix+#N$00.
   $B568,$02 #REGix+=#REGde.
@@ -1644,8 +1664,8 @@ c $B591
   $B59F,$03 #REGa=*#R$C276.
   $B5A2,$02 #REGa+=#N$0C.
   $B5A4,$03 Write #REGa back to *#R$C276.
-  $B5A7,$03 #REGl=(#REGix+#N$10).
-  $B5AA,$03 #REGh=(#REGix+#N$11).
+  $B5A7,$03 #REGl=*#REGix+#N$10.
+  $B5AA,$03 #REGh=*#REGix+#N$11.
   $B5AD,$03 #REGde=#N($0180,$04,$04).
   $B5B0,$01 #REGhl+=#REGde.
   $B5B1,$03 Write #REGl to *#REGix+#N$10.
@@ -1656,7 +1676,7 @@ c $B591
   $B5BE,$04 #REGix=#R$C2EE.
   $B5C2,$02 #REGb=#N$08 (counter).
   $B5C4,$03 #REGde=#N($000D,$04,$04).
-  $B5C7,$03 #REGa=(#REGix+#N$00).
+  $B5C7,$03 #REGa=*#REGix+#N$00.
   $B5CA,$02 #REGa-=#N$0C.
   $B5CC,$03 Write #REGa to *#REGix+#N$00.
   $B5CF,$02 #REGix+=#REGde.
@@ -1665,7 +1685,7 @@ c $B591
   $B5D7,$02 #REGb=#N$04.
   $B5D9,$03 #REGde=#N($000D,$04,$04).
   $B5DC,$03 #REGhl=#R$C38C.
-  $B5DF,$03 #REGa=(#REGix+#N$00).
+  $B5DF,$03 #REGa=*#REGix+#N$00.
   $B5E2,$02 #REGa-=#N$0C.
   $B5E4,$03 Jump to #R$B5EE if #REGa is higher than *#REGhl.
   $B5E7,$04 Jump to #R$B5EE if #REGa is lower than #N$20.
@@ -1697,12 +1717,12 @@ c $B591
   $B628,$02 #REGix+=#REGbc.
   $B62A,$03 Call #R$BD27.
   $B62D,$03 #REGhl=#R$7080.
-  $B630,$03 #REGbc=#N($2014,$04,$04).
-  $B633,$03 #REGde=#N($4040,$04,$04).
+  $B630,$03 #REGbc=#N$2014.
+  $B633,$03 #REGde=#N$4040 (screen buffer location).
   $B636,$03 Call #R$B38C.
   $B639,$03 #REGhl=#R$7840.
-  $B63C,$04 #REGix=#R$5840.
-  $B640,$03 #REGbc=#N($1420,$04,$04).
+  $B63C,$04 #REGix=#R$5840 (attribute buffer location).
+  $B640,$03 #REGbc=#N$1420.
   $B643,$03 Call #R$B2D1.
   $B646,$03 Call #R$B416.
   $B649,$03 Jump to #R$B0BB.
@@ -1854,11 +1874,11 @@ c $B724
 
 c $BADD
   $BADD,$04 #REGix=#R$C36E.
-  $BAE1,$03 #REGb=(#REGix+#N$0A).
-  $BAE4,$03 #REGc=(#REGix+#N$0B).
+  $BAE1,$03 #REGb=*#REGix+#N$0A.
+  $BAE4,$03 #REGc=*#REGix+#N$0B.
   $BAE7,$03 #REGde=#N($0020,$04,$04).
-  $BAEA,$03 #REGl=(#REGix+#N$0C).
-  $BAED,$03 #REGh=(#REGix+#N$0D).
+  $BAEA,$03 #REGl=*#REGix+#N$0C.
+  $BAED,$03 #REGh=*#REGix+#N$0D.
   $BAF0,$02 Set bit 5 of #REGh.
   $BAF2,$01 #REGa=#REGl.
   $BAF3,$02,b$01 Keep only bits 0-4.
@@ -1874,9 +1894,9 @@ c $BADD
   $BB06,$01 Increment #REGhl by one.
   $BB07,$01 Decrease #REGc by one.
   $BB08,$02 Jump to #R$BAF2 if {} is not zero.
-  $BB0A,$03 #REGc=(#REGix+#N$0B).
-  $BB0D,$03 #REGl=(#REGix+#N$0C).
-  $BB10,$03 #REGa=(#REGix+#N$0D).
+  $BB0A,$03 #REGc=*#REGix+#N$0B.
+  $BB0D,$03 #REGl=*#REGix+#N$0C.
+  $BB10,$03 #REGa=*#REGix+#N$0D.
   $BB13,$03 #REGde=#N($0040,$04,$04).
   $BB16,$02,b$01 Keep only bits 0-1.
   $BB18,$02,b$01 Set bits 3-5.
@@ -1946,9 +1966,9 @@ c $BCB7
   $BCE9,$03 Call #R$BCED if not zero.
   $BCEC,$01 Return.
 
-  $BCED,$03 #REGl=(#REGix+#N$22).
+  $BCED,$03 #REGl=*#REGix+#N$22.
   $BCF0,$01 #REGe=#REGl.
-  $BCF1,$03 #REGa=(#REGix+#N$23).
+  $BCF1,$03 #REGa=*#REGix+#N$23.
   $BCF4,$03 Return if #REGa is #N$00.
   $BCF7,$01 #REGc=#REGa.
   $BCF8,$02,b$01 Keep only bits 0-1.
@@ -1979,13 +1999,11 @@ c $BD0D
   $BD23,$01 Return.
   $BD24,$03 Call #R$C023.
   $BD27,$03 #REGa=*#REGix+#N$00.
-  $BD2A,$02 Compare #REGa with #N$17.
-  $BD2C,$01 Return is {} is higher.
+  $BD2A,$03 Return if #REGa is higher than #N$17.
   $BD2D,$03 Call #R$C13E.
   $BD30,$03 #REGde=#N($0040,$04,$04).
   $BD33,$03 #REGb=*#REGix+#N$03.
-  $BD36,$04 Test bit 0 of *#REGix+#N$07.
-  $BD3A,$02 Jump to #R$BD42 if {} is not zero.
+  $BD36,$06 Jump to #R$BD42 if bit 0 of *#REGix+#N$07 is not zero.
   $BD3C,$02 Reset bit 6 of *#REGhl.
   $BD3E,$01 #REGhl+=#REGde.
   $BD3F,$02 Decrease counter by one and loop back to #R$BD3C until counter is zero.
@@ -2014,10 +2032,8 @@ c $BF50
   $BF76,$03 Return if bit 7 of *#REGhl is zero.
   $BF79,$01 #REGa=#REGl.
   $BF7A,$02,b$01 Keep only bits 0-4.
-  $BF7C,$02 Compare #REGa with #N$0C.
-  $BF7E,$02 Jump to #R$BF8E if {} is lower.
-  $BF80,$02 Compare #REGa with #N$14.
-  $BF82,$02 Jump to #R$BF8E if {} is higher.
+  $BF7C,$04 Jump to #R$BF8E if #REGa is lower than #N$0C.
+  $BF80,$04 Jump to #R$BF8E if #REGa is higher than #N$14.
   $BF84,$01 Restore #REGhl from the stack.
   $BF85,$03 #REGhl=#R$B008.
   $BF88,$02 Set bit 0 of *#REGhl.
@@ -2097,6 +2113,18 @@ c $BFEC
   $C022,$01 Return.
 
 c $C023
+
+c $C13E
+  $C13E,$03 #REGh=*#REGix+#N$06.
+  $C141,$03 #REGl=*#REGix+#N$05.
+  $C144,$01 #REGhl*=#N$02.
+  $C145,$02 #REGa=#N$07.
+  $C147,$01 Merge the bits from #REGh.
+  $C148,$02,b$01 Set bits 4-6.
+  $C14A,$01 #REGh=#REGa.
+  $C14B,$01 Return.
+
+c $C14C
 B $C1E5
 
 t $C1EF Messaging: Bonus
@@ -2298,12 +2326,12 @@ N $CB5D There's no time left, signify the game is over.
 c $CB65
   $CB65,$02 Stash #REGix on the stack.
   $CB67,$04 #REGix=#R$C272.
-  $CB6B,$03 #REGa=(#REGix+#N$00).
+  $CB6B,$03 #REGa=*#REGix+#N$00.
   $CB6E,$01 #REGa+=*#REGhl.
   $CB6F,$01 DAA.
   $CB70,$03 Write #REGa to *#REGix+#N$00.
   $CB73,$01 Increment #REGhl by one.
-  $CB74,$03 #REGa=(#REGix+#N$01).
+  $CB74,$03 #REGa=*#REGix+#N$01.
   $CB77,$01 #REGa+=*#REGhl.
   $CB78,$01 DAA.
   $CB79,$03 Write #REGa to *#REGix+#N$01.
