@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Trashman: Routine at 48278</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="47987.html">47987</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#48278">Map</a></td>
+<td class="next">
+Next: <a href="48311.html">48311</a>
+</td>
+</tr>
+</table>
+<div class="description">48278: Handler: Bonus Messaging</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routine at <a href="47987.html">47987</a>.
+</div>
+</div>
+<table class="input">
+<tr class="asm-input-header">
+<th colspan="2">Input</th>
+</tr>
+<tr>
+<td class="register">HL</td>
+<td class="register-desc">Pointer to bonus messaging</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="48278"></span>
+<div class="comments">
+<div class="paragraph">
+Fetch the message string from *<span class="register">HL</span>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">Handler_BonusMessaging</td>
+<td class="address-2"><span id="48278"></span>48278</td>
+<td class="instruction">LD E,(HL)</td>
+<td class="comment-1" rowspan="1"><span class="register">E</span>=*<span class="register">HL</span>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="48279"></span>48279</td>
+<td class="instruction">INC HL</td>
+<td class="comment-1" rowspan="1">Increment <span class="register">HL</span> by one.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="48280"></span>48280</td>
+<td class="instruction">LD D,(HL)</td>
+<td class="comment-1" rowspan="1"><span class="register">D</span>=*<span class="register">HL</span>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="48281"></span>48281</td>
+<td class="instruction">INC HL</td>
+<td class="comment-1" rowspan="1">Increment <span class="register">HL</span> by one.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="48282"></span>48282</td>
+<td class="instruction">LD (50058),HL</td>
+<td class="comment-1" rowspan="1">Write <span class="register">HL</span> to *<a href="50058.html">BonusMessaging</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="48285"></span>48285</td>
+<td class="instruction">EX DE,HL</td>
+<td class="comment-1" rowspan="1">Exchange the <span class="register">DE</span> register with the shadow <span class="register">HL</span> register.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="48286"></span>
+<div class="comments">
+<div class="paragraph">
+This entry point is used by the routines at <a href="46264.html">46264</a>, <a href="47987.html">47987</a>, <a href="48521.html">48521</a> and <a href="48976.html">48976</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">Print_BonusMessaging</td>
+<td class="address-2"><span id="48286"></span>48286</td>
+<td class="instruction">LD DE,20672</td>
+<td class="comment-1" rowspan="1"><span class="register">DE</span>=20672 (screen buffer location).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="48289"></span>48289</td>
+<td class="instruction">LD A,0</td>
+<td class="comment-1" rowspan="2">Write 0 to *<a href="50056.html">50056</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="48291"></span>48291</td>
+<td class="instruction">LD (50056),A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="48294"></span>48294</td>
+<td class="instruction">CALL <a href="45185.html">PrintString</a></td>
+<td class="comment-1" rowspan="1">Call <a href="45185.html">PrintString</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="48297"></span>48297</td>
+<td class="instruction">EX DE,HL</td>
+<td class="comment-1" rowspan="1">Switch the <span class="register">DE</span> and <span class="register">HL</span> registers back to normal.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="48298"></span>
+<div class="comments">
+<div class="paragraph">
+The messaging appears right at the bottom of the screen. This code blanks out the rest of the two lines to overwrite any existing messaging.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">Print_BonusMessaging_Blank</td>
+<td class="address-2"><span id="48298"></span>48298</td>
+<td class="instruction">LD B,8</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=8 (eight lines in a character block).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="48300"></span>48300</td>
+<td class="instruction">PUSH HL</td>
+<td class="comment-1" rowspan="1">Remember where we are on the screen.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="48301"></span>
+<div class="comments">
+<div class="paragraph">
+Clearing the character block.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">Print_BonusMessaging_Loop</td>
+<td class="address-2"><span id="48301"></span>48301</td>
+<td class="instruction">LD (HL),0</td>
+<td class="comment-1" rowspan="1">Write 0 to *<span class="register">HL</span>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="48303"></span>48303</td>
+<td class="instruction">INC H</td>
+<td class="comment-1" rowspan="1">Move down one line.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="48304"></span>48304</td>
+<td class="instruction">DJNZ <a href="48278.html#48301">Print_BonusMessaging_Loop</a></td>
+<td class="comment-1" rowspan="1">Decrease counter by one and loop back to <a href="48278.html#48301">Print_BonusMessaging_Loop</a> until counter is zero.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="48306"></span>48306</td>
+<td class="instruction">POP HL</td>
+<td class="comment-1" rowspan="1">Restore the screen location where we started for this pass (the top of this character block).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="48307"></span>48307</td>
+<td class="instruction">INC L</td>
+<td class="comment-1" rowspan="1">Move right one character block.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="48308"></span>
+<div class="comments">
+<div class="paragraph">
+Keep going until the end of the screen is reached.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="48308"></span>48308</td>
+<td class="instruction">JR NZ,<a href="48278.html#48298">Print_BonusMessaging_Blank</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="48278.html#48298">Print_BonusMessaging_Blank</a> if <span class="register">L</span> is not zero.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="48310"></span>48310</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="47987.html">47987</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#48278">Map</a></td>
+<td class="next">
+Next: <a href="48311.html">48311</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1984 New Generation Software; 2023 ArcadeGeek LTD.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.0.</div>
+<div class="repository">Link to <a href="https://github.com/pobtastic/trashman/">Source code</a>.</div>
+<div><a href="../../asm/BC96.html">Switch to hexadecimal</a>.</div>
+</footer>
+</body>
+</html>

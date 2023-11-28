@@ -97,6 +97,16 @@ Is the player out of lives?
 <td class="comment-1" rowspan="1"><span class="register">A</span>=*<span class="register">HL</span>.</td>
 </tr>
 <tr>
+<td class="routine-comment" colspan="5">
+<span id="a622"></span>
+<div class="comments">
+<div class="paragraph">
+This is why <a href="A97A.html#a97d">A97D</a> can't be altered on its own to set higher staring lives.
+</div>
+</div>
+</td>
+</tr>
+<tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="a622"></span>A622</td>
 <td class="instruction">AND %00000011</td>
@@ -123,8 +133,8 @@ Is the player out of lives?
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="a62c"></span>A62C</td>
-<td class="instruction">JR <a href="A590.html#a5ed">GameEntryPoint_2</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="A590.html#a5ed">GameEntryPoint_2</a>.</td>
+<td class="instruction">JR <a href="A590.html#a5ed">SwitchPlayers</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="A590.html#a5ed">SwitchPlayers</a>.</td>
 </tr>
 </table>
 <table class="asm-navigation">

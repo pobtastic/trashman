@@ -26,7 +26,7 @@ gtag('config', 'G-75RERFCHBG');
 <table class="asm-navigation">
 <tr>
 <td class="prev">
-Prev: <a href="48456.html">48456</a>
+Prev: <a href="48521.html">48521</a>
 </td>
 <td class="up">Up: <a href="../maps/all.html#48976">Map</a></td>
 <td class="next">
@@ -49,6 +49,16 @@ Used by the routine at <a href="45217.html">StartGame</a>.
 <td class="address-2"><span id="48976"></span>48976</td>
 <td class="instruction">LD IX,50030</td>
 <td class="comment-1" rowspan="1"><span class="register">IX</span>=<a href="50030.html">50030</a>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="48980"></span>
+<div class="comments">
+<div class="paragraph">
+Check for Game Over "reasons" (see <a href="../reference/pokes.html#immunity">Immunity</a>).
+</div>
+</div>
+</td>
 </tr>
 <tr>
 <td class="address-1"><span id="48980"></span>48980</td>
@@ -195,17 +205,16 @@ Used by the routine at <a href="45217.html">StartGame</a>.
 <tr>
 <td class="address-2"><span id="49038"></span>49038</td>
 <td class="instruction">LD HL,49808</td>
-<td class="comment-1" rowspan="1"><span class="register">HL</span>=<a href="49808.html">49808</a>.</td>
+<td class="comment-1" rowspan="2">Write 80 to <a href="49808.html">49808</a>.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="49041"></span>49041</td>
 <td class="instruction">LD (HL),80</td>
-<td class="comment-1" rowspan="1">Write 80 to *<span class="register">HL</span>.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="49043"></span>49043</td>
 <td class="instruction">LD HL,52285</td>
-<td class="comment-1" rowspan="1"><span class="register">HL</span>=<a href="52285.html">52285</a>.</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>=<a href="52124.html#52285">52285</a>.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="49046"></span>49046</td>
@@ -219,8 +228,8 @@ Used by the routine at <a href="45217.html">StartGame</a>.
 </tr>
 <tr>
 <td class="address-1"><span id="49051"></span>49051</td>
-<td class="instruction">CALL <a href="47987.html#48286">48286</a></td>
-<td class="comment-1" rowspan="1">Call <a href="47987.html#48286">48286</a>.</td>
+<td class="instruction">CALL <a href="48278.html#48286">Print_BonusMessaging</a></td>
+<td class="comment-1" rowspan="1">Call <a href="48278.html#48286">Print_BonusMessaging</a>.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="49054"></span>49054</td>
@@ -287,7 +296,7 @@ Used by the routine at <a href="45217.html">StartGame</a>.
 <tr>
 <td class="address-1"><span id="49078"></span>49078</td>
 <td class="instruction">LD HL,52285</td>
-<td class="comment-1" rowspan="1"><span class="register">HL</span>=<a href="52285.html">52285</a>.</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>=<a href="52124.html#52285">52285</a>.</td>
 </tr>
 <tr>
 <td class="address-2"><span id="49081"></span>49081</td>
@@ -437,7 +446,7 @@ Used by the routine at <a href="45217.html">StartGame</a>.
 <table class="asm-navigation">
 <tr>
 <td class="prev">
-Prev: <a href="48456.html">48456</a>
+Prev: <a href="48521.html">48521</a>
 </td>
 <td class="up">Up: <a href="../maps/all.html#48976">Map</a></td>
 <td class="next">

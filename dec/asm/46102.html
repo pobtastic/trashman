@@ -53,22 +53,20 @@ Used by the routines at <a href="45217.html">StartGame</a>, <a href="46481.html"
 <tr>
 <td class="address-1"><span id="46106"></span>46106</td>
 <td class="instruction">BIT 0,(IX+24)</td>
-<td class="comment-1" rowspan="1">Test bit 0 of *<span class="register">IX</span>+24.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="46102.html#46117">46117</a> if bit 0 of *<span class="register">IX</span>+24 is zero.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="46110"></span>46110</td>
 <td class="instruction">JR Z,<a href="46102.html#46117">46117</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="46102.html#46117">46117</a> if {} is zero.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="46112"></span>46112</td>
 <td class="instruction">BIT 7,(IX+24)</td>
-<td class="comment-1" rowspan="1">Test bit 7 of *<span class="register">IX</span>+24.</td>
+<td class="comment-1" rowspan="2">Return if bit 7 of *<span class="register">IX</span>+24 is not zero.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="46116"></span>46116</td>
 <td class="instruction">RET NZ</td>
-<td class="comment-1" rowspan="1">Return if {} is not zero.</td>
 </tr>
 <tr>
 <td class="address-2"><span id="46117"></span>46117</td>
@@ -93,12 +91,11 @@ Used by the routines at <a href="45217.html">StartGame</a>, <a href="46481.html"
 <tr>
 <td class="address-1"><span id="46131"></span>46131</td>
 <td class="instruction">BIT 1,(IX+23)</td>
-<td class="comment-1" rowspan="1">Test bit 1 of *<span class="register">IX</span>+23.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="46102.html#46144">46144</a> if bit 1 of *<span class="register">IX</span>+23 is not zero.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="46135"></span>46135</td>
 <td class="instruction">JR NZ,<a href="46102.html#46144">46144</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="46102.html#46144">46144</a> if {} is not zero.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="46137"></span>46137</td>
@@ -118,12 +115,11 @@ Used by the routines at <a href="45217.html">StartGame</a>, <a href="46481.html"
 <tr>
 <td class="address-2"><span id="46144"></span>46144</td>
 <td class="instruction">BIT 0,(IX+24)</td>
-<td class="comment-1" rowspan="1">Test bit 0 of *<span class="register">IX</span>+24.</td>
+<td class="comment-1" rowspan="2">Return if bit 0 of *<span class="register">IX</span>+24 is zero.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="46148"></span>46148</td>
 <td class="instruction">RET Z</td>
-<td class="comment-1" rowspan="1">Return if {} is zero.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="46149"></span>46149</td>

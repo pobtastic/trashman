@@ -46,7 +46,7 @@ Next: <a href="A61D.html">A61D</a>
 <td class="asm-label">GameEntryPoint</td>
 <td class="address-2"><span id="a590"></span>A590</td>
 <td class="instruction">LD A,$00</td>
-<td class="comment-1" rowspan="2">Write 00 to *<a href="CC3D.html">CC3D</a>.</td>
+<td class="comment-1" rowspan="2">Write 00 to *<a href="CB9C.html#cc3d">CC3D</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -105,7 +105,7 @@ This entry point is used by the routines at <a href="A62E.html">Handler_Fired</a
 </td>
 </tr>
 <tr>
-<td class="asm-label">GameEntryPoint_0</td>
+<td class="asm-label">Game_Loop</td>
 <td class="address-2"><span id="a5a3"></span>A5A3</td>
 <td class="instruction">CALL <a href="A740.html">BlankMiddleAttributeBuffer</a></td>
 <td class="comment-1" rowspan="1">Call <a href="A740.html">BlankMiddleAttributeBuffer</a>.</td>
@@ -163,7 +163,7 @@ This entry point is used by the routine at <a href="A62E.html">Handler_Fired</a>
 </td>
 </tr>
 <tr>
-<td class="asm-label">GameEntryPoint_1</td>
+<td class="asm-label">NewLevel</td>
 <td class="address-2"><span id="a5bb"></span>A5BB</td>
 <td class="instruction">CALL <a href="A944.html">InitialiseStreet</a></td>
 <td class="comment-1" rowspan="1">Call <a href="A944.html">InitialiseStreet</a>.</td>
@@ -226,6 +226,16 @@ The game has ended ... check why.
 <td class="comment-1" rowspan="1">Call <a href="CB22.html">AddPointsToScore</a>.</td>
 </tr>
 <tr>
+<td class="routine-comment" colspan="5">
+<span id="a5d4"></span>
+<div class="comments">
+<div class="paragraph">
+Check other reasons why the game ended  (see <a href="../reference/pokes.html#immunity">Immunity</a>).
+</div>
+</div>
+</td>
+</tr>
+<tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="a5d4"></span>A5D4</td>
 <td class="instruction">LD A,($B008)</td>
@@ -235,13 +245,12 @@ The game has ended ... check why.
 <td class="asm-label"></td>
 <td class="address-1"><span id="a5d7"></span>A5D7</td>
 <td class="instruction">BIT 0,A</td>
-<td class="comment-1" rowspan="1"></td>
+<td class="comment-1" rowspan="2">Jump to <a href="A62E.html#a667">Handler_Fired_3</a> if bit 0 is not zero.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="a5d9"></span>A5D9</td>
 <td class="instruction">JP NZ,<a href="A62E.html#a667">Handler_Fired_3</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="A62E.html#a667">Handler_Fired_3</a> if is not zero.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -250,28 +259,46 @@ The game has ended ... check why.
 <td class="comment-1" rowspan="1"><span class="register">HL</span>=*<a href="AB7E.html">ActivePlayer</a>.</td>
 </tr>
 <tr>
+<td class="routine-comment" colspan="5">
+<span id="a5df"></span>
+<div class="comments">
+<div class="paragraph">
+Point to the current players level.
+</div>
+</div>
+</td>
+</tr>
+<tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="a5df"></span>A5DF</td>
 <td class="instruction">INC HL</td>
 <td class="comment-1" rowspan="1">Increment <span class="register">HL</span> by one.</td>
 </tr>
 <tr>
+<td class="routine-comment" colspan="5">
+<span id="a5e0"></span>
+<div class="comments">
+<div class="paragraph">
+Has the player completed the game?
+</div>
+</div>
+</td>
+</tr>
+<tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="a5e0"></span>A5E0</td>
 <td class="instruction">LD A,$0C</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=0C.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="A590.html#a5f7">Game_Complete</a> if *<span class="register">HL</span> equals 0C.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="a5e2"></span>A5E2</td>
 <td class="instruction">CP (HL)</td>
-<td class="comment-1" rowspan="1"></td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="a5e3"></span>A5E3</td>
-<td class="instruction">JR Z,<a href="A590.html#a5f7">GameEntryPoint_3</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="A590.html#a5f7">GameEntryPoint_3</a> if is zero.</td>
+<td class="instruction">JR Z,<a href="A590.html#a5f7">Game_Complete</a></td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -307,28 +334,28 @@ This entry point is used by the routine at <a href="A61D.html">Handler_TimeOut</
 </td>
 </tr>
 <tr>
-<td class="asm-label">GameEntryPoint_2</td>
+<td class="asm-label">SwitchPlayers</td>
 <td class="address-2"><span id="a5ed"></span>A5ED</td>
-<td class="instruction">CALL <a href="A9D4.html">SwitchPlayers</a></td>
-<td class="comment-1" rowspan="1">Call <a href="A9D4.html">SwitchPlayers</a>.</td>
+<td class="instruction">CALL <a href="A9D4.html">Handler_SwitchPlayers</a></td>
+<td class="comment-1" rowspan="1">Call <a href="A9D4.html">Handler_SwitchPlayers</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="a5f0"></span>A5F0</td>
-<td class="instruction">JR C,<a href="A590.html#a5bb">GameEntryPoint_1</a></td>
-<td class="comment-1" rowspan="1"></td>
+<td class="instruction">JR C,<a href="A590.html#a5bb">NewLevel</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="A590.html#a5bb">NewLevel</a> if 2UP is active.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="a5f2"></span>A5F2</td>
-<td class="instruction">CALL <a href="A9D4.html">SwitchPlayers</a></td>
-<td class="comment-1" rowspan="1">Call <a href="A9D4.html">SwitchPlayers</a>.</td>
+<td class="instruction">CALL <a href="A9D4.html">Handler_SwitchPlayers</a></td>
+<td class="comment-1" rowspan="1">Call <a href="A9D4.html">Handler_SwitchPlayers</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="a5f5"></span>A5F5</td>
-<td class="instruction">JR <a href="A590.html#a5bb">GameEntryPoint_1</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="A590.html#a5bb">GameEntryPoint_1</a>.</td>
+<td class="instruction">JR <a href="A590.html#a5bb">NewLevel</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="A590.html#a5bb">NewLevel</a>.</td>
 </tr>
 <tr>
 <td class="routine-comment" colspan="5">
@@ -341,7 +368,7 @@ Who is in play, is it 1UP or 2UP?
 </td>
 </tr>
 <tr>
-<td class="asm-label">GameEntryPoint_3</td>
+<td class="asm-label">Game_Complete</td>
 <td class="address-2"><span id="a5f7"></span>A5F7</td>
 <td class="instruction">LD HL,$AB8A</td>
 <td class="comment-1" rowspan="1"><span class="register">HL</span>=<a href="AB8A.html">Game_Flags</a>.</td>
@@ -350,13 +377,12 @@ Who is in play, is it 1UP or 2UP?
 <td class="asm-label"></td>
 <td class="address-1"><span id="a5fa"></span>A5FA</td>
 <td class="instruction">BIT 4,(HL)</td>
-<td class="comment-1" rowspan="1">Test bit 4 of *<span class="register">HL</span>.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="A590.html#a602">NewLevel_2UP_CopyScore</a> if this is player two.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="a5fc"></span>A5FC</td>
-<td class="instruction">JR NZ,<a href="A590.html#a602">GameEntryPoint_4</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="A590.html#a602">GameEntryPoint_4</a> if this is player two.</td>
+<td class="instruction">JR NZ,<a href="A590.html#a602">NewLevel_2UP_CopyScore</a></td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -367,17 +393,17 @@ Who is in play, is it 1UP or 2UP?
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="a600"></span>A600</td>
-<td class="instruction">JR <a href="A590.html#a604">GameEntryPoint_5</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="A590.html#a604">GameEntryPoint_5</a>.</td>
+<td class="instruction">JR <a href="A590.html#a604">NewLevel_CopyScore</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="A590.html#a604">NewLevel_CopyScore</a>.</td>
 </tr>
 <tr>
-<td class="asm-label">GameEntryPoint_4</td>
+<td class="asm-label">NewLevel_2UP_CopyScore</td>
 <td class="address-2"><span id="a602"></span>A602</td>
 <td class="instruction">RES 7,(HL)</td>
 <td class="comment-1" rowspan="1">Reset bit 7 of *<span class="register">HL</span>.</td>
 </tr>
 <tr>
-<td class="asm-label">GameEntryPoint_5</td>
+<td class="asm-label">NewLevel_CopyScore</td>
 <td class="address-2"><span id="a604"></span>A604</td>
 <td class="instruction">CALL <a href="A99F.html#a9c5">CopyScore_ActiveScore</a></td>
 <td class="comment-1" rowspan="1">Call <a href="A99F.html#a9c5">CopyScore_ActiveScore</a>.</td>
@@ -415,20 +441,20 @@ Who is in play, is it 1UP or 2UP?
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="a616"></span>A616</td>
-<td class="instruction">CALL <a href="A9D4.html">SwitchPlayers</a></td>
-<td class="comment-1" rowspan="1">Call <a href="A9D4.html">SwitchPlayers</a>.</td>
+<td class="instruction">CALL <a href="A9D4.html">Handler_SwitchPlayers</a></td>
+<td class="comment-1" rowspan="1">Call <a href="A9D4.html">Handler_SwitchPlayers</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="a619"></span>A619</td>
-<td class="instruction">JR C,<a href="A590.html#a5bb">GameEntryPoint_1</a></td>
-<td class="comment-1" rowspan="1"></td>
+<td class="instruction">JR C,<a href="A590.html#a5bb">NewLevel</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="A590.html#a5bb">NewLevel</a> if 2UP is active.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="a61b"></span>A61B</td>
-<td class="instruction">JR <a href="A590.html#a5a3">GameEntryPoint_0</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="A590.html#a5a3">GameEntryPoint_0</a>.</td>
+<td class="instruction">JR <a href="A590.html#a5a3">Game_Loop</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="A590.html#a5a3">Game_Loop</a>.</td>
 </tr>
 </table>
 <table class="asm-navigation">

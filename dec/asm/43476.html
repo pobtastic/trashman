@@ -34,7 +34,7 @@ Next: <a href="43503.html">43503</a>
 </td>
 </tr>
 </table>
-<div class="description">43476: Switch Players?</div>
+<div class="description">43476: Switch Players</div>
 <table class="disassembly">
 <tr>
 <td class="routine-comment" colspan="5">
@@ -46,7 +46,7 @@ Used by the routines at <a href="42384.html">GameEntryPoint</a> and <a href="425
 </td>
 </tr>
 <tr>
-<td class="asm-label">SwitchPlayers</td>
+<td class="asm-label">Handler_SwitchPlayers</td>
 <td class="address-2"><span id="43476"></span>43476</td>
 <td class="instruction">LD A,(43914)</td>
 <td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="43914.html">Game_Flags</a>.</td>
@@ -93,12 +93,12 @@ Who is in play, is it 1UP or 2UP?
 <td class="asm-label"></td>
 <td class="address-1"><span id="43487"></span>43487</td>
 <td class="instruction">BIT 4,A</td>
-<td class="comment-1" rowspan="2">Jump to <a href="43476.html#43494">SwitchPlayers_Write</a> if bit 4 of <span class="register">A</span> is zero.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="43476.html#43494">Handler_SwitchPlayers_Write</a> if bit 4 of <span class="register">A</span> is zero.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="43489"></span>43489</td>
-<td class="instruction">JR Z,<a href="43476.html#43494">SwitchPlayers_Write</a></td>
+<td class="instruction">JR Z,<a href="43476.html#43494">Handler_SwitchPlayers_Write</a></td>
 </tr>
 <tr>
 <td class="routine-comment" colspan="5">
@@ -117,7 +117,7 @@ Else, use 2UP.
 <td class="comment-1" rowspan="1"><span class="register">HL</span>=<a href="43902.html#43909">2UP_Lives</a>.</td>
 </tr>
 <tr>
-<td class="asm-label">SwitchPlayers_Write</td>
+<td class="asm-label">Handler_SwitchPlayers_Write</td>
 <td class="address-2"><span id="43494"></span>43494</td>
 <td class="instruction">LD (43902),HL</td>
 <td class="comment-1" rowspan="1">Write <span class="register">HL</span> to *<a href="43902.html">ActivePlayer</a>.</td>

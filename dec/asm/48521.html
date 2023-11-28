@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Trashman: Routine at 48521</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="48456.html">48456</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#48521">Map</a></td>
+<td class="next">
+Next: <a href="48976.html">48976</a>
+</td>
+</tr>
+</table>
+<div class="description">48521: Routine at BD89</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routine at <a href="45217.html">StartGame</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="address-2"><span id="48521"></span>48521</td>
+<td class="instruction">LD IX,50006</td>
+<td class="comment-1" rowspan="1"><span class="register">IX</span>=<a href="49902.html#50006">50006</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48525"></span>48525</td>
+<td class="instruction">LD HL,(49783)</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>=*<a href="49783.html">49783</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48528"></span>48528</td>
+<td class="instruction">BIT 4,(IX+16)</td>
+<td class="comment-1" rowspan="1">Test bit 4 of *<span class="register">IX</span>+16.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48532"></span>48532</td>
+<td class="instruction">LD DE,33</td>
+<td class="comment-1" rowspan="1"><span class="register">DE</span>=0033.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48535"></span>48535</td>
+<td class="instruction">JR Z,<a href="48521.html#48540">48540</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="48521.html#48540">48540</a> if {} is zero.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48537"></span>48537</td>
+<td class="instruction">LD DE,45</td>
+<td class="comment-1" rowspan="1"><span class="register">DE</span>=0045.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="48540"></span>48540</td>
+<td class="instruction">ADD HL,DE</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>+=<span class="register">DE</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48541"></span>48541</td>
+<td class="instruction">BIT 5,(HL)</td>
+<td class="comment-1" rowspan="2">Return if bit 5 of *<span class="register">HL</span> is zero.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48543"></span>48543</td>
+<td class="instruction">RET Z</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48544"></span>48544</td>
+<td class="instruction">LD A,(HL)</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<span class="register">HL</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48545"></span>48545</td>
+<td class="instruction">LD HL,50013</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>=<a href="50013.html">50013</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48548"></span>48548</td>
+<td class="instruction">LD DE,50006</td>
+<td class="comment-1" rowspan="1"><span class="register">DE</span>=<a href="49902.html#50006">50006</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48551"></span>48551</td>
+<td class="instruction">LD BC,7</td>
+<td class="comment-1" rowspan="1"><span class="register">BC</span>=0007.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48554"></span>48554</td>
+<td class="instruction">LDIR</td>
+<td class="comment-1" rowspan="1">LDIR.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48556"></span>48556</td>
+<td class="instruction">LD HL,50055</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>=<a href="50055.html">50055</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48559"></span>48559</td>
+<td class="instruction">DEC (HL)</td>
+<td class="comment-1" rowspan="1">Decrease *<span class="register">HL</span> by one.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48560"></span>48560</td>
+<td class="instruction">RET NZ</td>
+<td class="comment-1" rowspan="1">Return if *<span class="register">HL</span> is not zero.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48561"></span>48561</td>
+<td class="instruction">LD (HL),6</td>
+<td class="comment-1" rowspan="1">Write 6 to *<span class="register">HL</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48563"></span>48563</td>
+<td class="instruction">BIT 0,A</td>
+<td class="comment-1" rowspan="2">Jump to <a href="48521.html#48572">48572</a> if bit 0 of <span class="register">A</span> is not zero.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48565"></span>48565</td>
+<td class="instruction">JR NZ,<a href="48521.html#48572">48572</a></td>
+</tr>
+<tr>
+<td class="address-1"><span id="48567"></span>48567</td>
+<td class="instruction">BIT 3,(IX+23)</td>
+<td class="comment-1" rowspan="2">Return if bit 3 of *<span class="register">IX</span>+23 is zero.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48571"></span>48571</td>
+<td class="instruction">RET Z</td>
+</tr>
+<tr>
+<td class="address-2"><span id="48572"></span>48572</td>
+<td class="instruction">SET 3,(IX+23)</td>
+<td class="comment-1" rowspan="1">Set bit 3 of *<span class="register">IX</span>+23.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48576"></span>48576</td>
+<td class="instruction">BIT 5,(IX+19)</td>
+<td class="comment-1" rowspan="2">Jump to <a href="48521.html#48589">48589</a> if bit 5 of *<span class="register">IX</span>+19 is zero.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48580"></span>48580</td>
+<td class="instruction">JR Z,<a href="48521.html#48589">48589</a></td>
+</tr>
+<tr>
+<td class="address-1"><span id="48582"></span>48582</td>
+<td class="instruction">RES 5,(IX+19)</td>
+<td class="comment-1" rowspan="1">Reset bit 5 of *<span class="register">IX</span>+19.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48586"></span>48586</td>
+<td class="instruction">JP <a href="46884.html#47270">47270</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="46884.html#47270">47270</a>.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="48589"></span>48589</td>
+<td class="instruction">LD A,(IX+40)</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<span class="register">IX</span>+40.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48592"></span>48592</td>
+<td class="instruction">AND %00011111</td>
+<td class="comment-1" rowspan="1">Keep only bits 0-4.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48594"></span>48594</td>
+<td class="instruction">BIT 4,(IX+40)</td>
+<td class="comment-1" rowspan="2">Jump to <a href="48521.html#48606">48606</a> if bit 4 of *<span class="register">IX</span>+40 is zero.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48598"></span>48598</td>
+<td class="instruction">JR Z,<a href="48521.html#48606">48606</a></td>
+</tr>
+<tr>
+<td class="address-1"><span id="48600"></span>48600</td>
+<td class="instruction">CP 22</td>
+<td class="comment-1" rowspan="2">Jump to <a href="48521.html#48718">48718</a> if <span class="register">A</span> is lower than 22.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48602"></span>48602</td>
+<td class="instruction">JR C,<a href="48521.html#48718">48718</a></td>
+</tr>
+<tr>
+<td class="address-1"><span id="48604"></span>48604</td>
+<td class="instruction">JR <a href="48521.html#48610">48610</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="48521.html#48610">48610</a>.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="48606"></span>48606</td>
+<td class="instruction">CP 10</td>
+<td class="comment-1" rowspan="2">Jump to <a href="48521.html#48718">48718</a> if <span class="register">A</span> is higher than 10.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48608"></span>48608</td>
+<td class="instruction">JR NC,<a href="48521.html#48718">48718</a></td>
+</tr>
+<tr>
+<td class="address-2"><span id="48610"></span>48610</td>
+<td class="instruction">BIT 5,(IX+47)</td>
+<td class="comment-1" rowspan="2">Jump to <a href="48521.html#48718">48718</a> if bit 5 of *<span class="register">IX</span>+47 is not zero.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48614"></span>48614</td>
+<td class="instruction">JR NZ,<a href="48521.html#48718">48718</a></td>
+</tr>
+<tr>
+<td class="address-1"><span id="48616"></span>48616</td>
+<td class="instruction">LD A,(IX+40)</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<span class="register">IX</span>+40.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48619"></span>48619</td>
+<td class="instruction">LD L,A</td>
+<td class="comment-1" rowspan="1"><span class="register">L</span>=<span class="register">A</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48620"></span>48620</td>
+<td class="instruction">AND %00011111</td>
+<td class="comment-1" rowspan="1">Keep only bits 0-4.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48622"></span>48622</td>
+<td class="instruction">LD C,A</td>
+<td class="comment-1" rowspan="1"><span class="register">C</span>=<span class="register">A</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48623"></span>48623</td>
+<td class="instruction">LD H,(IX+41)</td>
+<td class="comment-1" rowspan="1"><span class="register">H</span>=*<span class="register">IX</span>+41.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48626"></span>48626</td>
+<td class="instruction">ADD HL,HL</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>+=<span class="register">HL</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48627"></span>48627</td>
+<td class="instruction">ADD HL,HL</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>+=<span class="register">HL</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48628"></span>48628</td>
+<td class="instruction">ADD HL,HL</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>+=<span class="register">HL</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48629"></span>48629</td>
+<td class="instruction">LD A,H</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=<span class="register">H</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48630"></span>48630</td>
+<td class="instruction">AND %00011111</td>
+<td class="comment-1" rowspan="1">Keep only bits 0-4.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48632"></span>48632</td>
+<td class="instruction">NEG</td>
+<td class="comment-1" rowspan="1">NEG.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48634"></span>48634</td>
+<td class="instruction">ADD A,21</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>+=21.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48636"></span>48636</td>
+<td class="instruction">LD B,A</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=<span class="register">A</span>.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="48637"></span>48637</td>
+<td class="instruction">LD A,(IX+16)</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<span class="register">IX</span>+16.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48640"></span>48640</td>
+<td class="instruction">AND %00011111</td>
+<td class="comment-1" rowspan="1">Keep only bits 0-4.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48642"></span>48642</td>
+<td class="instruction">CP C</td>
+<td class="comment-1" rowspan="1">Compare <span class="register">A</span> with <span class="register">C</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48643"></span>48643</td>
+<td class="instruction">LD C,0</td>
+<td class="comment-1" rowspan="1"><span class="register">C</span>=0.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48645"></span>48645</td>
+<td class="instruction">JR C,<a href="48521.html#48649">48649</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="48521.html#48649">48649</a> if {} is lower.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48647"></span>48647</td>
+<td class="instruction">LD C,16</td>
+<td class="comment-1" rowspan="1"><span class="register">C</span>=16.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="48649"></span>48649</td>
+<td class="instruction">LD A,(IX+7)</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<span class="register">IX</span>+7.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48652"></span>48652</td>
+<td class="instruction">CP B</td>
+<td class="comment-1" rowspan="1">Compare <span class="register">A</span> with <span class="register">B</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48653"></span>48653</td>
+<td class="instruction">LD B,8</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=8.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48655"></span>48655</td>
+<td class="instruction">JR NC,<a href="48521.html#48659">48659</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="48521.html#48659">48659</a> if {} is higher.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48657"></span>48657</td>
+<td class="instruction">LD B,24</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=24.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="48659"></span>48659</td>
+<td class="instruction">BIT 5,(IX+23)</td>
+<td class="comment-1" rowspan="2">Jump to <a href="48521.html#48668">48668</a> if bit 5 of *<span class="register">IX</span>+23 is zero.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48663"></span>48663</td>
+<td class="instruction">JR Z,<a href="48521.html#48668">48668</a></td>
+</tr>
+<tr>
+<td class="address-1"><span id="48665"></span>48665</td>
+<td class="instruction">LD A,C</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=<span class="register">C</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48666"></span>48666</td>
+<td class="instruction">LD C,B</td>
+<td class="comment-1" rowspan="1"><span class="register">C</span>=<span class="register">B</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48667"></span>48667</td>
+<td class="instruction">LD B,A</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=<span class="register">A</span>.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="48668"></span>48668</td>
+<td class="instruction">BIT 4,(IX+23)</td>
+<td class="comment-1" rowspan="2">Jump to <a href="48521.html#48693">48693</a> if bit 4 of *<span class="register">IX</span>+23 is not zero.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48672"></span>48672</td>
+<td class="instruction">JR NZ,<a href="48521.html#48693">48693</a></td>
+</tr>
+<tr>
+<td class="address-1"><span id="48674"></span>48674</td>
+<td class="instruction">LD A,(IX+19)</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<span class="register">IX</span>+19.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48677"></span>48677</td>
+<td class="instruction">CP C</td>
+<td class="comment-1" rowspan="2">Jump to <a href="48521.html#48693">48693</a> if <span class="register">A</span> is equal to <span class="register">C</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48678"></span>48678</td>
+<td class="instruction">JR Z,<a href="48521.html#48693">48693</a></td>
+</tr>
+<tr>
+<td class="address-1"><span id="48680"></span>48680</td>
+<td class="instruction">LD (IX+19),B</td>
+<td class="comment-1" rowspan="1">Write <span class="register">B</span> to *<span class="register">IX</span>+19.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48683"></span>48683</td>
+<td class="instruction">CALL <a href="48521.html#48757">48757</a></td>
+<td class="comment-1" rowspan="1">Call <a href="48521.html#48757">48757</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48686"></span>48686</td>
+<td class="instruction">SET 4,(IX+23)</td>
+<td class="comment-1" rowspan="1">Set bit 4 of *<span class="register">IX</span>+23.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48690"></span>48690</td>
+<td class="instruction">LD (IX+19),C</td>
+<td class="comment-1" rowspan="1">Write <span class="register">C</span> to *<span class="register">IX</span>+19.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="48693"></span>48693</td>
+<td class="instruction">CALL <a href="48521.html#48757">48757</a></td>
+<td class="comment-1" rowspan="1">Call <a href="48521.html#48757">48757</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48696"></span>48696</td>
+<td class="instruction">RES 4,(IX+23)</td>
+<td class="comment-1" rowspan="1">Reset bit 4 of *<span class="register">IX</span>+23.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48700"></span>48700</td>
+<td class="instruction">LD (IX+19),B</td>
+<td class="comment-1" rowspan="1">Write <span class="register">B</span> to *<span class="register">IX</span>+19.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48703"></span>48703</td>
+<td class="instruction">CALL <a href="48521.html#48757">48757</a></td>
+<td class="comment-1" rowspan="1">Call <a href="48521.html#48757">48757</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48706"></span>48706</td>
+<td class="instruction">LD A,C</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=<span class="register">C</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48707"></span>48707</td>
+<td class="instruction">XOR %00010000</td>
+<td class="comment-1" rowspan="1">Reset bit 4.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48709"></span>48709</td>
+<td class="instruction">LD (IX+19),A</td>
+<td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<span class="register">IX</span>+19.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48712"></span>48712</td>
+<td class="instruction">CALL <a href="48521.html#48757">48757</a></td>
+<td class="comment-1" rowspan="1">Call <a href="48521.html#48757">48757</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48715"></span>48715</td>
+<td class="instruction">JP <a href="46884.html#47270">47270</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="46884.html#47270">47270</a>.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="48718"></span>48718</td>
+<td class="instruction">BIT 1,(IX+23)</td>
+<td class="comment-1" rowspan="2">Return if bit 1 of *<span class="register">IX</span>+23 is not zero.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48722"></span>48722</td>
+<td class="instruction">RET NZ</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48723"></span>48723</td>
+<td class="instruction">LD BC,(47383)</td>
+<td class="comment-1" rowspan="1"><span class="register">BC</span>=*<a href="46884.html#47383">47383</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48727"></span>48727</td>
+<td class="instruction">JR <a href="48521.html#48637">48637</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="48521.html#48637">48637</a>.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="48729"></span>48729</td>
+<td class="instruction">LD L,(IX+16)</td>
+<td class="comment-1" rowspan="1"><span class="register">L</span>=*<span class="register">IX</span>+16.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48732"></span>48732</td>
+<td class="instruction">LD H,(IX+17)</td>
+<td class="comment-1" rowspan="1"><span class="register">H</span>=*<span class="register">IX</span>+17.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48735"></span>48735</td>
+<td class="instruction">LD E,(IX+40)</td>
+<td class="comment-1" rowspan="1"><span class="register">E</span>=*<span class="register">IX</span>+40.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48738"></span>48738</td>
+<td class="instruction">LD D,(IX+41)</td>
+<td class="comment-1" rowspan="1"><span class="register">D</span>=*<span class="register">IX</span>+41.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48741"></span>48741</td>
+<td class="instruction">AND A</td>
+<td class="comment-1" rowspan="1">Set flags.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48742"></span>48742</td>
+<td class="instruction">SBC HL,DE</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>-=<span class="register">DE</span> (with carry).</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48744"></span>48744</td>
+<td class="instruction">RET NZ</td>
+<td class="comment-1" rowspan="1">Return if {} is not zero.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48745"></span>48745</td>
+<td class="instruction">LD HL,49808</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>=<a href="49808.html">49808</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48748"></span>48748</td>
+<td class="instruction">LD (HL),100</td>
+<td class="comment-1" rowspan="1">Write 100 to *<span class="register">HL</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48750"></span>48750</td>
+<td class="instruction">LD HL,49697</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>=<a href="49697.html">Messaging_LegOrf</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48753"></span>48753</td>
+<td class="instruction">CALL <a href="48278.html#48286">Print_BonusMessaging</a></td>
+<td class="comment-1" rowspan="1">Call <a href="48278.html#48286">Print_BonusMessaging</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48756"></span>48756</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="48757"></span>48757</td>
+<td class="instruction">RES 5,(IX+23)</td>
+<td class="comment-1" rowspan="1">Reset bit 5 of *<span class="register">IX</span>+23.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48761"></span>48761</td>
+<td class="instruction">BIT 3,(IX+19)</td>
+<td class="comment-1" rowspan="2">Jump to <a href="48521.html#48771">48771</a> if bit 3 of *<span class="register">IX</span>+19 is zero.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48765"></span>48765</td>
+<td class="instruction">JR Z,<a href="48521.html#48771">48771</a></td>
+</tr>
+<tr>
+<td class="address-1"><span id="48767"></span>48767</td>
+<td class="instruction">SET 5,(IX+23)</td>
+<td class="comment-1" rowspan="1">Set bit 5 of *<span class="register">IX</span>+23.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="48771"></span>48771</td>
+<td class="instruction">LD HL,49639</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>=<a href="49484.html#49639">49639</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48774"></span>48774</td>
+<td class="instruction">LD D,0</td>
+<td class="comment-1" rowspan="1"><span class="register">D</span>=0.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48776"></span>48776</td>
+<td class="instruction">LD A,(IX+19)</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<span class="register">IX</span>+19.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48779"></span>48779</td>
+<td class="instruction">AND %00011000</td>
+<td class="comment-1" rowspan="1">Keep only bits 3-4.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48781"></span>48781</td>
+<td class="instruction">RRCA</td>
+<td class="comment-1" rowspan="1">RRCA.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48782"></span>48782</td>
+<td class="instruction">RRCA</td>
+<td class="comment-1" rowspan="1">RRCA.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48783"></span>48783</td>
+<td class="instruction">LD E,A</td>
+<td class="comment-1" rowspan="1"><span class="register">E</span>=<span class="register">A</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48784"></span>48784</td>
+<td class="instruction">ADD HL,DE</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>+=<span class="register">DE</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48785"></span>48785</td>
+<td class="instruction">LD E,(HL)</td>
+<td class="comment-1" rowspan="1"><span class="register">E</span>=*<span class="register">HL</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48786"></span>48786</td>
+<td class="instruction">INC HL</td>
+<td class="comment-1" rowspan="1">Increment <span class="register">HL</span> by one.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48787"></span>48787</td>
+<td class="instruction">LD D,(HL)</td>
+<td class="comment-1" rowspan="1"><span class="register">D</span>=*<span class="register">HL</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48788"></span>48788</td>
+<td class="instruction">LD L,(IX+16)</td>
+<td class="comment-1" rowspan="1"><span class="register">L</span>=*<span class="register">IX</span>+16.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48791"></span>48791</td>
+<td class="instruction">LD H,(IX+17)</td>
+<td class="comment-1" rowspan="1"><span class="register">H</span>=*<span class="register">IX</span>+17.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48794"></span>48794</td>
+<td class="instruction">ADD HL,DE</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>+=<span class="register">DE</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48795"></span>48795</td>
+<td class="instruction">BIT 3,(IX+19)</td>
+<td class="comment-1" rowspan="2">Jump to <a href="48521.html#48824">48824</a> if bit 3 of *<span class="register">IX</span>+19 is not zero.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48799"></span>48799</td>
+<td class="instruction">JR NZ,<a href="48521.html#48824">48824</a></td>
+</tr>
+<tr>
+<td class="address-1"><span id="48801"></span>48801</td>
+<td class="instruction">LD A,L</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=<span class="register">L</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48802"></span>48802</td>
+<td class="instruction">BIT 4,(IX+19)</td>
+<td class="comment-1" rowspan="2">Jump to <a href="48521.html#48818">48818</a> if bit 4 of *<span class="register">IX</span>+19 is zero.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48806"></span>48806</td>
+<td class="instruction">JR Z,<a href="48521.html#48818">48818</a></td>
+</tr>
+<tr>
+<td class="address-1"><span id="48808"></span>48808</td>
+<td class="instruction">AND %00011111</td>
+<td class="comment-1" rowspan="1">Keep only bits 0-4.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48810"></span>48810</td>
+<td class="instruction">CP 31</td>
+<td class="comment-1" rowspan="2">Return if <span class="register">A</span> is equal to 31.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48812"></span>48812</td>
+<td class="instruction">RET Z</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48813"></span>48813</td>
+<td class="instruction">CP 21</td>
+<td class="comment-1" rowspan="2">Return if <span class="register">A</span> is equal to 21.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48815"></span>48815</td>
+<td class="instruction">RET Z</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48816"></span>48816</td>
+<td class="instruction">JR <a href="48521.html#48824">48824</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="48521.html#48824">48824</a>.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="48818"></span>48818</td>
+<td class="instruction">AND %00011111</td>
+<td class="comment-1" rowspan="1">Keep only bits 0-4.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48820"></span>48820</td>
+<td class="instruction">RET Z</td>
+<td class="comment-1" rowspan="1">Return if the result is zero.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48821"></span>48821</td>
+<td class="instruction">CP 10</td>
+<td class="comment-1" rowspan="2">Return if <span class="register">A</span> is equal to 10.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48823"></span>48823</td>
+<td class="instruction">RET Z</td>
+</tr>
+<tr>
+<td class="address-2"><span id="48824"></span>48824</td>
+<td class="instruction">BIT 7,(HL)</td>
+<td class="comment-1" rowspan="2">Jump to <a href="48521.html#48889">48889</a> if bit 7 of *<span class="register">HL</span> is not zero.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48826"></span>48826</td>
+<td class="instruction">JR NZ,<a href="48521.html#48889">48889</a></td>
+</tr>
+<tr>
+<td class="address-1"><span id="48828"></span>48828</td>
+<td class="instruction">BIT 5,(IX+48)</td>
+<td class="comment-1" rowspan="1">Test bit 5 of *<span class="register">IX</span>+48.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48832"></span>48832</td>
+<td class="instruction">RES 5,(IX+48)</td>
+<td class="comment-1" rowspan="1">Reset bit 5 of *<span class="register">IX</span>+48.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48836"></span>48836</td>
+<td class="instruction">JR Z,<a href="48521.html#48864">48864</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="48521.html#48864">48864</a> if {} is zero.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48838"></span>48838</td>
+<td class="instruction">BIT 4,(IX+19)</td>
+<td class="comment-1" rowspan="2">Jump to <a href="48521.html#48854">48854</a> if bit 4 of *<span class="register">IX</span>+19 is zero.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48842"></span>48842</td>
+<td class="instruction">JR Z,<a href="48521.html#48854">48854</a></td>
+</tr>
+<tr>
+<td class="address-1"><span id="48844"></span>48844</td>
+<td class="instruction">RES 1,(IX+23)</td>
+<td class="comment-1" rowspan="1">Reset bit 1 of *<span class="register">IX</span>+23.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48848"></span>48848</td>
+<td class="instruction">SET 0,(IX+23)</td>
+<td class="comment-1" rowspan="1">Set bit 0 of *<span class="register">IX</span>+23.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48852"></span>48852</td>
+<td class="instruction">JR <a href="48521.html#48872">48872</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="48521.html#48872">48872</a>.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="48854"></span>48854</td>
+<td class="instruction">RES 1,(IX+23)</td>
+<td class="comment-1" rowspan="1">Reset bit 1 of *<span class="register">IX</span>+23.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48858"></span>48858</td>
+<td class="instruction">SET 2,(IX+23)</td>
+<td class="comment-1" rowspan="1">Set bit 2 of *<span class="register">IX</span>+23.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48862"></span>48862</td>
+<td class="instruction">JR <a href="48521.html#48872">48872</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="48521.html#48872">48872</a>.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="48864"></span>48864</td>
+<td class="instruction">RES 2,(IX+23)</td>
+<td class="comment-1" rowspan="1">Reset bit 2 of *<span class="register">IX</span>+23.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48868"></span>48868</td>
+<td class="instruction">RES 0,(IX+23)</td>
+<td class="comment-1" rowspan="1">Reset bit 0 of *<span class="register">IX</span>+23.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="48872"></span>48872</td>
+<td class="instruction">POP DE</td>
+<td class="comment-1" rowspan="1">Restore <span class="register">DE</span> from the stack.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48873"></span>48873</td>
+<td class="instruction">PUSH HL</td>
+<td class="comment-1" rowspan="1">Stash <span class="register">HL</span> on the stack.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48874"></span>48874</td>
+<td class="instruction">CALL <a href="48521.html#48729">48729</a></td>
+<td class="comment-1" rowspan="1">Call <a href="48521.html#48729">48729</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48877"></span>48877</td>
+<td class="instruction">LD HL,52285</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>=<a href="52124.html#52285">52285</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48880"></span>48880</td>
+<td class="instruction">SET 1,(HL)</td>
+<td class="comment-1" rowspan="1">Set bit 1 of *<span class="register">HL</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48882"></span>48882</td>
+<td class="instruction">POP HL</td>
+<td class="comment-1" rowspan="1">Restore <span class="register">HL</span> from the stack.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48883"></span>48883</td>
+<td class="instruction">LD B,(IX+19)</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=*<span class="register">IX</span>+19.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48886"></span>48886</td>
+<td class="instruction">JP <a href="46884.html#47242">47242</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="46884.html#47242">47242</a>.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="48889"></span>48889</td>
+<td class="instruction">LD A,(47384)</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="46884.html#47384">47384</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48892"></span>48892</td>
+<td class="instruction">BIT 3,(IX+19)</td>
+<td class="comment-1" rowspan="2">Jump to <a href="48521.html#48907">48907</a> if bit 3 of *<span class="register">IX</span>+19 is zero.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48896"></span>48896</td>
+<td class="instruction">JR Z,<a href="48521.html#48907">48907</a></td>
+</tr>
+<tr>
+<td class="address-1"><span id="48898"></span>48898</td>
+<td class="instruction">INC A</td>
+<td class="comment-1" rowspan="1">Increment <span class="register">A</span> by one.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48899"></span>48899</td>
+<td class="instruction">BIT 4,(IX+19)</td>
+<td class="comment-1" rowspan="2">Jump to <a href="48521.html#48907">48907</a> if bit 4 of *<span class="register">IX</span>+19 is zero.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48903"></span>48903</td>
+<td class="instruction">JR Z,<a href="48521.html#48907">48907</a></td>
+</tr>
+<tr>
+<td class="address-1"><span id="48905"></span>48905</td>
+<td class="instruction">SUB 2</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>-=2.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="48907"></span>48907</td>
+<td class="instruction">CP (IX+7)</td>
+<td class="comment-1" rowspan="2">Return if <span class="register">A</span> with *<span class="register">IX</span>+7 is not zero.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48910"></span>48910</td>
+<td class="instruction">RET NZ</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48911"></span>48911</td>
+<td class="instruction">SET 5,(IX+48)</td>
+<td class="comment-1" rowspan="1">Set bit 5 of *<span class="register">IX</span>+48.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48915"></span>48915</td>
+<td class="instruction">BIT 1,(IX+23)</td>
+<td class="comment-1" rowspan="2">Jump to <a href="48521.html#48872">48872</a> if bit 1 of *<span class="register">IX</span>+23 is not zero.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48919"></span>48919</td>
+<td class="instruction">JR NZ,<a href="48521.html#48872">48872</a></td>
+</tr>
+<tr>
+<td class="address-1"><span id="48921"></span>48921</td>
+<td class="instruction">BIT 3,(IX+19)</td>
+<td class="comment-1" rowspan="2">Return if bit 3 of *<span class="register">IX</span>+19 is not zero.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48925"></span>48925</td>
+<td class="instruction">RET NZ</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48926"></span>48926</td>
+<td class="instruction">BIT 4,(IX+19)</td>
+<td class="comment-1" rowspan="2">Jump to <a href="48521.html#48954">48954</a> if bit 4 of *<span class="register">IX</span>+19 is not zero.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48930"></span>48930</td>
+<td class="instruction">JR NZ,<a href="48521.html#48954">48954</a></td>
+</tr>
+<tr>
+<td class="address-1"><span id="48932"></span>48932</td>
+<td class="instruction">BIT 0,(IX+23)</td>
+<td class="comment-1" rowspan="2">Jump to <a href="48521.html#48944">48944</a> if bit 0 of *<span class="register">IX</span>+23 is not zero.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48936"></span>48936</td>
+<td class="instruction">JR NZ,<a href="48521.html#48944">48944</a></td>
+</tr>
+<tr>
+<td class="address-1"><span id="48938"></span>48938</td>
+<td class="instruction">SET 0,(IX+23)</td>
+<td class="comment-1" rowspan="1">Set bit 0 of *<span class="register">IX</span>+23.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48942"></span>48942</td>
+<td class="instruction">JR <a href="48521.html#48872">48872</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="48521.html#48872">48872</a>.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="48944"></span>48944</td>
+<td class="instruction">RES 0,(IX+23)</td>
+<td class="comment-1" rowspan="1">Reset bit 0 of *<span class="register">IX</span>+23.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48948"></span>48948</td>
+<td class="instruction">SET 1,(IX+23)</td>
+<td class="comment-1" rowspan="1">Set bit 1 of *<span class="register">IX</span>+23.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48952"></span>48952</td>
+<td class="instruction">JR <a href="48521.html#48872">48872</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="48521.html#48872">48872</a>.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="48954"></span>48954</td>
+<td class="instruction">BIT 2,(IX+23)</td>
+<td class="comment-1" rowspan="2">Jump to <a href="48521.html#48966">48966</a> if bit 2 of *<span class="register">IX</span>+23 is not zero.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48958"></span>48958</td>
+<td class="instruction">JR NZ,<a href="48521.html#48966">48966</a></td>
+</tr>
+<tr>
+<td class="address-1"><span id="48960"></span>48960</td>
+<td class="instruction">SET 2,(IX+23)</td>
+<td class="comment-1" rowspan="1">Set bit 2 of *<span class="register">IX</span>+23.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48964"></span>48964</td>
+<td class="instruction">JR <a href="48521.html#48872">48872</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="48521.html#48872">48872</a>.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="48966"></span>48966</td>
+<td class="instruction">RES 2,(IX+23)</td>
+<td class="comment-1" rowspan="1">Reset bit 2 of *<span class="register">IX</span>+23.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48970"></span>48970</td>
+<td class="instruction">SET 1,(IX+23)</td>
+<td class="comment-1" rowspan="1">Set bit 1 of *<span class="register">IX</span>+23.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48974"></span>48974</td>
+<td class="instruction">JR <a href="48521.html#48872">48872</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="48521.html#48872">48872</a>.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="48456.html">48456</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#48521">Map</a></td>
+<td class="next">
+Next: <a href="48976.html">48976</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1984 New Generation Software; 2023 ArcadeGeek LTD.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.0.</div>
+<div class="repository">Link to <a href="https://github.com/pobtastic/trashman/">Source code</a>.</div>
+<div><a href="../../asm/BD89.html">Switch to hexadecimal</a>.</div>
+</footer>
+</body>
+</html>

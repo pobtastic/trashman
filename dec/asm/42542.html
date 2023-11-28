@@ -129,13 +129,13 @@ Who is in play, is it 1UP or 2UP?
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="42571"></span>42571</td>
-<td class="instruction">CALL <a href="43476.html">SwitchPlayers</a></td>
-<td class="comment-1" rowspan="1">Call <a href="43476.html">SwitchPlayers</a>.</td>
+<td class="instruction">CALL <a href="43476.html">Handler_SwitchPlayers</a></td>
+<td class="comment-1" rowspan="1">Call <a href="43476.html">Handler_SwitchPlayers</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="42574"></span>42574</td>
-<td class="instruction">JP C,<a href="42384.html#42427">GameEntryPoint_1</a></td>
+<td class="instruction">JP C,<a href="42384.html#42427">NewLevel</a></td>
 <td class="comment-1" rowspan="1"></td>
 </tr>
 <tr>
@@ -171,13 +171,13 @@ Who is in play, is it 1UP or 2UP?
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="42591"></span>42591</td>
-<td class="instruction">CALL <a href="43476.html">SwitchPlayers</a></td>
-<td class="comment-1" rowspan="1">Call <a href="43476.html">SwitchPlayers</a>.</td>
+<td class="instruction">CALL <a href="43476.html">Handler_SwitchPlayers</a></td>
+<td class="comment-1" rowspan="1">Call <a href="43476.html">Handler_SwitchPlayers</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="42594"></span>42594</td>
-<td class="instruction">JP C,<a href="42384.html#42427">GameEntryPoint_1</a></td>
+<td class="instruction">JP C,<a href="42384.html#42427">NewLevel</a></td>
 <td class="comment-1" rowspan="1"></td>
 </tr>
 <tr>
@@ -223,8 +223,8 @@ This entry point is used by the routine at <a href="42384.html">GameEntryPoint</
 <tr>
 <td class="asm-label">Handler_Fired_BackToMenu</td>
 <td class="address-2"><span id="42610"></span>42610</td>
-<td class="instruction">JP <a href="42384.html#42403">GameEntryPoint_0</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="42384.html#42403">GameEntryPoint_0</a>.</td>
+<td class="instruction">JP <a href="42384.html#42403">Game_Loop</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="42384.html#42403">Game_Loop</a>.</td>
 </tr>
 </table>
 <table class="asm-navigation">

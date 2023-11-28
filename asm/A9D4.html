@@ -34,7 +34,7 @@ Next: <a href="A9EF.html">A9EF</a>
 </td>
 </tr>
 </table>
-<div class="description">A9D4: Switch Players?</div>
+<div class="description">A9D4: Switch Players</div>
 <table class="disassembly">
 <tr>
 <td class="routine-comment" colspan="5">
@@ -46,7 +46,7 @@ Used by the routines at <a href="A590.html">GameEntryPoint</a> and <a href="A62E
 </td>
 </tr>
 <tr>
-<td class="asm-label">SwitchPlayers</td>
+<td class="asm-label">Handler_SwitchPlayers</td>
 <td class="address-2"><span id="a9d4"></span>A9D4</td>
 <td class="instruction">LD A,($AB8A)</td>
 <td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="AB8A.html">Game_Flags</a>.</td>
@@ -93,12 +93,12 @@ Who is in play, is it 1UP or 2UP?
 <td class="asm-label"></td>
 <td class="address-1"><span id="a9df"></span>A9DF</td>
 <td class="instruction">BIT 4,A</td>
-<td class="comment-1" rowspan="2">Jump to <a href="A9D4.html#a9e6">SwitchPlayers_Write</a> if bit 4 of <span class="register">A</span> is zero.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="A9D4.html#a9e6">Handler_SwitchPlayers_Write</a> if bit 4 of <span class="register">A</span> is zero.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="a9e1"></span>A9E1</td>
-<td class="instruction">JR Z,<a href="A9D4.html#a9e6">SwitchPlayers_Write</a></td>
+<td class="instruction">JR Z,<a href="A9D4.html#a9e6">Handler_SwitchPlayers_Write</a></td>
 </tr>
 <tr>
 <td class="routine-comment" colspan="5">
@@ -117,7 +117,7 @@ Else, use 2UP.
 <td class="comment-1" rowspan="1"><span class="register">HL</span>=<a href="AB7E.html#ab85">2UP_Lives</a>.</td>
 </tr>
 <tr>
-<td class="asm-label">SwitchPlayers_Write</td>
+<td class="asm-label">Handler_SwitchPlayers_Write</td>
 <td class="address-2"><span id="a9e6"></span>A9E6</td>
 <td class="instruction">LD ($AB7E),HL</td>
 <td class="comment-1" rowspan="1">Write <span class="register">HL</span> to *<a href="AB7E.html">ActivePlayer</a>.</td>

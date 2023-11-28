@@ -34,7 +34,7 @@ Next: <a href="43140.html">43140</a>
 </td>
 </tr>
 </table>
-<div class="description">43097: Routine at A859</div>
+<div class="description">43097: Controller: Yes/ No</div>
 <table class="disassembly">
 <tr>
 <td class="routine-comment" colspan="5">
@@ -46,106 +46,204 @@ Used by the routine at <a href="42709.html">Player_Name</a>.
 </td>
 </tr>
 <tr>
+<td class="asm-label">Controller_Yes_No</td>
 <td class="address-2"><span id="43097"></span>43097</td>
 <td class="instruction">CALL <a href="42987.html">Handler_Debounce_Controls</a></td>
 <td class="comment-1" rowspan="1">Call <a href="42987.html">Handler_Debounce_Controls</a>.</td>
 </tr>
 <tr>
+<td class="routine-comment" colspan="5">
+<span id="43100"></span>
+<div class="comments">
+<div class="paragraph">
+Produce a short pause.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">Controller_Yes_No_Loop</td>
 <td class="address-2"><span id="43100"></span>43100</td>
 <td class="instruction">LD B,10</td>
 <td class="comment-1" rowspan="1"><span class="register">B</span>=10.</td>
 </tr>
 <tr>
+<td class="asm-label">Controller_Yes_No_Pause</td>
 <td class="address-2"><span id="43102"></span>43102</td>
 <td class="instruction">HALT</td>
 <td class="comment-1" rowspan="1">HALT.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43103"></span>43103</td>
-<td class="instruction">DJNZ <a href="43097.html#43102">43102</a></td>
-<td class="comment-1" rowspan="1">Decrease counter by one and loop back to <a href="43097.html#43102">43102</a> until counter is zero.</td>
+<td class="instruction">DJNZ <a href="43097.html#43102">Controller_Yes_No_Pause</a></td>
+<td class="comment-1" rowspan="1">Decrease counter by one and loop back to <a href="43097.html#43102">Controller_Yes_No_Pause</a> until counter is zero.</td>
 </tr>
 <tr>
+<td class="routine-comment" colspan="5">
+<span id="43105"></span>
+<div class="comments">
+<div class="paragraph">
+Fetch player input.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43105"></span>43105</td>
 <td class="instruction">CALL <a href="46779.html">Handler_Controls</a></td>
 <td class="comment-1" rowspan="1">Call <a href="46779.html">Handler_Controls</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43108"></span>43108</td>
 <td class="instruction">LD A,E</td>
 <td class="comment-1" rowspan="1"><span class="register">A</span>=<span class="register">E</span>.</td>
 </tr>
 <tr>
+<td class="routine-comment" colspan="5">
+<span id="43109"></span>
+<div class="comments">
+<div class="paragraph">
+Was "up" pressed?
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43109"></span>43109</td>
 <td class="instruction">CP 24</td>
-<td class="comment-1" rowspan="2">Jump to <a href="43097.html#43122">43122</a> if <span class="register">A</span> is 24.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="43097.html#43122">Controller_Yes_No_Action</a> if <span class="register">A</span> is 24.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43111"></span>43111</td>
-<td class="instruction">JR Z,<a href="43097.html#43122">43122</a></td>
+<td class="instruction">JR Z,<a href="43097.html#43122">Controller_Yes_No_Action</a></td>
 </tr>
 <tr>
+<td class="routine-comment" colspan="5">
+<span id="43113"></span>
+<div class="comments">
+<div class="paragraph">
+Was "down" pressed?
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43113"></span>43113</td>
 <td class="instruction">CP 8</td>
-<td class="comment-1" rowspan="2">Jump to <a href="43097.html#43122">43122</a> if <span class="register">A</span> is 8.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="43097.html#43122">Controller_Yes_No_Action</a> if <span class="register">A</span> is 8.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43115"></span>43115</td>
-<td class="instruction">JR Z,<a href="43097.html#43122">43122</a></td>
+<td class="instruction">JR Z,<a href="43097.html#43122">Controller_Yes_No_Action</a></td>
 </tr>
 <tr>
+<td class="routine-comment" colspan="5">
+<span id="43117"></span>
+<div class="comments">
+<div class="paragraph">
+Was "fire" <em>not</em> pressed?
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43117"></span>43117</td>
 <td class="instruction">CP 128</td>
-<td class="comment-1" rowspan="2">Jump to <a href="43097.html#43100">43100</a> if <span class="register">A</span> is not 128.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="43097.html#43100">Controller_Yes_No_Loop</a> if <span class="register">A</span> is not 128.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43119"></span>43119</td>
-<td class="instruction">JR NZ,<a href="43097.html#43100">43100</a></td>
+<td class="instruction">JR NZ,<a href="43097.html#43100">Controller_Yes_No_Loop</a></td>
 </tr>
 <tr>
+<td class="routine-comment" colspan="5">
+<span id="43121"></span>
+<div class="comments">
+<div class="paragraph">
+Pressing "fire" exits/ sets the value.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43121"></span>43121</td>
 <td class="instruction">RET</td>
 <td class="comment-1" rowspan="1">Return.</td>
 </tr>
 <tr>
+<td class="routine-comment" colspan="5">
+<span id="43122"></span>
+<div class="comments">
+<div class="paragraph">
+Flip bit 5 of <span class="register">A</span> (32) using XOR with *<a href="43914.html">Game_Flags</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">Controller_Yes_No_Action</td>
 <td class="address-2"><span id="43122"></span>43122</td>
 <td class="instruction">LD HL,43914</td>
-<td class="comment-1" rowspan="1"><span class="register">HL</span>=<a href="43914.html">Game_Flags</a>.</td>
+<td class="comment-1" rowspan="4">Flip bit 5 of <a href="43914.html">Game_Flags</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43125"></span>43125</td>
-<td class="instruction">LD A,32</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=32.</td>
+<td class="instruction">LD A,%00100000</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43127"></span>43127</td>
 <td class="instruction">XOR (HL)</td>
-<td class="comment-1" rowspan="1">Reset the bits from *<span class="register">HL</span>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43128"></span>43128</td>
 <td class="instruction">LD (HL),A</td>
-<td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<span class="register">HL</span>.</td>
 </tr>
 <tr>
+<td class="routine-comment" colspan="5">
+<span id="43129"></span>
+<div class="comments">
+<div class="paragraph">
+Update the text on the screen to reflect the players choice.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43129"></span>43129</td>
 <td class="instruction">CALL <a href="43140.html">Handler_Yes_No</a></td>
 <td class="comment-1" rowspan="1">Call <a href="43140.html">Handler_Yes_No</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43132"></span>43132</td>
 <td class="instruction">LD BC,128</td>
 <td class="comment-1" rowspan="1"><span class="register">BC</span>=0128.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43135"></span>43135</td>
 <td class="instruction">CALL <a href="42997.html#43006">PressAnyKey_1</a></td>
 <td class="comment-1" rowspan="1">Call <a href="42997.html#43006">PressAnyKey_1</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="43138"></span>43138</td>
-<td class="instruction">JR <a href="43097.html#43097">43097</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="43097.html">43097</a>.</td>
+<td class="instruction">JR <a href="43097.html#43097">Controller_Yes_No</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="43097.html">Controller_Yes_No</a>.</td>
 </tr>
 </table>
 <table class="asm-navigation">
