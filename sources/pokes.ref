@@ -76,7 +76,7 @@ To the following (which is overwritten immediately, so just never actions the ju
   </tbody>
 </table>
 
-[Poke:Time left for current level (#N$00-#N$99)]
+[Poke:timeLeft:Time left for current level (#N$00-#N$99)]
 <code>
 <div>POKE #R$C272(#N$C272),<em>nn</em></div>
 <div>POKE #R$C273(#N$C273),<em>nn</em></div>

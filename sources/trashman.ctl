@@ -23,9 +23,11 @@ b $7840
 
 b $785F
 
+b $78A0
+
 b $95B0
-D $95B0 #UDGARRAY$20,attr=$07,scale=$04,step=$20;$95B0-$96D0-$01-$100(street)
-  $95B0,$140,$20
+  $95B0 #UDG(#PC)
+L $95B0,$08,$180
 
 b $A200
   $A200 #UDG(#PC)
@@ -41,6 +43,7 @@ c $A590 Game Entry Point
   $A59E,$02,b$01 Set bit 7.
   $A5A0,$03 Write #REGa to #R$C1E5.
 
+@ $A5A3 label=Game_Loop
   $A5A3,$03 Call #R$A740.
   $A5A6,$03 Call #R$A77E.
   $A5A9,$03 Call #R$A675.
@@ -49,6 +52,8 @@ c $A590 Game Entry Point
   $A5B2,$03 Call #R$A97A.
   $A5B5,$03 Call #R$A6D5.
   $A5B8,$03 Call #R$A77E.
+
+@ $A5BB label=NewLevel
   $A5BB,$03 Call #R$A944.
   $A5BE,$03 Call #R$A89B.
   $A5C1,$03 Call #R$A7F5.
@@ -58,26 +63,31 @@ N $A5C7 The game has ended ... check why.
   $A5CA,$04 Jump to #R$A61D if the bonus/ time counter reached zero.
   $A5CE,$03 #REGhl=#R$C272.
   $A5D1,$03 Call #R$CB22.
+N $A5D4 Check other reasons why the game ended  (see #POKE#immunity()).
   $A5D4,$03 #REGa=*#R$B008.
-  $A5D9,$03 Jump to #R$A667 if is not zero.
+  $A5D7,$05 Jump to #R$A667 if bit 0 is not zero.
   $A5DC,$03 #REGhl=*#R$AB7E.
+N $A5DF Point to the current players level.
   $A5DF,$01 Increment #REGhl by one.
-  $A5E0,$02 #REGa=#N$0C.
-  $A5E3,$02 Jump to #R$A5F7 if is zero.
+N $A5E0 Has the player completed the game?
+  $A5E0,$05 Jump to #R$A5F7 if *#REGhl equals #N$0C.
   $A5E5,$02 Increment *#REGhl by two.
   $A5E7,$03 Call #R$A99F.
   $A5EA,$03 Call #R$A7F5.
+@ $A5ED label=SwitchPlayers
   $A5ED,$03 Call #R$A9D4.
-  $A5F0,$02
+  $A5F0,$02 Jump to #R$A5BB if 2UP is active.
   $A5F2,$03 Call #R$A9D4.
   $A5F5,$02 Jump to #R$A5BB.
 N $A5F7 Who is in play, is it 1UP or 2UP?
+@ $A5F7 label=Game_Complete
   $A5F7,$03 #REGhl=#R$AB8A.
-  $A5FA,$02 Test bit 4 of *#REGhl.
-  $A5FC,$02 Jump to #R$A602 if this is player two.
+  $A5FA,$04 Jump to #R$A602 if this is player two.
   $A5FE,$02 Reset bit 6 of *#REGhl.
   $A600,$02 Jump to #R$A604.
+@ $A602 label=NewLevel_2UP_CopyScore
   $A602,$02 Reset bit 7 of *#REGhl.
+@ $A604 label=NewLevel_CopyScore
   $A604,$03 Call #R$A9C5.
   $A607,$03 Call #R$AAA9.
   $A60A,$03 Call #R$AB12.
@@ -85,7 +95,7 @@ N $A5F7 Who is in play, is it 1UP or 2UP?
   $A610,$03 Call #R$AA69.
   $A613,$03 Call #R$A7F5.
   $A616,$03 Call #R$A9D4.
-  $A619,$02
+  $A619,$02 Jump to #R$A5BB if 2UP is active.
   $A61B,$02 Jump to #R$A5A3.
 
 c $A61D Handler: Time Out
@@ -97,6 +107,7 @@ N $A620 See #POKE#infinite_lives().
   $A620,$01 Decrease *#REGhl by one.
 N $A621 Is the player out of lives?
   $A621,$01 #REGa=*#REGhl.
+N $A622 This is why #R$A97D can't be altered on its own to set higher staring lives.
   $A622,$02,b$01 Keep only bits 0-1.
   $A624,$02 Jump to #R$A62E if is zero.
   $A626,$03 Call #R$A9EF.
@@ -270,11 +281,14 @@ N $A77E Writes #N$00 to the middle screen area.
   $A789,$02 Copy #REGhl to #REGde #N$07FF more times.
   $A78B,$01 Return.
 
-c $A78C
+c $A78C Controller: Name Selection
+@ $A78C label=Controller_NameSelect
+R $A78C HL Either #R$ACA6 or #R$ACC7.
   $A78C,$03 #REGa=*#R$AB8A.
   $A78F,$02,b$01 Keep only bits 4-7.
   $A791,$02,b$01 Set bit 3.
   $A793,$03 Write #REGa back to #R$AB8A.
+@ $A796 label=Handler_NameSelect_Loop
   $A796,$05 Write #N$00 to #R$CC3D.
   $A79B,$01 Stash #REGhl on the stack.
   $A79C,$02 #REGb=#N$0A.
@@ -288,8 +302,11 @@ c $A78C
   $A7B3,$01 Restore #REGhl from the stack.
   $A7B4,$03 Call #R$B6BB.
   $A7B7,$01 #REGa=#REGe.
+N $A7B8 Was "up" pressed?
   $A7B8,$04 Jump to #R$A80C if #REGa is #N$18
+N $A7BC Was "down" pressed?
   $A7BC,$04 Jump to #R$A818 if #REGa is #N$08.
+N $A7C0 #HTML(Was "fire" <em>not</em> pressed?)
   $A7C0,$04 Jump to #R$A796 if #REGa is not #N$80.
   $A7C4,$01 Stash #REGhl on the stack.
   $A7C5,$06 Write #N($0040,$04,$04) to *#R$CC3B.
@@ -332,22 +349,37 @@ N $A7F5 #HTML(Not technically <em>any key</em> but any control button.)
   $A808,$03 Call #R$CB9C.
   $A80B,$01 Return.
 
-c $A80C
-  $A80C,$01 #REGa=*#REGhl.
-  $A80D,$04 Jump to #R$A824 if #REGa is #N$20.
-  $A811,$04 Jump to #R$A828 if #REGa is #N$5A.
+c $A80C Handler: Player Name Selection
+@ $A80C label=Handler_NameSelect_Up
+R $A82E HL The address which contains the player name being created
+N $A80C Action "user has pressed "up":
+  $A80C,$01 #REGa=the current letter.
+N $A80D Special handling for "space" as it's out of sequence with the other lettering.
+  $A80D,$04 Jump to #R$A824 if #REGa is currently #N$20 (ASCII "space").
+  $A811,$04 Jump to #R$A828 if #REGa is currently #N$5A (ASCII "Z").
+N $A815 We're within the upper and lower boundaries, so move "up" a letter.
   $A815,$01 Increment #REGa by one.
   $A816,$02 Jump to #R$A82E.
-  $A818,$01 #REGa=*#REGhl.
-  $A819,$04 Jump to #R$A82C if #REGa is #N$20.
-  $A81D,$04 Jump to #R$A828 if #REGa is #N$41.
+N $A818 Action "user has pressed "down":
+@ $A818 label=Handler_NameSelect_Down
+  $A818,$01 #REGa=the current letter.
+N $A819 Special handling for "space" as it's out of sequence with the other lettering.
+  $A819,$04 Jump to #R$A82C if #REGa is currently #N$20 (ASCII "space").
+  $A81D,$04 Jump to #R$A828 if #REGa is currently #N$41 (ASCII "A").
+N $A821 We're within the upper and lower boundaries, so move "down" a letter.
   $A821,$01 Decrease #REGa by one.
   $A822,$02 Jump to #R$A82E.
-  $A824,$02 #REGa=#N$41.
+N $A824 The upper boundrary has been reached, so cycle back to the letter "A".
+@ $A824 label=NameSelect_BackTo_A
+  $A824,$02,c$01 #REGa=#N$41 (ASCII "A").
   $A826,$02 Jump to #R$A82E.
-  $A828,$02 #REGa=#N$20.
+@ $A828 label=NameSelect_Space
+  $A828,$02,c$01 #REGa=#N$20 (ASCII "space").
   $A82A,$02 Jump to #R$A82E.
-  $A82C,$02 #REGa=#N$5A.
+N $A82C The lower boundrary has been reached, so cycle back to the letter "Z".
+@ $A82C label=NameSelect_BackTo_Z
+  $A82C,$02,c$01 #REGa=#N$5A (ASCII "Z").
+@ $A82E label=Handler_NameSelect_Write
   $A82E,$01 Write #REGa to *#REGhl.
   $A82F,$01 Stash #REGhl on the stack.
   $A830,$03 #REGhl=#R$AB8A.
@@ -374,21 +406,34 @@ N $A841 Else, use the name for 2UP.
   $A856,$02 Write #N$FF to *#REGhl.
   $A858,$01 Return.
 
-c $A859
+c $A859 Controller: Yes/ No
+@ $A859 label=Controller_Yes_No
   $A859,$03 Call #R$A7EB.
+N $A85C Produce a short pause.
+@ $A85C label=Controller_Yes_No_Loop
   $A85C,$02 #REGb=#N$0A.
+@ $A85E label=Controller_Yes_No_Pause
   $A85E,$01 HALT.
   $A85F,$02 Decrease counter by one and loop back to #R$A85E until counter is zero.
+N $A861 Fetch player input.
   $A861,$03 Call #R$B6BB.
   $A864,$01 #REGa=#REGe.
+N $A865 Was "up" pressed?
   $A865,$04 Jump to #R$A872 if #REGa is #N$18.
+N $A869 Was "down" pressed?
   $A869,$04 Jump to #R$A872 if #REGa is #N$08.
+N $A86D #HTML(Was "fire" <em>not</em> pressed?)
   $A86D,$04 Jump to #R$A85C if #REGa is not #N$80.
+N $A871 Pressing "fire" exits/ sets the value.
   $A871,$01 Return.
+N $A872 Flip bit 5 of #REGa (#N$20) using XOR with *#R$AB8A.
+@ $A872 label=Controller_Yes_No_Action
   $A872,$03 #REGhl=#R$AB8A.
-  $A875,$02 #REGa=#N$20.
-  $A877,$01 Reset the bits from *#REGhl.
+  $A875,$02,b$01 #REGa=#N$20.
+  $A877,$01 Flip bit 5 of #REGa using XOR with *#REGhl.
   $A878,$01 Write #REGa to *#REGhl.
+M $A872,$07 Flip bit 5 of #R$AB8A.
+N $A879 Update the text on the screen to reflect the players choice.
   $A879,$03 Call #R$A884.
   $A87C,$03 #REGbc=#N($0080,$04,$04).
   $A87F,$03 Call #R$A7FE.
@@ -595,8 +640,8 @@ N $A9CE Scores are held using three bytes.
   $A9D1,$02 Copy the three score digits for the current player into the active players score location.
   $A9D3,$01 Return.
 
-c $A9D4 Switch Players?
-@ $A9D4 label=SwitchPlayers
+c $A9D4 Switch Players
+@ $A9D4 label=Handler_SwitchPlayers
   $A9D4,$03 #REGa=*#R$AB8A.
   $A9D7,$02,b$01 Reset bit 4.
   $A9D9,$03 Write #REGa to *#R$AB8A.
@@ -606,7 +651,7 @@ N $A9DF Who is in play, is it 1UP or 2UP?
   $A9DF,$04 Jump to #R$A9E6 if bit 4 of #REGa is zero.
 N $A9E3 Else, use 2UP.
   $A9E3,$03 #REGhl=#R$AB85.
-@ $A9E6 label=SwitchPlayers_Write
+@ $A9E6 label=Handler_SwitchPlayers_Write
   $A9E6,$03 Write #REGhl to *#R$AB7E.
   $A9E9,$01 Rotate #REGa left (with carry).
   $A9EA,$03 Return if bit 5 of #REGa is not zero.
@@ -855,7 +900,7 @@ D $AB8A #TABLE(default,centre,centre,centre,centre)
 . { =h 0 | =h 1 | =h 2 | =h 3 }
 . { To-do | To-do | To-do | To-do }
 . { =h 4 | =h 5 | =h 6 | =h 7 }
-. { Active player | To-do | To-do | To-do }
+. { Active player | 1UP or 2UP | To-do | To-do }
 . TABLE#
 B $AB8A,$01
 
@@ -1048,8 +1093,8 @@ N $B084 Create an offset in #REGhl.
 
 c $B0A1 Start Game
 @ $B0A1 label=StartGame
-N $B0A1 Write #N$C375 to *#R$C277.
-  $B0A1,$03 #REGhl=#N$C38D.
+N $B0A1 Write #R$C375 to *#R$C277.
+  $B0A1,$03 #REGhl=#R$C38D.
   $B0A4,$03 #REGde=#N$FFE8.
   $B0A7,$01 #REGhl+=#REGde.
   $B0A8,$03 Write #REGhl to *#R$C277.
@@ -1491,21 +1536,17 @@ c $B3F0
 
 c $B416
   $B416,$04 #REGix=#R$C36E.
-  $B41A,$04 Test bit 0 of *#REGix+#N$18.
-  $B41E,$02 Jump to #R$B425 if {} is zero.
-  $B420,$04 Test bit 7 of *#REGix+#N$18.
-  $B424,$01 Return if {} is not zero.
+  $B41A,$06 Jump to #R$B425 if bit 0 of *#REGix+#N$18 is zero.
+  $B420,$05 Return if bit 7 of *#REGix+#N$18 is not zero.
   $B425,$04 Reset bit 7 of *#REGix+#N$18.
   $B429,$03 Call #R$B2C0.
   $B42C,$04 #REGix=#R$C36E.
   $B430,$03 Call #R$B374.
-  $B433,$04 Test bit 1 of *#REGix+#N$17.
-  $B437,$02 Jump to #R$B440 if {} is not zero.
+  $B433,$06 Jump to #R$B440 if bit 1 of *#REGix+#N$17 is not zero.
   $B439,$03 Call #R$B4B8.
   $B43C,$03 Call #R$B469.
   $B43F,$01 Return.
-  $B440,$04 Test bit 0 of *#REGix+#N$18.
-  $B444,$01 Return if {} is zero.
+  $B440,$05 Return if bit 0 of *#REGix+#N$18 is zero.
   $B445,$04 Set bit 7 of *#REGix+#N$18.
   $B449,$01 Return.
 
@@ -1869,8 +1910,429 @@ N $B721 Handle no action.
   $B723,$01 Return.
 
 c $B724
-
-
+  $B724,$03 #REGde=#R$C36E.
+  $B727,$03 #REGhl=#R$C375.
+  $B72A,$03 #REGbc=#N($0007,$04,$04).
+  $B72D,$02 LDIR.
+  $B72F,$03 #REGhl=#R$C28E.
+  $B732,$01 Decrease *#REGhl by one.
+  $B733,$01 Return if {} is not zero.
+  $B734,$02 Write #N$06 to *#REGhl.
+  $B736,$01 Increment #REGhl by one.
+  $B737,$01 Decrease *#REGhl by one.
+  $B738,$01 Return if {} is not zero.
+  $B739,$02 Write #N$01 to *#REGhl.
+  $B73B,$04 #REGix=#R$C36E.
+  $B73F,$01 Increment #REGhl by one.
+  $B740,$01 Decrease *#REGhl by one.
+  $B741,$02 Jump to #R$B74B if {} is not zero.
+  $B743,$02 Write #N$01 to *#REGhl.
+  $B745,$04 Reset bit 5 of *#REGix+#N$17.
+  $B749,$02 Jump to #R$B75D.
+  $B74B,$04 Set bit 5 of *#REGix+#N$17.
+  $B74F,$06 Jump to #R$B75D if bit 5 of *#REGix+#N$13 is not zero.
+  $B755,$03 #REGa=*#R$C28E.
+  $B758,$02 #REGa+=#N$06.
+  $B75A,$03 Write #REGa to *#R$C28E.
+  $B75D,$06 Jump to #R$B76D if bit 4 of *#REGix+#N$17 is zero.
+  $B763,$03 #REGa=*#R$C28E.
+  $B766,$02 #REGa+=#N$04.
+  $B768,$03 Write #REGa to *#R$C28E.
+  $B76B,$02 Jump to #R$B781.
+  $B76D,$06 Jump to #R$B77B if bit 1 of *#REGix+#N$17 is zero.
+  $B773,$01 Increment #REGhl by one.
+  $B774,$02 Write #N$01 to *#REGhl.
+  $B776,$01 Increment #REGhl by one.
+  $B777,$02 Write #N$01 to *#REGhl.
+  $B779,$02 Jump to #R$B7A1.
+  $B77B,$01 Increment #REGhl by one.
+  $B77C,$01 Decrease *#REGhl by one.
+  $B77D,$02 Jump to #R$B763 if {} is not zero.
+  $B77F,$02 Write #N$01 to *#REGhl.
+  $B781,$01 Increment #REGhl by one.
+  $B782,$01 Decrease *#REGhl by one.
+  $B783,$02 Jump to #R$B79F if {} is zero.
+  $B785,$04 Jump to #R$B7A1 if bit 1 of *#REGhl is zero.
+  $B789,$02 Test bit 0 of *#REGhl.
+  $B78B,$03 #REGa=*#REGix+#N$13.
+  $B78E,$02 Jump to #R$B79A if {} is not zero.
+  $B790,$03 Call #R$C1CD.
+  $B793,$04 #REGix=#R$C36E.
+  $B797,$03 #REGa=*#R$C1E5.
+  $B79A,$02,b$01 Keep only bits 3-4.
+  $B79C,$01 #REGe=#REGa.
+  $B79D,$02 Jump to #R$B7A7.
+  $B79F,$02 Write #N$01 to *#REGhl.
+  $B7A1,$03 Call #R$B6BB.
+  $B7A4,$03 Return if bit 7 of #REGe is not zero.
+  $B7A7,$06 Jump to #R$B7CB if bit 0 of *#REGix+#N$18 is zero.
+  $B7AD,$02 #REGa=#N$08.
+  $B7AF,$01 Compare #REGa with #REGe.
+  $B7B0,$01 Return if {} is not zero.
+  $B7B1,$04 Reset bit 1 of *#REGix+#N$17.
+  $B7B5,$03 #REGhl=*#R$C277.
+  $B7B8,$03 #REGbc=#N($0021,$04,$04).
+  $B7BB,$06 Jump to #R$B7C4 if bit 4 of *#REGix+#N$10 is zero.
+  $B7C1,$03 #REGbc=#N($002D,$04,$04).
+  $B7C4,$01 #REGhl+=#REGbc.
+  $B7C5,$02 Set bit 2 of *#REGhl.
+  $B7C7,$02,b$01 Set bits 6.
+  $B7C9,$02 Jump to #R$B7E4.
+  $B7CB,$03 #REGhl=*#R$C277.
+  $B7CE,$03 #REGbc=#N($0021,$04,$04).
+  $B7D1,$06 Jump to #R$B7DA if bit 4 of *#REGix+#N$10 is zero.
+  $B7D7,$03 #REGbc=#N($002D,$04,$04).
+  $B7DA,$01 #REGhl+=#REGbc.
+  $B7DB,$04 Jump to #R$B7E1 if bit 1 of *#REGhl is not zero.
+  $B7DF,$02 Set bit 3 of *#REGhl.
+  $B7E1,$03 #REGa=*#REGix+#N$13.
+  $B7E4,$01 #REGb=#REGa.
+  $B7E5,$02,b$01 Keep only bits 3-4.
+  $B7E7,$03 Jump to #R$B7F3 if #REGa is equal to #REGe.
+  $B7EA,$01 #REGa=#REGb.
+  $B7EB,$02,b$01 Keep only bits 6.
+  $B7ED,$01 Set the bits from #REGe.
+  $B7EE,$03 Write #REGa to *#REGix+#N$13.
+  $B7F1,$02 Jump to #R$B7FC.
+  $B7F3,$04 Jump to #R$B81E if bit 5 of #REGb is zero.
+  $B7F7,$02 Reset bit 5 of #REGb.
+  $B7F9,$03 Write #REGb to *#REGix+#N$13.
+  $B7FC,$06 Jump to #R$B809 if bit 0 of *#REGix+#N$17 is not zero.
+  $B802,$07 Jump to #R$B8A6 if bit 2 of *#REGix+#N$17 is zero.
+  $B809,$04 Test bit 3 of *#REGix+#N$17.
+  $B80D,$02 #REGa=#N$02.
+  $B80F,$02 Jump to #R$B813 if {} is zero.
+  $B811,$02 #REGa=#N$00.
+  $B813,$03 Set the bits of #REGa with *#REGix+#N$17.
+  $B816,$02,b$01 Keep only bits 1, 3-7.
+  $B818,$03 Write #REGa to *#REGix+#N$17.
+  $B81B,$03 Jump to #R$B8A6.
+  $B81E,$03 #REGhl=#R$C1E7.
+  $B821,$02 Shift #REGe right (with carry).
+  $B823,$02 Shift #REGe right (with carry).
+  $B825,$02 #REGd=#N$00.
+  $B827,$01 #REGhl+=#REGde.
+  $B828,$01 #REGe=*#REGhl.
+  $B829,$01 Increment #REGhl by one.
+  $B82A,$01 #REGd=*#REGhl.
+  $B82B,$03 #REGl=*#REGix+#N$10.
+  $B82E,$03 #REGh=*#REGix+#N$11.
+  $B831,$01 #REGhl+=#REGde.
+  $B832,$04 Jump to #R$B870 if bit 7 of *#REGhl is not zero.
+  $B836,$01 Stash #REGhl on the stack.
+  $B837,$03 #REGde=#R$78A0.
+  $B83A,$01 Set flags.
+  $B83B,$02 #REGhl-=#REGde (with carry).
+  $B83D,$01 Restore #REGhl from the stack.
+  $B83E,$03 Jump to #R$B591 if {} is lower.
+  $B841,$01 Stash #REGhl on the stack.
+  $B842,$03 #REGde=#R$7A60.
+  $B845,$02 #REGhl-=#REGde (with carry).
+  $B847,$01 Restore #REGhl from the stack.
+  $B848,$03 Jump to #R$B4FC if {} is higher.
+  $B84B,$06 Jump to #R$B85F if bit 3 of *#REGix+#N$13 is not zero.
+  $B851,$04 Test bit 4 of *#REGix+#N$13.
+  $B855,$02 #REGa=#N$00.
+  $B857,$02 Jump to #R$B85B if {} is zero.
+  $B859,$02 #REGa=#N$1F.
+  $B85B,$01 Reset the bits from #REGl.
+  $B85C,$02,b$01 Keep only bits 0-4.
+  $B85E,$01 Return if {} is zero.
+  $B85F,$01 Stash #REGhl on the stack.
+  $B860,$04 Set bit 3 of *#REGix+#N$17.
+  $B864,$06 Jump to #R$B886 if bit 1 of *#REGix+#N$17 is zero.
+  $B86A,$04 Reset bit 1 of *#REGix+#N$17.
+  $B86E,$02 Jump to #R$B881.
+  $B870,$01 Stash #REGhl on the stack.
+  $B871,$04 Reset bit 3 of *#REGix+#N$17.
+  $B875,$02 Test bit 6 of #REGb.
+  $B877,$03 Call #R$BAAA zero.
+  $B87A,$01 Restore #REGhl from the stack.
+  $B87B,$01 Stash #REGhl on the stack.
+  $B87C,$03 Call #R$B919.
+  $B87F,$02 Jump to #R$B889.
+  $B881,$03 Call #R$B919.
+  $B884,$01 Restore #REGhl from the stack.
+  $B885,$01 Stash #REGhl on the stack.
+  $B886,$03 Call #R$B99F.
+  $B889,$01 Restore #REGhl from the stack.
+  $B88A,$02 Set bit 5 of #REGb.
+  $B88C,$03 Write #REGb to *#REGix+#N$13.
+  $B88F,$03 Write #REGl to *#REGix+#N$10.
+  $B892,$03 Write #REGh to *#REGix+#N$11.
+  $B895,$04 Jump to #R$B8A6 if bit 3 of #REGb is zero.
+  $B899,$03 Increment *#REGix+#N$07 by one.
+  $B89C,$04 Jump to #R$B8A6 if bit 4 of #REGb is not zero.
+  $B8A0,$03 Decrease *#REGix+#N$07 by one.
+  $B8A3,$03 Decrease *#REGix+#N$07 by one.
+  $B8A6,$03 #REGa=*#REGix+#N$13.
+  $B8A9,$01 #REGe=#REGa.
+  $B8AA,$02 #REGd=#N$00.
+  $B8AC,$03 #REGl=*#REGix+#N$14.
+  $B8AF,$03 #REGh=*#REGix+#N$15.
+  $B8B2,$01 #REGhl+=#REGde.
+  $B8B3,$01 #REGa=*#REGhl.
+  $B8B4,$03 Write #REGa to *#REGix+#N$0A.
+  $B8B7,$01 Increment #REGhl by one.
+  $B8B8,$01 #REGa=*#REGhl.
+  $B8B9,$03 Write #REGa to *#REGix+#N$0B.
+  $B8BC,$01 Increment #REGhl by one.
+  $B8BD,$01 #REGa=*#REGhl.
+  $B8BE,$03 Write #REGa to *#REGix+#N$0E.
+  $B8C1,$01 Increment #REGhl by one.
+  $B8C2,$01 #REGa=*#REGhl.
+  $B8C3,$03 Write #REGa to *#REGix+#N$0F.
+  $B8C6,$01 Increment #REGhl by one.
+  $B8C7,$01 #REGe=*#REGhl.
+  $B8C8,$01 Increment #REGhl by one.
+  $B8C9,$01 #REGd=*#REGhl.
+  $B8CA,$03 #REGl=*#REGix+#N$10.
+  $B8CD,$03 #REGh=*#REGix+#N$11.
+  $B8D0,$01 #REGhl+=#REGde.
+  $B8D1,$02 Reset bit 5 of #REGh.
+  $B8D3,$03 Write #REGl to *#REGix+#N$0C.
+  $B8D6,$03 Write #REGl to *#REGix+#N$08.
+  $B8D9,$03 Write #REGh to *#REGix+#N$0D.
+  $B8DC,$01 #REGa=#REGh.
+  $B8DD,$01 RLCA.
+  $B8DE,$01 RLCA.
+  $B8DF,$01 RLCA.
+  $B8E0,$02,b$01 Keep only bits 3-4.
+  $B8E2,$02,b$01 Set bits 6.
+  $B8E4,$03 Write #REGa to *#REGix+#N$09.
+  $B8E7,$03 #REGa=*#REGix+#N$0A.
+  $B8EA,$01 RLCA.
+  $B8EB,$01 RLCA.
+  $B8EC,$01 RLCA.
+  $B8ED,$01 RLCA.
+  $B8EE,$03 Write #REGa to *#REGix+#N$16.
+  $B8F1,$04 Test bit 0 of *#REGix+#N$17.
+  $B8F5,$02 Jump to #R$B8FC if {} is zero.
+  $B8F7,$04 Write #N$0B to *#REGix+#N$0B.
+  $B8FB,$01 Return.
+  $B8FC,$04 Test bit 2 of *#REGix+#N$17.
+  $B900,$01 Return if {} is zero.
+  $B901,$04 Write #N$0B to *#REGix+#N$0B.
+  $B905,$03 Increment *#REGix+#N$08 by one.
+  $B908,$03 Increment *#REGix+#N$0C by one.
+  $B90B,$03 #REGl=*#REGix+#N$0E.
+  $B90E,$01 #REGa+=#REGl.
+  $B90F,$03 Write #REGa to *#REGix+#N$0E.
+  $B912,$01 Return if {} is higher.
+  $B913,$03 Increment *#REGix+#N$0F by one.
+  $B916,$01 Return.
+  $B917,$01 Decrease #REGb by one.
+  $B918,$01 Increment #REGc by one.
+  $B919,$02 Stash #REGix on the stack.
+  $B91B,$04 #REGix=#R$C277.
+  $B91F,$01 Stash #REGhl on the stack.
+  $B920,$02 Test bit 4 of #REGl.
+  $B922,$02 Jump to #R$B929 if {} is zero.
+  $B924,$03 #REGde=#N($000C,$04,$04).
+  $B927,$02 #REGix+=#REGde.
+  $B929,$03 #REGe=*#REGix+#N$22.
+  $B92C,$03 #REGd=*#REGix+#N$23.
+  $B92F,$01 Set flags.
+  $B930,$02 #REGhl-=#REGde (with carry).
+  $B932,$01 Restore #REGhl from the stack.
+  $B933,$02 Jump to #R$B948 if {} is zero.
+  $B935,$01 #REGa=#REGl.
+  $B936,$01 #REGhl+=#REGhl.
+  $B937,$01 #REGhl+=#REGhl.
+  $B938,$01 #REGhl+=#REGhl.
+  $B939,$02,b$01 Keep only bits 0-4.
+  $B93B,$01 #REGc=#REGa.
+  $B93C,$02 Compare #REGa with #N$0A.
+  $B93E,$02 Jump to #R$B96C if {} is lower.
+  $B940,$02 Compare #REGa with #N$16.
+  $B942,$02 Jump to #R$B988 if {} is higher.
+  $B944,$03 Restore #REGhl, #REGhl and #REGhl from the stack.
+  $B947,$01 Return.
+  $B948,$02 Stash #REGix on the stack.
+  $B94A,$01 Restore #REGhl from the stack.
+  $B94B,$03 #REGde=#N($0021,$04,$04).
+  $B94E,$01 #REGhl+=#REGde.
+  $B94F,$02 Test bit 4 of *#REGhl.
+  $B951,$02 Jump to #R$B944 if {} is zero.
+  $B953,$02 Restore #REGix from the stack.
+  $B955,$02 Test bit 3 of #REGb.
+  $B957,$02 Jump to #R$B945 if {} is zero.
+  $B959,$02 Test bit 4 of #REGb.
+  $B95B,$02 Jump to #R$B945 if {} is zero.
+  $B95D,$02 Test bit 6 of #REGb.
+  $B95F,$02 Jump to #R$B945 if {} is zero.
+  $B961,$02 Set bit 3 of *#REGhl.
+  $B963,$04 Set bit 1 of *#REGix+#N$17.
+  $B967,$04 Set bit 0 of *#REGix+#N$18.
+  $B96B,$01 Return.
+  $B96C,$01 #REGa=#REGh.
+  $B96D,$03 Compare #REGa with *#REGix+#N$20.
+  $B970,$02 Jump to #R$B944 if {} is not zero.
+  $B972,$02 Restore #REGix from the stack.
+  $B974,$04 Test bit 1 of *#REGix+#N$17.
+  $B978,$01 Return if {} is not zero.
+  $B979,$01 #REGa=#REGc.
+  $B97A,$02 Compare #REGa with #N$05.
+  $B97C,$02 Jump to #R$B983 if {} is higher.
+  $B97E,$04 Set bit 0 of *#REGix+#N$17.
+  $B982,$01 Return.
+  $B983,$04 Set bit 2 of *#REGix+#N$17.
+  $B987,$01 Return.
+  $B988,$01 #REGa=#REGh.
+  $B989,$03 Compare #REGa with *#REGix+#N$20.
+  $B98C,$02 Jump to #R$B944 if {} is not zero.
+  $B98E,$02 Restore #REGix from the stack.
+  $B990,$04 Test bit 1 of *#REGix+#N$17.
+  $B994,$01 Return if {} is not zero.
+  $B995,$01 #REGa=#REGc.
+  $B996,$02 Compare #REGa with #N$1B.
+  $B998,$02 Jump to #R$B983 if {} is higher.
+  $B99A,$04 Set bit 0 of *#REGix+#N$17.
+  $B99E,$01 Return.
+  $B99F,$02 Stash #REGix on the stack.
+  $B9A1,$04 #REGix=#R$C277.
+  $B9A5,$02 Test bit 4 of #REGl.
+  $B9A7,$02 Jump to #R$B9AE if {} is zero.
+  $B9A9,$03 #REGde=#N($000C,$04,$04).
+  $B9AC,$02 #REGix+=#REGde.
+  $B9AE,$01 Stash #REGhl on the stack.
+  $B9AF,$03 #REGde=#N($0020,$04,$04).
+  $B9B2,$01 #REGhl+=#REGde.
+  $B9B3,$01 #REGa=*#REGhl.
+  $B9B4,$02,b$01 Keep only bits 3-5.
+  $B9B6,$02 Compare #REGa with #N$20.
+  $B9B8,$01 #REGa=#REGl.
+  $B9B9,$02 Jump to #R$B9D7 if {} is not zero.
+  $B9BB,$03 #REGe=*#REGix+#N$1E.
+  $B9BE,$03 #REGd=*#REGix+#N$1F.
+  $B9C1,$01 Restore #REGhl from the stack.
+  $B9C2,$01 Stash #REGhl on the stack.
+  $B9C3,$01 Set flags.
+  $B9C4,$02 #REGhl-=#REGde (with carry).
+  $B9C6,$02 Jump to #R$B9D7 if {} is zero.
+  $B9C8,$04 Set bit 0 of *#REGix+#N$21.
+  $B9CC,$04 Reset bit 1 of *#REGix+#N$21.
+  $B9D0,$03 #REGhl=#R$C386.
+  $B9D3,$02 Set bit 4 of *#REGhl.
+  $B9D5,$02 Jump to #R$B9F6.
+  $B9D7,$03 #REGhl=#R$C386.
+  $B9DA,$02 Reset bit 4 of *#REGhl.
+  $B9DC,$04 Test bit 1 of *#REGix+#N$21.
+  $B9E0,$02 Jump to #R$B9F6 if {} is zero.
+  $B9E2,$04 Test bit 0 of *#REGix+#N$21.
+  $B9E6,$02 Jump to #R$B9F6 if {} is not zero.
+  $B9E8,$02,b$01 Keep only bits 0-4.
+  $B9EA,$02 Compare #REGa with #N$08.
+  $B9EC,$02 Jump to #R$B9F2 if {} is zero.
+  $B9EE,$02 Compare #REGa with #N$17.
+  $B9F0,$02 Jump to #R$B9F6 if {} is not zero.
+  $B9F2,$04 Set bit 2 of *#REGix+#N$21.
+  $B9F6,$01 Restore #REGhl from the stack.
+  $B9F7,$01 #REGa=#REGl.
+  $B9F8,$03 Compare #REGa with *#REGix+#N$1A.
+  $B9FB,$02 Jump to #R$BA04 if {} is not zero.
+  $B9FD,$01 #REGa=#REGh.
+  $B9FE,$03 Compare #REGa with *#REGix+#N$1B.
+  $BA01,$02 Jump to #R$BA2C if {} is zero.
+  $BA03,$01 #REGa=#REGl.
+  $BA04,$03 Compare #REGa with *#REGix+#N$1E.
+  $BA07,$02 Jump to #R$BA1D if {} is not zero.
+  $BA09,$01 #REGa=#REGh.
+  $BA0A,$03 Compare #REGa with *#REGix+#N$1F.
+  $BA0D,$02 Jump to #R$BA1D if {} is not zero.
+  $BA0F,$02 Restore #REGix from the stack.
+  $BA11,$03 Call #R$C144.
+  $BA14,$01 Increment #REGhl by one.
+  $BA15,$02 Set bit 3 of *#REGhl.
+  $BA17,$03 #REGhl=#R$CC3D.
+  $BA1A,$02 Set bit 2 of *#REGhl.
+  $BA1C,$01 Return.
+  $BA1D,$03 #REGl=*#REGix+#N$1E.
+  $BA20,$03 #REGh=*#REGix+#N$1F.
+  $BA23,$02 Restore #REGix from the stack.
+  $BA25,$03 Call #R$C144.
+  $BA28,$01 Increment #REGhl by one.
+  $BA29,$02 Reset bit 3 of *#REGhl.
+  $BA2B,$01 Return.
+  $BA2C,$03 Call #R$C144.
+  $BA2F,$03 #REGde=#N($0041,$04,$04).
+  $BA32,$01 #REGhl+=#REGde.
+  $BA33,$02 Test bit 6 of #REGb.
+  $BA35,$02 Jump to #R$BA54 if {} is zero.
+  $BA37,$02 Reset bit 3 of *#REGhl.
+  $BA39,$02 Reset bit 6 of #REGb.
+  $BA3B,$04 Set bit 6 of *#REGix+#N$21.
+  $BA3F,$04 Test bit 7 of *#REGix+#N$21.
+  $BA43,$02 Restore #REGix from the stack.
+  $BA45,$03 #REGhl=#R$CC3D.
+  $BA48,$02 Jump to #R$BA4D if {} is zero.
+  $BA4A,$02 Set bit 3 of *#REGhl.
+  $BA4C,$01 Return.
+  $BA4D,$02 Set bit 4 of *#REGhl.
+  $BA4F,$04 Set bit 4 of *#REGix+#N$17.
+  $BA53,$01 Return.
+  $BA54,$02 Test bit 3 of *#REGhl.
+  $BA56,$02 Jump to #R$BAA5 if {} is not zero.
+  $BA58,$02 Set bit 3 of *#REGhl.
+  $BA5A,$02 Set bit 6 of #REGb.
+  $BA5C,$04 Reset bit 6 of *#REGix+#N$21.
+  $BA60,$04 Test bit 5 of *#REGix+#N$21.
+  $BA64,$02 Jump to #R$BA6E if {} is zero.
+  $BA66,$03 #REGa=*#R$C36D.
+  $BA69,$02,b$01 Set bits .
+  $BA6B,$03 Write #REGa to *#R$C36D.
+  $BA6E,$02 Stash #REGix on the stack.
+  $BA70,$01 Restore #REGhl from the stack.
+  $BA71,$03 #REGde=#N($0021,$04,$04).
+  $BA74,$01 #REGhl+=#REGde.
+  $BA75,$02 Restore #REGix from the stack.
+  $BA77,$04 Test bit 4 of *#REGix+#N$17.
+  $BA7B,$04 Reset bit 4 of *#REGix+#N$17.
+  $BA7F,$02 Jump to #R$BA9F if {} is not zero.
+  $BA81,$02 Test bit 7 of *#REGhl.
+  $BA83,$02 Set bit 7 of *#REGhl.
+  $BA85,$02 Jump to #R$BA99 if {} is not zero.
+  $BA87,$02 Set bit 1 of *#REGhl.
+  $BA89,$03 #REGhl=#R$CC3D.
+  $BA8C,$02 Set bit 3 of *#REGhl.
+  $BA8E,$03 #REGhl=#R$C274.
+  $BA91,$02 Stash #REGix on the stack.
+  $BA93,$03 Call #R$CB22.
+  $BA96,$02 Restore #REGix from the stack.
+  $BA98,$01 Return.
+  $BA99,$03 #REGhl=#R$CC3D.
+  $BA9C,$02 Set bit 3 of *#REGhl.
+  $BA9E,$01 Return.
+  $BA9F,$03 #REGhl=#R$CC3D.
+  $BAA2,$02 Set bit 2 of *#REGhl.
+  $BAA4,$01 Return.
+  $BAA5,$02 Restore #REGix from the stack.
+  $BAA7,$02 Restore #REGhl and #REGhl from the stack.
+  $BAA9,$01 Return.
+  $BAAA,$02 Test bit 3 of #REGb.
+  $BAAC,$01 Return if {} is zero.
+  $BAAD,$02 Test bit 4 of #REGb.
+  $BAAF,$01 Return if {} is zero.
+  $BAB0,$03 #REGde=#N($0060,$04,$04).
+  $BAB3,$02 Reset bit 5 of #REGh.
+  $BAB5,$01 Set flags.
+  $BAB6,$02 #REGhl-=#REGde (with carry).
+  $BAB8,$04 #REGde=*#R$C2CC.
+  $BABC,$02 #REGhl-=#REGde (with carry).
+  $BABE,$02 Jump to #R$BAC7 if {} is zero.
+  $BAC0,$03 #REGde=#N($0001,$04,$04).
+  $BAC3,$01 Set flags.
+  $BAC4,$02 #REGhl-=#REGde (with carry).
+  $BAC6,$01 Return if {} is not zero.
+  $BAC7,$02 Restore #REGhl and #REGhl from the stack.
+  $BAC9,$02 Set bit 5 of #REGb.
+  $BACB,$01 #REGa=#REGb.
+  $BACC,$03 Write #REGa to *#REGix+#N$13.
+  $BACF,$02,b$01 Keep only bits 3-5.
+  $BAD1,$02,b$01 Set bits 7.
+  $BAD3,$04 Reset bit 4 of *#REGix+#N$17.
+  $BAD7,$03 Call #R$BA9F.
+  $BADA,$03 Jump to #R$B8A9.
 
 c $BADD
   $BADD,$04 #REGix=#R$C36E.
@@ -1947,6 +2409,148 @@ c $BB36
   $BB72,$01 Return.
 
 c $BB73
+  $BB73,$04 #REGix=*#R$C277.
+  $BB77,$07 Call #R$BC04 if bit 2 of *#REGix+#N$21 is not zero.
+  $BB7E,$07 Call #R$BBCE if bit 3 of *#REGix+#N$21 is not zero.
+  $BB85,$03 #REGde=#N($000C,$04,$04).
+  $BB88,$02 #REGix+=#REGde.
+  $BB8A,$07 Call #R$BC04 if bit 2 of *#REGix+#N$21 is not zero.
+  $BB91,$07 Call #R$BBCE if bit 3 of *#REGix+#N$21 is not zero.
+  $BB98,$03 #REGa=*#R$C389.
+  $BB9B,$02,b$01 Flip bit 1.
+  $BB9D,$02 Test bit 1 of #REGa.
+  $BB9F,$03 Write #REGa to *#R$C389.
+  $BBA2,$01 Return if {} is not zero.
+  $BBA3,$03 #REGhl=#N$C388.
+  $BBA6,$01 Decrease *#REGhl by one.
+  $BBA7,$02 Jump to #R$BBCB if {} is zero.
+  $BBA9,$02 #REGa=#N$01.
+  $BBAB,$01 Compare #REGa with *#REGhl.
+  $BBAC,$01 Return if {} is not zero.
+  $BBAD,$03 #REGhl=#R$D811.
+  $BBB0,$03 Call #R$BC9E.
+  $BBB3,$04 #REGix=#R$C277.
+  $BBB7,$04 Set bit 3 of *#REGix+#N$21.
+  $BBBB,$03 Call #R$BBCE.
+  $BBBE,$03 #REGde=#N($000C,$04,$04).
+  $BBC1,$02 #REGix+=#REGde.
+  $BBC3,$04 Set bit 3 of *#REGix+#N$21.
+  $BBC7,$03 Call #R$BBCE.
+  $BBCA,$01 Return.
+  $BBCB,$02 Write #N$01 to *#REGhl.
+  $BBCD,$01 Return.
+  $BBCE,$05 Return if bit 4 of *#REGix+#N$21 is zero.
+  $BBD3,$04 Reset bit 4 of *#REGix+#N$21.
+  $BBD7,$04 Reset bit 1 of *#REGix+#N$21.
+  $BBDB,$03 #REGhl=#R$C389.
+  $BBDE,$02 Reset bit 0 of *#REGhl.
+  $BBE0,$03 #REGl=*#REGix+#N$22.
+  $BBE3,$03 #REGh=*#REGix+#N$23.
+  $BBE6,$03 Call #R$C144.
+  $BBE9,$01 Increment #REGhl by one.
+  $BBEA,$02 Reset bit 3 of *#REGhl.
+  $BBEC,$03 #REGde=#N($0040,$04,$04).
+  $BBEF,$01 #REGhl+=#REGde.
+  $BBF0,$02 Reset bit 3 of *#REGhl.
+  $BBF2,$03 #REGhl=#R$C386.
+  $BBF5,$03 Return if bit 0 of *#REGhl is zero.
+  $BBF8,$03 #REGhl=*#N$C38A.
+  $BBFB,$01 #REGa=*#REGhl.
+  $BBFC,$03 Write #REGa to *#N$C28F.
+  $BBFF,$01 Increment #REGhl by one.
+  $BC00,$03 Write #REGhl to *#N$C38A.
+  $BC03,$01 Return.
+  $BC04,$03 #REGl=*#REGix+#N$22.
+  $BC07,$03 #REGh=*#REGix+#N$23.
+  $BC0A,$03 Call #R$C144.
+  $BC0D,$01 Increment #REGhl by one.
+  $BC0E,$02 Set bit 3 of *#REGhl.
+  $BC10,$03 #REGde=#N($0040,$04,$04).
+  $BC13,$01 #REGhl+=#REGde.
+  $BC14,$02 Set bit 3 of *#REGhl.
+  $BC16,$04 Set bit 4 of *#REGix+#N$21.
+  $BC1A,$03 #REGa=*#R$C386.
+  $BC1D,$04 Jump to #R$BC49 if bit 0 of #REGa is not zero.
+  $BC21,$03 #REGhl=#R$C389.
+  $BC24,$03 Return if bit 0 of *#REGhl is not zero.
+  $BC27,$02 Set bit 0 of *#REGhl.
+  $BC29,$03 #REGl=*#REGix+#N$18.
+  $BC2C,$03 #REGh=*#REGix+#N$19.
+  $BC2F,$04 #REGhl+=#N($0240,$04,$04).
+  $BC33,$01 #REGa=*#REGhl.
+  $BC34,$01 Increment #REGhl by one.
+  $BC35,$01 #REGh=*#REGhl.
+  $BC36,$01 #REGl=#REGa.
+  $BC37,$03 #REGa=*#R$C1E5.
+  $BC3A,$02,b$01 Keep only bits 3-4.
+  $BC3C,$02 #REGd=#N$00.
+  $BC3E,$01 #REGe=#REGa.
+  $BC3F,$01 #REGhl+=#REGde.
+  $BC40,$03 Call #R$BC96.
+  $BC43,$03 #REGhl=#R$CC3D.
+  $BC46,$02 Set bit 2 of *#REGhl.
+  $BC48,$01 Return.
+  $BC49,$02 Reset bit 0 of #REGa.
+  $BC4B,$03 Write #REGa to *#R$C386.
+  $BC4E,$03 #REGl=*#REGix+#N$18.
+  $BC51,$03 #REGh=*#REGix+#N$19.
+  $BC54,$01 Stash #REGhl on the stack.
+  $BC55,$03 #REGde=#N$9C34.
+  $BC58,$01 Set flags.
+  $BC59,$02 #REGhl-=#REGde (with carry).
+  $BC5B,$01 Restore #REGhl from the stack.
+  $BC5C,$02 Jump to #R$BC83 if {} is zero.
+  $BC5E,$03 #REGde=#N$932E.
+  $BC61,$01 Set flags.
+  $BC62,$02 #REGhl-=#REGde (with carry).
+  $BC64,$02 Jump to #R$BC70 if {} is zero.
+  $BC66,$03 #REGhl=*#N$C38A.
+  $BC69,$03 Call #R$CB65.
+  $BC6C,$03 Call #R$BC96.
+  $BC6F,$01 Return.
+  $BC70,$03 #REGa=*#R$C1E5.
+  $BC73,$04 Jump to #R$BC66 if bit 0 of #REGa is not zero.
+  $BC77,$02 #REGa=#N$64.
+  $BC79,$03 Write #REGa to *#R$C291.
+  $BC7C,$03 #REGhl=#R$CF1F.
+  $BC7F,$03 Call #R$BC9E.
+  $BC82,$01 Return.
+  $BC83,$03 #REGa=*#R$C1E5.
+  $BC86,$04 Jump to #R$BC66 if bit 0 of #REGa is not zero.
+  $BC8A,$05 Write #N$FF to *#R$C292.
+  $BC8F,$03 #REGhl=#R$CE17.
+  $BC92,$03 Call #R$BC9E.
+  $BC95,$01 Return.
+
+c $BC96 Handler: Bonus Messaging
+@ $BC96 label=Handler_BonusMessaging
+R $BC96 HL Pointer to bonus messaging
+N $BC96 Fetch the message string from *#REGhl.
+  $BC96,$01 #REGe=*#REGhl.
+  $BC97,$01 Increment #REGhl by one.
+  $BC98,$01 #REGd=*#REGhl.
+  $BC99,$01 Increment #REGhl by one.
+  $BC9A,$03 Write #REGhl to *#R$C38A.
+  $BC9D,$01 Exchange the #REGde register with the shadow #REGhl register.
+@ $BC9E label=Print_BonusMessaging
+  $BC9E,$03 #REGde=#N$50C0 (screen buffer location).
+  $BCA1,$05 Write #N$00 to *#R$C388.
+  $BCA6,$03 Call #R$B081.
+  $BCA9,$01 Switch the #REGde and #REGhl registers back to normal.
+N $BCAA The messaging appears right at the bottom of the screen. This code blanks out the rest of the two lines to overwrite any existing messaging.
+@ $BCAA label=Print_BonusMessaging_Blank
+  $BCAA,$02 #REGb=#N$08 (eight lines in a character block).
+  $BCAC,$01 Remember where we are on the screen.
+N $BCAD Clearing the character block.
+@ $BCAD label=Print_BonusMessaging_Loop
+  $BCAD,$02 Write #N$00 to *#REGhl.
+  $BCAF,$01 Move down one line.
+  $BCB0,$02 Decrease counter by one and loop back to #R$BCAD until counter is zero.
+  $BCB2,$01 Restore the screen location where we started for this pass (the top of this character block).
+  $BCB3,$01 Move right one character block.
+N $BCB4 Keep going until the end of the screen is reached.
+  $BCB4,$02 Jump to #R$BCAA if #REGl is not zero.
+  $BCB6,$01 Return.
 
 c $BCB7
   $BCB7,$04 #REGix=*#R$C277.
@@ -2014,9 +2618,199 @@ c $BD0D
   $BD47,$01 Return.
 
 c $BD48
+  $BD48,$04 #REGix=#R$C2C7.
+  $BD4C,$03 #REGa=*#REGix+#N$07.
+  $BD4F,$02,b$01 Reset bits 6.
+  $BD51,$02 Test bit 6 of #REGa.
+  $BD53,$03 Write #REGa to *#REGix+#N$07.
+  $BD56,$01 Return if {} is not zero.
+  $BD57,$03 #REGa=*#REGix+#N$00.
+  $BD5A,$03 #REGhl=#R$C276.
+  $BD5D,$01 #REGa+=*#REGhl.
+  $BD5E,$03 #REGhl=#R$C27F.
+  $BD61,$03 Jump to #R$BD68 if #REGa is equal to *#REGhl.
+  $BD64,$03 Call #R$C023.
+  $BD67,$01 Return.
+  $BD68,$03 #REGbc=#N($0001,$04,$04).
+  $BD6B,$03 #REGhl=*#R$C27D.
+  $BD6E,$01 Set flags.
+  $BD6F,$02 #REGhl-=#REGbc.
+  $BD71,$03 Write #REGhl to *#R$C27D.
+  $BD74,$01 Return if {} is not zero.
+  $BD75,$03 #REGhl=*#R$C27B.
+  $BD78,$03 Write #REGhl to *#R$C27D.
+  $BD7B,$03 #REGhl=#R$C279.
+  $BD7E,$02 Return if #REGa is higher than *#REGhl.
+  $BD80,$03 #REGa=*#R$C27F.
+  $BD83,$02 #REGa+=#N$04.
+  $BD85,$03 Write #REGa to *#R$C27F.
+  $BD88,$01 Return.
+
+c $BD89
+  $BD89,$04 #REGix=#R$C356.
+  $BD8D,$03 #REGhl=*#R$C277.
+  $BD90,$04 Test bit 4 of *#REGix+#N$10.
+  $BD94,$03 #REGde=#N($0021,$04,$04).
+  $BD97,$02 Jump to #R$BD9C if {} is zero.
+  $BD99,$03 #REGde=#N($002D,$04,$04).
+  $BD9C,$01 #REGhl+=#REGde.
+  $BD9D,$03 Return if bit 5 of *#REGhl is zero.
+  $BDA0,$01 #REGa=*#REGhl.
+  $BDA1,$03 #REGhl=#R$C35D.
+  $BDA4,$03 #REGde=#R$C356.
+  $BDA7,$03 #REGbc=#N($0007,$04,$04).
+  $BDAA,$02 LDIR.
+  $BDAC,$03 #REGhl=#R$C387.
+  $BDAF,$01 Decrease *#REGhl by one.
+  $BDB0,$01 Return if *#REGhl is not zero.
+  $BDB1,$02 Write #N$06 to *#REGhl.
+  $BDB3,$04 Jump to #R$BDBC if bit 0 of #REGa is not zero.
+  $BDB7,$05 Return if bit 3 of *#REGix+#N$17 is zero.
+  $BDBC,$04 Set bit 3 of *#REGix+#N$17.
+  $BDC0,$06 Jump to #R$BDCD if bit 5 of *#REGix+#N$13 is zero.
+  $BDC6,$04 Reset bit 5 of *#REGix+#N$13.
+  $BDCA,$03 Jump to #R$B8A6.
+
+  $BDCD,$03 #REGa=*#REGix+#N$28.
+  $BDD0,$02,b$01 Keep only bits 0-4.
+  $BDD2,$06 Jump to #R$BDDE if bit 4 of *#REGix+#N$28 is zero.
+  $BDD8,$04 Jump to #R$BE4E if #REGa is lower than #N$16.
+  $BDDC,$02 Jump to #R$BDE2.
+  $BDDE,$04 Jump to #R$BE4E if #REGa is higher than #N$0A.
+  $BDE2,$06 Jump to #R$BE4E if bit 5 of *#REGix+#N$2F is not zero.
+  $BDE8,$03 #REGa=*#REGix+#N$28.
+  $BDEB,$01 #REGl=#REGa.
+  $BDEC,$02,b$01 Keep only bits 0-4.
+  $BDEE,$01 #REGc=#REGa.
+  $BDEF,$03 #REGh=*#REGix+#N$29.
+  $BDF2,$01 #REGhl+=#REGhl.
+  $BDF3,$01 #REGhl+=#REGhl.
+  $BDF4,$01 #REGhl+=#REGhl.
+  $BDF5,$01 #REGa=#REGh.
+  $BDF6,$02,b$01 Keep only bits 0-4.
+  $BDF8,$02 NEG.
+  $BDFA,$02 #REGa+=#N$15.
+  $BDFC,$01 #REGb=#REGa.
+  $BDFD,$03 #REGa=*#REGix+#N$10.
+  $BE00,$02,b$01 Keep only bits 0-4.
+  $BE02,$01 Compare #REGa with #REGc.
+  $BE03,$02 #REGc=#N$00.
+  $BE05,$02 Jump to #R$BE09 if {} is lower.
+  $BE07,$02 #REGc=#N$10.
+  $BE09,$03 #REGa=*#REGix+#N$07.
+  $BE0C,$01 Compare #REGa with #REGb.
+  $BE0D,$02 #REGb=#N$08.
+  $BE0F,$02 Jump to #R$BE13 if {} is higher.
+  $BE11,$02 #REGb=#N$18.
+  $BE13,$06 Jump to #R$BE1C if bit 5 of *#REGix+#N$17 is zero.
+  $BE19,$01 #REGa=#REGc.
+  $BE1A,$01 #REGc=#REGb.
+  $BE1B,$01 #REGb=#REGa.
+  $BE1C,$06 Jump to #R$BE35 if bit 4 of *#REGix+#N$17 is not zero.
+  $BE22,$03 #REGa=*#REGix+#N$13.
+  $BE25,$03 Jump to #R$BE35 if #REGa is equal to #REGc.
+  $BE28,$03 Write #REGb to *#REGix+#N$13.
+  $BE2B,$03 Call #R$BE75.
+  $BE2E,$04 Set bit 4 of *#REGix+#N$17.
+  $BE32,$03 Write #REGc to *#REGix+#N$13.
+  $BE35,$03 Call #R$BE75.
+  $BE38,$04 Reset bit 4 of *#REGix+#N$17.
+  $BE3C,$03 Write #REGb to *#REGix+#N$13.
+  $BE3F,$03 Call #R$BE75.
+  $BE42,$01 #REGa=#REGc.
+  $BE43,$02,b$01 Reset bit 4.
+  $BE45,$03 Write #REGa to *#REGix+#N$13.
+  $BE48,$03 Call #R$BE75.
+  $BE4B,$03 Jump to #R$B8A6.
+  $BE4E,$05 Return if bit 1 of *#REGix+#N$17 is not zero.
+  $BE53,$04 #REGbc=*#R$B917.
+  $BE57,$02 Jump to #R$BDFD.
+  $BE59,$03 #REGl=*#REGix+#N$10.
+  $BE5C,$03 #REGh=*#REGix+#N$11.
+  $BE5F,$03 #REGe=*#REGix+#N$28.
+  $BE62,$03 #REGd=*#REGix+#N$29.
+  $BE65,$01 Set flags.
+  $BE66,$02 #REGhl-=#REGde (with carry).
+  $BE68,$01 Return if {} is not zero.
+  $BE69,$03 #REGhl=#R$C290.
+  $BE6C,$02 Write #N$64 to *#REGhl.
+  $BE6E,$03 #REGhl=#R$C221.
+  $BE71,$03 Call #R$BC9E.
+  $BE74,$01 Return.
+  $BE75,$04 Reset bit 5 of *#REGix+#N$17.
+  $BE79,$06 Jump to #R$BE83 if bit 3 of *#REGix+#N$13 is zero.
+  $BE7F,$04 Set bit 5 of *#REGix+#N$17.
+  $BE83,$03 #REGhl=#R$C1E7.
+  $BE86,$02 #REGd=#N$00.
+  $BE88,$03 #REGa=*#REGix+#N$13.
+  $BE8B,$02,b$01 Keep only bits 3-4.
+  $BE8D,$01 RRCA.
+  $BE8E,$01 RRCA.
+  $BE8F,$01 #REGe=#REGa.
+  $BE90,$01 #REGhl+=#REGde.
+  $BE91,$01 #REGe=*#REGhl.
+  $BE92,$01 Increment #REGhl by one.
+  $BE93,$01 #REGd=*#REGhl.
+  $BE94,$03 #REGl=*#REGix+#N$10.
+  $BE97,$03 #REGh=*#REGix+#N$11.
+  $BE9A,$01 #REGhl+=#REGde.
+  $BE9B,$06 Jump to #R$BEB8 if bit 3 of *#REGix+#N$13 is not zero.
+  $BEA1,$01 #REGa=#REGl.
+  $BEA2,$06 Jump to #R$BEB2 if bit 4 of *#REGix+#N$13 is zero.
+  $BEA8,$02,b$01 Keep only bits 0-4.
+  $BEAA,$03 Return if #REGa is equal to #N$1F.
+  $BEAD,$03 Return if #REGa is equal to #N$15.
+  $BEB0,$02 Jump to #R$BEB8.
+  $BEB2,$02,b$01 Keep only bits 0-4.
+  $BEB4,$01 Return if the result is zero.
+  $BEB5,$03 Return if #REGa is equal to #N$0A.
+  $BEB8,$04 Jump to #R$BEF9 if bit 7 of *#REGhl is not zero.
+  $BEBC,$04 Test bit 5 of *#REGix+#N$30.
+  $BEC0,$04 Reset bit 5 of *#REGix+#N$30.
+  $BEC4,$02 Jump to #R$BEE0 if {} is zero.
+  $BEC6,$06 Jump to #R$BED6 if bit 4 of *#REGix+#N$13 is zero.
+  $BECC,$04 Reset bit 1 of *#REGix+#N$17.
+  $BED0,$04 Set bit 0 of *#REGix+#N$17.
+  $BED4,$02 Jump to #R$BEE8.
+  $BED6,$04 Reset bit 1 of *#REGix+#N$17.
+  $BEDA,$04 Set bit 2 of *#REGix+#N$17.
+  $BEDE,$02 Jump to #R$BEE8.
+  $BEE0,$04 Reset bit 2 of *#REGix+#N$17.
+  $BEE4,$04 Reset bit 0 of *#REGix+#N$17.
+  $BEE8,$01 Restore #REGde from the stack.
+  $BEE9,$01 Stash #REGhl on the stack.
+  $BEEA,$03 Call #R$BE59.
+  $BEED,$03 #REGhl=#R$CC3D.
+  $BEF0,$02 Set bit 1 of *#REGhl.
+  $BEF2,$01 Restore #REGhl from the stack.
+  $BEF3,$03 #REGb=*#REGix+#N$13.
+  $BEF6,$03 Jump to #R$B88A.
+  $BEF9,$03 #REGa=*#R$B918.
+  $BEFC,$06 Jump to #R$BF0B if bit 3 of *#REGix+#N$13 is zero.
+  $BF02,$01 Increment #REGa by one.
+  $BF03,$06 Jump to #R$BF0B if bit 4 of *#REGix+#N$13 is zero.
+  $BF09,$02 #REGa-=#N$02.
+  $BF0B,$04 Return if #REGa with *#REGix+#N$07 is not zero.
+  $BF0F,$04 Set bit 5 of *#REGix+#N$30.
+  $BF13,$06 Jump to #R$BEE8 if bit 1 of *#REGix+#N$17 is not zero.
+  $BF19,$05 Return if bit 3 of *#REGix+#N$13 is not zero.
+  $BF1E,$06 Jump to #R$BF3A if bit 4 of *#REGix+#N$13 is not zero.
+  $BF24,$06 Jump to #R$BF30 if bit 0 of *#REGix+#N$17 is not zero.
+  $BF2A,$04 Set bit 0 of *#REGix+#N$17.
+  $BF2E,$02 Jump to #R$BEE8.
+  $BF30,$04 Reset bit 0 of *#REGix+#N$17.
+  $BF34,$04 Set bit 1 of *#REGix+#N$17.
+  $BF38,$02 Jump to #R$BEE8.
+  $BF3A,$06 Jump to #R$BF46 if bit 2 of *#REGix+#N$17 is not zero.
+  $BF40,$04 Set bit 2 of *#REGix+#N$17.
+  $BF44,$02 Jump to #R$BEE8.
+  $BF46,$04 Reset bit 2 of *#REGix+#N$17.
+  $BF4A,$04 Set bit 1 of *#REGix+#N$17.
+  $BF4E,$02 Jump to #R$BEE8.
 
 c $BF50
   $BF50,$04 #REGix=#R$C36E.
+N $BF54 Check for Game Over "reasons" (see #POKE#immunity()).
   $BF54,$03 #REGa=*#REGix+#N$17.
   $BF57,$02,b$01 Keep only bits 0-2.
   $BF59,$01 Return if #REGa is not zero.
@@ -2039,8 +2833,7 @@ c $BF50
   $BF88,$02 Set bit 0 of *#REGhl.
   $BF8A,$03 Call #R$BF9F.
   $BF8D,$01 Return.
-  $BF8E,$03 #REGhl=#R$C290.
-  $BF91,$02 Write #N$50 to *#REGhl.
+  $BF8E,$05 Write #N$50 to #R$C290.
   $BF93,$03 #REGhl=#R$CC3D.
   $BF96,$02 Set bit 5 of *#REGhl.
   $BF98,$03 #REGhl=#R$C24A.
@@ -2125,7 +2918,72 @@ c $C13E
   $C14B,$01 Return.
 
 c $C14C
+  $C14C,$04 Test bit 7 of *#REGix+#N$07.
+  $C150,$03 #REGhl=#R$C38C.
+  $C153,$02 Jump to #R$C15A if {} is not zero.
+  $C155,$02 #REGa=#N$20.
+  $C157,$01 #REGc=*#REGhl.
+  $C158,$02 Jump to #R$C15D.
+  $C15A,$01 #REGa=*#REGhl.
+  $C15B,$02 #REGc=#N$20.
+  $C15D,$03 Compare #REGa with *#REGix+#N$00.
+  $C160,$01 Return if {} is not zero.
+  $C161,$03 Write #REGc to *#REGix+#N$00.
+  $C164,$02 Stash #REGix on the stack.
+  $C166,$03 Call #R$C1CD.
+  $C169,$02 Restore #REGix from the stack.
+  $C16B,$03 #REGa=*#R$C1E5.
+  $C16E,$02,b$01 Keep only bits 0-1.
+  $C170,$02 Jump to #R$C174 if #REGa is not zero.
+  $C172,$02 #REGa+=#N$02.
+  $C174,$03 Write #REGa to *#REGix+#N$08.
+  $C177,$01 Return.
+  $C178,$03 #REGhl=#R$C38C.
+  $C17B,$01 #REGa=*#REGhl.
+  $C17C,$02 #REGa-=#N$20.
+  $C17E,$01 #REGb=#REGa.
+  $C17F,$03 #REGa=*#REGix+#N$00.
+  $C182,$06 Jump to #R$C196 if bit 7 of *#REGix+#N$07 is zero.
+  $C188,$02 #REGa-=#N$06.
+  $C18A,$04 Jump to #R$C1A0 if #REGa is lower than #N$20.
+  $C18E,$01 Compare #REGa with *#REGhl.
+  $C18F,$02 Jump to #R$C193 if {} is zero.
+  $C191,$02 Jump to #R$C1A0 if {} is higher.
+  $C193,$01 #REGa-=#REGb.
+  $C194,$02 Jump to #R$C1A0.
+  $C196,$02 #REGa+=#N$06.
+  $C198,$04 Jump to #R$C1A0 if #REGa is lower than #N$20.
+  $C19C,$03 Jump to #R$C1A0 if #REGa is higher than *#REGhl.
+  $C19F,$01 #REGa+=#REGb.
+  $C1A0,$03 #REGl=*#REGix+#N$01.
+  $C1A3,$02 Stash #REGix on the stack.
+  $C1A5,$04 #REGix=#R$C293.
+  $C1A9,$02 #REGb=#N$04 (counter).
+  $C1AB,$03 #REGde=#N($000D,$04,$04).
+  $C1AE,$05 Jump to #R$C1BA if #REGa with *#REGix+#N$00 is zero.
+  $C1B3,$02 #REGix+=#REGde.
+  $C1B5,$02 Decrease counter by one and loop back to #R$C1AE until counter is zero.
+  $C1B7,$02 Restore #REGix from the stack.
+  $C1B9,$01 Return.
+  $C1BA,$01 #REGc=#REGa.
+  $C1BB,$03 #REGa=*#REGix+#N$01.
+  $C1BE,$01 Reset the bits from #REGl.
+  $C1BF,$02,b$01 Keep only bits 0-4.
+  $C1C1,$01 #REGa=#REGc.
+  $C1C2,$02 Jump to #R$C1B3 if {} is not zero.
+  $C1C4,$03 #REGa=*#REGix+#N$08.
+  $C1C7,$02 Restore #REGix from the stack.
+  $C1C9,$03 Write #REGa to *#REGix+#N$08.
+  $C1CC,$01 Return.
+  $C1CD,$04 #REGix=#R$C1E5.
+  $C1D1,$04 Rotate *#REGix+#N$01 right.
+  $C1D5,$06 Jump to #R$C1DC if bit 4 of *#REGix+#N$00 is zero.
+  $C1DB,$01 Invert the carry flag.
+  $C1DC,$04 Rotate *#REGix+#N$00 left.
+  $C1E0,$04 Rotate *#REGix+#N$01 left.
+  $C1E4,$01 Return.
 B $C1E5
+B $C1E7
 
 t $C1EF Messaging: Bonus
 @ $C1EF label=Messaging_Bonus
@@ -2137,15 +2995,24 @@ t $C1F5 Messaging: Score
 
 t $C1FB Messaging: You have not collected all the bins
 @ $C1FB label=Messaging_NotAllTheBins
-  $C1FB,$26,$20,$05:$01 #FONT:(You have not collected  all  the bins.)$E417,attr=$30(all-the-bins)
+  $C1FB,$26,$20,$05:$01 #TABLE(default)
+. { #FONT:(You have not collected  all  the)$E417,attr=$30(all-the-bins-1) }
+. { #FONT:(bins.)$E417,attr=$30(all-the-bins-2) }
+. TABLE#
 
 t $C221 Messaging: Ouch! Scat, before I bite YOUR leg orf
 @ $C221 label=Messaging_LegOrf
-  $C221,$29,$20,$08:$01 #FONT:(Ouch!  Scat, before I bite  YOUR leg orf.)$E417,attr=$30(leg-orf)
+  $C221,$29,$20,$08:$01 #TABLE(default)
+. { #FONT:(Ouch!  Scat, before I bite  YOUR)$E417,attr=$30(leg-orf-1) }
+. { #FONT:(leg orf.)$E417,attr=$30(leg-orf-2) }
+. TABLE#
 
 t $C24A Messaging: Ouch! Ge'orf the pavement youbrat
 @ $C24A label=Messaging_Brat
-  $C24A,$26,$20,$05:$01 #FONT:(Ouch!    Ge'orf the pavement you brat.)$E417,attr=$30(brat)
+  $C24A,$26,$20,$05:$01 #TABLE(default)
+. { #FONT:(Ouch!    Ge'orf the pavement you)$E417,attr=$30(brat-1) }
+. { #FONT:(brat.)$E417,attr=$30(brat-2) }
+. TABLE#
 
 g $C270 Number Of Bins String
 @ $C270 label=String_NumberOfBins
@@ -2164,14 +3031,24 @@ D $C272 Time Remaining equates to how much bonus the player receives when the le
 . TABLE#
 .
 . For "250" seconds/ bonus points remaining.
+N $C272 See #POKE#timeLeft().
 B $C272,$02,$01
 
 g $C274
 
 g $C276
+
 g $C277
+W $C277,$02
+
 g $C279
 g $C27A
+g $C27B
+
+g $C27D
+W $C27D,$02
+
+g $C27F
 
 t $C280 Messaging: Road Name
 @ $C280 label=Messaging_RoadName
@@ -2181,15 +3058,34 @@ g $C28E
 
 g $C290
 
+g $C291
+
+g $C292
+
 g $C293
+
+g $C2C7
+
+g $C2CC
 
 g $C2D4
 
 g $C2EE
 
+g $C35D
+
 g $C36E
 
+g $C375
+
+g $C386
+g $C387
+g $C388
 g $C389
+
+g $C38A Bonus Messaging
+@ $C38A label=BonusMessaging
+W $C38A,$02
 
 g $C38C
 g $C38D
@@ -2359,7 +3255,7 @@ D $CB96 The current players score for display. Stored as e.g.
 . For a score of "112233" points.
 B $CB96,$03,$01
 
-g $CB99 Inactive Players Score?
+g $CB99 Inactive Players Score
 @ $CB99 label=InactivePlayer_Score
 D $CB99 See #R$CB96 for explanation.
 B $CB99,$03,$01
@@ -2440,8 +3336,344 @@ c $CB9C
   $CC38,$02 Reset bit 7 of *#REGhl.
   $CC3A,$01 Return.
 W $CC3B,$02
+B $CC3D,$01
 
-b $CC3D
+b $CC3E Table: In-Game Messaging
+@ $CC3E label=Table_InGameMessaging
+W $CC3E,$02 Message.
+  $CC40,$01
+W $CC41,$02 Points.
+W $CC43,$02 Message.
+  $CC45,$01
+L $CC3E,$08,$20
+
+t $CD3E Messaging: One for the road?
+  $CD3E,$18,$17:$01 #FONT:(One for the road? (250))$E417,attr=$30(one-for-the-road)
+
+t $CD56 Messaging: You're supposed to empty the bin
+  $CD56,$30,$20,$0F:$01 #TABLE(default)
+. { #FONT:(You're supposed to empty the bin)$E417,attr=$30(empty-the-bin-1) }
+. { #FONT:(not the barrel.)$E417,attr=$30(empty-the-bin-2) }
+. TABLE#
+
+t $CD86 Messaging: Come in for a quick pint
+  $CD86,$20,$1F:$01 #FONT:(Come in for a quick pint. (230))$E417,attr=$30(quick-pint)
+
+t $CDA6 Messaging: Well, milk's better for you
+  $CDA6,$1D,$1C:$01 #FONT:(Well, milk's better for you.)$E417,attr=$30(milk)
+
+t $CDC3 Messaging: Fancy a swift 'arf?
+  $CDC3,$1A,$19:$01 #FONT:(Fancy a swift 'arf? (270))$E417,attr=$30(swift-arf)
+
+t $CDDD Messaging: Last time I saw Trashman
+  $CDDD,$3A,$20,$19:$01 #TABLE(default)
+. { #FONT:(Last time I saw Trashman 'e were)$E417,attr=$30(saw-trashman-1) }
+. { #FONT:(pi-eyed and wiv a sailor.)$E417,attr=$30(saw-trashman-2) }
+. TABLE#
+
+t $CE17 Messaging: Hic! *%&#'@ Hic!
+@ $CE17 label=Messaging_HicHic
+  $CE17,$11,$10:$01 #FONT:(Hic! *%&#'@ Hic!)$E417,attr=$30(hic)
+
+t $CE28 Messaging: Would you like a Quick Byte?
+  $CE28,$26,$20,$05:$01 #TABLE(default)
+. { #FONT:(Would you like a Quick Byte?)$E417,attr=$30(quick-byte-1) }
+. { #FONT:((150))$E417,attr=$30(quick-byte-2) }
+. TABLE#
+
+t $CE4E Messaging: Good grief!
+  $CE4E,$19,$18:$01 #FONT:(Good grief! He liked it.)$E417,attr=$30(good-grief)
+
+t $CE67 Messaging: Come here, I've got something for you
+  $CE67,$2F,$20,$0E:$01 #TABLE(default)
+. { #FONT:(Come  here,  I've got  something)$E417,attr=$30(got-something-1) }
+. { #FONT:(for you. (130))$E417,attr=$30(got-something-2) }
+. TABLE#
+
+t $CE96 Messaging: I didn't mean you to eat it
+  $CE96,$1D,$1C:$01 #FONT:(I didn't mean you to eat it.)$E417,attr=$30(eat-it)
+
+t $CEB3 Messaging: Trashman. Try today's special
+  $CEB3,$38,$20,$17:$01 #TABLE(default)
+. { #FONT:(Trashman.  Try today's  special,)$E417,attr=$30(todays-special-1) }
+. { #FONT:(" Paradise Isle " (170))$E417,attr=$30(todays-special-2) }
+. TABLE#
+
+t $CEEB Messaging: But some like fried egg floating in a sea of grease
+  $CEEB,$34,$20,$13:$01 #TABLE(default)
+. { #FONT:(But some like fried egg floating)$E417,attr=$30(fried-egg-1) }
+. { #FONT:(in a sea of grease.)$E417,attr=$30(fried-egg-2) }
+. TABLE#
+
+t $CF1F Messaging: Wolfing that lot down like that will slow you down
+@ $CF1F label=Messaging_WolfingThatLotDown
+  $CF1F,$3A,$20,$19:$01 #TABLE(default)
+. { #FONT:(Wolfing that lot  down like that)$E417,attr=$30(wolfing-1) }
+. { #FONT:(will slow you down, mate.)$E417,attr=$30(wolfing-2) }
+. TABLE#
+
+t $CF59 Messaging: Help! My pet llama's running amok upstairs
+  $CF59,$34,$20,$13:$01 #TABLE(default)
+. { #FONT:(Help!   My pet  llama's  running)$E417,attr=$30(llama-1) }
+. { #FONT:(amok upstairs. (80))$E417,attr=$30(llama-2) }
+. TABLE#
+
+t $CF8D Messaging: That was an awesome experience
+  $CF8D,$20,$1F:$01 #FONT:(That was an awesome experience.)$E417,attr=$30(awesome-experience)
+
+t $CFAD Messaging: Want a tip?
+  $CFAD,$11,$10:$01 #FONT:(Want a tip? (45))$E417,attr=$30(tip)
+
+t $CFBE Messaging: Keep off the grass
+  $CFBE,$3B,$20,$1A:$01 #TABLE(default)
+. { #FONT:(Keep off the  grass.  I've taken)$E417,attr=$30(keep-off-the-grass-1) }
+. { #FONT:(the bover to use my hover.)$E417,attr=$30(keep-off-the-grass-2) }
+. TABLE#
+
+t $CFF9 Messaging: Want a quick game of Scrabble?
+  $CFF9,$26,$20,$05:$01 #TABLE(default)
+. { #FONT:(Want a quick  game of  Scrabble?)$E417,attr=$30(scrabble-1) }
+. { #FONT:((100))$E417,attr=$30(scrabble-2) }
+. TABLE#
+
+t $D01F Messaging: O.K. I give in. TRASHMAN is a proper name
+  $D01F,$2D,$20,$0C:$01 #TABLE(default)
+. { #FONT:(O.K.   I give in.  TRASHMAN is a)$E417,attr=$30(give-in-1) }
+. { #FONT:(proper name.)$E417,attr=$30(give-in-2) }
+. TABLE#
+
+t $D04C Messaging: Could you look at my T.V.?
+  $D04C,$20,$1F:$01 #FONT:(Could you look at my T.V.? (50))$E417,attr=$30(tv)
+
+t $D06C Messaging: I meant mend it, not watch it
+  $D06C,$1F,$1E:$01 #FONT:(I meant mend it, not watch it.)$E417,attr=$30(mend-it)
+
+t $D08B Messaging: Take this thing away. My son is obsessed with it
+  $D08B,$37,$20,$16:$01 #TABLE(default)
+. { #FONT:(Take this thing away.  My son is)$E417,attr=$30(take-away-1) }
+. { #FONT:(obsessed with it. (50))$E417,attr=$30(take-away-2) }
+. TABLE#
+
+t $D0C2 Messaging: No one will ever believe I've picked up a Spectrum
+  $D0C2,$36,$20,$15:$01 #TABLE(default)
+. { #FONT:(No one  will ever  believe  I've)$E417,attr=$30(believe-1) }
+. { #FONT:(picked up a Spectrum.)$E417,attr=$30(believe-2) }
+. TABLE#
+
+t $D0F8 Messaging: D'you want a quick game of Space Invaders?
+  $D0F8,$2F,$20,$0E:$01 #TABLE(default)
+. { #FONT:(D'you want a quick game of Space)$E417,attr=$30(quick-game-1) }
+. { #FONT:(Invaders? (70))$E417,attr=$30(quick-game-2) }
+. TABLE#
+
+t $D127 Messaging: Get out! Zapping the cat is not part of the game
+  $D127,$32,$20,$11:$01 #TABLE(default)
+. { #FONT:(Get out!  Zapping the cat is not)$E417,attr=$30(get-out-1) }
+. { #FONT:(part of the game.)$E417,attr=$30(get-out-2) }
+. TABLE#
+
+t $D159 Messaging: Can you help with an anagram? It's I, ENIGMA
+  $D159,$36,$20,$15:$01 #TABLE(default)
+. { #FONT:(Can you  help with  an  anagram?)$E417,attr=$30(anagram-1) }
+. { #FONT:(It's  I, ENIGMA. (55))$E417,attr=$30(anagram-2) }
+. TABLE#
+
+t $D18F Messaging: I'm no good at anagrams. I can't even imagine the answer
+  $D18F,$39,$20,$18:$01 #TABLE(default)
+. { #FONT:(I'm no good at anagrams. I can't)$E417,attr=$30(no-good-anagrams-1) }
+. { #FONT:(even imagine the answer.)$E417,attr=$30(no-good-anagrams-2) }
+. TABLE#
+
+t $D1C8 Messaging: Could you have a look at my COMMODORE 64?
+  $D1C8,$33,$20,$12:$01 #TABLE(default)
+. { #FONT:(Could  you  have  a look  at  my)$E417,attr=$30(look-at-my-1) }
+. { #FONT:(COMMODORE 64? (95))$E417,attr=$30(look-at-my-2) }
+. TABLE#
+
+t $D1FB Messaging: Sorry, but I think the elephant got there first
+  $D1FB,$31,$20,$10:$01 #TABLE(default)
+. { #FONT:(Sorry, but I think the  elephant)$E417,attr=$30(elephant-1) }
+. { #FONT:(got there first.)$E417,attr=$30(elephant-2) }
+. TABLE#
+
+t $D22C Messaging: Do you want a copy of 3D Monster Maze?
+  $D22C,$2B,$20,$0A:$01 #TABLE(default)
+. { #FONT:(Do you want a copy of 3D Monster)$E417,attr=$30(monster-1) }
+. { #FONT:(Maze? (55))$E417,attr=$30(monster-2) }
+. TABLE#
+
+t $D257 Messaging: What on earth did you expect? An original!
+  $D257,$2D,$20,$0C:$01 #TABLE(default)
+. { #FONT:(What  on earth  did you  expect?)$E417,attr=$30(earth-1) }
+. { #FONT:(An original!)$E417,attr=$30(earth-2) }
+. TABLE#
+
+t $D284 Messaging: Come and see our new puppy
+  $D284,$25,$20,$04:$01 #TABLE(default)
+. { #FONT:(Come  and  see  our  new   puppy)$E417,attr=$30(puppy-1) }
+. { #FONT:((70))$E417,attr=$30(puppy-2) }
+. TABLE#
+
+t $D2A9 Messaging: We had our old dog put down when the last Trashman bit him
+  $D2A9,$3B,$20,$1A:$01 #TABLE(default)
+. { #FONT:(We had our old dog put down when)$E417,attr=$30(put-down-1) }
+. { #FONT:(the last Trashman bit him.)$E417,attr=$30(put-down-2) }
+. TABLE#
+
+t $D2E4 Messaging: Do you think I'm a megalomaniac?
+  $D2E4,$25,$20,$04:$01 #TABLE(default)
+. { #FONT:(Do you think I'm a megalomaniac?)$E417,attr=$30(megalomaniac-1) }
+. { #FONT:((50))$E417,attr=$30(megalomaniac-2) }
+. TABLE#
+
+t $D309 Messaging: Just give me a ZX81, and I'll control the world
+  $D309,$33,$20,$12:$01 #TABLE(default)
+. { #FONT:(Just  give  me a  ZX81, and I'll)$E417,attr=$30(zx81-1) }
+. { #FONT:(control the world.)$E417,attr=$30(zx81-2) }
+. TABLE#
+
+t $D33C Messaging: Do you want to play some games on my Spectrum?
+  $D33C,$35,$20,$14:$01 #TABLE(default)
+. { #FONT:(Do you want to  play some  games)$E417,attr=$30(play-games-1) }
+. { #FONT:(on my Spectrum? (95))$E417,attr=$30(play-games-2) }
+. TABLE#
+
+t $D371 Messaging: That game was Virgin on the impossible !!!!
+  $D371,$30,$20,$0F:$01 #TABLE(default)
+. { #FONT:(That  game  was  Virgin  on  the)$E417,attr=$30(virgin-1) }
+. { #FONT:(impossible !!!!)$E417,attr=$30(virgin-2) }
+. TABLE#
+
+t $D3A1 Messaging: Have you seen that delinquent son of mine?
+  $D3A1,$32,$20,$11:$01 #TABLE(default)
+. { #FONT:(Have you  seen  that  delinquent)$E417,attr=$30(delinquent-1) }
+. { #FONT:(son of mine? (55))$E417,attr=$30(delinquent-2) }
+. TABLE#
+
+t $D3D3 Messaging: Yes,you're right. You could call him a Maniac Minor
+  $D3D3,$34,$20,$13:$01 #TABLE(default)
+. { #FONT:(Yes,you're right. You could call)$E417,attr=$30(right-1) }
+. { #FONT:(him a Maniac Minor.)$E417,attr=$30(right-2) }
+. TABLE#
+
+t $D407 Messaging: Come and look at my Spectrum with 4 megabyte memory
+  $D407,$3D,$20,$1C:$01 #TABLE(default)
+. { #FONT:(Come  and look  at  my  Spectrum)$E417,attr=$30(spectrum-1) }
+. { #FONT:(with 4 megabyte memory. (60))$E417,attr=$30(spectrum-2) }
+. TABLE#
+
+t $D444 Messaging: Only trouble is, I've forgotten what I wanted it for
+  $D444,$36,$20,$15:$01 #TABLE(default)
+. { #FONT:(Only trouble is,  I've forgotten)$E417,attr=$30(forgotten-1) }
+. { #FONT:(what I wanted it for.)$E417,attr=$30(forgotten-2) }
+. TABLE#
+
+t $D47A Messaging: Help!! The curtains are on fire!
+  $D47A,$25,$20,$04:$01 #TABLE(default)
+. { #FONT:(Help!! The curtains are on fire!)$E417,attr=$30(curtains-1) }
+. { #FONT:((75))$E417,attr=$30(curtains-2) }
+. TABLE#
+
+t $D49F Messaging: A tongue of flame came out of my Dragon
+  $D49F,$28,$20,$07:$01 #TABLE(default)
+. { #FONT:(A tongue of flame came out of my)$E417,attr=$30(tongue-1) }
+. { #FONT:(Dragon.)$E417,attr=$30(tongue-2) }
+. TABLE#
+
+t $D4C7 Messaging: Oh dear, what shall I do? My husband's been taken away
+  $D4C7,$3F,$20,$1E:$01 #TABLE(default)
+. { #FONT:(Oh  dear,  what shall  I do?  My)$E417,attr=$30(shall-i-do-1) }
+. { #FONT:(husband's been taken away.(75))$E417,attr=$30(shall-i-do-2) }
+. TABLE#
+
+t $D506 Messaging: He was a Schizoid
+  $D506,$13,$12:$01 #FONT:(He was a Schizoid.)$E417,attr=$30(schizoid)
+
+t $D519 Messaging: Do you want a tip?
+  $D519,$18,$17:$01 #FONT:(Do you want a tip? (50))$E417,attr=$30(want-tip)
+
+t $D531 Messaging: That's got Trashman worried. I'm his tax inspector
+  $D531,$33,$20,$12:$01 #TABLE(default)
+. { #FONT:(That's got Trashman worried. I'm)$E417,attr=$30(worried-1) }
+. { #FONT:(his tax inspector.)$E417,attr=$30(worried-2) }
+. TABLE#
+
+t $D564 Messaging: Give us a hand mate
+  $D564,$1A,$19:$01 #FONT:(Give us a hand mate. (60))$E417,attr=$30(hand)
+
+t $D57E Messaging: That was NOT funny. Applauding while everything collapsed
+  $D57E,$3C,$20,$1B:$01 #TABLE(default)
+. { #FONT:(That  was NOT funny.  Applauding)$E417,attr=$30(not-funny-1) }
+. { #FONT:(while everything collapsed.)$E417,attr=$30(not-funny-2) }
+. TABLE#
+
+t $D5BA Messaging: Please help find my little doggy woggy
+  $D5BA,$2C,$20,$0B:$01 #TABLE(default)
+. { #FONT:(Please help find my little doggy)$E417,attr=$30(doggy-1) }
+. { #FONT:(woggy. (65))$E417,attr=$30(doggy-2) }
+. TABLE#
+
+t $D5E6 Messaging: You've been a great help. At least I know where he's been
+  $D5E6,$3E,$20,$1D:$01 #TABLE(default)
+. { #FONT:(You've  been  a great  help.  At)$E417,attr=$30(great-help-1) }
+. { #FONT:(least I know where he's been.)$E417,attr=$30(great-help-2) }
+. TABLE#
+
+t $D624 Messaging: Are you the chimney sweep?
+  $D624,$20,$1F:$01 #FONT:(Are you the chimney sweep? (80))$E417,attr=$30(chimney-sweep)
+
+t $D644 Messaging: Sorry, but you must admit you do have the same complexion
+  $D644,$3A,$20,$19:$01 #TABLE(default)
+. { #FONT:(Sorry, but you must admit you do)$E417,attr=$30(admit-1) }
+. { #FONT:(have the same complexion.)$E417,attr=$30(admit-2) }
+. TABLE#
+
+t $D67E Messaging: Hallo Trashman. Your move this week, I think?
+  $D67E,$34,$20,$13:$01 #TABLE(default)
+. { #FONT:(Hallo Trashman.  Your move  this)$E417,attr=$30(hallo-1) }
+. { #FONT:(week, I think? (65))$E417,attr=$30(hallo-2) }
+. TABLE#
+
+t $D6B2 Messaging: You know, it might be quicker playing chess with a computer
+  $D6B2,$3F,$20,$1E:$01 #TABLE(default)
+. { #FONT:(You know,  it  might be  quicker)$E417,attr=$30(quicker-1) }
+. { #FONT:(playing chess with a computer.)$E417,attr=$30(quicker-2) }
+. TABLE#
+
+t $D6F1 Messaging: Come and see the computer my Auntie gave me
+  $D6F1,$35,$20,$14:$01 #TABLE(default)
+. { #FONT:(Come  and  see the  computer  my)$E417,attr=$30(computer-1) }
+. { #FONT:(Auntie gave me. (45))$E417,attr=$30(computer-2) }
+. TABLE#
+
+t $D726 Messaging: Oh good! I thought I might need a licence for it
+  $D726,$32,$20,$11:$01 #TABLE(default)
+. { #FONT:(Oh good!  I thought I might need)$E417,attr=$30(oh-good-1) }
+. { #FONT:(a licence for it.)$E417,attr=$30(oh-good-2) }
+. TABLE#
+
+t $D758 Messaging: Hey, Bilbo, help me solve this adventure
+  $D758,$31,$20,$10:$01 #TABLE(default)
+. { #FONT:(Hey, Bilbo,  help me  solve this)$E417,attr=$30(bilbo-1) }
+. { #FONT:(adventure. (100))$E417,attr=$30(bilbo-2) }
+. TABLE#
+
+t $D789 Messaging: You're no help. HOPPIT!
+  $D789,$18,$17:$01 #FONT:(You're no help. HOPPIT!)$E417,attr=$30(no-help)
+
+t $D7A1 Messaging: Help me! Sophie's drowning. Can you revive her?
+  $D7A1,$35,$20,$14:$01 #TABLE(default)
+. { #FONT:(Help  me! Sophie's drowning. Can)$E417,attr=$30(drowning-1) }
+. { #FONT:(you revive her? (85))$E417,attr=$30(drowning-2) }
+. TABLE#
+
+t $D7D6 Messaging: If you hadn't laughed, the gold-fish might still be alive
+  $D7D6,$3B,$20,$1A:$01 #TABLE(default)
+. { #FONT:(If you hadn't laughed, the gold-)$E417,attr=$30(laughed-1) }
+. { #FONT:(fish might still be alive.)$E417,attr=$30(laughed-2) }
+. TABLE#
+
+b $D811
 
 b $D813 Data: Level 1
 @ $D813 label=Data_Level1
