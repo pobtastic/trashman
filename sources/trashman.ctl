@@ -320,7 +320,7 @@ N $A7C0 #HTML(Was "fire" <em>not</em> pressed?)
   $A7D7,$03 Call #R$A7EB.
   $A7DA,$01 Restore #REGhl from the stack.
   $A7DB,$01 Increment #REGhl by one.
-  $A7DC,$01 HALT.
+  $A7DC,$01 Halt operation (suspend CPU until the next interrupt).
   $A7DD,$02 Jump to #R$A79B.
   $A7DF,$01 Restore #REGhl from the stack.
   $A7E0,$01 Return.
@@ -346,7 +346,7 @@ N $A7F5 #HTML(Not technically <em>any key</em> but any control button.)
   $A7F8,$03 Call #R$A7E1.
   $A7FB,$03 #REGbc=#N($0040,$04,$04).
   $A7FE,$04 Write #REGbc to *#R$CC3B.
-  $A802,$01 HALT.
+  $A802,$01 Halt operation (suspend CPU until the next interrupt).
   $A803,$05 Write #N$01 to *#R$CC3D.
   $A808,$03 Call #R$CB9C.
   $A80B,$01 Return.
@@ -415,7 +415,7 @@ N $A85C Produce a short pause.
 @ $A85C label=Controller_Yes_No_Loop
   $A85C,$02 #REGb=#N$0A.
 @ $A85E label=Controller_Yes_No_Pause
-  $A85E,$01 HALT.
+  $A85E,$01 Halt operation (suspend CPU until the next interrupt).
   $A85F,$02 Decrease counter by one and loop back to #R$A85E until counter is zero.
 N $A861 Fetch player input.
   $A861,$03 Call #R$B6BB.
@@ -3395,7 +3395,7 @@ c $CB9C
   $CBB1,$01 Rotate #REGa right one bit (with carry).
   $CBB2,$02 Jump to #R$CBF2 if the carry bit was set.
   $CBB4,$04 Set border to YELLOW.
-  $CBB8,$01 HALT.
+  $CBB8,$01 Halt operation (suspend CPU until the next interrupt).
   $CBB9,$02 Reset bit 7 of *#REGhl.
   $CBBB,$01 Return.
 

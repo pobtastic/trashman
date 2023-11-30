@@ -2928,7 +2928,7 @@ c$A78C LD A,($AB8A)  ; #REGa=*#R$AB8A.
  $A7D7 CALL $A7EB    ; Call #R$A7EB.
  $A7DA POP HL        ; Restore #REGhl from the stack.
  $A7DB INC HL        ; Increment #REGhl by one.
- $A7DC HALT          ; HALT.
+ $A7DC HALT          ; Halt operation (suspend CPU until the next interrupt).
  $A7DD JR $A79B      ; Jump to #R$A79B.
 *$A7DF POP HL        ; Restore #REGhl from the stack.
  $A7E0 RET           ; Return.
@@ -2971,7 +2971,7 @@ c$A7F5 CALL $A7EB    ; Call #R$A7EB.
 *$A7FB LD BC,$0040   ; #REGbc=#N($0040,$04,$04).
 ; This entry point is used by the routine at #R$A859.
 *$A7FE LD ($CC3B),BC ; Write #REGbc to *#R$CC3B.
- $A802 HALT          ; HALT.
+ $A802 HALT          ; Halt operation (suspend CPU until the next interrupt).
  $A803 LD A,$01      ; {Write #N$01 to *#R$CC3D.
  $A805 LD ($CC3D),A  ; }
  $A808 CALL $CB9C    ; Call #R$CB9C.
@@ -3058,7 +3058,7 @@ c$A859 CALL $A7EB     ; Call #R$A7EB.
 @label=Controller_Yes_No_Loop
 *$A85C LD B,$0A       ; #REGb=#N$0A.
 @label=Controller_Yes_No_Pause
-*$A85E HALT           ; HALT.
+*$A85E HALT           ; Halt operation (suspend CPU until the next interrupt).
  $A85F DJNZ $A85E     ; Decrease counter by one and loop back to #R$A85E until
                       ; counter is zero.
 ; Fetch player input.
@@ -6922,7 +6922,7 @@ c$CB9C LD HL,$CC3D    ; #REGhl=#R$CC3D.
  $CBB2 JR C,$CBF2     ; Jump to #R$CBF2 if the carry bit was set.
  $CBB4 LD A,$06       ; {Set border to YELLOW.
  $CBB6 OUT ($FE),A    ; }
- $CBB8 HALT           ; HALT.
+ $CBB8 HALT           ; Halt operation (suspend CPU until the next interrupt).
  $CBB9 RES 7,(HL)     ; Reset bit 7 of *#REGhl.
  $CBBB RET            ; Return.
 *$CBBC LD DE,$0070    ; #REGde=#N($0070,$04,$04).
