@@ -58,7 +58,7 @@ Used by the routine at <a href="BFEC.html">BFEC</a>.
 <tr>
 <td class="address-1"><span id="c153"></span>C153</td>
 <td class="instruction">JR NZ,<a href="C14C.html#c15a">$C15A</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="C14C.html#c15a">C15A</a> if {} is not zero.</td>
+<td class="comment-1" rowspan="1">Jump to <a href="C14C.html#c15a">C15A</a> if bit 7 of *<span class="register">IX</span>+07 is set.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="c155"></span>C155</td>
@@ -88,12 +88,11 @@ Used by the routine at <a href="BFEC.html">BFEC</a>.
 <tr>
 <td class="address-2"><span id="c15d"></span>C15D</td>
 <td class="instruction">CP (IX+$00)</td>
-<td class="comment-1" rowspan="1">Compare <span class="register">A</span> with *<span class="register">IX</span>+00.</td>
+<td class="comment-1" rowspan="2">Return if <span class="register">A</span> is not equal to *<span class="register">IX</span>+00.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="c160"></span>C160</td>
 <td class="instruction">RET NZ</td>
-<td class="comment-1" rowspan="1">Return if {} is not zero.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="c161"></span>C161</td>
@@ -183,7 +182,7 @@ This entry point is used by the routine at <a href="BFEC.html">BFEC</a>.
 <tr>
 <td class="address-1"><span id="c182"></span>C182</td>
 <td class="instruction">BIT 7,(IX+$07)</td>
-<td class="comment-1" rowspan="2">Jump to <a href="C14C.html#c196">C196</a> if bit 7 of *<span class="register">IX</span>+07 is zero.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="C14C.html#c196">C196</a> if bit 7 of *<span class="register">IX</span>+07 is not set.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="c186"></span>C186</td>
@@ -365,7 +364,7 @@ This entry point is used by the routine at <a href="BFEC.html">BFEC</a>.
 <span id="c1cd"></span>
 <div class="comments">
 <div class="paragraph">
-This entry point is used by the routines at <a href="B724.html">B724</a>, <a href="BF50.html">BF50</a> and <a href="CB9C.html">CB9C</a>.
+This entry point is used by the routines at <a href="B724.html">B724</a>, <a href="BF9F.html">BF9F</a> and <a href="CB9C.html">CB9C</a>.
 </div>
 </div>
 </td>

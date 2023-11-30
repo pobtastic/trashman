@@ -148,7 +148,7 @@ Used by the routine at <a href="45217.html">StartGame</a>.
 <tr>
 <td class="address-1"><span id="46927"></span>46927</td>
 <td class="instruction">BIT 5,(IX+19)</td>
-<td class="comment-1" rowspan="2">Jump to <a href="46884.html#46941">46941</a> if bit 5 of *<span class="register">IX</span>+19 is not zero.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="46884.html#46941">46941</a> if bit 5 of *<span class="register">IX</span>+19 is set.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="46931"></span>46931</td>
@@ -172,7 +172,7 @@ Used by the routine at <a href="45217.html">StartGame</a>.
 <tr>
 <td class="address-2"><span id="46941"></span>46941</td>
 <td class="instruction">BIT 4,(IX+23)</td>
-<td class="comment-1" rowspan="2">Jump to <a href="46884.html#46957">46957</a> if bit 4 of *<span class="register">IX</span>+23 is zero.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="46884.html#46957">46957</a> if bit 4 of *<span class="register">IX</span>+23 is not set.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="46945"></span>46945</td>
@@ -201,7 +201,7 @@ Used by the routine at <a href="45217.html">StartGame</a>.
 <tr>
 <td class="address-2"><span id="46957"></span>46957</td>
 <td class="instruction">BIT 1,(IX+23)</td>
-<td class="comment-1" rowspan="2">Jump to <a href="46884.html#46971">46971</a> if bit 1 of *<span class="register">IX</span>+23 is zero.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="46884.html#46971">46971</a> if bit 1 of *<span class="register">IX</span>+23 is not set.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="46961"></span>46961</td>
@@ -245,7 +245,7 @@ Used by the routine at <a href="45217.html">StartGame</a>.
 <tr>
 <td class="address-1"><span id="46973"></span>46973</td>
 <td class="instruction">JR NZ,<a href="46884.html#46947">46947</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="46884.html#46947">46947</a> if {} is not zero.</td>
+<td class="comment-1" rowspan="1">Jump to <a href="46884.html#46947">46947</a> if *<span class="register">HL</span> is set.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="46975"></span>46975</td>
@@ -265,12 +265,12 @@ Used by the routine at <a href="45217.html">StartGame</a>.
 <tr>
 <td class="address-1"><span id="46979"></span>46979</td>
 <td class="instruction">JR Z,<a href="46884.html#47007">47007</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="46884.html#47007">47007</a> if {} is zero.</td>
+<td class="comment-1" rowspan="1">Jump to <a href="46884.html#47007">47007</a> if *<span class="register">HL</span> is zero.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="46981"></span>46981</td>
 <td class="instruction">BIT 1,(HL)</td>
-<td class="comment-1" rowspan="2">Jump to <a href="46884.html#47009">47009</a> if bit 1 of *<span class="register">HL</span> is zero.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="46884.html#47009">47009</a> if bit 1 of *<span class="register">HL</span> is not set.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="46983"></span>46983</td>
@@ -289,7 +289,7 @@ Used by the routine at <a href="45217.html">StartGame</a>.
 <tr>
 <td class="address-1"><span id="46990"></span>46990</td>
 <td class="instruction">JR NZ,<a href="46884.html#47002">47002</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="46884.html#47002">47002</a> if {} is not zero.</td>
+<td class="comment-1" rowspan="1">Jump to <a href="46884.html#47002">47002</a> if bit 0 of *<span class="register">HL</span> is set.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="46992"></span>46992</td>
@@ -334,7 +334,7 @@ Used by the routine at <a href="45217.html">StartGame</a>.
 <tr>
 <td class="address-1"><span id="47012"></span>47012</td>
 <td class="instruction">BIT 7,E</td>
-<td class="comment-1" rowspan="2">Return if bit 7 of <span class="register">E</span> is not zero.</td>
+<td class="comment-1" rowspan="2">Return if bit 7 of <span class="register">E</span> is set.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="47014"></span>47014</td>
@@ -343,7 +343,7 @@ Used by the routine at <a href="45217.html">StartGame</a>.
 <tr>
 <td class="address-2"><span id="47015"></span>47015</td>
 <td class="instruction">BIT 0,(IX+24)</td>
-<td class="comment-1" rowspan="2">Jump to <a href="46884.html#47051">47051</a> if bit 0 of *<span class="register">IX</span>+24 is zero.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="46884.html#47051">47051</a> if bit 0 of *<span class="register">IX</span>+24 is not set.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="47019"></span>47019</td>
@@ -382,7 +382,7 @@ Used by the routine at <a href="45217.html">StartGame</a>.
 <tr>
 <td class="address-1"><span id="47035"></span>47035</td>
 <td class="instruction">BIT 4,(IX+16)</td>
-<td class="comment-1" rowspan="2">Jump to <a href="46884.html#47044">47044</a> if bit 4 of *<span class="register">IX</span>+16 is zero.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="46884.html#47044">47044</a> if bit 4 of *<span class="register">IX</span>+16 is not set.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="47039"></span>47039</td>
@@ -426,7 +426,7 @@ Used by the routine at <a href="45217.html">StartGame</a>.
 <tr>
 <td class="address-1"><span id="47057"></span>47057</td>
 <td class="instruction">BIT 4,(IX+16)</td>
-<td class="comment-1" rowspan="2">Jump to <a href="46884.html#47066">47066</a> if bit 4 of *<span class="register">IX</span>+16 is zero.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="46884.html#47066">47066</a> if bit 4 of *<span class="register">IX</span>+16 is not set.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="47061"></span>47061</td>
@@ -445,7 +445,7 @@ Used by the routine at <a href="45217.html">StartGame</a>.
 <tr>
 <td class="address-1"><span id="47067"></span>47067</td>
 <td class="instruction">BIT 1,(HL)</td>
-<td class="comment-1" rowspan="2">Jump to <a href="46884.html#47073">47073</a> if bit 1 of *<span class="register">HL</span> is not zero.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="46884.html#47073">47073</a> if bit 1 of *<span class="register">HL</span> is set.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="47069"></span>47069</td>
@@ -508,7 +508,7 @@ Used by the routine at <a href="45217.html">StartGame</a>.
 <tr>
 <td class="address-2"><span id="47091"></span>47091</td>
 <td class="instruction">BIT 5,B</td>
-<td class="comment-1" rowspan="2">Jump to <a href="46884.html#47134">47134</a> if bit 5 of <span class="register">B</span> is zero.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="46884.html#47134">47134</a> if bit 5 of <span class="register">B</span> is not set.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="47093"></span>47093</td>
@@ -527,7 +527,7 @@ Used by the routine at <a href="45217.html">StartGame</a>.
 <tr>
 <td class="address-2"><span id="47100"></span>47100</td>
 <td class="instruction">BIT 0,(IX+23)</td>
-<td class="comment-1" rowspan="2">Jump to <a href="46884.html#47113">47113</a> if bit 0 of *<span class="register">IX</span>+23 is not zero.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="46884.html#47113">47113</a> if bit 0 of *<span class="register">IX</span>+23 is set.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="47104"></span>47104</td>
@@ -536,7 +536,7 @@ Used by the routine at <a href="45217.html">StartGame</a>.
 <tr>
 <td class="address-1"><span id="47106"></span>47106</td>
 <td class="instruction">BIT 2,(IX+23)</td>
-<td class="comment-1" rowspan="2">Jump to <a href="46884.html#47270">47270</a> if bit 2 of *<span class="register">IX</span>+23 is zero.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="46884.html#47270">47270</a> if bit 2 of *<span class="register">IX</span>+23 is not set.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="47110"></span>47110</td>
@@ -555,7 +555,7 @@ Used by the routine at <a href="45217.html">StartGame</a>.
 <tr>
 <td class="address-1"><span id="47119"></span>47119</td>
 <td class="instruction">JR Z,<a href="46884.html#47123">47123</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="46884.html#47123">47123</a> if {} is zero.</td>
+<td class="comment-1" rowspan="1">Jump to <a href="46884.html#47123">47123</a> if bit 3 of *<span class="register">IX</span>+23 is not set.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="47121"></span>47121</td>
@@ -640,7 +640,7 @@ Used by the routine at <a href="45217.html">StartGame</a>.
 <tr>
 <td class="address-1"><span id="47154"></span>47154</td>
 <td class="instruction">BIT 7,(HL)</td>
-<td class="comment-1" rowspan="2">Jump to <a href="46884.html#47216">47216</a> if bit 7 of *<span class="register">HL</span> is not zero.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="46884.html#47216">47216</a> if bit 7 of *<span class="register">HL</span> is set.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="47156"></span>47156</td>
@@ -704,7 +704,7 @@ Used by the routine at <a href="45217.html">StartGame</a>.
 <tr>
 <td class="address-1"><span id="47179"></span>47179</td>
 <td class="instruction">BIT 3,(IX+19)</td>
-<td class="comment-1" rowspan="2">Jump to <a href="46884.html#47199">47199</a> if bit 3 of *<span class="register">IX</span>+19 is not zero.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="46884.html#47199">47199</a> if bit 3 of *<span class="register">IX</span>+19 is set.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="47183"></span>47183</td>
@@ -723,7 +723,7 @@ Used by the routine at <a href="45217.html">StartGame</a>.
 <tr>
 <td class="address-1"><span id="47191"></span>47191</td>
 <td class="instruction">JR Z,<a href="46884.html#47195">47195</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="46884.html#47195">47195</a> if {} is zero.</td>
+<td class="comment-1" rowspan="1">Jump to <a href="46884.html#47195">47195</a> if bit 4 of *<span class="register">IX</span>+19 is not set.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="47193"></span>47193</td>
@@ -743,7 +743,7 @@ Used by the routine at <a href="45217.html">StartGame</a>.
 <tr>
 <td class="address-1"><span id="47198"></span>47198</td>
 <td class="instruction">RET Z</td>
-<td class="comment-1" rowspan="1">Return if {} is zero.</td>
+<td class="comment-1" rowspan="1">Return if the result is zero.</td>
 </tr>
 <tr>
 <td class="address-2"><span id="47199"></span>47199</td>
@@ -758,7 +758,7 @@ Used by the routine at <a href="45217.html">StartGame</a>.
 <tr>
 <td class="address-1"><span id="47204"></span>47204</td>
 <td class="instruction">BIT 1,(IX+23)</td>
-<td class="comment-1" rowspan="2">Jump to <a href="46884.html#47238">47238</a> if bit 1 of *<span class="register">IX</span>+23 is zero.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="46884.html#47238">47238</a> if bit 1 of *<span class="register">IX</span>+23 is not set.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="47208"></span>47208</td>
@@ -787,12 +787,11 @@ Used by the routine at <a href="45217.html">StartGame</a>.
 <tr>
 <td class="address-1"><span id="47221"></span>47221</td>
 <td class="instruction">BIT 6,B</td>
-<td class="comment-1" rowspan="1">Test bit 6 of <span class="register">B</span>.</td>
+<td class="comment-1" rowspan="2">Call <a href="46884.html#47786">47786</a> if bit 6 of <span class="register">B</span> is not set.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="47223"></span>47223</td>
 <td class="instruction">CALL Z,<a href="46884.html#47786">47786</a></td>
-<td class="comment-1" rowspan="1">Call <a href="46884.html#47786">47786</a> zero.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="47226"></span>47226</td>
@@ -844,7 +843,7 @@ Used by the routine at <a href="45217.html">StartGame</a>.
 <span id="47242"></span>
 <div class="comments">
 <div class="paragraph">
-This entry point is used by the routine at <a href="48521.html">48521</a>.
+This entry point is used by the routine at <a href="48757.html">48757</a>.
 </div>
 </div>
 </td>
@@ -872,7 +871,7 @@ This entry point is used by the routine at <a href="48521.html">48521</a>.
 <tr>
 <td class="address-1"><span id="47253"></span>47253</td>
 <td class="instruction">BIT 3,B</td>
-<td class="comment-1" rowspan="2">Jump to <a href="46884.html#47270">47270</a> if bit 3 of <span class="register">B</span> is zero.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="46884.html#47270">47270</a> if bit 3 of <span class="register">B</span> is not set.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="47255"></span>47255</td>
@@ -886,7 +885,7 @@ This entry point is used by the routine at <a href="48521.html">48521</a>.
 <tr>
 <td class="address-1"><span id="47260"></span>47260</td>
 <td class="instruction">BIT 4,B</td>
-<td class="comment-1" rowspan="2">Jump to <a href="46884.html#47270">47270</a> if bit 4 of <span class="register">B</span> is not zero.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="46884.html#47270">47270</a> if bit 4 of <span class="register">B</span> is set.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="47262"></span>47262</td>
@@ -1120,12 +1119,11 @@ This entry point is used by the routines at <a href="46264.html">46264</a>, <a h
 <tr>
 <td class="address-1"><span id="47345"></span>47345</td>
 <td class="instruction">BIT 0,(IX+23)</td>
-<td class="comment-1" rowspan="1">Test bit 0 of *<span class="register">IX</span>+23.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="46884.html#47356">47356</a> if bit 0 of *<span class="register">IX</span>+23 is not set.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="47349"></span>47349</td>
 <td class="instruction">JR Z,<a href="46884.html#47356">47356</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="46884.html#47356">47356</a> if {} is zero.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="47351"></span>47351</td>
@@ -1140,12 +1138,11 @@ This entry point is used by the routines at <a href="46264.html">46264</a>, <a h
 <tr>
 <td class="address-2"><span id="47356"></span>47356</td>
 <td class="instruction">BIT 2,(IX+23)</td>
-<td class="comment-1" rowspan="1">Test bit 2 of *<span class="register">IX</span>+23.</td>
+<td class="comment-1" rowspan="2">Return if bit 2 of *<span class="register">IX</span>+23 is not set.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="47360"></span>47360</td>
 <td class="instruction">RET Z</td>
-<td class="comment-1" rowspan="1">Return if {} is zero.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="47361"></span>47361</td>
@@ -1220,12 +1217,11 @@ This entry point is used by the routines at <a href="46264.html">46264</a>, <a h
 <tr>
 <td class="address-1"><span id="47392"></span>47392</td>
 <td class="instruction">BIT 4,L</td>
-<td class="comment-1" rowspan="1">Test bit 4 of <span class="register">L</span>.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="46884.html#47401">47401</a> if bit 4 of <span class="register">L</span> is not set.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="47394"></span>47394</td>
 <td class="instruction">JR Z,<a href="46884.html#47401">47401</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="46884.html#47401">47401</a> if {} is zero.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="47396"></span>47396</td>
@@ -1300,22 +1296,20 @@ This entry point is used by the routines at <a href="46264.html">46264</a>, <a h
 <tr>
 <td class="address-1"><span id="47420"></span>47420</td>
 <td class="instruction">CP 10</td>
-<td class="comment-1" rowspan="1">Compare <span class="register">A</span> with 10.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="46884.html#47468">47468</a> if <span class="register">A</span> is lower than 10.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="47422"></span>47422</td>
 <td class="instruction">JR C,<a href="46884.html#47468">47468</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="46884.html#47468">47468</a> if {} is lower.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="47424"></span>47424</td>
 <td class="instruction">CP 22</td>
-<td class="comment-1" rowspan="1">Compare <span class="register">A</span> with 22.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="46884.html#47496">47496</a> if <span class="register">A</span> is higher than 22.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="47426"></span>47426</td>
 <td class="instruction">JR NC,<a href="46884.html#47496">47496</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="46884.html#47496">47496</a> if {} is higher.</td>
 </tr>
 <tr>
 <td class="address-2"><span id="47428"></span>47428</td>
@@ -1683,22 +1677,20 @@ This entry point is used by the routines at <a href="46264.html">46264</a>, <a h
 <tr>
 <td class="address-1"><span id="47580"></span>47580</td>
 <td class="instruction">BIT 1,(IX+33)</td>
-<td class="comment-1" rowspan="1">Test bit 1 of *<span class="register">IX</span>+33.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="46884.html#47606">47606</a> if bit 1 of *<span class="register">IX</span>+33 is not set.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="47584"></span>47584</td>
 <td class="instruction">JR Z,<a href="46884.html#47606">47606</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="46884.html#47606">47606</a> if {} is zero.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="47586"></span>47586</td>
 <td class="instruction">BIT 0,(IX+33)</td>
-<td class="comment-1" rowspan="1">Test bit 0 of *<span class="register">IX</span>+33.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="46884.html#47606">47606</a> if bit 0 of *<span class="register">IX</span>+33 is set.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="47590"></span>47590</td>
 <td class="instruction">JR NZ,<a href="46884.html#47606">47606</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="46884.html#47606">47606</a> if {} is not zero.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="47592"></span>47592</td>
@@ -1708,22 +1700,20 @@ This entry point is used by the routines at <a href="46264.html">46264</a>, <a h
 <tr>
 <td class="address-1"><span id="47594"></span>47594</td>
 <td class="instruction">CP 8</td>
-<td class="comment-1" rowspan="1">Compare <span class="register">A</span> with 8.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="46884.html#47602">47602</a> if <span class="register">A</span> is equal to 8.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="47596"></span>47596</td>
 <td class="instruction">JR Z,<a href="46884.html#47602">47602</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="46884.html#47602">47602</a> if {} is zero.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="47598"></span>47598</td>
 <td class="instruction">CP 23</td>
-<td class="comment-1" rowspan="1">Compare <span class="register">A</span> with 23.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="46884.html#47606">47606</a> if <span class="register">A</span> is not equal to 23.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="47600"></span>47600</td>
 <td class="instruction">JR NZ,<a href="46884.html#47606">47606</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="46884.html#47606">47606</a> if {} is not zero.</td>
 </tr>
 <tr>
 <td class="address-2"><span id="47602"></span>47602</td>
@@ -1883,12 +1873,11 @@ This entry point is used by the routines at <a href="46264.html">46264</a>, <a h
 <tr>
 <td class="address-1"><span id="47667"></span>47667</td>
 <td class="instruction">BIT 6,B</td>
-<td class="comment-1" rowspan="1">Test bit 6 of <span class="register">B</span>.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="46884.html#47700">47700</a> if bit 6 of <span class="register">B</span> is not set.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="47669"></span>47669</td>
 <td class="instruction">JR Z,<a href="46884.html#47700">47700</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="46884.html#47700">47700</a> if {} is zero.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="47671"></span>47671</td>
@@ -1923,7 +1912,7 @@ This entry point is used by the routines at <a href="46264.html">46264</a>, <a h
 <tr>
 <td class="address-1"><span id="47688"></span>47688</td>
 <td class="instruction">JR Z,<a href="46884.html#47693">47693</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="46884.html#47693">47693</a> if {} is zero.</td>
+<td class="comment-1" rowspan="1">Jump to <a href="46884.html#47693">47693</a> if bit 7 of *<span class="register">IX</span>+33 is not set.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="47690"></span>47690</td>
@@ -1953,12 +1942,11 @@ This entry point is used by the routines at <a href="46264.html">46264</a>, <a h
 <tr>
 <td class="address-2"><span id="47700"></span>47700</td>
 <td class="instruction">BIT 3,(HL)</td>
-<td class="comment-1" rowspan="1">Test bit 3 of *<span class="register">HL</span>.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="46884.html#47781">47781</a> if bit 3 of *<span class="register">HL</span> is set.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="47702"></span>47702</td>
 <td class="instruction">JR NZ,<a href="46884.html#47781">47781</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="46884.html#47781">47781</a> if {} is not zero.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="47704"></span>47704</td>
@@ -1978,12 +1966,11 @@ This entry point is used by the routines at <a href="46264.html">46264</a>, <a h
 <tr>
 <td class="address-1"><span id="47712"></span>47712</td>
 <td class="instruction">BIT 5,(IX+33)</td>
-<td class="comment-1" rowspan="1">Test bit 5 of *<span class="register">IX</span>+33.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="46884.html#47726">47726</a> if bit 5 of *<span class="register">IX</span>+33 is not set.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="47716"></span>47716</td>
 <td class="instruction">JR Z,<a href="46884.html#47726">47726</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="46884.html#47726">47726</a> if {} is zero.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="47718"></span>47718</td>
@@ -2038,7 +2025,7 @@ This entry point is used by the routines at <a href="46264.html">46264</a>, <a h
 <tr>
 <td class="address-1"><span id="47743"></span>47743</td>
 <td class="instruction">JR NZ,<a href="46884.html#47775">47775</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="46884.html#47775">47775</a> if {} is not zero.</td>
+<td class="comment-1" rowspan="1">Jump to <a href="46884.html#47775">47775</a> if bit 4 of *<span class="register">IX</span>+23 is set.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="47745"></span>47745</td>
@@ -2053,7 +2040,7 @@ This entry point is used by the routines at <a href="46264.html">46264</a>, <a h
 <tr>
 <td class="address-1"><span id="47749"></span>47749</td>
 <td class="instruction">JR NZ,<a href="46884.html#47769">47769</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="46884.html#47769">47769</a> if {} is not zero.</td>
+<td class="comment-1" rowspan="1">Jump to <a href="46884.html#47769">47769</a> if *<span class="register">HL</span> is set.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="47751"></span>47751</td>
@@ -2147,22 +2134,20 @@ This entry point is used by the routines at <a href="46264.html">46264</a>, <a h
 <tr>
 <td class="address-2"><span id="47786"></span>47786</td>
 <td class="instruction">BIT 3,B</td>
-<td class="comment-1" rowspan="1">Test bit 3 of <span class="register">B</span>.</td>
+<td class="comment-1" rowspan="2">Return if bit 3 of <span class="register">B</span> is not set.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="47788"></span>47788</td>
 <td class="instruction">RET Z</td>
-<td class="comment-1" rowspan="1">Return if {} is zero.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="47789"></span>47789</td>
 <td class="instruction">BIT 4,B</td>
-<td class="comment-1" rowspan="1">Test bit 4 of <span class="register">B</span>.</td>
+<td class="comment-1" rowspan="2">Return if bit 4 of <span class="register">B</span> is not set.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="47791"></span>47791</td>
 <td class="instruction">RET Z</td>
-<td class="comment-1" rowspan="1">Return if {} is zero.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="47792"></span>47792</td>

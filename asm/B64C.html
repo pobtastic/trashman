@@ -98,7 +98,7 @@ Used by the routines at <a href="B4B8.html">B4B8</a> and <a href="B591.html">B59
 <tr>
 <td class="address-1"><span id="b66e"></span>B66E</td>
 <td class="instruction">JR NZ,<a href="B64C.html#b677">$B677</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="B64C.html#b677">B677</a> if bit 5 is not zero.</td>
+<td class="comment-1" rowspan="1">Jump to <a href="B64C.html#b677">B677</a> if bit 5 is set.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="b670"></span>B670</td>
@@ -223,12 +223,11 @@ Used by the routines at <a href="B4B8.html">B4B8</a> and <a href="B591.html">B59
 <tr>
 <td class="address-1"><span id="b6a5"></span>B6A5</td>
 <td class="instruction">BIT 4,L</td>
-<td class="comment-1" rowspan="1">Test bit 4 of <span class="register">L</span>.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="B64C.html#b6ad">B6AD</a> if bit 4 of <span class="register">L</span> is not set.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="b6a7"></span>B6A7</td>
 <td class="instruction">JR Z,<a href="B64C.html#b6ad">$B6AD</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="B64C.html#b6ad">B6AD</a> if {} is zero.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="b6a9"></span>B6A9</td>

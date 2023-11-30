@@ -58,7 +58,7 @@ Used by the routine at <a href="49132.html">49132</a>.
 <tr>
 <td class="address-1"><span id="49491"></span>49491</td>
 <td class="instruction">JR NZ,<a href="49484.html#49498">49498</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="49484.html#49498">49498</a> if {} is not zero.</td>
+<td class="comment-1" rowspan="1">Jump to <a href="49484.html#49498">49498</a> if bit 7 of *<span class="register">IX</span>+7 is set.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="49493"></span>49493</td>
@@ -88,12 +88,11 @@ Used by the routine at <a href="49132.html">49132</a>.
 <tr>
 <td class="address-2"><span id="49501"></span>49501</td>
 <td class="instruction">CP (IX+0)</td>
-<td class="comment-1" rowspan="1">Compare <span class="register">A</span> with *<span class="register">IX</span>+0.</td>
+<td class="comment-1" rowspan="2">Return if <span class="register">A</span> is not equal to *<span class="register">IX</span>+0.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="49504"></span>49504</td>
 <td class="instruction">RET NZ</td>
-<td class="comment-1" rowspan="1">Return if {} is not zero.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="49505"></span>49505</td>
@@ -183,7 +182,7 @@ This entry point is used by the routine at <a href="49132.html">49132</a>.
 <tr>
 <td class="address-1"><span id="49538"></span>49538</td>
 <td class="instruction">BIT 7,(IX+7)</td>
-<td class="comment-1" rowspan="2">Jump to <a href="49484.html#49558">49558</a> if bit 7 of *<span class="register">IX</span>+7 is zero.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="49484.html#49558">49558</a> if bit 7 of *<span class="register">IX</span>+7 is not set.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="49542"></span>49542</td>
@@ -365,7 +364,7 @@ This entry point is used by the routine at <a href="49132.html">49132</a>.
 <span id="49613"></span>
 <div class="comments">
 <div class="paragraph">
-This entry point is used by the routines at <a href="46884.html">46884</a>, <a href="48976.html">48976</a> and <a href="52124.html">52124</a>.
+This entry point is used by the routines at <a href="46884.html">46884</a>, <a href="49055.html">49055</a> and <a href="52124.html">52124</a>.
 </div>
 </div>
 </td>

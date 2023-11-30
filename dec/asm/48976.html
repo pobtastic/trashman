@@ -26,11 +26,11 @@ gtag('config', 'G-75RERFCHBG');
 <table class="asm-navigation">
 <tr>
 <td class="prev">
-Prev: <a href="48521.html">48521</a>
+Prev: <a href="48757.html">48757</a>
 </td>
 <td class="up">Up: <a href="../maps/all.html#48976">Map</a></td>
 <td class="next">
-Next: <a href="49132.html">49132</a>
+Next: <a href="49038.html">49038</a>
 </td>
 </tr>
 </table>
@@ -93,7 +93,7 @@ Check for Game Over "reasons" (see <a href="../reference/pokes.html#immunity">Im
 <tr>
 <td class="address-1"><span id="48995"></span>48995</td>
 <td class="instruction">BIT 5,A</td>
-<td class="comment-1" rowspan="2">Jump to <a href="48976.html#49014">49014</a> if bit 5 of <span class="register">A</span> is zero.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="48976.html#49014">49014</a> if bit 5 of <span class="register">A</span> is not set.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="48997"></span>48997</td>
@@ -102,7 +102,7 @@ Check for Game Over "reasons" (see <a href="../reference/pokes.html#immunity">Im
 <tr>
 <td class="address-1"><span id="48999"></span>48999</td>
 <td class="instruction">BIT 3,A</td>
-<td class="comment-1" rowspan="2">Jump to <a href="48976.html#49014">49014</a> if bit 3 of <span class="register">A</span> is not zero.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="48976.html#49014">49014</a> if bit 3 of <span class="register">A</span> is set.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="49001"></span>49001</td>
@@ -111,7 +111,7 @@ Check for Game Over "reasons" (see <a href="../reference/pokes.html#immunity">Im
 <tr>
 <td class="address-1"><span id="49003"></span>49003</td>
 <td class="instruction">BIT 7,(HL)</td>
-<td class="comment-1" rowspan="2">Jump to <a href="48976.html#49017">49017</a> if bit 7 of *<span class="register">HL</span> is not zero.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="48976.html#49017">49017</a> if bit 7 of *<span class="register">HL</span> is set.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="49005"></span>49005</td>
@@ -125,7 +125,7 @@ Check for Game Over "reasons" (see <a href="../reference/pokes.html#immunity">Im
 <tr>
 <td class="address-1"><span id="49008"></span>49008</td>
 <td class="instruction">BIT 4,A</td>
-<td class="comment-1" rowspan="2">Jump to <a href="48976.html#49014">49014</a> if bit 4 of <span class="register">A</span> is zero.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="48976.html#49014">49014</a> if bit 4 of <span class="register">A</span> is not set.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="49010"></span>49010</td>
@@ -143,7 +143,7 @@ Check for Game Over "reasons" (see <a href="../reference/pokes.html#immunity">Im
 <tr>
 <td class="address-2"><span id="49014"></span>49014</td>
 <td class="instruction">BIT 7,(HL)</td>
-<td class="comment-1" rowspan="2">Return if bit 7 of *<span class="register">HL</span> is zero.</td>
+<td class="comment-1" rowspan="2">Return if bit 7 of *<span class="register">HL</span> is not set.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="49016"></span>49016</td>
@@ -162,20 +162,20 @@ Check for Game Over "reasons" (see <a href="../reference/pokes.html#immunity">Im
 <tr>
 <td class="address-1"><span id="49020"></span>49020</td>
 <td class="instruction">CP 12</td>
-<td class="comment-1" rowspan="2">Jump to <a href="48976.html#49038">49038</a> if <span class="register">A</span> is lower than 12.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="49038.html">Handler_HitByBike</a> if <span class="register">A</span> is lower than 12.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="49022"></span>49022</td>
-<td class="instruction">JR C,<a href="48976.html#49038">49038</a></td>
+<td class="instruction">JR C,<a href="49038.html">Handler_HitByBike</a></td>
 </tr>
 <tr>
 <td class="address-1"><span id="49024"></span>49024</td>
 <td class="instruction">CP 20</td>
-<td class="comment-1" rowspan="2">Jump to <a href="48976.html#49038">49038</a> if <span class="register">A</span> is higher than 20.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="49038.html">Handler_HitByBike</a> if <span class="register">A</span> is higher than 20.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="49026"></span>49026</td>
-<td class="instruction">JR NC,<a href="48976.html#49038">49038</a></td>
+<td class="instruction">JR NC,<a href="49038.html">Handler_HitByBike</a></td>
 </tr>
 <tr>
 <td class="address-1"><span id="49028"></span>49028</td>
@@ -194,251 +194,11 @@ Check for Game Over "reasons" (see <a href="../reference/pokes.html#immunity">Im
 </tr>
 <tr>
 <td class="address-1"><span id="49034"></span>49034</td>
-<td class="instruction">CALL <a href="48976.html#49055">49055</a></td>
-<td class="comment-1" rowspan="1">Call <a href="48976.html#49055">49055</a>.</td>
+<td class="instruction">CALL <a href="49055.html">49055</a></td>
+<td class="comment-1" rowspan="1">Call <a href="49055.html">49055</a>.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="49037"></span>49037</td>
-<td class="instruction">RET</td>
-<td class="comment-1" rowspan="1">Return.</td>
-</tr>
-<tr>
-<td class="address-2"><span id="49038"></span>49038</td>
-<td class="instruction">LD HL,49808</td>
-<td class="comment-1" rowspan="2">Write 80 to <a href="49808.html">49808</a>.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="49041"></span>49041</td>
-<td class="instruction">LD (HL),80</td>
-</tr>
-<tr>
-<td class="address-1"><span id="49043"></span>49043</td>
-<td class="instruction">LD HL,52285</td>
-<td class="comment-1" rowspan="1"><span class="register">HL</span>=<a href="52124.html#52285">52285</a>.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="49046"></span>49046</td>
-<td class="instruction">SET 5,(HL)</td>
-<td class="comment-1" rowspan="1">Set bit 5 of *<span class="register">HL</span>.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="49048"></span>49048</td>
-<td class="instruction">LD HL,49738</td>
-<td class="comment-1" rowspan="1"><span class="register">HL</span>=<a href="49738.html">Messaging_Brat</a>.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="49051"></span>49051</td>
-<td class="instruction">CALL <a href="48278.html#48286">Print_BonusMessaging</a></td>
-<td class="comment-1" rowspan="1">Call <a href="48278.html#48286">Print_BonusMessaging</a>.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="49054"></span>49054</td>
-<td class="instruction">RET</td>
-<td class="comment-1" rowspan="1">Return.</td>
-</tr>
-<tr>
-<td class="address-2"><span id="49055"></span>49055</td>
-<td class="instruction">LD E,66</td>
-<td class="comment-1" rowspan="1"><span class="register">E</span>=66.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="49057"></span>49057</td>
-<td class="instruction">LD BC,0</td>
-<td class="comment-1" rowspan="1"><span class="register">BC</span>=0000.</td>
-</tr>
-<tr>
-<td class="address-2"><span id="49060"></span>49060</td>
-<td class="instruction">INC B</td>
-<td class="comment-1" rowspan="1">Increment <span class="register">B</span> by one.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="49061"></span>49061</td>
-<td class="instruction">BIT 4,B</td>
-<td class="comment-1" rowspan="2">Return if bit 4 of <span class="register">B</span> is not zero.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="49063"></span>49063</td>
-<td class="instruction">RET NZ</td>
-</tr>
-<tr>
-<td class="address-1"><span id="49064"></span>49064</td>
-<td class="instruction">PUSH BC</td>
-<td class="comment-1" rowspan="3">Stash <span class="register">BC</span>, <span class="register">DE</span> and <span class="register">BC</span> on the stack.</td>
-</tr>
-<tr>
-<td class="address-2"><span id="49065"></span>49065</td>
-<td class="instruction">PUSH DE</td>
-</tr>
-<tr>
-<td class="address-1"><span id="49066"></span>49066</td>
-<td class="instruction">PUSH BC</td>
-</tr>
-<tr>
-<td class="address-1"><span id="49067"></span>49067</td>
-<td class="instruction">LD IX,50030</td>
-<td class="comment-1" rowspan="1"><span class="register">IX</span>=<a href="50030.html">50030</a>.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="49071"></span>49071</td>
-<td class="instruction">LD (IX+18),E</td>
-<td class="comment-1" rowspan="1">Write <span class="register">E</span> to *<span class="register">IX</span>+18.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="49074"></span>49074</td>
-<td class="instruction">CALL <a href="46102.html">46102</a></td>
-<td class="comment-1" rowspan="1">Call <a href="46102.html">46102</a>.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="49077"></span>49077</td>
-<td class="instruction">POP BC</td>
-<td class="comment-1" rowspan="1">Restore <span class="register">BC</span> from the stack.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="49078"></span>49078</td>
-<td class="instruction">LD HL,52285</td>
-<td class="comment-1" rowspan="1"><span class="register">HL</span>=<a href="52124.html#52285">52285</a>.</td>
-</tr>
-<tr>
-<td class="address-2"><span id="49081"></span>49081</td>
-<td class="instruction">CALL <a href="49484.html#49613">49613</a></td>
-<td class="comment-1" rowspan="1">Call <a href="49484.html#49613">49613</a>.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="49084"></span>49084</td>
-<td class="instruction">LD A,(49637)</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="49484.html#49637">49637</a>.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="49087"></span>49087</td>
-<td class="instruction">AND %00011000</td>
-<td class="comment-1" rowspan="1">Keep only bits 3-4.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="49089"></span>49089</td>
-<td class="instruction">OR C</td>
-<td class="comment-1" rowspan="1">Set the bits from <span class="register">C</span>.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="49090"></span>49090</td>
-<td class="instruction">OUT (254),A</td>
-<td class="comment-1" rowspan="1">OUT 254</td>
-</tr>
-<tr>
-<td class="address-1"><span id="49092"></span>49092</td>
-<td class="instruction">LD E,B</td>
-<td class="comment-1" rowspan="1"><span class="register">E</span>=<span class="register">B</span>.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="49093"></span>49093</td>
-<td class="instruction">SLA E</td>
-<td class="comment-1" rowspan="1">Shift <span class="register">E</span> left (with carry).</td>
-</tr>
-<tr>
-<td class="address-1"><span id="49095"></span>49095</td>
-<td class="instruction">SLA E</td>
-<td class="comment-1" rowspan="1">Shift <span class="register">E</span> left (with carry).</td>
-</tr>
-<tr>
-<td class="address-1"><span id="49097"></span>49097</td>
-<td class="instruction">LD D,0</td>
-<td class="comment-1" rowspan="1"><span class="register">D</span>=0.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="49099"></span>49099</td>
-<td class="instruction">PUSH DE</td>
-<td class="comment-1" rowspan="1">Stash <span class="register">DE</span> on the stack.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="49100"></span>49100</td>
-<td class="instruction">POP IX</td>
-<td class="comment-1" rowspan="1">Restore <span class="register">IX</span> from the stack.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="49102"></span>49102</td>
-<td class="instruction">LD DE,65535</td>
-<td class="comment-1" rowspan="1"><span class="register">DE</span>=65535.</td>
-</tr>
-<tr>
-<td class="address-2"><span id="49105"></span>49105</td>
-<td class="instruction">ADD IX,DE</td>
-<td class="comment-1" rowspan="1"><span class="register">IX</span>+=<span class="register">DE</span>.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="49107"></span>49107</td>
-<td class="instruction">BIT 7,(HL)</td>
-<td class="comment-1" rowspan="2">Jump to <a href="48976.html#49115">49115</a> if bit 7 of *<span class="register">HL</span> is not zero.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="49109"></span>49109</td>
-<td class="instruction">JR NZ,<a href="48976.html#49115">49115</a></td>
-</tr>
-<tr>
-<td class="address-1"><span id="49111"></span>49111</td>
-<td class="instruction">JR C,<a href="48976.html#49105">49105</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="48976.html#49105">49105</a> if {} is lower.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="49113"></span>49113</td>
-<td class="instruction">JR <a href="48976.html#49081">49081</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="48976.html#49081">49081</a>.</td>
-</tr>
-<tr>
-<td class="address-2"><span id="49115"></span>49115</td>
-<td class="instruction">RES 7,(HL)</td>
-<td class="comment-1" rowspan="1">Reset bit 7 of *<span class="register">HL</span>.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="49117"></span>49117</td>
-<td class="instruction">POP DE</td>
-<td class="comment-1" rowspan="1">Restore <span class="register">DE</span> from the stack.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="49118"></span>49118</td>
-<td class="instruction">DJNZ <a href="48976.html#49065">49065</a></td>
-<td class="comment-1" rowspan="1">Decrease counter by one and loop back to <a href="48976.html#49065">49065</a> until counter is zero.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="49120"></span>49120</td>
-<td class="instruction">LD A,5</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=5.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="49122"></span>49122</td>
-<td class="instruction">XOR E</td>
-<td class="comment-1" rowspan="1">Reset the bits from <span class="register">E</span>.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="49123"></span>49123</td>
-<td class="instruction">LD E,A</td>
-<td class="comment-1" rowspan="1"><span class="register">E</span>=<span class="register">A</span>.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="49124"></span>49124</td>
-<td class="instruction">POP BC</td>
-<td class="comment-1" rowspan="1">Restore <span class="register">BC</span> from the stack.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="49125"></span>49125</td>
-<td class="instruction">LD A,6</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=6.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="49127"></span>49127</td>
-<td class="instruction">XOR C</td>
-<td class="comment-1" rowspan="1">Reset the bits from <span class="register">C</span>.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="49128"></span>49128</td>
-<td class="instruction">LD C,A</td>
-<td class="comment-1" rowspan="1"><span class="register">C</span>=<span class="register">A</span>.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="49129"></span>49129</td>
-<td class="instruction">JR <a href="48976.html#49060">49060</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="48976.html#49060">49060</a>.</td>
-</tr>
-<tr>
-<td class="address-1"><span id="49131"></span>49131</td>
 <td class="instruction">RET</td>
 <td class="comment-1" rowspan="1">Return.</td>
 </tr>
@@ -446,11 +206,11 @@ Check for Game Over "reasons" (see <a href="../reference/pokes.html#immunity">Im
 <table class="asm-navigation">
 <tr>
 <td class="prev">
-Prev: <a href="48521.html">48521</a>
+Prev: <a href="48757.html">48757</a>
 </td>
 <td class="up">Up: <a href="../maps/all.html#48976">Map</a></td>
 <td class="next">
-Next: <a href="49132.html">49132</a>
+Next: <a href="49038.html">49038</a>
 </td>
 </tr>
 </table>

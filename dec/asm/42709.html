@@ -67,7 +67,7 @@ Used by the routine at <a href="42384.html">GameEntryPoint</a>.
 <td class="asm-label"></td>
 <td class="address-1"><span id="42718"></span>42718</td>
 <td class="instruction">LD HL,18504</td>
-<td class="comment-1" rowspan="1"><span class="register">HL</span>=18504.</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>=18504 (screen buffer location).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -198,13 +198,12 @@ Used by the routine at <a href="42384.html">GameEntryPoint</a>.
 <td class="asm-label"></td>
 <td class="address-1"><span id="42780"></span>42780</td>
 <td class="instruction">BIT 5,(HL)</td>
-<td class="comment-1" rowspan="1">Test bit 5 of *<span class="register">HL</span>.</td>
+<td class="comment-1" rowspan="2">Return if bit 5 of *<span class="register">HL</span> is not set.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="42782"></span>42782</td>
 <td class="instruction">RET Z</td>
-<td class="comment-1" rowspan="1">Return if {} is zero.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>

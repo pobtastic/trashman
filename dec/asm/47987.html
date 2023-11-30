@@ -53,7 +53,7 @@ Used by the routine at <a href="45217.html">StartGame</a>.
 <tr>
 <td class="address-1"><span id="47991"></span>47991</td>
 <td class="instruction">BIT 2,(IX+33)</td>
-<td class="comment-1" rowspan="2">Call <a href="47987.html#48132">48132</a> if bit 2 of *<span class="register">IX</span>+33 is not zero.</td>
+<td class="comment-1" rowspan="2">Call <a href="47987.html#48132">48132</a> if bit 2 of *<span class="register">IX</span>+33 is set.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="47995"></span>47995</td>
@@ -62,7 +62,7 @@ Used by the routine at <a href="45217.html">StartGame</a>.
 <tr>
 <td class="address-1"><span id="47998"></span>47998</td>
 <td class="instruction">BIT 3,(IX+33)</td>
-<td class="comment-1" rowspan="2">Call <a href="47987.html#48078">48078</a> if bit 3 of *<span class="register">IX</span>+33 is not zero.</td>
+<td class="comment-1" rowspan="2">Call <a href="47987.html#48078">48078</a> if bit 3 of *<span class="register">IX</span>+33 is set.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="48002"></span>48002</td>
@@ -81,7 +81,7 @@ Used by the routine at <a href="45217.html">StartGame</a>.
 <tr>
 <td class="address-1"><span id="48010"></span>48010</td>
 <td class="instruction">BIT 2,(IX+33)</td>
-<td class="comment-1" rowspan="2">Call <a href="47987.html#48132">48132</a> if bit 2 of *<span class="register">IX</span>+33 is not zero.</td>
+<td class="comment-1" rowspan="2">Call <a href="47987.html#48132">48132</a> if bit 2 of *<span class="register">IX</span>+33 is set.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="48014"></span>48014</td>
@@ -90,7 +90,7 @@ Used by the routine at <a href="45217.html">StartGame</a>.
 <tr>
 <td class="address-1"><span id="48017"></span>48017</td>
 <td class="instruction">BIT 3,(IX+33)</td>
-<td class="comment-1" rowspan="2">Call <a href="47987.html#48078">48078</a> if bit 3 of *<span class="register">IX</span>+33 is not zero.</td>
+<td class="comment-1" rowspan="2">Call <a href="47987.html#48078">48078</a> if bit 3 of *<span class="register">IX</span>+33 is set.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="48021"></span>48021</td>
@@ -119,7 +119,7 @@ Used by the routine at <a href="45217.html">StartGame</a>.
 <tr>
 <td class="address-1"><span id="48034"></span>48034</td>
 <td class="instruction">RET NZ</td>
-<td class="comment-1" rowspan="1">Return if {} is not zero.</td>
+<td class="comment-1" rowspan="1">Return if bit 1 of <span class="register">A</span> is set.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="48035"></span>48035</td>
@@ -134,7 +134,7 @@ Used by the routine at <a href="45217.html">StartGame</a>.
 <tr>
 <td class="address-1"><span id="48039"></span>48039</td>
 <td class="instruction">JR Z,<a href="47987.html#48075">48075</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="47987.html#48075">48075</a> if {} is zero.</td>
+<td class="comment-1" rowspan="1">Jump to <a href="47987.html#48075">48075</a> if *<span class="register">HL</span> is not set.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="48041"></span>48041</td>
@@ -144,12 +144,11 @@ Used by the routine at <a href="45217.html">StartGame</a>.
 <tr>
 <td class="address-1"><span id="48043"></span>48043</td>
 <td class="instruction">CP (HL)</td>
-<td class="comment-1" rowspan="1">Compare <span class="register">A</span> with *<span class="register">HL</span>.</td>
+<td class="comment-1" rowspan="2">Return if <span class="register">A</span> is not equal to *<span class="register">HL</span>.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="48044"></span>48044</td>
 <td class="instruction">RET NZ</td>
-<td class="comment-1" rowspan="1">Return if {} is not zero.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="48045"></span>48045</td>
@@ -214,7 +213,7 @@ Used by the routine at <a href="45217.html">StartGame</a>.
 <tr>
 <td class="address-2"><span id="48078"></span>48078</td>
 <td class="instruction">BIT 4,(IX+33)</td>
-<td class="comment-1" rowspan="2">Return if bit 4 of *<span class="register">IX</span>+33 is zero.</td>
+<td class="comment-1" rowspan="2">Return if bit 4 of *<span class="register">IX</span>+33 is not set.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="48082"></span>48082</td>
@@ -288,7 +287,7 @@ Used by the routine at <a href="45217.html">StartGame</a>.
 <tr>
 <td class="address-1"><span id="48117"></span>48117</td>
 <td class="instruction">BIT 0,(HL)</td>
-<td class="comment-1" rowspan="2">Return if bit 0 of *<span class="register">HL</span> is zero.</td>
+<td class="comment-1" rowspan="2">Return if bit 0 of *<span class="register">HL</span> is not set.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="48119"></span>48119</td>
@@ -377,7 +376,7 @@ Used by the routine at <a href="45217.html">StartGame</a>.
 <tr>
 <td class="address-1"><span id="48157"></span>48157</td>
 <td class="instruction">BIT 0,A</td>
-<td class="comment-1" rowspan="2">Jump to <a href="47987.html#48201">48201</a> if bit 0 of <span class="register">A</span> is not zero.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="47987.html#48201">48201</a> if bit 0 of <span class="register">A</span> is set.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="48159"></span>48159</td>
@@ -391,7 +390,7 @@ Used by the routine at <a href="45217.html">StartGame</a>.
 <tr>
 <td class="address-1"><span id="48164"></span>48164</td>
 <td class="instruction">BIT 0,(HL)</td>
-<td class="comment-1" rowspan="2">Return if bit 0 of *<span class="register">HL</span> is not zero.</td>
+<td class="comment-1" rowspan="2">Return if bit 0 of *<span class="register">HL</span> is set.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="48166"></span>48166</td>
@@ -584,7 +583,7 @@ Used by the routine at <a href="45217.html">StartGame</a>.
 <tr>
 <td class="address-1"><span id="48243"></span>48243</td>
 <td class="instruction">BIT 0,A</td>
-<td class="comment-1" rowspan="2">Jump to <a href="47987.html#48230">48230</a> if bit 0 of <span class="register">A</span> is not zero.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="47987.html#48230">48230</a> if bit 0 of <span class="register">A</span> is set.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="48245"></span>48245</td>
@@ -623,7 +622,7 @@ Used by the routine at <a href="45217.html">StartGame</a>.
 <tr>
 <td class="address-1"><span id="48262"></span>48262</td>
 <td class="instruction">BIT 0,A</td>
-<td class="comment-1" rowspan="2">Jump to <a href="47987.html#48230">48230</a> if bit 0 of <span class="register">A</span> is not zero.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="47987.html#48230">48230</a> if bit 0 of <span class="register">A</span> is set.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="48264"></span>48264</td>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Trashman: Routine at BE59</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="BD89.html">BD89</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#be59">Map</a></td>
+<td class="next">
+Next: <a href="BE75.html">BE75</a>
+</td>
+</tr>
+</table>
+<div class="description">BE59: Handler: Bitten By Dog</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routine at <a href="BE75.html">BE75</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">Handler_BittenByDog</td>
+<td class="address-2"><span id="be59"></span>BE59</td>
+<td class="instruction">LD L,(IX+$10)</td>
+<td class="comment-1" rowspan="1"><span class="register">L</span>=*<span class="register">IX</span>+10.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="be5c"></span>BE5C</td>
+<td class="instruction">LD H,(IX+$11)</td>
+<td class="comment-1" rowspan="1"><span class="register">H</span>=*<span class="register">IX</span>+11.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="be5f"></span>BE5F</td>
+<td class="instruction">LD E,(IX+$28)</td>
+<td class="comment-1" rowspan="1"><span class="register">E</span>=*<span class="register">IX</span>+28.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="be62"></span>BE62</td>
+<td class="instruction">LD D,(IX+$29)</td>
+<td class="comment-1" rowspan="1"><span class="register">D</span>=*<span class="register">IX</span>+29.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="be65"></span>BE65</td>
+<td class="instruction">AND A</td>
+<td class="comment-1" rowspan="1">Set flags.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="be66"></span>BE66</td>
+<td class="instruction">SBC HL,DE</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>-=<span class="register">DE</span> (with carry).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="be68"></span>BE68</td>
+<td class="instruction">RET NZ</td>
+<td class="comment-1" rowspan="1">Return if the result is not zero.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="be69"></span>BE69</td>
+<td class="instruction">LD HL,$C290</td>
+<td class="comment-1" rowspan="2">Write 64 to *<a href="C290.html">C290</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="be6c"></span>BE6C</td>
+<td class="instruction">LD (HL),$64</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="be6e"></span>BE6E</td>
+<td class="instruction">LD HL,$C221</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>=<a href="C221.html">Messaging_LegOrf</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="be71"></span>BE71</td>
+<td class="instruction">CALL <a href="BC96.html#bc9e">Print_BonusMessaging</a></td>
+<td class="comment-1" rowspan="1">Call <a href="BC96.html#bc9e">Print_BonusMessaging</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="be74"></span>BE74</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="BD89.html">BD89</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#be59">Map</a></td>
+<td class="next">
+Next: <a href="BE75.html">BE75</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1984 New Generation Software; 2023 ArcadeGeek LTD.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.0.</div>
+<div class="repository">Link to <a href="https://github.com/pobtastic/trashman/">Source code</a>.</div>
+<div><a href="../dec/asm/48729.html">Switch to decimal</a>.</div>
+</footer>
+</body>
+</html>

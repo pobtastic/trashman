@@ -80,7 +80,7 @@ Who is in play, is it 1UP or 2UP?
 </td>
 </tr>
 <tr>
-<td class="asm-label">Handler_Fired_0</td>
+<td class="asm-label">Handler_Fired_PlayerCheck</td>
 <td class="address-2"><span id="42554"></span>42554</td>
 <td class="instruction">LD HL,43914</td>
 <td class="comment-1" rowspan="1"><span class="register">HL</span>=<a href="43914.html">Game_Flags</a>.</td>
@@ -105,8 +105,8 @@ Who is in play, is it 1UP or 2UP?
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="42563"></span>42563</td>
-<td class="instruction">JR <a href="42542.html#42567">Handler_Fired_1</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="42542.html#42567">Handler_Fired_1</a>.</td>
+<td class="instruction">JR <a href="42542.html#42567">Handler_Fired_HighScoreCheck</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="42542.html#42567">Handler_Fired_HighScoreCheck</a>.</td>
 </tr>
 <tr>
 <td class="asm-label">Handler_Fired_2UP</td>
@@ -115,16 +115,15 @@ Who is in play, is it 1UP or 2UP?
 <td class="comment-1" rowspan="1">Reset bit 7 of *<span class="register">HL</span>.</td>
 </tr>
 <tr>
-<td class="asm-label">Handler_Fired_1</td>
+<td class="asm-label">Handler_Fired_HighScoreCheck</td>
 <td class="address-2"><span id="42567"></span>42567</td>
 <td class="instruction">BIT 0,(HL)</td>
-<td class="comment-1" rowspan="1">Test bit 0 of *<span class="register">HL</span>.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="42542.html#42585">Handler_Fired_HighScore</a> if the score is on the High Score table.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="42569"></span>42569</td>
-<td class="instruction">JR NZ,<a href="42542.html#42585">Handler_Fired_2</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="42542.html#42585">Handler_Fired_2</a> if is not zero.</td>
+<td class="instruction">JR NZ,<a href="42542.html#42585">Handler_Fired_HighScore</a></td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -136,7 +135,7 @@ Who is in play, is it 1UP or 2UP?
 <td class="asm-label"></td>
 <td class="address-1"><span id="42574"></span>42574</td>
 <td class="instruction">JP C,<a href="42384.html#42427">NewLevel</a></td>
-<td class="comment-1" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Jump to <a href="42384.html#42427">NewLevel</a> if there is still an active player.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -157,7 +156,7 @@ Who is in play, is it 1UP or 2UP?
 <td class="comment-1" rowspan="1">Jump to <a href="42542.html#42610">Handler_Fired_BackToMenu</a>.</td>
 </tr>
 <tr>
-<td class="asm-label">Handler_Fired_2</td>
+<td class="asm-label">Handler_Fired_HighScore</td>
 <td class="address-2"><span id="42585"></span>42585</td>
 <td class="instruction">CALL <a href="43625.html">Print_HighScoreTable</a></td>
 <td class="comment-1" rowspan="1">Call <a href="43625.html">Print_HighScoreTable</a>.</td>
@@ -178,7 +177,7 @@ Who is in play, is it 1UP or 2UP?
 <td class="asm-label"></td>
 <td class="address-1"><span id="42594"></span>42594</td>
 <td class="instruction">JP C,<a href="42384.html#42427">NewLevel</a></td>
-<td class="comment-1" rowspan="1"></td>
+<td class="comment-1" rowspan="1">Jump to <a href="42384.html#42427">NewLevel</a> if there is still an active player.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -197,7 +196,7 @@ This entry point is used by the routine at <a href="42384.html">GameEntryPoint</
 </td>
 </tr>
 <tr>
-<td class="asm-label">Handler_Fired_3</td>
+<td class="asm-label">Handler_Fired_0</td>
 <td class="address-2"><span id="42599"></span>42599</td>
 <td class="instruction">CALL <a href="43423.html#43461">CopyScore_ActiveScore</a></td>
 <td class="comment-1" rowspan="1">Call <a href="43423.html#43461">CopyScore_ActiveScore</a>.</td>
@@ -217,8 +216,8 @@ This entry point is used by the routine at <a href="42384.html">GameEntryPoint</
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="42608"></span>42608</td>
-<td class="instruction">JR <a href="42542.html#42554">Handler_Fired_0</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="42542.html#42554">Handler_Fired_0</a>.</td>
+<td class="instruction">JR <a href="42542.html#42554">Handler_Fired_PlayerCheck</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="42542.html#42554">Handler_Fired_PlayerCheck</a>.</td>
 </tr>
 <tr>
 <td class="asm-label">Handler_Fired_BackToMenu</td>

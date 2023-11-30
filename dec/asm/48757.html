@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Trashman: Routine at 48757</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="48729.html">48729</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#48757">Map</a></td>
+<td class="next">
+Next: <a href="48976.html">48976</a>
+</td>
+</tr>
+</table>
+<div class="description">48757: Routine at BE75</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routine at <a href="48521.html">48521</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="address-2"><span id="48757"></span>48757</td>
+<td class="instruction">RES 5,(IX+23)</td>
+<td class="comment-1" rowspan="1">Reset bit 5 of *<span class="register">IX</span>+23.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48761"></span>48761</td>
+<td class="instruction">BIT 3,(IX+19)</td>
+<td class="comment-1" rowspan="2">Jump to <a href="48757.html#48771">48771</a> if bit 3 of *<span class="register">IX</span>+19 is not set.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48765"></span>48765</td>
+<td class="instruction">JR Z,<a href="48757.html#48771">48771</a></td>
+</tr>
+<tr>
+<td class="address-1"><span id="48767"></span>48767</td>
+<td class="instruction">SET 5,(IX+23)</td>
+<td class="comment-1" rowspan="1">Set bit 5 of *<span class="register">IX</span>+23.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="48771"></span>48771</td>
+<td class="instruction">LD HL,49639</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>=<a href="49484.html#49639">49639</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48774"></span>48774</td>
+<td class="instruction">LD D,0</td>
+<td class="comment-1" rowspan="1"><span class="register">D</span>=0.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48776"></span>48776</td>
+<td class="instruction">LD A,(IX+19)</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<span class="register">IX</span>+19.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48779"></span>48779</td>
+<td class="instruction">AND %00011000</td>
+<td class="comment-1" rowspan="1">Keep only bits 3-4.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48781"></span>48781</td>
+<td class="instruction">RRCA</td>
+<td class="comment-1" rowspan="1">RRCA.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48782"></span>48782</td>
+<td class="instruction">RRCA</td>
+<td class="comment-1" rowspan="1">RRCA.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48783"></span>48783</td>
+<td class="instruction">LD E,A</td>
+<td class="comment-1" rowspan="1"><span class="register">E</span>=<span class="register">A</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48784"></span>48784</td>
+<td class="instruction">ADD HL,DE</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>+=<span class="register">DE</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48785"></span>48785</td>
+<td class="instruction">LD E,(HL)</td>
+<td class="comment-1" rowspan="1"><span class="register">E</span>=*<span class="register">HL</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48786"></span>48786</td>
+<td class="instruction">INC HL</td>
+<td class="comment-1" rowspan="1">Increment <span class="register">HL</span> by one.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48787"></span>48787</td>
+<td class="instruction">LD D,(HL)</td>
+<td class="comment-1" rowspan="1"><span class="register">D</span>=*<span class="register">HL</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48788"></span>48788</td>
+<td class="instruction">LD L,(IX+16)</td>
+<td class="comment-1" rowspan="1"><span class="register">L</span>=*<span class="register">IX</span>+16.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48791"></span>48791</td>
+<td class="instruction">LD H,(IX+17)</td>
+<td class="comment-1" rowspan="1"><span class="register">H</span>=*<span class="register">IX</span>+17.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48794"></span>48794</td>
+<td class="instruction">ADD HL,DE</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>+=<span class="register">DE</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48795"></span>48795</td>
+<td class="instruction">BIT 3,(IX+19)</td>
+<td class="comment-1" rowspan="2">Jump to <a href="48757.html#48824">48824</a> if bit 3 of *<span class="register">IX</span>+19 is set.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48799"></span>48799</td>
+<td class="instruction">JR NZ,<a href="48757.html#48824">48824</a></td>
+</tr>
+<tr>
+<td class="address-1"><span id="48801"></span>48801</td>
+<td class="instruction">LD A,L</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=<span class="register">L</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48802"></span>48802</td>
+<td class="instruction">BIT 4,(IX+19)</td>
+<td class="comment-1" rowspan="2">Jump to <a href="48757.html#48818">48818</a> if bit 4 of *<span class="register">IX</span>+19 is not set.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48806"></span>48806</td>
+<td class="instruction">JR Z,<a href="48757.html#48818">48818</a></td>
+</tr>
+<tr>
+<td class="address-1"><span id="48808"></span>48808</td>
+<td class="instruction">AND %00011111</td>
+<td class="comment-1" rowspan="1">Keep only bits 0-4.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48810"></span>48810</td>
+<td class="instruction">CP 31</td>
+<td class="comment-1" rowspan="2">Return if <span class="register">A</span> is equal to 31.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48812"></span>48812</td>
+<td class="instruction">RET Z</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48813"></span>48813</td>
+<td class="instruction">CP 21</td>
+<td class="comment-1" rowspan="2">Return if <span class="register">A</span> is equal to 21.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48815"></span>48815</td>
+<td class="instruction">RET Z</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48816"></span>48816</td>
+<td class="instruction">JR <a href="48757.html#48824">48824</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="48757.html#48824">48824</a>.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="48818"></span>48818</td>
+<td class="instruction">AND %00011111</td>
+<td class="comment-1" rowspan="1">Keep only bits 0-4.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48820"></span>48820</td>
+<td class="instruction">RET Z</td>
+<td class="comment-1" rowspan="1">Return if the result is zero.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48821"></span>48821</td>
+<td class="instruction">CP 10</td>
+<td class="comment-1" rowspan="2">Return if <span class="register">A</span> is equal to 10.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48823"></span>48823</td>
+<td class="instruction">RET Z</td>
+</tr>
+<tr>
+<td class="address-2"><span id="48824"></span>48824</td>
+<td class="instruction">BIT 7,(HL)</td>
+<td class="comment-1" rowspan="2">Jump to <a href="48757.html#48889">48889</a> if bit 7 of *<span class="register">HL</span> is set.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48826"></span>48826</td>
+<td class="instruction">JR NZ,<a href="48757.html#48889">48889</a></td>
+</tr>
+<tr>
+<td class="address-1"><span id="48828"></span>48828</td>
+<td class="instruction">BIT 5,(IX+48)</td>
+<td class="comment-1" rowspan="1">Test bit 5 of *<span class="register">IX</span>+48.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48832"></span>48832</td>
+<td class="instruction">RES 5,(IX+48)</td>
+<td class="comment-1" rowspan="1">Reset bit 5 of *<span class="register">IX</span>+48.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48836"></span>48836</td>
+<td class="instruction">JR Z,<a href="48757.html#48864">48864</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="48757.html#48864">48864</a> if bit 5 of *<span class="register">IX</span>+48 is not set.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48838"></span>48838</td>
+<td class="instruction">BIT 4,(IX+19)</td>
+<td class="comment-1" rowspan="2">Jump to <a href="48757.html#48854">48854</a> if bit 4 of *<span class="register">IX</span>+19 is not set.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48842"></span>48842</td>
+<td class="instruction">JR Z,<a href="48757.html#48854">48854</a></td>
+</tr>
+<tr>
+<td class="address-1"><span id="48844"></span>48844</td>
+<td class="instruction">RES 1,(IX+23)</td>
+<td class="comment-1" rowspan="1">Reset bit 1 of *<span class="register">IX</span>+23.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48848"></span>48848</td>
+<td class="instruction">SET 0,(IX+23)</td>
+<td class="comment-1" rowspan="1">Set bit 0 of *<span class="register">IX</span>+23.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48852"></span>48852</td>
+<td class="instruction">JR <a href="48757.html#48872">48872</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="48757.html#48872">48872</a>.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="48854"></span>48854</td>
+<td class="instruction">RES 1,(IX+23)</td>
+<td class="comment-1" rowspan="1">Reset bit 1 of *<span class="register">IX</span>+23.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48858"></span>48858</td>
+<td class="instruction">SET 2,(IX+23)</td>
+<td class="comment-1" rowspan="1">Set bit 2 of *<span class="register">IX</span>+23.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48862"></span>48862</td>
+<td class="instruction">JR <a href="48757.html#48872">48872</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="48757.html#48872">48872</a>.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="48864"></span>48864</td>
+<td class="instruction">RES 2,(IX+23)</td>
+<td class="comment-1" rowspan="1">Reset bit 2 of *<span class="register">IX</span>+23.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48868"></span>48868</td>
+<td class="instruction">RES 0,(IX+23)</td>
+<td class="comment-1" rowspan="1">Reset bit 0 of *<span class="register">IX</span>+23.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="48872"></span>48872</td>
+<td class="instruction">POP DE</td>
+<td class="comment-1" rowspan="1">Restore <span class="register">DE</span> from the stack.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48873"></span>48873</td>
+<td class="instruction">PUSH HL</td>
+<td class="comment-1" rowspan="1">Stash <span class="register">HL</span> on the stack.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48874"></span>48874</td>
+<td class="instruction">CALL <a href="48729.html">Handler_BittenByDog</a></td>
+<td class="comment-1" rowspan="1">Call <a href="48729.html">Handler_BittenByDog</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48877"></span>48877</td>
+<td class="instruction">LD HL,52285</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>=<a href="52124.html#52285">52285</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48880"></span>48880</td>
+<td class="instruction">SET 1,(HL)</td>
+<td class="comment-1" rowspan="1">Set bit 1 of *<span class="register">HL</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48882"></span>48882</td>
+<td class="instruction">POP HL</td>
+<td class="comment-1" rowspan="1">Restore <span class="register">HL</span> from the stack.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48883"></span>48883</td>
+<td class="instruction">LD B,(IX+19)</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=*<span class="register">IX</span>+19.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48886"></span>48886</td>
+<td class="instruction">JP <a href="46884.html#47242">47242</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="46884.html#47242">47242</a>.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="48889"></span>48889</td>
+<td class="instruction">LD A,(47384)</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="46884.html#47384">47384</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48892"></span>48892</td>
+<td class="instruction">BIT 3,(IX+19)</td>
+<td class="comment-1" rowspan="2">Jump to <a href="48757.html#48907">48907</a> if bit 3 of *<span class="register">IX</span>+19 is not set.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48896"></span>48896</td>
+<td class="instruction">JR Z,<a href="48757.html#48907">48907</a></td>
+</tr>
+<tr>
+<td class="address-1"><span id="48898"></span>48898</td>
+<td class="instruction">INC A</td>
+<td class="comment-1" rowspan="1">Increment <span class="register">A</span> by one.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48899"></span>48899</td>
+<td class="instruction">BIT 4,(IX+19)</td>
+<td class="comment-1" rowspan="2">Jump to <a href="48757.html#48907">48907</a> if bit 4 of *<span class="register">IX</span>+19 is not set.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48903"></span>48903</td>
+<td class="instruction">JR Z,<a href="48757.html#48907">48907</a></td>
+</tr>
+<tr>
+<td class="address-1"><span id="48905"></span>48905</td>
+<td class="instruction">SUB 2</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>-=2.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="48907"></span>48907</td>
+<td class="instruction">CP (IX+7)</td>
+<td class="comment-1" rowspan="2">Return if <span class="register">A</span> with *<span class="register">IX</span>+7 is not zero.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48910"></span>48910</td>
+<td class="instruction">RET NZ</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48911"></span>48911</td>
+<td class="instruction">SET 5,(IX+48)</td>
+<td class="comment-1" rowspan="1">Set bit 5 of *<span class="register">IX</span>+48.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48915"></span>48915</td>
+<td class="instruction">BIT 1,(IX+23)</td>
+<td class="comment-1" rowspan="2">Jump to <a href="48757.html#48872">48872</a> if bit 1 of *<span class="register">IX</span>+23 is set.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48919"></span>48919</td>
+<td class="instruction">JR NZ,<a href="48757.html#48872">48872</a></td>
+</tr>
+<tr>
+<td class="address-1"><span id="48921"></span>48921</td>
+<td class="instruction">BIT 3,(IX+19)</td>
+<td class="comment-1" rowspan="2">Return if bit 3 of *<span class="register">IX</span>+19 is set.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48925"></span>48925</td>
+<td class="instruction">RET NZ</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48926"></span>48926</td>
+<td class="instruction">BIT 4,(IX+19)</td>
+<td class="comment-1" rowspan="2">Jump to <a href="48757.html#48954">48954</a> if bit 4 of *<span class="register">IX</span>+19 is set.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48930"></span>48930</td>
+<td class="instruction">JR NZ,<a href="48757.html#48954">48954</a></td>
+</tr>
+<tr>
+<td class="address-1"><span id="48932"></span>48932</td>
+<td class="instruction">BIT 0,(IX+23)</td>
+<td class="comment-1" rowspan="2">Jump to <a href="48757.html#48944">48944</a> if bit 0 of *<span class="register">IX</span>+23 is set.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48936"></span>48936</td>
+<td class="instruction">JR NZ,<a href="48757.html#48944">48944</a></td>
+</tr>
+<tr>
+<td class="address-1"><span id="48938"></span>48938</td>
+<td class="instruction">SET 0,(IX+23)</td>
+<td class="comment-1" rowspan="1">Set bit 0 of *<span class="register">IX</span>+23.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48942"></span>48942</td>
+<td class="instruction">JR <a href="48757.html#48872">48872</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="48757.html#48872">48872</a>.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="48944"></span>48944</td>
+<td class="instruction">RES 0,(IX+23)</td>
+<td class="comment-1" rowspan="1">Reset bit 0 of *<span class="register">IX</span>+23.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48948"></span>48948</td>
+<td class="instruction">SET 1,(IX+23)</td>
+<td class="comment-1" rowspan="1">Set bit 1 of *<span class="register">IX</span>+23.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48952"></span>48952</td>
+<td class="instruction">JR <a href="48757.html#48872">48872</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="48757.html#48872">48872</a>.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="48954"></span>48954</td>
+<td class="instruction">BIT 2,(IX+23)</td>
+<td class="comment-1" rowspan="2">Jump to <a href="48757.html#48966">48966</a> if bit 2 of *<span class="register">IX</span>+23 is set.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48958"></span>48958</td>
+<td class="instruction">JR NZ,<a href="48757.html#48966">48966</a></td>
+</tr>
+<tr>
+<td class="address-1"><span id="48960"></span>48960</td>
+<td class="instruction">SET 2,(IX+23)</td>
+<td class="comment-1" rowspan="1">Set bit 2 of *<span class="register">IX</span>+23.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48964"></span>48964</td>
+<td class="instruction">JR <a href="48757.html#48872">48872</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="48757.html#48872">48872</a>.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="48966"></span>48966</td>
+<td class="instruction">RES 2,(IX+23)</td>
+<td class="comment-1" rowspan="1">Reset bit 2 of *<span class="register">IX</span>+23.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48970"></span>48970</td>
+<td class="instruction">SET 1,(IX+23)</td>
+<td class="comment-1" rowspan="1">Set bit 1 of *<span class="register">IX</span>+23.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48974"></span>48974</td>
+<td class="instruction">JR <a href="48757.html#48872">48872</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="48757.html#48872">48872</a>.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="48729.html">48729</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#48757">Map</a></td>
+<td class="next">
+Next: <a href="48976.html">48976</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1984 New Generation Software; 2023 ArcadeGeek LTD.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.0.</div>
+<div class="repository">Link to <a href="https://github.com/pobtastic/trashman/">Source code</a>.</div>
+<div><a href="../../asm/BE75.html">Switch to hexadecimal</a>.</div>
+</footer>
+</body>
+</html>

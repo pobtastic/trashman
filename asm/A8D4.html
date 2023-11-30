@@ -123,7 +123,7 @@ Print "Trashman killed in".
 <td class="asm-label"></td>
 <td class="address-1"><span id="a8ee"></span>A8EE</td>
 <td class="instruction">LD DE,$4860</td>
-<td class="comment-1" rowspan="1"><span class="register">DE</span>=4860.</td>
+<td class="comment-1" rowspan="1"><span class="register">DE</span>=4860 (screen buffer location).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -185,7 +185,7 @@ Print "Nominee for TRASHMAN of the YEAR" if the score is on the scoreboard.
 <td class="asm-label"></td>
 <td class="address-1"><span id="a903"></span>A903</td>
 <td class="instruction">BIT 0,A</td>
-<td class="comment-1" rowspan="2">Call <a href="B081.html">PrintString</a> if bit 0 of <span class="register">A</span> is not set.</td>
+<td class="comment-1" rowspan="2">Call <a href="B081.html">PrintString</a> if the score is on the scoreboard.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>

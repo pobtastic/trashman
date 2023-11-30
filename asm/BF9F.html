@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Trashman: Routine at BF9F</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="BF8E.html">BF8E</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#bf9f">Map</a></td>
+<td class="next">
+Next: <a href="BFEC.html">BFEC</a>
+</td>
+</tr>
+</table>
+<div class="description">BF9F: Routine at BF9F</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routine at <a href="BF50.html">BF50</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="address-2"><span id="bf9f"></span>BF9F</td>
+<td class="instruction">LD E,$42</td>
+<td class="comment-1" rowspan="1"><span class="register">E</span>=42.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="bfa1"></span>BFA1</td>
+<td class="instruction">LD BC,$0000</td>
+<td class="comment-1" rowspan="1"><span class="register">BC</span>=0000.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="bfa4"></span>BFA4</td>
+<td class="instruction">INC B</td>
+<td class="comment-1" rowspan="1">Increment <span class="register">B</span> by one.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="bfa5"></span>BFA5</td>
+<td class="instruction">BIT 4,B</td>
+<td class="comment-1" rowspan="2">Return if bit 4 of <span class="register">B</span> is set.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="bfa7"></span>BFA7</td>
+<td class="instruction">RET NZ</td>
+</tr>
+<tr>
+<td class="address-1"><span id="bfa8"></span>BFA8</td>
+<td class="instruction">PUSH BC</td>
+<td class="comment-1" rowspan="3">Stash <span class="register">BC</span>, <span class="register">DE</span> and <span class="register">BC</span> on the stack.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="bfa9"></span>BFA9</td>
+<td class="instruction">PUSH DE</td>
+</tr>
+<tr>
+<td class="address-1"><span id="bfaa"></span>BFAA</td>
+<td class="instruction">PUSH BC</td>
+</tr>
+<tr>
+<td class="address-1"><span id="bfab"></span>BFAB</td>
+<td class="instruction">LD IX,$C36E</td>
+<td class="comment-1" rowspan="1"><span class="register">IX</span>=<a href="C36E.html">C36E</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="bfaf"></span>BFAF</td>
+<td class="instruction">LD (IX+$12),E</td>
+<td class="comment-1" rowspan="1">Write <span class="register">E</span> to *<span class="register">IX</span>+12.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="bfb2"></span>BFB2</td>
+<td class="instruction">CALL <a href="B416.html">$B416</a></td>
+<td class="comment-1" rowspan="1">Call <a href="B416.html">B416</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="bfb5"></span>BFB5</td>
+<td class="instruction">POP BC</td>
+<td class="comment-1" rowspan="1">Restore <span class="register">BC</span> from the stack.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="bfb6"></span>BFB6</td>
+<td class="instruction">LD HL,$CC3D</td>
+<td class="comment-1" rowspan="1"><span class="register">HL</span>=<a href="CB9C.html#cc3d">CC3D</a>.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="bfb9"></span>BFB9</td>
+<td class="instruction">CALL <a href="C14C.html#c1cd">$C1CD</a></td>
+<td class="comment-1" rowspan="1">Call <a href="C14C.html#c1cd">C1CD</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="bfbc"></span>BFBC</td>
+<td class="instruction">LD A,($C1E5)</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="C14C.html#c1e5">C1E5</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="bfbf"></span>BFBF</td>
+<td class="instruction">AND %00011000</td>
+<td class="comment-1" rowspan="1">Keep only bits 3-4.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="bfc1"></span>BFC1</td>
+<td class="instruction">OR C</td>
+<td class="comment-1" rowspan="1">Set the bits from <span class="register">C</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="bfc2"></span>BFC2</td>
+<td class="instruction">OUT ($FE),A</td>
+<td class="comment-1" rowspan="1">OUT FE</td>
+</tr>
+<tr>
+<td class="address-1"><span id="bfc4"></span>BFC4</td>
+<td class="instruction">LD E,B</td>
+<td class="comment-1" rowspan="1"><span class="register">E</span>=<span class="register">B</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="bfc5"></span>BFC5</td>
+<td class="instruction">SLA E</td>
+<td class="comment-1" rowspan="1">Shift <span class="register">E</span> left (with carry).</td>
+</tr>
+<tr>
+<td class="address-1"><span id="bfc7"></span>BFC7</td>
+<td class="instruction">SLA E</td>
+<td class="comment-1" rowspan="1">Shift <span class="register">E</span> left (with carry).</td>
+</tr>
+<tr>
+<td class="address-1"><span id="bfc9"></span>BFC9</td>
+<td class="instruction">LD D,$00</td>
+<td class="comment-1" rowspan="1"><span class="register">D</span>=00.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="bfcb"></span>BFCB</td>
+<td class="instruction">PUSH DE</td>
+<td class="comment-1" rowspan="1">Stash <span class="register">DE</span> on the stack.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="bfcc"></span>BFCC</td>
+<td class="instruction">POP IX</td>
+<td class="comment-1" rowspan="1">Restore <span class="register">IX</span> from the stack.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="bfce"></span>BFCE</td>
+<td class="instruction">LD DE,$FFFF</td>
+<td class="comment-1" rowspan="1"><span class="register">DE</span>=FFFF.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="bfd1"></span>BFD1</td>
+<td class="instruction">ADD IX,DE</td>
+<td class="comment-1" rowspan="1"><span class="register">IX</span>+=<span class="register">DE</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="bfd3"></span>BFD3</td>
+<td class="instruction">BIT 7,(HL)</td>
+<td class="comment-1" rowspan="2">Jump to <a href="BF9F.html#bfdb">BFDB</a> if bit 7 of *<span class="register">HL</span> is set.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="bfd5"></span>BFD5</td>
+<td class="instruction">JR NZ,<a href="BF9F.html#bfdb">$BFDB</a></td>
+</tr>
+<tr>
+<td class="address-1"><span id="bfd7"></span>BFD7</td>
+<td class="instruction">JR C,<a href="BF9F.html#bfd1">$BFD1</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="BF9F.html#bfd1">BFD1</a> if {} is lower.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="bfd9"></span>BFD9</td>
+<td class="instruction">JR <a href="BF9F.html#bfb9">$BFB9</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="BF9F.html#bfb9">BFB9</a>.</td>
+</tr>
+<tr>
+<td class="address-2"><span id="bfdb"></span>BFDB</td>
+<td class="instruction">RES 7,(HL)</td>
+<td class="comment-1" rowspan="1">Reset bit 7 of *<span class="register">HL</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="bfdd"></span>BFDD</td>
+<td class="instruction">POP DE</td>
+<td class="comment-1" rowspan="1">Restore <span class="register">DE</span> from the stack.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="bfde"></span>BFDE</td>
+<td class="instruction">DJNZ <a href="BF9F.html#bfa9">$BFA9</a></td>
+<td class="comment-1" rowspan="1">Decrease counter by one and loop back to <a href="BF9F.html#bfa9">BFA9</a> until counter is zero.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="bfe0"></span>BFE0</td>
+<td class="instruction">LD A,$05</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=05.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="bfe2"></span>BFE2</td>
+<td class="instruction">XOR E</td>
+<td class="comment-1" rowspan="1">Reset the bits from <span class="register">E</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="bfe3"></span>BFE3</td>
+<td class="instruction">LD E,A</td>
+<td class="comment-1" rowspan="1"><span class="register">E</span>=<span class="register">A</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="bfe4"></span>BFE4</td>
+<td class="instruction">POP BC</td>
+<td class="comment-1" rowspan="1">Restore <span class="register">BC</span> from the stack.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="bfe5"></span>BFE5</td>
+<td class="instruction">LD A,$06</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=06.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="bfe7"></span>BFE7</td>
+<td class="instruction">XOR C</td>
+<td class="comment-1" rowspan="1">Reset the bits from <span class="register">C</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="bfe8"></span>BFE8</td>
+<td class="instruction">LD C,A</td>
+<td class="comment-1" rowspan="1"><span class="register">C</span>=<span class="register">A</span>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="bfe9"></span>BFE9</td>
+<td class="instruction">JR <a href="BF9F.html#bfa4">$BFA4</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="BF9F.html#bfa4">BFA4</a>.</td>
+</tr>
+<tr>
+<td class="address-1"><span id="bfeb"></span>BFEB</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="BF8E.html">BF8E</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#bf9f">Map</a></td>
+<td class="next">
+Next: <a href="BFEC.html">BFEC</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1984 New Generation Software; 2023 ArcadeGeek LTD.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.0.</div>
+<div class="repository">Link to <a href="https://github.com/pobtastic/trashman/">Source code</a>.</div>
+<div><a href="../dec/asm/49055.html">Switch to decimal</a>.</div>
+</footer>
+</body>
+</html>

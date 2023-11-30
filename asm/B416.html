@@ -40,7 +40,7 @@ Next: <a href="B44A.html">B44A</a>
 <td class="routine-comment" colspan="5">
 <div class="details">
 <div class="paragraph">
-Used by the routines at <a href="B0A1.html">StartGame</a>, <a href="B591.html">B591</a> and <a href="BF50.html">BF50</a>.
+Used by the routines at <a href="B0A1.html">StartGame</a>, <a href="B591.html">B591</a> and <a href="BF9F.html">BF9F</a>.
 </div>
 </div>
 </td>
@@ -53,7 +53,7 @@ Used by the routines at <a href="B0A1.html">StartGame</a>, <a href="B591.html">B
 <tr>
 <td class="address-1"><span id="b41a"></span>B41A</td>
 <td class="instruction">BIT 0,(IX+$18)</td>
-<td class="comment-1" rowspan="2">Jump to <a href="B416.html#b425">B425</a> if bit 0 of *<span class="register">IX</span>+18 is zero.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="B416.html#b425">B425</a> if bit 0 of *<span class="register">IX</span>+18 is not set.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="b41e"></span>B41E</td>
@@ -62,7 +62,7 @@ Used by the routines at <a href="B0A1.html">StartGame</a>, <a href="B591.html">B
 <tr>
 <td class="address-1"><span id="b420"></span>B420</td>
 <td class="instruction">BIT 7,(IX+$18)</td>
-<td class="comment-1" rowspan="2">Return if bit 7 of *<span class="register">IX</span>+18 is not zero.</td>
+<td class="comment-1" rowspan="2">Return if bit 7 of *<span class="register">IX</span>+18 is set.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="b424"></span>B424</td>
@@ -91,7 +91,7 @@ Used by the routines at <a href="B0A1.html">StartGame</a>, <a href="B591.html">B
 <tr>
 <td class="address-1"><span id="b433"></span>B433</td>
 <td class="instruction">BIT 1,(IX+$17)</td>
-<td class="comment-1" rowspan="2">Jump to <a href="B416.html#b440">B440</a> if bit 1 of *<span class="register">IX</span>+17 is not zero.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="B416.html#b440">B440</a> if bit 1 of *<span class="register">IX</span>+17 is set.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="b437"></span>B437</td>
@@ -115,7 +115,7 @@ Used by the routines at <a href="B0A1.html">StartGame</a>, <a href="B591.html">B
 <tr>
 <td class="address-2"><span id="b440"></span>B440</td>
 <td class="instruction">BIT 0,(IX+$18)</td>
-<td class="comment-1" rowspan="2">Return if bit 0 of *<span class="register">IX</span>+18 is zero.</td>
+<td class="comment-1" rowspan="2">Return if bit 0 of *<span class="register">IX</span>+18 is not set.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="b444"></span>B444</td>

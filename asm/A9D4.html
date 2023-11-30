@@ -55,7 +55,7 @@ Used by the routines at <a href="A590.html">GameEntryPoint</a> and <a href="A62E
 <td class="asm-label"></td>
 <td class="address-1"><span id="a9d7"></span>A9D7</td>
 <td class="instruction">XOR %00010000</td>
-<td class="comment-1" rowspan="1">Reset bit 4.</td>
+<td class="comment-1" rowspan="1">Flip bit 4.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -93,7 +93,7 @@ Who is in play, is it 1UP or 2UP?
 <td class="asm-label"></td>
 <td class="address-1"><span id="a9df"></span>A9DF</td>
 <td class="instruction">BIT 4,A</td>
-<td class="comment-1" rowspan="2">Jump to <a href="A9D4.html#a9e6">Handler_SwitchPlayers_Write</a> if bit 4 of <span class="register">A</span> is zero.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="A9D4.html#a9e6">Handler_SwitchPlayers_Write</a> if this is player one.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -132,7 +132,7 @@ Else, use 2UP.
 <td class="asm-label"></td>
 <td class="address-1"><span id="a9ea"></span>A9EA</td>
 <td class="instruction">BIT 5,A</td>
-<td class="comment-1" rowspan="2">Return if bit 5 of <span class="register">A</span> is not zero.</td>
+<td class="comment-1" rowspan="2">Return if bit 5 of <span class="register">A</span> is set.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
