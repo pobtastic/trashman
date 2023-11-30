@@ -2603,9 +2603,9 @@ c$A590 LD A,$00      ; {Write #N$00 to *#R$CC3D.
  $A5CC JR NZ,$A61D   ; zero.}
  $A5CE LD HL,$C272   ; #REGhl=#R$C272.
  $A5D1 CALL $CB22    ; Call #R$CB22.
-; Check other reasons why the game ended  (see #POKE#immunity()).
+; Check other reasons why the game ended (see #POKE#immunity()).
  $A5D4 LD A,($B008)  ; #REGa=*#R$B008.
- $A5D7 BIT 0,A       ; {Jump to #R$A667 if bit 0 is not zero.
+ $A5D7 BIT 0,A       ; {Jump to #R$A667 if bit 0 is set.
  $A5D9 JP NZ,$A667   ; }
  $A5DC LD HL,($AB7E) ; #REGhl=*#R$AB7E.
 ; Point to the current players level.
@@ -2675,6 +2675,7 @@ c$A62E CALL $A9C5    ; Call #R$A9C5.
  $A634 CALL $AA33    ; Call #R$AA33.
  $A637 CALL $A7F5    ; Call #R$A7F5.
 ; Who is in play, is it 1UP or 2UP?
+@label=Handler_Fired_PlayerCheck
 *$A63A LD HL,$AB8A   ; #REGhl=#R$AB8A.
  $A63D BIT 4,(HL)    ; {Jump to #R$A645 if this is player two.
  $A63F JR NZ,$A645   ; }
@@ -2682,17 +2683,19 @@ c$A62E CALL $A9C5    ; Call #R$A9C5.
  $A643 JR $A647      ; Jump to #R$A647.
 @label=Handler_Fired_2UP
 *$A645 RES 7,(HL)    ; Reset bit 7 of *#REGhl.
-*$A647 BIT 0,(HL)    ; Test bit 0 of *#REGhl.
- $A649 JR NZ,$A659   ; Jump to #R$A659 if is not zero.
+@label=Handler_Fired_HighScoreCheck
+*$A647 BIT 0,(HL)    ; {Jump to #R$A659 if the score is on the High Score
+ $A649 JR NZ,$A659   ; table.}
  $A64B CALL $A9D4    ; Call #R$A9D4.
- $A64E JP C,$A5BB    ;
+ $A64E JP C,$A5BB    ; Jump to #R$A5BB if there is still an active player.
  $A651 CALL $AA69    ; Call #R$AA69.
  $A654 CALL $A7F5    ; Call #R$A7F5.
  $A657 JR $A672      ; Jump to #R$A672.
+@label=Handler_Fired_HighScore
 *$A659 CALL $AA69    ; Call #R$AA69.
  $A65C CALL $A7F5    ; Call #R$A7F5.
  $A65F CALL $A9D4    ; Call #R$A9D4.
- $A662 JP C,$A5BB    ;
+ $A662 JP C,$A5BB    ; Jump to #R$A5BB if there is still an active player.
  $A665 JR $A672      ; Jump to #R$A672.
 ; This entry point is used by the routine at #R$A590.
 *$A667 CALL $A9C5    ; Call #R$A9C5.
@@ -2780,7 +2783,7 @@ c$A6C7 LD BC,$7FFE   ; {Read from the keyboard;
 c$A6D5 LD HL,$AC0C   ; #REGhl=#R$AC0C.
  $A6D8 LD DE,$4828   ; #REGde=#N$4828 (screen buffer location).
  $A6DB CALL $B081    ; Call #R$B081.
- $A6DE LD HL,$4848   ; #REGhl=#N$4848.
+ $A6DE LD HL,$4848   ; #REGhl=#N$4848 (screen buffer location).
  $A6E1 LD B,$10      ; #REGb=#N$10.
  $A6E3 CALL $A895    ; Call #R$A895.
  $A6E6 LD HL,$AC8F   ; #REGhl=#R$AC8F.
@@ -2802,8 +2805,8 @@ c$A6D5 LD HL,$AC0C   ; #REGhl=#R$AC0C.
  $A714 CALL $A7FB    ; Call #R$A7FB.
  $A717 LD HL,$AB8A   ; #REGhl=#R$AB8A.
  $A71A SET 6,(HL)    ; Set bit 6 of *#REGhl.
- $A71C BIT 5,(HL)    ; Test bit 5 of *#REGhl.
- $A71E RET Z         ; Return if {} is zero.
+ $A71C BIT 5,(HL)    ; {Return if bit 5 of *#REGhl is not set.
+ $A71E RET Z         ; }
  $A71F SET 4,(HL)    ; Set bit 4 of *#REGhl.
  $A721 LD HL,$ACB0   ; #REGhl=#R$ACB0.
  $A724 LD DE,$48C0   ; #REGde=#N$48C0 (screen buffer location).
@@ -3091,7 +3094,7 @@ c$A859 CALL $A7EB     ; Call #R$A7EB.
 c$A884 BIT 5,A       ; Test bit 5 of #REGa.
 ; Default to using "NO".
  $A886 LD HL,$ACF2   ; #REGhl=#R$ACF2.
- $A889 JR Z,$A88E    ; Jump to #R$A88E if bit 5 of #REGa is zero.
+ $A889 JR Z,$A88E    ; Jump to #R$A88E if bit 5 of #REGa is not set.
 ; Else, use "YES.
  $A88B LD HL,$ACF6   ; #REGhl=#R$ACF6.
 @label=Handler_Yes_No_Write
@@ -3162,7 +3165,7 @@ c$A8D4 CALL $A77E    ; Call #R$A77E.
  $A8E8 CALL $A895    ; Call #R$A895.
 ; Print "Trashman killed in".
  $A8EB LD HL,$AD2B   ; #REGhl=#R$AD2B.
- $A8EE LD DE,$4860   ; #REGde=#N($4860,$04,$04).
+ $A8EE LD DE,$4860   ; #REGde=#N$4860 (screen buffer location).
  $A8F1 CALL $B081    ; Call #R$B081.
 ; Prints the current road name.
  $A8F4 LD HL,$C280   ; #REGhl=#R$C280.
@@ -3171,7 +3174,7 @@ c$A8D4 CALL $A77E    ; Call #R$A77E.
  $A8FA LD DE,$4880   ; #REGde=#N$4880 (screen buffer location).
  $A8FD LD HL,$AD3F   ; #REGhl=#R$AD3F.
  $A900 LD A,($AB8A)  ; #REGa=*#R$AB8A.
- $A903 BIT 0,A       ; {Call #R$B081 if bit 0 of #REGa is not set.
+ $A903 BIT 0,A       ; {Call #R$B081 if the score is on the scoreboard.
  $A905 CALL NZ,$B081 ; }
 ; Print "Fred Scrunge, (".
  $A908 LD HL,$AD60   ; #REGhl=#R$AD60.
@@ -3319,19 +3322,19 @@ c$A99F CALL $A77E    ; Call #R$A77E.
 ; Used by the routines at #R$A590 and #R$A62E.
 @label=Handler_SwitchPlayers
 c$A9D4 LD A,($AB8A)  ; #REGa=*#R$AB8A.
- $A9D7 XOR %00010000 ; Reset bit 4.
+ $A9D7 XOR %00010000 ; Flip bit 4.
  $A9D9 LD ($AB8A),A  ; Write #REGa to *#R$AB8A.
 ; Default to using 1UP.
  $A9DC LD HL,$AB80   ; #REGhl=#R$AB80.
 ; Who is in play, is it 1UP or 2UP?
- $A9DF BIT 4,A       ; {Jump to #R$A9E6 if bit 4 of #REGa is zero.
+ $A9DF BIT 4,A       ; {Jump to #R$A9E6 if this is player one.
  $A9E1 JR Z,$A9E6    ; }
 ; Else, use 2UP.
  $A9E3 LD HL,$AB85   ; #REGhl=#R$AB85.
 @label=Handler_SwitchPlayers_Write
 *$A9E6 LD ($AB7E),HL ; Write #REGhl to *#R$AB7E.
  $A9E9 RLCA          ; Rotate #REGa left (with carry).
- $A9EA BIT 5,A       ; {Return if bit 5 of #REGa is not zero.
+ $A9EA BIT 5,A       ; {Return if bit 5 of #REGa is set.
  $A9EC RET NZ        ; }
  $A9ED RLCA          ; Rotate #REGa left (with carry).
  $A9EE RET           ; Return.
@@ -3347,7 +3350,7 @@ c$A9EF CALL $A77E    ; Call #R$A77E.
  $A9F8 LD DE,$4840   ; #REGde=#N$4840 (screen buffer location).
  $A9FB CALL $B081    ; Call #R$B081.
 ; Who is in play, is it 1UP or 2UP?
- $A9FE LD HL,$AB8A   ; {Test if bit 4 of #R$AB8A is set.
+ $A9FE LD HL,$AB8A   ; {Test bit 4 of #R$AB8A.
  $AA01 BIT 4,(HL)    ; }
 ; Default to using the 1UP name.
  $AA03 LD HL,$ACA6   ; #REGhl=#R$ACA6.
@@ -3405,7 +3408,7 @@ c$AA33 CALL $A77E    ; Call #R$A77E.
  $AA56 LD HL,$AEFD   ; #REGhl=#R$AEFD.
  $AA59 CALL $B081    ; Call #R$B081.
  $AA5C LD HL,$AB8A   ; #REGhl=#R$AB8A.
- $AA5F BIT 0,(HL)    ; {Return if bit 0 of *#REGhl is set.
+ $AA5F BIT 0,(HL)    ; {Return if the score isn't on the score board.
  $AA61 RET Z         ; }
 ; Print "you have been  nominated for TRASHMAN OF THE YEAR" messaging.
  $AA62 LD HL,$AE97   ; #REGhl=#R$AE97.
@@ -3574,7 +3577,7 @@ c$AB12 CALL $A740    ; Call #R$A740.
  $AB5D LD HL,$AE28   ; #REGhl=#R$AE28.
  $AB60 CALL $B081    ; Call #R$B081.
  $AB63 LD HL,$AB8A   ; #REGhl=#R$AB8A.
- $AB66 BIT 0,(HL)    ; {Return if bit 0 of *#REGhl is set.
+ $AB66 BIT 0,(HL)    ; {Return if the score is not on the score board.
  $AB68 RET Z         ; }
 ; Print "Your  success  has  given you  a well earned  nomination  for the
 ; TRASHMAN OF THE YEAR.".
@@ -3617,9 +3620,9 @@ g$AB7E DEFW $AB80
 ; #TABLE(default,centre,centre,centre,centre)
 ; { =h,c4 Bits }
 ; { =h 0 | =h 1 | =h 2 | =h 3 }
-; { To-do | To-do | To-do | To-do }
+; { On High Score table | To-do | To-do | To-do }
 ; { =h 4 | =h 5 | =h 6 | =h 7 }
-; { Active player | 1UP or 2UP | To-do | To-do }
+; { Active player | 1UP or 2UP | 1UP In-Play | 2UP In-Play }
 ; TABLE#
 @label=Game_Flags
 g$AB8A DEFB $00
@@ -3984,13 +3987,13 @@ c$B12B LD HL,$B146   ; #REGhl=#R$B146.
  $B12E DEC (HL)      ; Decrease *#REGhl by one.
  $B12F LD A,($C386)  ; #REGa=*#R$C386.
  $B132 JR NZ,$B140   ; Jump to #R$B140 if is not zero.
- $B134 BIT 4,A       ;
+ $B134 BIT 4,A       ; Test bit 4 of #REGa.
  $B136 LD (HL),$02   ; Write #N$02 to *#REGhl.
- $B138 JR NZ,$B13C   ; Jump to #R$B13C if is not zero.
+ $B138 JR NZ,$B13C   ; Jump to #R$B13C if bit 4 of #REGa is set.
  $B13A LD (HL),$19   ; Write #N$19 to *#REGhl.
 *$B13C CALL $CB40    ; Call #R$CB40.
  $B13F RET           ; Return.
-*$B140 BIT 4,A       ; {Return if bit 4 of #REGa is set.
+*$B140 BIT 4,A       ; {Return if bit 4 of #REGa is not set.
  $B142 RET Z         ; }
  $B143 LD (HL),$01   ; Write #N$01 to *#REGhl.
  $B145 RET           ; Return.
@@ -4100,7 +4103,7 @@ c$B1D7 LD L,(IX+$00)  ; #REGl=*#REGix+#N$00.
  $B1EE SBC HL,BC      ; #REGhl-=#REGbc.
  $B1F0 POP HL         ; Restore #REGhl from the stack.
  $B1F1 RET C          ; Return if the subtract had any carry.
-*$B1F2 BIT 6,(IX+$07) ; {Return if bit 6 of #REGix+#N$07 is not zero.
+*$B1F2 BIT 6,(IX+$07) ; {Return if bit 6 of #REGix+#N$07 is set.
  $B1F6 RET NZ         ; }
  $B1F7 LD BC,$0020    ; {#REGhl+=#N($0020,$04,$04).
  $B1FA ADD HL,BC      ; }
@@ -4199,7 +4202,7 @@ c$B2A4 PUSH BC       ; {Stash #REGbc and #REGde on the stack.
  $B2A5 PUSH DE       ; }
 *$B2A6 INC HL        ; Increment #REGhl by one.
  $B2A7 LD A,(HL)     ; #REGa=*#REGhl.
- $B2A8 XOR %00000100 ; Reset bit 2.
+ $B2A8 XOR %00000100 ; Flip bit 2.
  $B2AA LD (DE),A     ; Write #REGa to *#REGde.
  $B2AB DEC HL        ; Decrease #REGhl by one.
  $B2AC DEC DE        ; Decrease #REGde by one.
@@ -4268,8 +4271,8 @@ c$B2EE LD L,(IX+$05) ; #REGl=*#REGix+#N$05.
  $B303 PUSH IX       ;
  $B305 PUSH BC       ; }
 *$B306 LD A,(HL)     ; #REGa=*#REGhl.
- $B307 BIT 6,A       ; Test bit 6 of #REGa.
- $B309 JR NZ,$B312   ; Jump to #R$B312.
+ $B307 BIT 6,A       ; {Jump to #R$B312 if bit 6 of #REGa is set.
+ $B309 JR NZ,$B312   ; }
  $B30B AND %00111111 ; Keep only bits 0-5.
  $B30D OR %01000000  ; Set bit 6.
  $B30F LD (IX+$00),A ; Write #REGa to *#REGix+#N$00.
@@ -4306,7 +4309,7 @@ c$B322 LD L,(IX+$05) ; #REGl=*#REGix+#N$05.
  $B33E LD B,(HL)     ; #REGb=*#REGhl.
  $B33F INC HL        ; Increment #REGhl by one.
  $B340 LD H,(HL)     ; #REGh=*#REGhl.
- $B341 BIT 7,H       ; {Jump to #R$B36E if bit 7 of #REGh is zero.
+ $B341 BIT 7,H       ; {Jump to #R$B36E if bit 7 of #REGh is not set.
  $B343 JR Z,$B36E    ; }
  $B345 LD L,B        ; #REGl=#REGb.
  $B346 LD B,$08      ; #REGb=#N$08.
@@ -4455,22 +4458,22 @@ c$B3F0 LD IX,$C293   ; #REGix=#R$C293.
 
 ; Routine at B416
 ;
-; Used by the routines at #R$B0A1, #R$B591 and #R$BF50.
+; Used by the routines at #R$B0A1, #R$B591 and #R$BF9F.
 c$B416 LD IX,$C36E    ; #REGix=#R$C36E.
- $B41A BIT 0,(IX+$18) ; {Jump to #R$B425 if bit 0 of *#REGix+#N$18 is zero.
+ $B41A BIT 0,(IX+$18) ; {Jump to #R$B425 if bit 0 of *#REGix+#N$18 is not set.
  $B41E JR Z,$B425     ; }
- $B420 BIT 7,(IX+$18) ; {Return if bit 7 of *#REGix+#N$18 is not zero.
+ $B420 BIT 7,(IX+$18) ; {Return if bit 7 of *#REGix+#N$18 is set.
  $B424 RET NZ         ; }
 *$B425 RES 7,(IX+$18) ; Reset bit 7 of *#REGix+#N$18.
  $B429 CALL $B2C0     ; Call #R$B2C0.
  $B42C LD IX,$C36E    ; #REGix=#R$C36E.
  $B430 CALL $B374     ; Call #R$B374.
- $B433 BIT 1,(IX+$17) ; {Jump to #R$B440 if bit 1 of *#REGix+#N$17 is not zero.
+ $B433 BIT 1,(IX+$17) ; {Jump to #R$B440 if bit 1 of *#REGix+#N$17 is set.
  $B437 JR NZ,$B440    ; }
  $B439 CALL $B4B8     ; Call #R$B4B8.
  $B43C CALL $B469     ; Call #R$B469.
  $B43F RET            ; Return.
-*$B440 BIT 0,(IX+$18) ; {Return if bit 0 of *#REGix+#N$18 is zero.
+*$B440 BIT 0,(IX+$18) ; {Return if bit 0 of *#REGix+#N$18 is not set.
  $B444 RET Z          ; }
  $B445 SET 7,(IX+$18) ; Set bit 7 of *#REGix+#N$18.
  $B449 RET            ; Return.
@@ -4479,12 +4482,12 @@ c$B416 LD IX,$C36E    ; #REGix=#R$C36E.
 ;
 ; Used by the routine at #R$B0A1.
 c$B44A LD IX,$C356    ; #REGix=#R$C356.
- $B44E BIT 3,(IX+$17) ; {Return if bit 3 of *#REGix+#N$17 is zero.
+ $B44E BIT 3,(IX+$17) ; {Return if bit 3 of *#REGix+#N$17 is not set.
  $B452 RET Z          ; }
  $B453 CALL $B2C0     ; Call #R$B2C0.
  $B456 LD IX,$C356    ; #REGix=#R$C356.
  $B45A CALL $B374     ; Call #R$B374.
- $B45D BIT 1,(IX+$17) ; {Return if bit 1 of *#REGix+#N$17 is not zero.
+ $B45D BIT 1,(IX+$17) ; {Return if bit 1 of *#REGix+#N$17 is set.
  $B461 RET NZ         ; }
  $B462 CALL $B4B8     ; Call #R$B4B8.
  $B465 CALL $B469     ; Call #R$B469.
@@ -4635,7 +4638,7 @@ c$B4B8 LD B,(IX+$0B)  ; #REGb=*#REGix+#N$0B.
  $B573 LD DE,$000C    ; #REGde=#N($000C,$04,$04).
  $B576 LD A,($C27A)   ; #REGa=*#R$C27A.
  $B579 LD B,A         ; #REGb=#REGa.
-*$B57A BIT 7,(IX+$21) ; {Jump to #R$B58B if bit 7 of *#REGix+#N$21 is zero.
+*$B57A BIT 7,(IX+$21) ; {Jump to #R$B58B if bit 7 of *#REGix+#N$21 is not set.
  $B57E JR Z,$B58B     ; }
  $B580 ADD IX,DE      ; #REGix+=#REGde.
  $B582 DJNZ $B57A     ; Decrease counter by one and loop back to #R$B57A until
@@ -4741,7 +4744,7 @@ c$B64C PUSH IX         ; Stash #REGix on the stack.
  $B664 LD ($C277),IX   ; Write #REGix to *#R$C277.
  $B668 BIT 5,(IX+$21)  ; Test bit 5 of *#REGix+#N$21.
  $B66C LD L,$28        ; #REGl=#N$28.
- $B66E JR NZ,$B677     ; Jump to #R$B677 if bit 5 is not zero.
+ $B66E JR NZ,$B677     ; Jump to #R$B677 if bit 5 is set.
  $B670 LD DE,$000C     ; #REGde=#N($000C,$04,$04).
  $B673 ADD IX,DE       ; #REGix+=#REGde.
  $B675 LD L,$D8        ; #REGl=#N$D8.
@@ -4766,8 +4769,8 @@ c$B64C PUSH IX         ; Stash #REGix on the stack.
  $B69E LD ($B918),A    ; Write #REGa to *#R$B918.
  $B6A1 LD C,$22        ; #REGc=#N$22.
  $B6A3 LD A,$05        ; #REGa=#N$05.
- $B6A5 BIT 4,L         ; Test bit 4 of #REGl.
- $B6A7 JR Z,$B6AD      ; Jump to #R$B6AD if {} is zero.
+ $B6A5 BIT 4,L         ; {Jump to #R$B6AD if bit 4 of #REGl is not set.
+ $B6A7 JR Z,$B6AD      ; }
  $B6A9 LD C,$02        ; #REGc=#N$02.
  $B6AB LD A,$1A        ; #REGa=#N$1A.
 *$B6AD LD (IX+$17),C   ; Write #REGc to *#REGix+#N$17.
@@ -4931,18 +4934,18 @@ c$B724 LD DE,$C36E     ; #REGde=#R$C36E.
  $B745 RES 5,(IX+$17)  ; Reset bit 5 of *#REGix+#N$17.
  $B749 JR $B75D        ; Jump to #R$B75D.
 *$B74B SET 5,(IX+$17)  ; Set bit 5 of *#REGix+#N$17.
- $B74F BIT 5,(IX+$13)  ; {Jump to #R$B75D if bit 5 of *#REGix+#N$13 is not
- $B753 JR NZ,$B75D     ; zero.}
+ $B74F BIT 5,(IX+$13)  ; {Jump to #R$B75D if bit 5 of *#REGix+#N$13 is set.
+ $B753 JR NZ,$B75D     ; }
  $B755 LD A,($C28E)    ; #REGa=*#R$C28E.
  $B758 ADD A,$06       ; #REGa+=#N$06.
  $B75A LD ($C28E),A    ; Write #REGa to *#R$C28E.
-*$B75D BIT 4,(IX+$17)  ; {Jump to #R$B76D if bit 4 of *#REGix+#N$17 is zero.
+*$B75D BIT 4,(IX+$17)  ; {Jump to #R$B76D if bit 4 of *#REGix+#N$17 is not set.
  $B761 JR Z,$B76D      ; }
 *$B763 LD A,($C28E)    ; #REGa=*#R$C28E.
  $B766 ADD A,$04       ; #REGa+=#N$04.
  $B768 LD ($C28E),A    ; Write #REGa to *#R$C28E.
  $B76B JR $B781        ; Jump to #R$B781.
-*$B76D BIT 1,(IX+$17)  ; {Jump to #R$B77B if bit 1 of *#REGix+#N$17 is zero.
+*$B76D BIT 1,(IX+$17)  ; {Jump to #R$B77B if bit 1 of *#REGix+#N$17 is not set.
  $B771 JR Z,$B77B      ; }
  $B773 INC HL          ; Increment #REGhl by one.
  $B774 LD (HL),$01     ; Write #N$01 to *#REGhl.
@@ -4951,16 +4954,16 @@ c$B724 LD DE,$C36E     ; #REGde=#R$C36E.
  $B779 JR $B7A1        ; Jump to #R$B7A1.
 *$B77B INC HL          ; Increment #REGhl by one.
  $B77C DEC (HL)        ; Decrease *#REGhl by one.
- $B77D JR NZ,$B763     ; Jump to #R$B763 if {} is not zero.
+ $B77D JR NZ,$B763     ; Jump to #R$B763 if *#REGhl is set.
  $B77F LD (HL),$01     ; Write #N$01 to *#REGhl.
 *$B781 INC HL          ; Increment #REGhl by one.
  $B782 DEC (HL)        ; Decrease *#REGhl by one.
- $B783 JR Z,$B79F      ; Jump to #R$B79F if {} is zero.
- $B785 BIT 1,(HL)      ; {Jump to #R$B7A1 if bit 1 of *#REGhl is zero.
+ $B783 JR Z,$B79F      ; Jump to #R$B79F if *#REGhl is zero.
+ $B785 BIT 1,(HL)      ; {Jump to #R$B7A1 if bit 1 of *#REGhl is not set.
  $B787 JR Z,$B7A1      ; }
  $B789 BIT 0,(HL)      ; Test bit 0 of *#REGhl.
  $B78B LD A,(IX+$13)   ; #REGa=*#REGix+#N$13.
- $B78E JR NZ,$B79A     ; Jump to #R$B79A if {} is not zero.
+ $B78E JR NZ,$B79A     ; Jump to #R$B79A if bit 0 of *#REGhl is set.
  $B790 CALL $C1CD      ; Call #R$C1CD.
  $B793 LD IX,$C36E     ; #REGix=#R$C36E.
  $B797 LD A,($C1E5)    ; #REGa=*#R$C1E5.
@@ -4969,9 +4972,9 @@ c$B724 LD DE,$C36E     ; #REGde=#R$C36E.
  $B79D JR $B7A7        ; Jump to #R$B7A7.
 *$B79F LD (HL),$01     ; Write #N$01 to *#REGhl.
 *$B7A1 CALL $B6BB      ; Call #R$B6BB.
- $B7A4 BIT 7,E         ; {Return if bit 7 of #REGe is not zero.
+ $B7A4 BIT 7,E         ; {Return if bit 7 of #REGe is set.
  $B7A6 RET NZ          ; }
-*$B7A7 BIT 0,(IX+$18)  ; {Jump to #R$B7CB if bit 0 of *#REGix+#N$18 is zero.
+*$B7A7 BIT 0,(IX+$18)  ; {Jump to #R$B7CB if bit 0 of *#REGix+#N$18 is not set.
  $B7AB JR Z,$B7CB      ; }
  $B7AD LD A,$08        ; #REGa=#N$08.
  $B7AF CP E            ; Compare #REGa with #REGe.
@@ -4979,7 +4982,7 @@ c$B724 LD DE,$C36E     ; #REGde=#R$C36E.
  $B7B1 RES 1,(IX+$17)  ; Reset bit 1 of *#REGix+#N$17.
  $B7B5 LD HL,($C277)   ; #REGhl=*#R$C277.
  $B7B8 LD BC,$0021     ; #REGbc=#N($0021,$04,$04).
- $B7BB BIT 4,(IX+$10)  ; {Jump to #R$B7C4 if bit 4 of *#REGix+#N$10 is zero.
+ $B7BB BIT 4,(IX+$10)  ; {Jump to #R$B7C4 if bit 4 of *#REGix+#N$10 is not set.
  $B7BF JR Z,$B7C4      ; }
  $B7C1 LD BC,$002D     ; #REGbc=#N($002D,$04,$04).
 *$B7C4 ADD HL,BC       ; #REGhl+=#REGbc.
@@ -4988,11 +4991,11 @@ c$B724 LD DE,$C36E     ; #REGde=#R$C36E.
  $B7C9 JR $B7E4        ; Jump to #R$B7E4.
 *$B7CB LD HL,($C277)   ; #REGhl=*#R$C277.
  $B7CE LD BC,$0021     ; #REGbc=#N($0021,$04,$04).
- $B7D1 BIT 4,(IX+$10)  ; {Jump to #R$B7DA if bit 4 of *#REGix+#N$10 is zero.
+ $B7D1 BIT 4,(IX+$10)  ; {Jump to #R$B7DA if bit 4 of *#REGix+#N$10 is not set.
  $B7D5 JR Z,$B7DA      ; }
  $B7D7 LD BC,$002D     ; #REGbc=#N($002D,$04,$04).
 *$B7DA ADD HL,BC       ; #REGhl+=#REGbc.
- $B7DB BIT 1,(HL)      ; {Jump to #R$B7E1 if bit 1 of *#REGhl is not zero.
+ $B7DB BIT 1,(HL)      ; {Jump to #R$B7E1 if bit 1 of *#REGhl is set.
  $B7DD JR NZ,$B7E1     ; }
  $B7DF SET 3,(HL)      ; Set bit 3 of *#REGhl.
 *$B7E1 LD A,(IX+$13)   ; #REGa=*#REGix+#N$13.
@@ -5005,17 +5008,17 @@ c$B724 LD DE,$C36E     ; #REGde=#R$C36E.
  $B7ED OR E            ; Set the bits from #REGe.
  $B7EE LD (IX+$13),A   ; Write #REGa to *#REGix+#N$13.
  $B7F1 JR $B7FC        ; Jump to #R$B7FC.
-*$B7F3 BIT 5,B         ; {Jump to #R$B81E if bit 5 of #REGb is zero.
+*$B7F3 BIT 5,B         ; {Jump to #R$B81E if bit 5 of #REGb is not set.
  $B7F5 JR Z,$B81E      ; }
  $B7F7 RES 5,B         ; Reset bit 5 of #REGb.
  $B7F9 LD (IX+$13),B   ; Write #REGb to *#REGix+#N$13.
-*$B7FC BIT 0,(IX+$17)  ; {Jump to #R$B809 if bit 0 of *#REGix+#N$17 is not
- $B800 JR NZ,$B809     ; zero.}
- $B802 BIT 2,(IX+$17)  ; {Jump to #R$B8A6 if bit 2 of *#REGix+#N$17 is zero.
+*$B7FC BIT 0,(IX+$17)  ; {Jump to #R$B809 if bit 0 of *#REGix+#N$17 is set.
+ $B800 JR NZ,$B809     ; }
+ $B802 BIT 2,(IX+$17)  ; {Jump to #R$B8A6 if bit 2 of *#REGix+#N$17 is not set.
  $B806 JP Z,$B8A6      ; }
 *$B809 BIT 3,(IX+$17)  ; Test bit 3 of *#REGix+#N$17.
  $B80D LD A,$02        ; #REGa=#N$02.
- $B80F JR Z,$B813      ; Jump to #R$B813 if {} is zero.
+ $B80F JR Z,$B813      ; Jump to #R$B813 if bit 3 of *#REGix+#N$17 is not set.
  $B811 LD A,$00        ; #REGa=#N$00.
 *$B813 OR (IX+$17)     ; Set the bits of #REGa with *#REGix+#N$17.
  $B816 AND %11111010   ; Keep only bits 1, 3-7.
@@ -5032,7 +5035,7 @@ c$B724 LD DE,$C36E     ; #REGde=#R$C36E.
  $B82B LD L,(IX+$10)   ; #REGl=*#REGix+#N$10.
  $B82E LD H,(IX+$11)   ; #REGh=*#REGix+#N$11.
  $B831 ADD HL,DE       ; #REGhl+=#REGde.
- $B832 BIT 7,(HL)      ; {Jump to #R$B870 if bit 7 of *#REGhl is not zero.
+ $B832 BIT 7,(HL)      ; {Jump to #R$B870 if bit 7 of *#REGhl is set.
  $B834 JR NZ,$B870     ; }
  $B836 PUSH HL         ; Stash #REGhl on the stack.
  $B837 LD DE,$78A0     ; #REGde=#R$78A0.
@@ -5045,25 +5048,25 @@ c$B724 LD DE,$C36E     ; #REGde=#R$C36E.
  $B845 SBC HL,DE       ; #REGhl-=#REGde (with carry).
  $B847 POP HL          ; Restore #REGhl from the stack.
  $B848 JP NC,$B4FC     ; Jump to #R$B4FC if {} is higher.
- $B84B BIT 3,(IX+$13)  ; {Jump to #R$B85F if bit 3 of *#REGix+#N$13 is not
- $B84F JR NZ,$B85F     ; zero.}
+ $B84B BIT 3,(IX+$13)  ; {Jump to #R$B85F if bit 3 of *#REGix+#N$13 is set.
+ $B84F JR NZ,$B85F     ; }
  $B851 BIT 4,(IX+$13)  ; Test bit 4 of *#REGix+#N$13.
  $B855 LD A,$00        ; #REGa=#N$00.
- $B857 JR Z,$B85B      ; Jump to #R$B85B if {} is zero.
+ $B857 JR Z,$B85B      ; Jump to #R$B85B if bit 4 of *#REGix+#N$13 is not set.
  $B859 LD A,$1F        ; #REGa=#N$1F.
 *$B85B XOR L           ; Reset the bits from #REGl.
  $B85C AND %00011111   ; Keep only bits 0-4.
- $B85E RET Z           ; Return if {} is zero.
+ $B85E RET Z           ; Return if the result is zero.
 *$B85F PUSH HL         ; Stash #REGhl on the stack.
  $B860 SET 3,(IX+$17)  ; Set bit 3 of *#REGix+#N$17.
- $B864 BIT 1,(IX+$17)  ; {Jump to #R$B886 if bit 1 of *#REGix+#N$17 is zero.
+ $B864 BIT 1,(IX+$17)  ; {Jump to #R$B886 if bit 1 of *#REGix+#N$17 is not set.
  $B868 JR Z,$B886      ; }
  $B86A RES 1,(IX+$17)  ; Reset bit 1 of *#REGix+#N$17.
  $B86E JR $B881        ; Jump to #R$B881.
 *$B870 PUSH HL         ; Stash #REGhl on the stack.
  $B871 RES 3,(IX+$17)  ; Reset bit 3 of *#REGix+#N$17.
- $B875 BIT 6,B         ; Test bit 6 of #REGb.
- $B877 CALL Z,$BAAA    ; Call #R$BAAA zero.
+ $B875 BIT 6,B         ; {Call #R$BAAA if bit 6 of #REGb is not set.
+ $B877 CALL Z,$BAAA    ; }
  $B87A POP HL          ; Restore #REGhl from the stack.
  $B87B PUSH HL         ; Stash #REGhl on the stack.
  $B87C CALL $B919      ; Call #R$B919.
@@ -5073,15 +5076,15 @@ c$B724 LD DE,$C36E     ; #REGde=#R$C36E.
  $B885 PUSH HL         ; Stash #REGhl on the stack.
 *$B886 CALL $B99F      ; Call #R$B99F.
 *$B889 POP HL          ; Restore #REGhl from the stack.
-; This entry point is used by the routine at #R$BD89.
+; This entry point is used by the routine at #R$BE75.
 *$B88A SET 5,B         ; Set bit 5 of #REGb.
  $B88C LD (IX+$13),B   ; Write #REGb to *#REGix+#N$13.
  $B88F LD (IX+$10),L   ; Write #REGl to *#REGix+#N$10.
  $B892 LD (IX+$11),H   ; Write #REGh to *#REGix+#N$11.
- $B895 BIT 3,B         ; {Jump to #R$B8A6 if bit 3 of #REGb is zero.
+ $B895 BIT 3,B         ; {Jump to #R$B8A6 if bit 3 of #REGb is not set.
  $B897 JR Z,$B8A6      ; }
  $B899 INC (IX+$07)    ; Increment *#REGix+#N$07 by one.
- $B89C BIT 4,B         ; {Jump to #R$B8A6 if bit 4 of #REGb is not zero.
+ $B89C BIT 4,B         ; {Jump to #R$B8A6 if bit 4 of #REGb is set.
  $B89E JR NZ,$B8A6     ; }
  $B8A0 DEC (IX+$07)    ; Decrease *#REGix+#N$07 by one.
  $B8A3 DEC (IX+$07)    ; Decrease *#REGix+#N$07 by one.
@@ -5127,12 +5130,12 @@ c$B724 LD DE,$C36E     ; #REGde=#R$C36E.
  $B8EC RLCA            ; RLCA.
  $B8ED RLCA            ; RLCA.
  $B8EE LD (IX+$16),A   ; Write #REGa to *#REGix+#N$16.
- $B8F1 BIT 0,(IX+$17)  ; Test bit 0 of *#REGix+#N$17.
- $B8F5 JR Z,$B8FC      ; Jump to #R$B8FC if {} is zero.
+ $B8F1 BIT 0,(IX+$17)  ; {Jump to #R$B8FC if bit 0 of *#REGix+#N$17 is not set.
+ $B8F5 JR Z,$B8FC      ; }
  $B8F7 LD (IX+$0B),$01 ; Write #N$0B to *#REGix+#N$0B.
  $B8FB RET             ; Return.
-*$B8FC BIT 2,(IX+$17)  ; Test bit 2 of *#REGix+#N$17.
- $B900 RET Z           ; Return if {} is zero.
+*$B8FC BIT 2,(IX+$17)  ; {Return if bit 2 of *#REGix+#N$17 is not set.
+ $B900 RET Z           ; }
  $B901 LD (IX+$0B),$01 ; Write #N$0B to *#REGix+#N$0B.
  $B905 INC (IX+$08)    ; Increment *#REGix+#N$08 by one.
  $B908 INC (IX+$0C)    ; Increment *#REGix+#N$0C by one.
@@ -5147,8 +5150,8 @@ c$B724 LD DE,$C36E     ; #REGde=#R$C36E.
 *$B919 PUSH IX         ; Stash #REGix on the stack.
  $B91B LD IX,($C277)   ; #REGix=#R$C277.
  $B91F PUSH HL         ; Stash #REGhl on the stack.
- $B920 BIT 4,L         ; Test bit 4 of #REGl.
- $B922 JR Z,$B929      ; Jump to #R$B929 if {} is zero.
+ $B920 BIT 4,L         ; {Jump to #R$B929 if bit 4 of #REGl is not set.
+ $B922 JR Z,$B929      ; }
  $B924 LD DE,$000C     ; #REGde=#N($000C,$04,$04).
  $B927 ADD IX,DE       ; #REGix+=#REGde.
 *$B929 LD E,(IX+$22)   ; #REGe=*#REGix+#N$22.
@@ -5163,10 +5166,10 @@ c$B724 LD DE,$C36E     ; #REGde=#R$C36E.
  $B938 ADD HL,HL       ; #REGhl+=#REGhl.
  $B939 AND %00011111   ; Keep only bits 0-4.
  $B93B LD C,A          ; #REGc=#REGa.
- $B93C CP $0A          ; Compare #REGa with #N$0A.
- $B93E JR C,$B96C      ; Jump to #R$B96C if {} is lower.
- $B940 CP $16          ; Compare #REGa with #N$16.
- $B942 JR NC,$B988     ; Jump to #R$B988 if {} is higher.
+ $B93C CP $0A          ; {Jump to #R$B96C if #REGa is lower than #N$0A.
+ $B93E JR C,$B96C      ; }
+ $B940 CP $16          ; {Jump to #R$B988 if #REGa is higher than #N$16.
+ $B942 JR NC,$B988     ; }
 *$B944 POP HL          ; {Restore #REGhl, #REGhl and #REGhl from the stack.
 *$B945 POP HL          ;
  $B946 POP HL          ; }
@@ -5240,15 +5243,15 @@ c$B724 LD DE,$C36E     ; #REGde=#R$C36E.
  $B9D5 JR $B9F6        ; Jump to #R$B9F6.
 *$B9D7 LD HL,$C386     ; #REGhl=#R$C386.
  $B9DA RES 4,(HL)      ; Reset bit 4 of *#REGhl.
- $B9DC BIT 1,(IX+$21)  ; Test bit 1 of *#REGix+#N$21.
- $B9E0 JR Z,$B9F6      ; Jump to #R$B9F6 if {} is zero.
- $B9E2 BIT 0,(IX+$21)  ; Test bit 0 of *#REGix+#N$21.
- $B9E6 JR NZ,$B9F6     ; Jump to #R$B9F6 if {} is not zero.
+ $B9DC BIT 1,(IX+$21)  ; {Jump to #R$B9F6 if bit 1 of *#REGix+#N$21 is not set.
+ $B9E0 JR Z,$B9F6      ; }
+ $B9E2 BIT 0,(IX+$21)  ; {Jump to #R$B9F6 if bit 0 of *#REGix+#N$21 is set.
+ $B9E6 JR NZ,$B9F6     ; }
  $B9E8 AND %00011111   ; Keep only bits 0-4.
- $B9EA CP $08          ; Compare #REGa with #N$08.
- $B9EC JR Z,$B9F2      ; Jump to #R$B9F2 if {} is zero.
- $B9EE CP $17          ; Compare #REGa with #N$17.
- $B9F0 JR NZ,$B9F6     ; Jump to #R$B9F6 if {} is not zero.
+ $B9EA CP $08          ; {Jump to #R$B9F2 if #REGa is equal to #N$08.
+ $B9EC JR Z,$B9F2      ; }
+ $B9EE CP $17          ; {Jump to #R$B9F6 if #REGa is not equal to #N$17.
+ $B9F0 JR NZ,$B9F6     ; }
 *$B9F2 SET 2,(IX+$21)  ; Set bit 2 of *#REGix+#N$21.
 *$B9F6 POP HL          ; Restore #REGhl from the stack.
  $B9F7 LD A,L          ; #REGa=#REGl.
@@ -5280,27 +5283,27 @@ c$B724 LD DE,$C36E     ; #REGde=#R$C36E.
 *$BA2C CALL $C144      ; Call #R$C144.
  $BA2F LD DE,$0041     ; #REGde=#N($0041,$04,$04).
  $BA32 ADD HL,DE       ; #REGhl+=#REGde.
- $BA33 BIT 6,B         ; Test bit 6 of #REGb.
- $BA35 JR Z,$BA54      ; Jump to #R$BA54 if {} is zero.
+ $BA33 BIT 6,B         ; {Jump to #R$BA54 if bit 6 of #REGb is not set.
+ $BA35 JR Z,$BA54      ; }
  $BA37 RES 3,(HL)      ; Reset bit 3 of *#REGhl.
  $BA39 RES 6,B         ; Reset bit 6 of #REGb.
  $BA3B SET 6,(IX+$21)  ; Set bit 6 of *#REGix+#N$21.
  $BA3F BIT 7,(IX+$21)  ; Test bit 7 of *#REGix+#N$21.
  $BA43 POP IX          ; Restore #REGix from the stack.
  $BA45 LD HL,$CC3D     ; #REGhl=#R$CC3D.
- $BA48 JR Z,$BA4D      ; Jump to #R$BA4D if {} is zero.
+ $BA48 JR Z,$BA4D      ; Jump to #R$BA4D if bit 7 of *#REGix+#N$21 is not set.
  $BA4A SET 3,(HL)      ; Set bit 3 of *#REGhl.
  $BA4C RET             ; Return.
 *$BA4D SET 4,(HL)      ; Set bit 4 of *#REGhl.
  $BA4F SET 4,(IX+$17)  ; Set bit 4 of *#REGix+#N$17.
  $BA53 RET             ; Return.
-*$BA54 BIT 3,(HL)      ; Test bit 3 of *#REGhl.
- $BA56 JR NZ,$BAA5     ; Jump to #R$BAA5 if {} is not zero.
+*$BA54 BIT 3,(HL)      ; {Jump to #R$BAA5 if bit 3 of *#REGhl is set.
+ $BA56 JR NZ,$BAA5     ; }
  $BA58 SET 3,(HL)      ; Set bit 3 of *#REGhl.
  $BA5A SET 6,B         ; Set bit 6 of #REGb.
  $BA5C RES 6,(IX+$21)  ; Reset bit 6 of *#REGix+#N$21.
- $BA60 BIT 5,(IX+$21)  ; Test bit 5 of *#REGix+#N$21.
- $BA64 JR Z,$BA6E      ; Jump to #R$BA6E if {} is zero.
+ $BA60 BIT 5,(IX+$21)  ; {Jump to #R$BA6E if bit 5 of *#REGix+#N$21 is not set.
+ $BA64 JR Z,$BA6E      ; }
  $BA66 LD A,($C36D)    ; #REGa=*#R$C36D.
  $BA69 OR %00000000    ; Set bits .
  $BA6B LD ($C36D),A    ; Write #REGa to *#R$C36D.
@@ -5311,10 +5314,10 @@ c$B724 LD DE,$C36E     ; #REGde=#R$C36E.
  $BA75 POP IX          ; Restore #REGix from the stack.
  $BA77 BIT 4,(IX+$17)  ; Test bit 4 of *#REGix+#N$17.
  $BA7B RES 4,(IX+$17)  ; Reset bit 4 of *#REGix+#N$17.
- $BA7F JR NZ,$BA9F     ; Jump to #R$BA9F if {} is not zero.
+ $BA7F JR NZ,$BA9F     ; Jump to #R$BA9F if bit 4 of *#REGix+#N$17 is set.
  $BA81 BIT 7,(HL)      ; Test bit 7 of *#REGhl.
  $BA83 SET 7,(HL)      ; Set bit 7 of *#REGhl.
- $BA85 JR NZ,$BA99     ; Jump to #R$BA99 if {} is not zero.
+ $BA85 JR NZ,$BA99     ; Jump to #R$BA99 if *#REGhl is set.
  $BA87 SET 1,(HL)      ; Set bit 1 of *#REGhl.
  $BA89 LD HL,$CC3D     ; #REGhl=#R$CC3D.
  $BA8C SET 3,(HL)      ; Set bit 3 of *#REGhl.
@@ -5333,10 +5336,10 @@ c$B724 LD DE,$C36E     ; #REGde=#R$C36E.
  $BAA7 POP HL          ; {Restore #REGhl and #REGhl from the stack.
  $BAA8 POP HL          ; }
  $BAA9 RET             ; Return.
-*$BAAA BIT 3,B         ; Test bit 3 of #REGb.
- $BAAC RET Z           ; Return if {} is zero.
- $BAAD BIT 4,B         ; Test bit 4 of #REGb.
- $BAAF RET Z           ; Return if {} is zero.
+*$BAAA BIT 3,B         ; {Return if bit 3 of #REGb is not set.
+ $BAAC RET Z           ; }
+ $BAAD BIT 4,B         ; {Return if bit 4 of #REGb is not set.
+ $BAAF RET Z           ; }
  $BAB0 LD DE,$0060     ; #REGde=#N($0060,$04,$04).
  $BAB3 RES 5,H         ; Reset bit 5 of #REGh.
  $BAB5 AND A           ; Set flags.
@@ -5451,27 +5454,27 @@ c$BB36 LD IX,$C2D4   ; #REGix=#R$C2D4.
 ;
 ; Used by the routine at #R$B0A1.
 c$BB73 LD IX,($C277)  ; #REGix=*#R$C277.
- $BB77 BIT 2,(IX+$21) ; {Call #R$BC04 if bit 2 of *#REGix+#N$21 is not zero.
+ $BB77 BIT 2,(IX+$21) ; {Call #R$BC04 if bit 2 of *#REGix+#N$21 is set.
  $BB7B CALL NZ,$BC04  ; }
- $BB7E BIT 3,(IX+$21) ; {Call #R$BBCE if bit 3 of *#REGix+#N$21 is not zero.
+ $BB7E BIT 3,(IX+$21) ; {Call #R$BBCE if bit 3 of *#REGix+#N$21 is set.
  $BB82 CALL NZ,$BBCE  ; }
  $BB85 LD DE,$000C    ; #REGde=#N($000C,$04,$04).
  $BB88 ADD IX,DE      ; #REGix+=#REGde.
- $BB8A BIT 2,(IX+$21) ; {Call #R$BC04 if bit 2 of *#REGix+#N$21 is not zero.
+ $BB8A BIT 2,(IX+$21) ; {Call #R$BC04 if bit 2 of *#REGix+#N$21 is set.
  $BB8E CALL NZ,$BC04  ; }
- $BB91 BIT 3,(IX+$21) ; {Call #R$BBCE if bit 3 of *#REGix+#N$21 is not zero.
+ $BB91 BIT 3,(IX+$21) ; {Call #R$BBCE if bit 3 of *#REGix+#N$21 is set.
  $BB95 CALL NZ,$BBCE  ; }
  $BB98 LD A,($C389)   ; #REGa=*#R$C389.
  $BB9B XOR %00000010  ; Flip bit 1.
  $BB9D BIT 1,A        ; Test bit 1 of #REGa.
  $BB9F LD ($C389),A   ; Write #REGa to *#R$C389.
- $BBA2 RET NZ         ; Return if {} is not zero.
+ $BBA2 RET NZ         ; Return if bit 1 of #REGa is set.
  $BBA3 LD HL,$C388    ; #REGhl=#N$C388.
  $BBA6 DEC (HL)       ; Decrease *#REGhl by one.
- $BBA7 JR Z,$BBCB     ; Jump to #R$BBCB if {} is zero.
+ $BBA7 JR Z,$BBCB     ; Jump to #R$BBCB if *#REGhl is not set.
  $BBA9 LD A,$01       ; #REGa=#N$01.
- $BBAB CP (HL)        ; Compare #REGa with *#REGhl.
- $BBAC RET NZ         ; Return if {} is not zero.
+ $BBAB CP (HL)        ; {Return if #REGa is not equal to *#REGhl.
+ $BBAC RET NZ         ; }
  $BBAD LD HL,$D811    ; #REGhl=#R$D811.
  $BBB0 CALL $BC9E     ; Call #R$BC9E.
  $BBB3 LD IX,($C277)  ; #REGix=#R$C277.
@@ -5484,7 +5487,7 @@ c$BB73 LD IX,($C277)  ; #REGix=*#R$C277.
  $BBCA RET            ; Return.
 *$BBCB LD (HL),$01    ; Write #N$01 to *#REGhl.
  $BBCD RET            ; Return.
-*$BBCE BIT 4,(IX+$21) ; {Return if bit 4 of *#REGix+#N$21 is zero.
+*$BBCE BIT 4,(IX+$21) ; {Return if bit 4 of *#REGix+#N$21 is not set.
  $BBD2 RET Z          ; }
  $BBD3 RES 4,(IX+$21) ; Reset bit 4 of *#REGix+#N$21.
  $BBD7 RES 1,(IX+$21) ; Reset bit 1 of *#REGix+#N$21.
@@ -5499,7 +5502,7 @@ c$BB73 LD IX,($C277)  ; #REGix=*#R$C277.
  $BBEF ADD HL,DE      ; #REGhl+=#REGde.
  $BBF0 RES 3,(HL)     ; Reset bit 3 of *#REGhl.
  $BBF2 LD HL,$C386    ; #REGhl=#R$C386.
- $BBF5 BIT 0,(HL)     ; {Return if bit 0 of *#REGhl is zero.
+ $BBF5 BIT 0,(HL)     ; {Return if bit 0 of *#REGhl is not set.
  $BBF7 RET Z          ; }
  $BBF8 LD HL,($C38A)  ; #REGhl=*#N$C38A.
  $BBFB LD A,(HL)      ; #REGa=*#REGhl.
@@ -5517,10 +5520,10 @@ c$BB73 LD IX,($C277)  ; #REGix=*#R$C277.
  $BC14 SET 3,(HL)     ; Set bit 3 of *#REGhl.
  $BC16 SET 4,(IX+$21) ; Set bit 4 of *#REGix+#N$21.
  $BC1A LD A,($C386)   ; #REGa=*#R$C386.
- $BC1D BIT 0,A        ; {Jump to #R$BC49 if bit 0 of #REGa is not zero.
+ $BC1D BIT 0,A        ; {Jump to #R$BC49 if bit 0 of #REGa is set.
  $BC1F JR NZ,$BC49    ; }
  $BC21 LD HL,$C389    ; #REGhl=#R$C389.
- $BC24 BIT 0,(HL)     ; {Return if bit 0 of *#REGhl is not zero.
+ $BC24 BIT 0,(HL)     ; {Return if bit 0 of *#REGhl is set.
  $BC26 RET NZ         ; }
  $BC27 SET 0,(HL)     ; Set bit 0 of *#REGhl.
  $BC29 LD L,(IX+$18)  ; #REGl=*#REGix+#N$18.
@@ -5559,7 +5562,7 @@ c$BB73 LD IX,($C277)  ; #REGix=*#R$C277.
  $BC6C CALL $BC96     ; Call #R$BC96.
  $BC6F RET            ; Return.
 *$BC70 LD A,($C1E5)   ; #REGa=*#R$C1E5.
- $BC73 BIT 0,A        ; {Jump to #R$BC66 if bit 0 of #REGa is not zero.
+ $BC73 BIT 0,A        ; {Jump to #R$BC66 if bit 0 of #REGa is set.
  $BC75 JR NZ,$BC66    ; }
  $BC77 LD A,$64       ; #REGa=#N$64.
  $BC79 LD ($C291),A   ; Write #REGa to *#R$C291.
@@ -5567,7 +5570,7 @@ c$BB73 LD IX,($C277)  ; #REGix=*#R$C277.
  $BC7F CALL $BC9E     ; Call #R$BC9E.
  $BC82 RET            ; Return.
 *$BC83 LD A,($C1E5)   ; #REGa=*#R$C1E5.
- $BC86 BIT 0,A        ; {Jump to #R$BC66 if bit 0 of #REGa is not zero.
+ $BC86 BIT 0,A        ; {Jump to #R$BC66 if bit 0 of #REGa is set.
  $BC88 JR NZ,$BC66    ; }
  $BC8A LD A,$FF       ; {Write #N$FF to *#R$C292.
  $BC8C LD ($C292),A   ; }
@@ -5590,8 +5593,8 @@ c$BC96 LD E,(HL)     ; #REGe=*#REGhl.
  $BC9A LD ($C38A),HL ; Write #REGhl to *#R$C38A.
  $BC9D EX DE,HL      ; Exchange the #REGde register with the shadow #REGhl
                      ; register.
-; This entry point is used by the routines at #R$B4B8, #R$BB73, #R$BD89 and
-; #R$BF50.
+; This entry point is used by the routines at #R$B4B8, #R$BB73, #R$BE59 and
+; #R$BF8E.
 @label=Print_BonusMessaging
 *$BC9E LD DE,$50C0   ; #REGde=#N$50C0 (screen buffer location).
  $BCA1 LD A,$00      ; {Write #N$00 to *#R$C388.
@@ -5622,18 +5625,18 @@ c$BC96 LD E,(HL)     ; #REGe=*#REGhl.
 c$BCB7 LD IX,($C277)  ; #REGix=*#R$C277.
  $BCBB BIT 2,(IX+$21) ;
  $BCBF RES 2,(IX+$21) ;
- $BCC3 CALL NZ,$BCED  ; Call #R$BCED if not zero.
+ $BCC3 CALL NZ,$BCED  ; Call #R$BCED if bit 2 of *#REGix+#N$21 is set.
  $BCC6 BIT 3,(IX+$21) ;
  $BCCA RES 3,(IX+$21) ;
- $BCCE CALL NZ,$BCED  ; Call #R$BCED if not zero.
+ $BCCE CALL NZ,$BCED  ; Call #R$BCED if bit 3 of *#REGix+#N$21 is set.
  $BCD1 LD DE,$000C    ; #REGde=#N($000C,$04,$04).
  $BCD4 ADD IX,DE      ; #REGix+=#REGde.
  $BCD6 BIT 2,(IX+$21) ;
  $BCDA RES 2,(IX+$21) ;
- $BCDE CALL NZ,$BCED  ; Call #R$BCED if not zero.
+ $BCDE CALL NZ,$BCED  ; Call #R$BCED if bit 2 of *#REGix+#N$21 is set.
  $BCE1 BIT 3,(IX+$21) ;
  $BCE5 RES 3,(IX+$21) ;
- $BCE9 CALL NZ,$BCED  ; Call #R$BCED if not zero.
+ $BCE9 CALL NZ,$BCED  ; Call #R$BCED if bit 3 of *#REGix+#N$21 is set.
  $BCEC RET            ; Return.
 *$BCED LD L,(IX+$22)  ; #REGl=*#REGix+#N$22.
  $BCF0 LD E,L         ; #REGe=#REGl.
@@ -5678,7 +5681,7 @@ c$BD0D LD IX,$C2D4    ; #REGix=#R$C2D4.
  $BD2D CALL $C13E     ; Call #R$C13E.
  $BD30 LD DE,$0040    ; #REGde=#N($0040,$04,$04).
  $BD33 LD B,(IX+$03)  ; #REGb=*#REGix+#N$03.
- $BD36 BIT 0,(IX+$07) ; {Jump to #R$BD42 if bit 0 of *#REGix+#N$07 is not zero.
+ $BD36 BIT 0,(IX+$07) ; {Jump to #R$BD42 if bit 0 of *#REGix+#N$07 is set.
  $BD3A JR NZ,$BD42    ; }
 *$BD3C RES 6,(HL)     ; Reset bit 6 of *#REGhl.
  $BD3E ADD HL,DE      ; #REGhl+=#REGde.
@@ -5699,7 +5702,7 @@ c$BD48 LD IX,$C2C7   ; #REGix=#R$C2C7.
  $BD4F XOR %01000000 ; Reset bits 6.
  $BD51 BIT 6,A       ; Test bit 6 of #REGa.
  $BD53 LD (IX+$07),A ; Write #REGa to *#REGix+#N$07.
- $BD56 RET NZ        ; Return if {} is not zero.
+ $BD56 RET NZ        ; Return if bit 6 of #REGa is set.
  $BD57 LD A,(IX+$00) ; #REGa=*#REGix+#N$00.
  $BD5A LD HL,$C276   ; #REGhl=#R$C276.
  $BD5D ADD A,(HL)    ; #REGa+=*#REGhl.
@@ -5731,10 +5734,10 @@ c$BD89 LD IX,$C356    ; #REGix=#R$C356.
  $BD8D LD HL,($C277)  ; #REGhl=*#R$C277.
  $BD90 BIT 4,(IX+$10) ; Test bit 4 of *#REGix+#N$10.
  $BD94 LD DE,$0021    ; #REGde=#N($0021,$04,$04).
- $BD97 JR Z,$BD9C     ; Jump to #R$BD9C if {} is zero.
+ $BD97 JR Z,$BD9C     ; Jump to #R$BD9C if bit 4 of *#REGix+#N$10 is not set.
  $BD99 LD DE,$002D    ; #REGde=#N($002D,$04,$04).
 *$BD9C ADD HL,DE      ; #REGhl+=#REGde.
- $BD9D BIT 5,(HL)     ; {Return if bit 5 of *#REGhl is zero.
+ $BD9D BIT 5,(HL)     ; {Return if bit 5 of *#REGhl is not set.
  $BD9F RET Z          ; }
  $BDA0 LD A,(HL)      ; #REGa=*#REGhl.
  $BDA1 LD HL,$C35D    ; #REGhl=#R$C35D.
@@ -5745,25 +5748,25 @@ c$BD89 LD IX,$C356    ; #REGix=#R$C356.
  $BDAF DEC (HL)       ; Decrease *#REGhl by one.
  $BDB0 RET NZ         ; Return if *#REGhl is not zero.
  $BDB1 LD (HL),$06    ; Write #N$06 to *#REGhl.
- $BDB3 BIT 0,A        ; {Jump to #R$BDBC if bit 0 of #REGa is not zero.
+ $BDB3 BIT 0,A        ; {Jump to #R$BDBC if bit 0 of #REGa is set.
  $BDB5 JR NZ,$BDBC    ; }
- $BDB7 BIT 3,(IX+$17) ; {Return if bit 3 of *#REGix+#N$17 is zero.
+ $BDB7 BIT 3,(IX+$17) ; {Return if bit 3 of *#REGix+#N$17 is not set.
  $BDBB RET Z          ; }
 *$BDBC SET 3,(IX+$17) ; Set bit 3 of *#REGix+#N$17.
- $BDC0 BIT 5,(IX+$13) ; {Jump to #R$BDCD if bit 5 of *#REGix+#N$13 is zero.
+ $BDC0 BIT 5,(IX+$13) ; {Jump to #R$BDCD if bit 5 of *#REGix+#N$13 is not set.
  $BDC4 JR Z,$BDCD     ; }
  $BDC6 RES 5,(IX+$13) ; Reset bit 5 of *#REGix+#N$13.
  $BDCA JP $B8A6       ; Jump to #R$B8A6.
 *$BDCD LD A,(IX+$28)  ; #REGa=*#REGix+#N$28.
  $BDD0 AND %00011111  ; Keep only bits 0-4.
- $BDD2 BIT 4,(IX+$28) ; {Jump to #R$BDDE if bit 4 of *#REGix+#N$28 is zero.
+ $BDD2 BIT 4,(IX+$28) ; {Jump to #R$BDDE if bit 4 of *#REGix+#N$28 is not set.
  $BDD6 JR Z,$BDDE     ; }
  $BDD8 CP $16         ; {Jump to #R$BE4E if #REGa is lower than #N$16.
  $BDDA JR C,$BE4E     ; }
  $BDDC JR $BDE2       ; Jump to #R$BDE2.
 *$BDDE CP $0A         ; {Jump to #R$BE4E if #REGa is higher than #N$0A.
  $BDE0 JR NC,$BE4E    ; }
-*$BDE2 BIT 5,(IX+$2F) ; {Jump to #R$BE4E if bit 5 of *#REGix+#N$2F is not zero.
+*$BDE2 BIT 5,(IX+$2F) ; {Jump to #R$BE4E if bit 5 of *#REGix+#N$2F is set.
  $BDE6 JR NZ,$BE4E    ; }
  $BDE8 LD A,(IX+$28)  ; #REGa=*#REGix+#N$28.
  $BDEB LD L,A         ; #REGl=#REGa.
@@ -5782,19 +5785,19 @@ c$BD89 LD IX,$C356    ; #REGix=#R$C356.
  $BE00 AND %00011111  ; Keep only bits 0-4.
  $BE02 CP C           ; Compare #REGa with #REGc.
  $BE03 LD C,$00       ; #REGc=#N$00.
- $BE05 JR C,$BE09     ; Jump to #R$BE09 if {} is lower.
+ $BE05 JR C,$BE09     ; Jump to #R$BE09 if #REGa is lower than #REGc.
  $BE07 LD C,$10       ; #REGc=#N$10.
 *$BE09 LD A,(IX+$07)  ; #REGa=*#REGix+#N$07.
  $BE0C CP B           ; Compare #REGa with #REGb.
  $BE0D LD B,$08       ; #REGb=#N$08.
- $BE0F JR NC,$BE13    ; Jump to #R$BE13 if {} is higher.
+ $BE0F JR NC,$BE13    ; Jump to #R$BE13 if #REGa is higher than #REGb.
  $BE11 LD B,$18       ; #REGb=#N$18.
-*$BE13 BIT 5,(IX+$17) ; {Jump to #R$BE1C if bit 5 of *#REGix+#N$17 is zero.
+*$BE13 BIT 5,(IX+$17) ; {Jump to #R$BE1C if bit 5 of *#REGix+#N$17 is not set.
  $BE17 JR Z,$BE1C     ; }
  $BE19 LD A,C         ; #REGa=#REGc.
  $BE1A LD C,B         ; #REGc=#REGb.
  $BE1B LD B,A         ; #REGb=#REGa.
-*$BE1C BIT 4,(IX+$17) ; {Jump to #R$BE35 if bit 4 of *#REGix+#N$17 is not zero.
+*$BE1C BIT 4,(IX+$17) ; {Jump to #R$BE35 if bit 4 of *#REGix+#N$17 is set.
  $BE20 JR NZ,$BE35    ; }
  $BE22 LD A,(IX+$13)  ; #REGa=*#REGix+#N$13.
  $BE25 CP C           ; {Jump to #R$BE35 if #REGa is equal to #REGc.
@@ -5812,24 +5815,33 @@ c$BD89 LD IX,$C356    ; #REGix=#R$C356.
  $BE45 LD (IX+$13),A  ; Write #REGa to *#REGix+#N$13.
  $BE48 CALL $BE75     ; Call #R$BE75.
  $BE4B JP $B8A6       ; Jump to #R$B8A6.
-*$BE4E BIT 1,(IX+$17) ; {Return if bit 1 of *#REGix+#N$17 is not zero.
+*$BE4E BIT 1,(IX+$17) ; {Return if bit 1 of *#REGix+#N$17 is set.
  $BE52 RET NZ         ; }
  $BE53 LD BC,($B917)  ; #REGbc=*#R$B917.
  $BE57 JR $BDFD       ; Jump to #R$BDFD.
-*$BE59 LD L,(IX+$10)  ; #REGl=*#REGix+#N$10.
- $BE5C LD H,(IX+$11)  ; #REGh=*#REGix+#N$11.
- $BE5F LD E,(IX+$28)  ; #REGe=*#REGix+#N$28.
- $BE62 LD D,(IX+$29)  ; #REGd=*#REGix+#N$29.
- $BE65 AND A          ; Set flags.
- $BE66 SBC HL,DE      ; #REGhl-=#REGde (with carry).
- $BE68 RET NZ         ; Return if {} is not zero.
- $BE69 LD HL,$C290    ; #REGhl=#R$C290.
- $BE6C LD (HL),$64    ; Write #N$64 to *#REGhl.
- $BE6E LD HL,$C221    ; #REGhl=#R$C221.
- $BE71 CALL $BC9E     ; Call #R$BC9E.
- $BE74 RET            ; Return.
-*$BE75 RES 5,(IX+$17) ; Reset bit 5 of *#REGix+#N$17.
- $BE79 BIT 3,(IX+$13) ; {Jump to #R$BE83 if bit 3 of *#REGix+#N$13 is zero.
+
+; Handler: Bitten By Dog
+;
+; Used by the routine at #R$BE75.
+@label=Handler_BittenByDog
+c$BE59 LD L,(IX+$10) ; #REGl=*#REGix+#N$10.
+ $BE5C LD H,(IX+$11) ; #REGh=*#REGix+#N$11.
+ $BE5F LD E,(IX+$28) ; #REGe=*#REGix+#N$28.
+ $BE62 LD D,(IX+$29) ; #REGd=*#REGix+#N$29.
+ $BE65 AND A         ; Set flags.
+ $BE66 SBC HL,DE     ; #REGhl-=#REGde (with carry).
+ $BE68 RET NZ        ; Return if the result is not zero.
+ $BE69 LD HL,$C290   ; {Write #N$64 to *#R$C290.
+ $BE6C LD (HL),$64   ; }
+ $BE6E LD HL,$C221   ; #REGhl=#R$C221.
+ $BE71 CALL $BC9E    ; Call #R$BC9E.
+ $BE74 RET           ; Return.
+
+; Routine at BE75
+;
+; Used by the routine at #R$BD89.
+c$BE75 RES 5,(IX+$17) ; Reset bit 5 of *#REGix+#N$17.
+ $BE79 BIT 3,(IX+$13) ; {Jump to #R$BE83 if bit 3 of *#REGix+#N$13 is not set.
  $BE7D JR Z,$BE83     ; }
  $BE7F SET 5,(IX+$17) ; Set bit 5 of *#REGix+#N$17.
 *$BE83 LD HL,$C1E7    ; #REGhl=#R$C1E7.
@@ -5846,10 +5858,10 @@ c$BD89 LD IX,$C356    ; #REGix=#R$C356.
  $BE94 LD L,(IX+$10)  ; #REGl=*#REGix+#N$10.
  $BE97 LD H,(IX+$11)  ; #REGh=*#REGix+#N$11.
  $BE9A ADD HL,DE      ; #REGhl+=#REGde.
- $BE9B BIT 3,(IX+$13) ; {Jump to #R$BEB8 if bit 3 of *#REGix+#N$13 is not zero.
+ $BE9B BIT 3,(IX+$13) ; {Jump to #R$BEB8 if bit 3 of *#REGix+#N$13 is set.
  $BE9F JR NZ,$BEB8    ; }
  $BEA1 LD A,L         ; #REGa=#REGl.
- $BEA2 BIT 4,(IX+$13) ; {Jump to #R$BEB2 if bit 4 of *#REGix+#N$13 is zero.
+ $BEA2 BIT 4,(IX+$13) ; {Jump to #R$BEB2 if bit 4 of *#REGix+#N$13 is not set.
  $BEA6 JR Z,$BEB2     ; }
  $BEA8 AND %00011111  ; Keep only bits 0-4.
  $BEAA CP $1F         ; {Return if #REGa is equal to #N$1F.
@@ -5861,12 +5873,12 @@ c$BD89 LD IX,$C356    ; #REGix=#R$C356.
  $BEB4 RET Z          ; Return if the result is zero.
  $BEB5 CP $0A         ; {Return if #REGa is equal to #N$0A.
  $BEB7 RET Z          ; }
-*$BEB8 BIT 7,(HL)     ; {Jump to #R$BEF9 if bit 7 of *#REGhl is not zero.
+*$BEB8 BIT 7,(HL)     ; {Jump to #R$BEF9 if bit 7 of *#REGhl is set.
  $BEBA JR NZ,$BEF9    ; }
  $BEBC BIT 5,(IX+$30) ; Test bit 5 of *#REGix+#N$30.
  $BEC0 RES 5,(IX+$30) ; Reset bit 5 of *#REGix+#N$30.
- $BEC4 JR Z,$BEE0     ; Jump to #R$BEE0 if {} is zero.
- $BEC6 BIT 4,(IX+$13) ; {Jump to #R$BED6 if bit 4 of *#REGix+#N$13 is zero.
+ $BEC4 JR Z,$BEE0     ; Jump to #R$BEE0 if bit 5 of *#REGix+#N$30 is not set.
+ $BEC6 BIT 4,(IX+$13) ; {Jump to #R$BED6 if bit 4 of *#REGix+#N$13 is not set.
  $BECA JR Z,$BED6     ; }
  $BECC RES 1,(IX+$17) ; Reset bit 1 of *#REGix+#N$17.
  $BED0 SET 0,(IX+$17) ; Set bit 0 of *#REGix+#N$17.
@@ -5885,29 +5897,29 @@ c$BD89 LD IX,$C356    ; #REGix=#R$C356.
  $BEF3 LD B,(IX+$13)  ; #REGb=*#REGix+#N$13.
  $BEF6 JP $B88A       ; Jump to #R$B88A.
 *$BEF9 LD A,($B918)   ; #REGa=*#R$B918.
- $BEFC BIT 3,(IX+$13) ; {Jump to #R$BF0B if bit 3 of *#REGix+#N$13 is zero.
+ $BEFC BIT 3,(IX+$13) ; {Jump to #R$BF0B if bit 3 of *#REGix+#N$13 is not set.
  $BF00 JR Z,$BF0B     ; }
  $BF02 INC A          ; Increment #REGa by one.
- $BF03 BIT 4,(IX+$13) ; {Jump to #R$BF0B if bit 4 of *#REGix+#N$13 is zero.
+ $BF03 BIT 4,(IX+$13) ; {Jump to #R$BF0B if bit 4 of *#REGix+#N$13 is not set.
  $BF07 JR Z,$BF0B     ; }
  $BF09 SUB $02        ; #REGa-=#N$02.
 *$BF0B CP (IX+$07)    ; {Return if #REGa with *#REGix+#N$07 is not zero.
  $BF0E RET NZ         ; }
  $BF0F SET 5,(IX+$30) ; Set bit 5 of *#REGix+#N$30.
- $BF13 BIT 1,(IX+$17) ; {Jump to #R$BEE8 if bit 1 of *#REGix+#N$17 is not zero.
+ $BF13 BIT 1,(IX+$17) ; {Jump to #R$BEE8 if bit 1 of *#REGix+#N$17 is set.
  $BF17 JR NZ,$BEE8    ; }
- $BF19 BIT 3,(IX+$13) ; {Return if bit 3 of *#REGix+#N$13 is not zero.
+ $BF19 BIT 3,(IX+$13) ; {Return if bit 3 of *#REGix+#N$13 is set.
  $BF1D RET NZ         ; }
- $BF1E BIT 4,(IX+$13) ; {Jump to #R$BF3A if bit 4 of *#REGix+#N$13 is not zero.
+ $BF1E BIT 4,(IX+$13) ; {Jump to #R$BF3A if bit 4 of *#REGix+#N$13 is set.
  $BF22 JR NZ,$BF3A    ; }
- $BF24 BIT 0,(IX+$17) ; {Jump to #R$BF30 if bit 0 of *#REGix+#N$17 is not zero.
+ $BF24 BIT 0,(IX+$17) ; {Jump to #R$BF30 if bit 0 of *#REGix+#N$17 is set.
  $BF28 JR NZ,$BF30    ; }
  $BF2A SET 0,(IX+$17) ; Set bit 0 of *#REGix+#N$17.
  $BF2E JR $BEE8       ; Jump to #R$BEE8.
 *$BF30 RES 0,(IX+$17) ; Reset bit 0 of *#REGix+#N$17.
  $BF34 SET 1,(IX+$17) ; Set bit 1 of *#REGix+#N$17.
  $BF38 JR $BEE8       ; Jump to #R$BEE8.
-*$BF3A BIT 2,(IX+$17) ; {Jump to #R$BF46 if bit 2 of *#REGix+#N$17 is not zero.
+*$BF3A BIT 2,(IX+$17) ; {Jump to #R$BF46 if bit 2 of *#REGix+#N$17 is set.
  $BF3E JR NZ,$BF46    ; }
  $BF40 SET 2,(IX+$17) ; Set bit 2 of *#REGix+#N$17.
  $BF44 JR $BEE8       ; Jump to #R$BEE8.
@@ -5926,18 +5938,18 @@ c$BF50 LD IX,$C36E   ; #REGix=#R$C36E.
  $BF5A LD L,(IX+$10) ; #REGl=*#REGix+#N$10.
  $BF5D LD H,(IX+$11) ; #REGh=*#REGix+#N$11.
  $BF60 LD A,(IX+$13) ; #REGa=*#REGix+#N$13.
- $BF63 BIT 5,A       ; {Jump to #R$BF76 if bit 5 of #REGa is zero.
+ $BF63 BIT 5,A       ; {Jump to #R$BF76 if bit 5 of #REGa is not set.
  $BF65 JR Z,$BF76    ; }
- $BF67 BIT 3,A       ; {Jump to #R$BF76 if bit 3 of #REGa is not zero.
+ $BF67 BIT 3,A       ; {Jump to #R$BF76 if bit 3 of #REGa is set.
  $BF69 JR NZ,$BF76   ; }
- $BF6B BIT 7,(HL)    ; {Jump to #R$BF79 if bit 7 of *#REGhl is not zero.
+ $BF6B BIT 7,(HL)    ; {Jump to #R$BF79 if bit 7 of *#REGhl is set.
  $BF6D JR NZ,$BF79   ; }
  $BF6F DEC L         ; Decrease #REGl by one.
- $BF70 BIT 4,A       ; {Jump to #R$BF76 if bit 4 of #REGa is zero.
+ $BF70 BIT 4,A       ; {Jump to #R$BF76 if bit 4 of #REGa is not set.
  $BF72 JR Z,$BF76    ; }
  $BF74 INC L         ; {Increment #REGl by two.
  $BF75 INC L         ; }
-*$BF76 BIT 7,(HL)    ; {Return if bit 7 of *#REGhl is zero.
+*$BF76 BIT 7,(HL)    ; {Return if bit 7 of *#REGhl is not set.
  $BF78 RET Z         ; }
 *$BF79 LD A,L        ; #REGa=#REGl.
  $BF7A AND %00011111 ; Keep only bits 0-4.
@@ -5950,17 +5962,26 @@ c$BF50 LD IX,$C36E   ; #REGix=#R$C36E.
  $BF88 SET 0,(HL)    ; Set bit 0 of *#REGhl.
  $BF8A CALL $BF9F    ; Call #R$BF9F.
  $BF8D RET           ; Return.
-*$BF8E LD HL,$C290   ; {Write #N$50 to #R$C290.
+
+; Handler: Hit By Bike
+;
+; Used by the routine at #R$BF50.
+@label=Handler_HitByBike
+c$BF8E LD HL,$C290   ; {Write #N$50 to *#R$C290.
  $BF91 LD (HL),$50   ; }
  $BF93 LD HL,$CC3D   ; #REGhl=#R$CC3D.
  $BF96 SET 5,(HL)    ; Set bit 5 of *#REGhl.
  $BF98 LD HL,$C24A   ; #REGhl=#R$C24A.
  $BF9B CALL $BC9E    ; Call #R$BC9E.
  $BF9E RET           ; Return.
-*$BF9F LD E,$42      ; #REGe=#N$42.
+
+; Routine at BF9F
+;
+; Used by the routine at #R$BF50.
+c$BF9F LD E,$42      ; #REGe=#N$42.
  $BFA1 LD BC,$0000   ; #REGbc=#N($0000,$04,$04).
 *$BFA4 INC B         ; Increment #REGb by one.
- $BFA5 BIT 4,B       ; {Return if bit 4 of #REGb is not zero.
+ $BFA5 BIT 4,B       ; {Return if bit 4 of #REGb is set.
  $BFA7 RET NZ        ; }
  $BFA8 PUSH BC       ; {Stash #REGbc, #REGde and #REGbc on the stack.
 *$BFA9 PUSH DE       ;
@@ -5983,7 +6004,7 @@ c$BF50 LD IX,$C36E   ; #REGix=#R$C36E.
  $BFCC POP IX        ; Restore #REGix from the stack.
  $BFCE LD DE,$FFFF   ; #REGde=#N$FFFF.
 *$BFD1 ADD IX,DE     ; #REGix+=#REGde.
- $BFD3 BIT 7,(HL)    ; {Jump to #R$BFDB if bit 7 of *#REGhl is not zero.
+ $BFD3 BIT 7,(HL)    ; {Jump to #R$BFDB if bit 7 of *#REGhl is set.
  $BFD5 JR NZ,$BFDB   ; }
  $BFD7 JR C,$BFD1    ; Jump to #R$BFD1 if {} is lower.
  $BFD9 JR $BFB9      ; Jump to #R$BFB9.
@@ -6036,147 +6057,148 @@ c$BFEC LD IX,$C293   ; #REGix=#R$C293.
 ; Routine at C023
 ;
 ; Used by the routines at #R$BD0D, #R$BD48 and #R$BFEC.
-c$C023 LD A,(IX+$07)   ;
- $C026 BIT 7,A         ;
- $C028 JR Z,$C03B      ;
- $C02A SUB (IX+$08)    ;
- $C02D BIT 3,A         ;
- $C02F JR Z,$C042      ;
- $C031 ADD A,$08       ;
- $C033 LD (IX+$07),A   ;
- $C036 DEC (IX+$00)    ;
- $C039 JR $C057        ;
-*$C03B ADD A,(IX+$08)  ;
- $C03E BIT 3,A         ;
- $C040 JR NZ,$C04F     ;
-*$C042 LD (IX+$07),A   ;
- $C045 LD A,(IX+$00)   ;
- $C048 CP (IX+$0B)     ;
- $C04B RET NC          ;
- $C04C JP $C112        ;
-*$C04F RES 3,A         ;
- $C051 LD (IX+$07),A   ;
- $C054 INC (IX+$00)    ;
+c$C023 LD A,(IX+$07)   ; #REGa=*#REGix+#N$07.
+ $C026 BIT 7,A         ; {Jump to #R$C03B if bit 7 of #REGa is not set.
+ $C028 JR Z,$C03B      ; }
+ $C02A SUB (IX+$08)    ; #REGa-=*#REGix+#N$08.
+ $C02D BIT 3,A         ; {Jump to #R$C042 if bit 3 of #REGa is not set.
+ $C02F JR Z,$C042      ; }
+ $C031 ADD A,$08       ; #REGa+=#N$08.
+ $C033 LD (IX+$07),A   ; Write #REGa to *#REGix+#N$07.
+ $C036 DEC (IX+$00)    ; Decrease *#REGix+#N$00 by one.
+ $C039 JR $C057        ; Jump to #R$C057.
+*$C03B ADD A,(IX+$08)  ; #REGa+=*#REGix+#N$08.
+ $C03E BIT 3,A         ; {Jump to #R$C04F if bit 3 of #REGa is set.
+ $C040 JR NZ,$C04F     ; }
+*$C042 LD (IX+$07),A   ; Write #REGa to *#REGix+#N$07.
+ $C045 LD A,(IX+$00)   ; #REGa=*#REGix+#N$00.
+ $C048 CP (IX+$0B)     ; {Return if #REGa is higher than *#REGix+#N$0B.
+ $C04B RET NC          ; }
+ $C04C JP $C112        ; Jump to #R$C112.
+*$C04F RES 3,A         ; Reset bit 3 of #REGa.
+ $C051 LD (IX+$07),A   ; Write #REGa to *#REGix+#N$07.
+ $C054 INC (IX+$00)    ; Increment *#REGix+#N$00 by one.
 ; This entry point is used by the routines at #R$B3BE and #R$B591.
-*$C057 LD A,(IX+$00)   ;
- $C05A CP (IX+$0B)     ;
- $C05D RET NC          ;
- $C05E CP $14          ;
- $C060 JR NC,$C0A9     ;
- $C062 CP (IX+$0C)     ;
- $C065 JR C,$C06F      ;
- $C067 LD A,(IX+$0C)   ;
- $C06A LD (IX+$03),A   ;
- $C06D JR $C073        ;
-*$C06F INC A           ;
- $C070 LD (IX+$03),A   ;
-*$C073 LD A,(IX+$05)   ;
- $C076 AND $1F         ;
- $C078 LD C,A          ;
- $C079 LD A,(IX+$00)   ;
- $C07C NEG             ;
- $C07E ADD A,$15       ;
- $C080 LD E,A          ;
- $C081 RRCA            ;
- $C082 RRCA            ;
- $C083 RRCA            ;
- $C084 LD B,A          ;
- $C085 AND $E0         ;
- $C087 OR C            ;
- $C088 LD (IX+$05),A   ;
- $C08B LD (IX+$01),A   ;
- $C08E LD A,$03        ;
- $C090 AND B           ;
- $C091 OR $58          ;
- $C093 LD D,A          ;
- $C094 SET 5,D         ;
- $C096 LD (IX+$06),A   ;
- $C099 LD A,$18        ;
- $C09B AND E           ;
- $C09C OR $40          ;
- $C09E LD (IX+$02),A   ;
- $C0A1 LD E,(IX+$05)   ;
- $C0A4 LD BC,$0000     ;
- $C0A7 JR $C0D8        ;
-*$C0A9 NEG             ;
- $C0AB ADD A,(IX+$0B)  ;
- $C0AE LD (IX+$03),A   ;
- $C0B1 SUB (IX+$0C)    ;
- $C0B4 NEG             ;
- $C0B6 BIT 0,(IX+$04)  ;
- $C0BA JR NZ,$C0BD     ;
- $C0BC RLCA            ;
-*$C0BD LD C,A          ;
- $C0BE LD B,$00        ;
- $C0C0 LD A,(IX+$05)   ;
- $C0C3 AND $1F         ;
- $C0C5 OR $40          ;
- $C0C7 LD E,A          ;
- $C0C8 LD (IX+$05),A   ;
- $C0CB LD (IX+$01),A   ;
- $C0CE LD D,$78        ;
- $C0D0 LD (IX+$06),$58 ;
- $C0D4 LD (IX+$02),$40 ;
-*$C0D8 LD L,(IX+$09)   ;
- $C0DB LD H,(IX+$0A)   ;
- $C0DE LD A,C          ;
- $C0DF PUSH AF         ;
- $C0E0 PUSH HL         ;
- $C0E1 ADD HL,BC       ;
- $C0E2 LD C,(IX+$0C)   ;
- $C0E5 BIT 0,(IX+$04)  ;
- $C0E9 JR NZ,$C0ED     ;
- $C0EB SLA C           ;
-*$C0ED SLA C           ;
- $C0EF ADD HL,BC       ;
- $C0F0 LD B,(IX+$03)   ;
- $C0F3 LD C,(IX+$04)   ;
- $C0F6 PUSH BC         ;
- $C0F7 PUSH DE         ;
- $C0F8 CALL $B1B2      ;
- $C0FB POP HL          ;
- $C0FC ADD HL,HL       ;
- $C0FD LD A,$07        ;
- $C0FF AND H           ;
- $C100 OR $70          ;
- $C102 LD D,A          ;
- $C103 LD E,L          ;
- $C104 POP BC          ;
+*$C057 LD A,(IX+$00)   ; #REGa=*#REGix+#N$00.
+ $C05A CP (IX+$0B)     ; {Return if #REGa is higher than *#REGix+#N$0B.
+ $C05D RET NC          ; }
+ $C05E CP $14          ; {Jump to #R$C0A9 if #REGa is higher than #N$14.
+ $C060 JR NC,$C0A9     ; }
+ $C062 CP (IX+$0C)     ; {Jump to #R$C06F if #REGa is lower than *#REGix+#N$0C.
+ $C065 JR C,$C06F      ; }
+ $C067 LD A,(IX+$0C)   ; #REGa=*#REGix+#N$0C.
+ $C06A LD (IX+$03),A   ; Write #REGa to *#REGix+#N$03.
+ $C06D JR $C073        ; Jump to #R$C073.
+*$C06F INC A           ; Increment #REGa by one.
+ $C070 LD (IX+$03),A   ; Write #REGa to *#REGix+#N$03.
+*$C073 LD A,(IX+$05)   ; #REGa=*#REGix+#N$05.
+ $C076 AND %00011111   ; Keep only bits 0-4.
+ $C078 LD C,A          ; #REGc=#REGa.
+ $C079 LD A,(IX+$00)   ; #REGa=*#REGix+#N$00.
+ $C07C NEG             ; NEG.
+ $C07E ADD A,$15       ; #REGa+=#N$15.
+ $C080 LD E,A          ; #REGe=#REGa.
+ $C081 RRCA            ; RRCA.
+ $C082 RRCA            ; RRCA.
+ $C083 RRCA            ; RRCA.
+ $C084 LD B,A          ; #REGb=#REGa.
+ $C085 AND %11100000   ; Keep only bits 5-7.
+ $C087 OR C            ; Set the bits from #REGc.
+ $C088 LD (IX+$05),A   ; Write #REGa to *#REGix+#N$05.
+ $C08B LD (IX+$01),A   ; Write #REGa to *#REGix+#N$01.
+ $C08E LD A,$03        ; #REGa=#N$03.
+ $C090 AND B           ; Merge the bits from #REGb.
+ $C091 OR %01011000    ; Set bits 3-4, 6.
+ $C093 LD D,A          ; #REGd=#REGa.
+ $C094 SET 5,D         ; Set bit 5 of #REGd.
+ $C096 LD (IX+$06),A   ; Write #REGa to *#REGix+#N$06.
+ $C099 LD A,$18        ; #REGa=#N$18.
+ $C09B AND E           ; Merge the bits from #REGe.
+ $C09C OR %01000000    ; Set bits 6.
+ $C09E LD (IX+$02),A   ; Write #REGa to *#REGix+#N$02.
+ $C0A1 LD E,(IX+$05)   ; #REGe=*#REGix+#N$05.
+ $C0A4 LD BC,$0000     ; #REGbc=#N($0000,$04,$04).
+ $C0A7 JR $C0D8        ; Jump to #R$C0D8.
+*$C0A9 NEG             ; NEG.
+ $C0AB ADD A,(IX+$0B)  ; #REGa+=*#REGix+#N$0B.
+ $C0AE LD (IX+$03),A   ; Write #REGa to *#REGix+#N$03.
+ $C0B1 SUB (IX+$0C)    ; #REGa-=*#REGix+#N$0C.
+ $C0B4 NEG             ; NEG.
+ $C0B6 BIT 0,(IX+$04)  ; {Jump to #R$C0BD if bit 0 of *#REGix+#N$04 is set.
+ $C0BA JR NZ,$C0BD     ; }
+ $C0BC RLCA            ; RLCA.
+*$C0BD LD C,A          ; #REGc=#REGa.
+ $C0BE LD B,$00        ; #REGb=#N$00.
+ $C0C0 LD A,(IX+$05)   ; #REGa=*#REGix+#N$05.
+ $C0C3 AND %00011111   ; Keep only bits 0-4.
+ $C0C5 OR %01000000    ; Set bits 6.
+ $C0C7 LD E,A          ; #REGe=#REGa.
+ $C0C8 LD (IX+$05),A   ; Write #REGa to *#REGix+#N$05.
+ $C0CB LD (IX+$01),A   ; Write #REGa to *#REGix+#N$01.
+ $C0CE LD D,$78        ; #REGd=#N$78.
+ $C0D0 LD (IX+$06),$58 ; Write #N$06 to *#REGix+#N$06.
+ $C0D4 LD (IX+$02),$40 ; Write #N$02 to *#REGix+#N$02.
+*$C0D8 LD L,(IX+$09)   ; #REGl=*#REGix+#N$09.
+ $C0DB LD H,(IX+$0A)   ; #REGh=*#REGix+#N$0A.
+ $C0DE LD A,C          ; #REGa=#REGc.
+ $C0DF PUSH AF         ; {Stash #REGaf and #REGhl on the stack.
+ $C0E0 PUSH HL         ; }
+ $C0E1 ADD HL,BC       ; #REGhl+=#REGbc.
+ $C0E2 LD C,(IX+$0C)   ; #REGc=*#REGix+#N$0C.
+ $C0E5 BIT 0,(IX+$04)  ; {Jump to #R$C0ED if bit 0 of *#REGix+#N$04 is set.
+ $C0E9 JR NZ,$C0ED     ; }
+ $C0EB SLA C           ; Shift #REGc left (with carry).
+*$C0ED SLA C           ; Shift #REGc left (with carry).
+ $C0EF ADD HL,BC       ; #REGhl+=#REGbc.
+ $C0F0 LD B,(IX+$03)   ; #REGb=*#REGix+#N$03.
+ $C0F3 LD C,(IX+$04)   ; #REGc=*#REGix+#N$04.
+ $C0F6 PUSH BC         ; {Stash #REGbc and #REGde on the stack.
+ $C0F7 PUSH DE         ; }
+ $C0F8 CALL $B1B2      ; Call #R$B1B2.
+ $C0FB POP HL          ; Restore #REGhl from the stack.
+ $C0FC ADD HL,HL       ; #REGhl+=#REGhl.
+ $C0FD LD A,$07        ; #REGa=#N$07.
+ $C0FF AND H           ; Merge the bits from #REGh.
+ $C100 OR %01110000    ; Set bits 4-6.
+ $C102 LD D,A          ; #REGd=#REGa.
+ $C103 LD E,L          ; #REGe=#REGl.
+ $C104 POP BC          ; {Restore #REGbc, #REGhl and #REGaf from the stack.
  $C105 POP HL          ;
- $C106 POP AF          ;
- $C107 RLCA            ;
- $C108 ADD A,L         ;
- $C109 LD L,A          ;
- $C10A JR NC,$C10D     ;
- $C10C INC H           ;
-*$C10D SLA C           ;
- $C10F CALL $B293      ;
-*$C112 CALL $C13E      ;
- $C115 LD B,(IX+$03)   ;
- $C118 LD A,(IX+$07)   ;
- $C11B AND $07         ;
- $C11D LD C,A          ;
- $C11E LD DE,$003D     ;
-*$C121 LD A,(HL)       ;
- $C122 AND $F8         ;
- $C124 OR C            ;
- $C125 LD (HL),A       ;
- $C126 INC L           ;
- $C127 SET 7,(HL)      ;
- $C129 INC L           ;
- $C12A INC L           ;
- $C12B BIT 0,(IX+$04)  ;
- $C12F JR NZ,$C13A     ;
- $C131 DEC L           ;
- $C132 LD A,(HL)       ;
- $C133 AND $F8         ;
- $C135 OR C            ;
- $C136 LD (HL),A       ;
- $C137 INC L           ;
- $C138 SET 7,(HL)      ;
-*$C13A ADD HL,DE       ;
- $C13B DJNZ $C121      ;
- $C13D RET             ;
+ $C106 POP AF          ; }
+ $C107 RLCA            ; RLCA.
+ $C108 ADD A,L         ; #REGa+=#REGl.
+ $C109 LD L,A          ; #REGl=#REGa.
+ $C10A JR NC,$C10D     ; Jump to #R$C10D if {} is higher.
+ $C10C INC H           ; Increment #REGh by one.
+*$C10D SLA C           ; Shift #REGc left (with carry).
+ $C10F CALL $B293      ; Call #R$B293.
+*$C112 CALL $C13E      ; Call #R$C13E.
+ $C115 LD B,(IX+$03)   ; #REGb=*#REGix+#N$03.
+ $C118 LD A,(IX+$07)   ; #REGa=*#REGix+#N$07.
+ $C11B AND %00000111   ; Keep only bits 0-2.
+ $C11D LD C,A          ; #REGc=#REGa.
+ $C11E LD DE,$003D     ; #REGde=#N($003D,$04,$04).
+*$C121 LD A,(HL)       ; #REGa=*#REGhl.
+ $C122 AND %11111000   ; Keep only bits 3-7.
+ $C124 OR C            ; Set the bits from #REGc.
+ $C125 LD (HL),A       ; Write #REGa to *#REGhl.
+ $C126 INC L           ; Increment #REGl by one.
+ $C127 SET 7,(HL)      ; Set bit 7 of *#REGhl.
+ $C129 INC L           ; {Increment #REGl by two.
+ $C12A INC L           ; }
+ $C12B BIT 0,(IX+$04)  ; {Jump to #R$C13A if bit 0 of *#REGix+#N$04 is set.
+ $C12F JR NZ,$C13A     ; }
+ $C131 DEC L           ; Decrease #REGl by one.
+ $C132 LD A,(HL)       ; #REGa=*#REGhl.
+ $C133 AND %11111000   ; Keep only bits 3-7.
+ $C135 OR C            ; Set the bits from #REGc.
+ $C136 LD (HL),A       ; Write #REGa to *#REGhl.
+ $C137 INC L           ; Increment #REGl by one.
+ $C138 SET 7,(HL)      ; Set bit 7 of *#REGhl.
+*$C13A ADD HL,DE       ; #REGhl+=#REGde.
+ $C13B DJNZ $C121      ; Decrease counter by one and loop back to #R$C121 until
+                       ; counter is zero.
+ $C13D RET             ; Return.
 
 ; Routine at C13E
 ;
@@ -6196,15 +6218,15 @@ c$C13E LD H,(IX+$06) ; #REGh=*#REGix+#N$06.
 ; Used by the routine at #R$BFEC.
 c$C14C BIT 7,(IX+$07)                       ; Test bit 7 of *#REGix+#N$07.
  $C150 LD HL,$C38C                          ; #REGhl=#R$C38C.
- $C153 JR NZ,$C15A                          ; Jump to #R$C15A if {} is not
-                                            ; zero.
+ $C153 JR NZ,$C15A                          ; Jump to #R$C15A if bit 7 of
+                                            ; *#REGix+#N$07 is set.
  $C155 LD A,$20                             ; #REGa=#N$20.
  $C157 LD C,(HL)                            ; #REGc=*#REGhl.
  $C158 JR $C15D                             ; Jump to #R$C15D.
 *$C15A LD A,(HL)                            ; #REGa=*#REGhl.
  $C15B LD C,$20                             ; #REGc=#N$20.
-*$C15D CP (IX+$00)                          ; Compare #REGa with *#REGix+#N$00.
- $C160 RET NZ                               ; Return if {} is not zero.
+*$C15D CP (IX+$00)                          ; {Return if #REGa is not equal to
+ $C160 RET NZ                               ; *#REGix+#N$00.}
  $C161 LD (IX+$00),C                        ; Write #REGc to *#REGix+#N$00.
  $C164 PUSH IX                              ; Stash #REGix on the stack.
  $C166 CALL $C1CD                           ; Call #R$C1CD.
@@ -6223,7 +6245,7 @@ c$C14C BIT 7,(IX+$07)                       ; Test bit 7 of *#REGix+#N$07.
  $C17E LD B,A                               ; #REGb=#REGa.
  $C17F LD A,(IX+$00)                        ; #REGa=*#REGix+#N$00.
  $C182 BIT 7,(IX+$07)                       ; {Jump to #R$C196 if bit 7 of
- $C186 JR Z,$C196                           ; *#REGix+#N$07 is zero.}
+ $C186 JR Z,$C196                           ; *#REGix+#N$07 is not set.}
  $C188 SUB $06                              ; #REGa-=#N$06.
  $C18A CP $20                               ; {Jump to #R$C1A0 if #REGa is
  $C18C JR C,$C1A0                           ; lower than #N$20.}
@@ -6262,7 +6284,7 @@ c$C14C BIT 7,(IX+$07)                       ; Test bit 7 of *#REGix+#N$07.
  $C1C7 POP IX                               ; Restore #REGix from the stack.
  $C1C9 LD (IX+$08),A                        ; Write #REGa to *#REGix+#N$08.
  $C1CC RET                                  ; Return.
-; This entry point is used by the routines at #R$B724, #R$BF50 and #R$CB9C.
+; This entry point is used by the routines at #R$B724, #R$BF9F and #R$CB9C.
 *$C1CD LD IX,$C1E5                          ; #REGix=#R$C1E5.
  $C1D1 RR (IX+$01)                          ; Rotate *#REGix+#N$01 right.
  $C1D5 BIT 4,(IX+$00)                       ; {Jump to #R$C1DC if bit 4 of
@@ -6916,11 +6938,11 @@ c$CB9C LD HL,$CC3D    ; #REGhl=#R$CC3D.
 *$CBD7 LD IX,($CC3B)  ; #REGix=#R$CC3B.
 *$CBDB ADD IX,DE      ; #REGix+=#REGde.
  $CBDD JR NC,$CBE5    ; Jump to #R$CBE5 if {} is higher.
- $CBDF BIT 7,(HL)     ; Test bit 7 of *#REGhl.
- $CBE1 JR NZ,$CBEF    ; Jump to #R$CBEF if {} is not zero.
+ $CBDF BIT 7,(HL)     ; {Jump to #R$CBEF if bit 7 of *#REGhl is not zero.
+ $CBE1 JR NZ,$CBEF    ; }
  $CBE3 JR $CBDB       ; Jump to #R$CBDB.
-*$CBE5 BIT 7,(HL)     ; Test bit 7 of *#REGhl.
- $CBE7 JR NZ,$CBEF    ; Jump to #R$CBEF if {} is not zero.
+*$CBE5 BIT 7,(HL)     ; {Jump to #R$CBEF if bit 7 of *#REGhl is not zero.
+ $CBE7 JR NZ,$CBEF    ; }
  $CBE9 XOR %00011000  ; XOR bits 3-4 (if they are set, unset them and if they
                       ; are unset, set them).
  $CBEB OUT ($FE),A    ; OUT #N$FE
@@ -6933,8 +6955,8 @@ c$CB9C LD HL,$CC3D    ; #REGhl=#R$CC3D.
  $CBF9 JR $CC12       ; Jump to #R$CC12.
 *$CBFB RES 1,(HL)     ; Reset bit 1 of *#REGhl.
  $CBFD CALL $C1CD     ; Call #R$C1CD.
- $CC00 BIT 0,(IX+$00) ; Test bit 0 of *#REGix+#N$00.
- $CC04 JR NZ,$CBA8    ; Jump to #R$CBA8 if {} is not zero.
+ $CC00 BIT 0,(IX+$00) ; {Jump to #R$CBA8 if bit 0 of *#REGix+#N$00 is not zero.
+ $CC04 JR NZ,$CBA8    ; }
  $CC06 LD DE,$0020    ; #REGde=#N($0020,$04,$04).
  $CC09 JR $CC10       ; Jump to #R$CC10.
 *$CC0B RES 2,(HL)     ; Reset bit 2 of *#REGhl.
@@ -6945,11 +6967,11 @@ c$CB9C LD HL,$CC3D    ; #REGhl=#R$CC3D.
 *$CC19 LD IX,($CC3B)  ; #REGix=#R$CC3B.
 *$CC1D ADD IX,DE      ; #REGix+=#REGde.
  $CC1F JR NC,$CC27    ; Jump to #R$CC27 if {} is higher.
- $CC21 BIT 7,(HL)     ; Test bit 7 of *#REGhl.
- $CC23 JR NZ,$CC38    ; Jump to #R$CC38 if {} is not zero.
+ $CC21 BIT 7,(HL)     ; {Jump to #R$CC38 if bit 7 of *#REGhl is not zero.
+ $CC23 JR NZ,$CC38    ; }
  $CC25 JR $CC1D       ; Jump to #R$CC1D.
-*$CC27 BIT 7,(HL)     ; Test bit 7 of *#REGhl.
- $CC29 JR NZ,$CC38    ; Jump to #R$CC38 if {} is not zero.
+*$CC27 BIT 7,(HL)     ; {Jump to #R$CC38 if bit 7 of *#REGhl is not zero.
+ $CC29 JR NZ,$CC38    ; }
  $CC2B CALL $C1CD     ; Call #R$C1CD.
  $CC2E LD A,($C1E5)   ; #REGa=*#R$C1E5.
  $CC31 AND %00011000  ; Keep only bits 3-4.
@@ -6963,165 +6985,165 @@ c$CB9C LD HL,$CC3D    ; #REGhl=#R$CC3D.
 
 ; Table: In-Game Messaging
 @label=Table_InGameMessaging
-b$CC3E DEFW $CFAD    ; Message.
+b$CC3E DEFW $CFAD    ; "#D(#PEEK(#PC) + #PEEK(#PC + $01) * $100)".
  $CC40 DEFB $18
  $CC41 DEFW $0045    ; Points.
- $CC43 DEFW $CFBE    ; Message.
+ $CC43 DEFW $CFBE    ; "#D(#PEEK(#PC) + #PEEK(#PC + $01) * $100)".
  $CC45 DEFB $00
- $CC46 DEFW $D2E4    ; Message.
+ $CC46 DEFW $D2E4    ; "#D(#PEEK(#PC) + #PEEK(#PC + $01) * $100)".
  $CC48 DEFB $18
  $CC49 DEFW $0050    ; Points.
- $CC4B DEFW $D309    ; Message.
+ $CC4B DEFW $D309    ; "#D(#PEEK(#PC) + #PEEK(#PC + $01) * $100)".
  $CC4D DEFB $00
- $CC4E DEFW $D519    ; Message.
+ $CC4E DEFW $D519    ; "#D(#PEEK(#PC) + #PEEK(#PC + $01) * $100)".
  $CC50 DEFB $18
  $CC51 DEFW $0050    ; Points.
- $CC53 DEFW $D531    ; Message.
+ $CC53 DEFW $D531    ; "#D(#PEEK(#PC) + #PEEK(#PC + $01) * $100)".
  $CC55 DEFB $00
- $CC56 DEFW $D6F1    ; Message.
+ $CC56 DEFW $D6F1    ; "#D(#PEEK(#PC) + #PEEK(#PC + $01) * $100)".
  $CC58 DEFB $18
  $CC59 DEFW $0045    ; Points.
- $CC5B DEFW $D726    ; Message.
+ $CC5B DEFW $D726    ; "#D(#PEEK(#PC) + #PEEK(#PC + $01) * $100)".
  $CC5D DEFB $00
- $CC5E DEFW $D04C    ; Message.
+ $CC5E DEFW $D04C    ; "#D(#PEEK(#PC) + #PEEK(#PC + $01) * $100)".
  $CC60 DEFB $20
  $CC61 DEFW $0050    ; Points.
- $CC63 DEFW $D06C    ; Message.
+ $CC63 DEFW $D06C    ; "#D(#PEEK(#PC) + #PEEK(#PC + $01) * $100)".
  $CC65 DEFB $00
- $CC66 DEFW $D08B    ; Message.
+ $CC66 DEFW $D08B    ; "#D(#PEEK(#PC) + #PEEK(#PC + $01) * $100)".
  $CC68 DEFB $20
  $CC69 DEFW $0050    ; Points.
- $CC6B DEFW $D0C2    ; Message.
+ $CC6B DEFW $D0C2    ; "#D(#PEEK(#PC) + #PEEK(#PC + $01) * $100)".
  $CC6D DEFB $00
- $CC6E DEFW $D22C    ; Message.
+ $CC6E DEFW $D22C    ; "#D(#PEEK(#PC) + #PEEK(#PC + $01) * $100)".
  $CC70 DEFB $20
  $CC71 DEFW $0055    ; Points.
- $CC73 DEFW $D257    ; Message.
+ $CC73 DEFW $D257    ; "#D(#PEEK(#PC) + #PEEK(#PC + $01) * $100)".
  $CC75 DEFB $00
- $CC76 DEFW $D3A1    ; Message.
+ $CC76 DEFW $D3A1    ; "#D(#PEEK(#PC) + #PEEK(#PC + $01) * $100)".
  $CC78 DEFB $20
  $CC79 DEFW $0055    ; Points.
- $CC7B DEFW $D3D3    ; Message.
+ $CC7B DEFW $D3D3    ; "#D(#PEEK(#PC) + #PEEK(#PC + $01) * $100)".
  $CC7D DEFB $00
- $CC7E DEFW $D4C7    ; Message.
+ $CC7E DEFW $D4C7    ; "#D(#PEEK(#PC) + #PEEK(#PC + $01) * $100)".
  $CC80 DEFB $2C
  $CC81 DEFW $0075    ; Points.
- $CC83 DEFW $D506    ; Message.
+ $CC83 DEFW $D506    ; "#D(#PEEK(#PC) + #PEEK(#PC + $01) * $100)".
  $CC85 DEFB $00
- $CC86 DEFW $CF59    ; Message.
+ $CC86 DEFW $CF59    ; "#D(#PEEK(#PC) + #PEEK(#PC + $01) * $100)".
  $CC88 DEFB $2C
  $CC89 DEFW $0080    ; Points.
- $CC8B DEFW $CF8D    ; Message.
+ $CC8B DEFW $CF8D    ; "#D(#PEEK(#PC) + #PEEK(#PC + $01) * $100)".
  $CC8D DEFB $00
- $CC8E DEFW $D624    ; Message.
+ $CC8E DEFW $D624    ; "#D(#PEEK(#PC) + #PEEK(#PC + $01) * $100)".
  $CC90 DEFB $2C
  $CC91 DEFW $0080    ; Points.
- $CC93 DEFW $D644    ; Message.
+ $CC93 DEFW $D644    ; "#D(#PEEK(#PC) + #PEEK(#PC + $01) * $100)".
  $CC95 DEFB $00
- $CC96 DEFW $D7A1    ; Message.
+ $CC96 DEFW $D7A1    ; "#D(#PEEK(#PC) + #PEEK(#PC + $01) * $100)".
  $CC98 DEFB $2C
  $CC99 DEFW $0085    ; Points.
- $CC9B DEFW $D7D6    ; Message.
+ $CC9B DEFW $D7D6    ; "#D(#PEEK(#PC) + #PEEK(#PC + $01) * $100)".
  $CC9D DEFB $00
- $CC9E DEFW $D5BA    ; Message.
+ $CC9E DEFW $D5BA    ; "#D(#PEEK(#PC) + #PEEK(#PC + $01) * $100)".
  $CCA0 DEFB $28
  $CCA1 DEFW $0065    ; Points.
- $CCA3 DEFW $D5E6    ; Message.
+ $CCA3 DEFW $D5E6    ; "#D(#PEEK(#PC) + #PEEK(#PC + $01) * $100)".
  $CCA5 DEFB $00
- $CCA6 DEFW $D0F8    ; Message.
+ $CCA6 DEFW $D0F8    ; "#D(#PEEK(#PC) + #PEEK(#PC + $01) * $100)".
  $CCA8 DEFB $28
  $CCA9 DEFW $0070    ; Points.
- $CCAB DEFW $D127    ; Message.
+ $CCAB DEFW $D127    ; "#D(#PEEK(#PC) + #PEEK(#PC + $01) * $100)".
  $CCAD DEFB $00
- $CCAE DEFW $D284    ; Message.
+ $CCAE DEFW $D284    ; "#D(#PEEK(#PC) + #PEEK(#PC + $01) * $100)".
  $CCB0 DEFB $28
  $CCB1 DEFW $0070    ; Points.
- $CCB3 DEFW $D2A9    ; Message.
+ $CCB3 DEFW $D2A9    ; "#D(#PEEK(#PC) + #PEEK(#PC + $01) * $100)".
  $CCB5 DEFB $00
- $CCB6 DEFW $D47A    ; Message.
+ $CCB6 DEFW $D47A    ; "#D(#PEEK(#PC) + #PEEK(#PC + $01) * $100)".
  $CCB8 DEFB $28
  $CCB9 DEFW $0075    ; Points.
- $CCBB DEFW $D49F    ; Message.
+ $CCBB DEFW $D49F    ; "#D(#PEEK(#PC) + #PEEK(#PC + $01) * $100)".
  $CCBD DEFB $00
- $CCBE DEFW $D159    ; Message.
+ $CCBE DEFW $D159    ; "#D(#PEEK(#PC) + #PEEK(#PC + $01) * $100)".
  $CCC0 DEFB $24
  $CCC1 DEFW $0055    ; Points.
- $CCC3 DEFW $D18F    ; Message.
+ $CCC3 DEFW $D18F    ; "#D(#PEEK(#PC) + #PEEK(#PC + $01) * $100)".
  $CCC5 DEFB $00
- $CCC6 DEFW $D407    ; Message.
+ $CCC6 DEFW $D407    ; "#D(#PEEK(#PC) + #PEEK(#PC + $01) * $100)".
  $CCC8 DEFB $24
  $CCC9 DEFW $0060    ; Points.
- $CCCB DEFW $D444    ; Message.
+ $CCCB DEFW $D444    ; "#D(#PEEK(#PC) + #PEEK(#PC + $01) * $100)".
  $CCCD DEFB $00
- $CCCE DEFW $D564    ; Message.
+ $CCCE DEFW $D564    ; "#D(#PEEK(#PC) + #PEEK(#PC + $01) * $100)".
  $CCD0 DEFB $24
  $CCD1 DEFW $0060    ; Points.
- $CCD3 DEFW $D57E    ; Message.
+ $CCD3 DEFW $D57E    ; "#D(#PEEK(#PC) + #PEEK(#PC + $01) * $100)".
  $CCD5 DEFB $00
- $CCD6 DEFW $D67E    ; Message.
+ $CCD6 DEFW $D67E    ; "#D(#PEEK(#PC) + #PEEK(#PC + $01) * $100)".
  $CCD8 DEFB $24
  $CCD9 DEFW $0065    ; Points.
- $CCDB DEFW $D6B2    ; Message.
+ $CCDB DEFW $D6B2    ; "#D(#PEEK(#PC) + #PEEK(#PC + $01) * $100)".
  $CCDD DEFB $00
- $CCDE DEFW $D1C8    ; Message.
+ $CCDE DEFW $D1C8    ; "#D(#PEEK(#PC) + #PEEK(#PC + $01) * $100)".
  $CCE0 DEFB $30
  $CCE1 DEFW $0095    ; Points.
- $CCE3 DEFW $D1FB    ; Message.
+ $CCE3 DEFW $D1FB    ; "#D(#PEEK(#PC) + #PEEK(#PC + $01) * $100)".
  $CCE5 DEFB $00
- $CCE6 DEFW $D33C    ; Message.
+ $CCE6 DEFW $D33C    ; "#D(#PEEK(#PC) + #PEEK(#PC + $01) * $100)".
  $CCE8 DEFB $30
  $CCE9 DEFW $0095    ; Points.
- $CCEB DEFW $D371    ; Message.
+ $CCEB DEFW $D371    ; "#D(#PEEK(#PC) + #PEEK(#PC + $01) * $100)".
  $CCED DEFB $00
- $CCEE DEFW $D758    ; Message.
+ $CCEE DEFW $D758    ; "#D(#PEEK(#PC) + #PEEK(#PC + $01) * $100)".
  $CCF0 DEFB $30
  $CCF1 DEFW $0100    ; Points.
- $CCF3 DEFW $D789    ; Message.
+ $CCF3 DEFW $D789    ; "#D(#PEEK(#PC) + #PEEK(#PC + $01) * $100)".
  $CCF5 DEFB $00
- $CCF6 DEFW $CFF9    ; Message.
+ $CCF6 DEFW $CFF9    ; "#D(#PEEK(#PC) + #PEEK(#PC + $01) * $100)".
  $CCF8 DEFB $30
  $CCF9 DEFW $0100    ; Points.
- $CCFB DEFW $D01F    ; Message.
+ $CCFB DEFW $D01F    ; "#D(#PEEK(#PC) + #PEEK(#PC + $01) * $100)".
  $CCFD DEFB $00
- $CCFE DEFW $CD3E    ; Message.
+ $CCFE DEFW $CD3E    ; "#D(#PEEK(#PC) + #PEEK(#PC + $01) * $100)".
  $CD00 DEFB $38
  $CD01 DEFW $0250    ; Points.
- $CD03 DEFW $CD56    ; Message.
+ $CD03 DEFW $CD56    ; "#D(#PEEK(#PC) + #PEEK(#PC + $01) * $100)".
  $CD05 DEFB $00
- $CD06 DEFW $CD86    ; Message.
+ $CD06 DEFW $CD86    ; "#D(#PEEK(#PC) + #PEEK(#PC + $01) * $100)".
  $CD08 DEFB $38
  $CD09 DEFW $0230    ; Points.
- $CD0B DEFW $CDA6    ; Message.
+ $CD0B DEFW $CDA6    ; "#D(#PEEK(#PC) + #PEEK(#PC + $01) * $100)".
  $CD0D DEFB $00
- $CD0E DEFW $CDC3    ; Message.
+ $CD0E DEFW $CDC3    ; "#D(#PEEK(#PC) + #PEEK(#PC + $01) * $100)".
  $CD10 DEFB $38
  $CD11 DEFW $0270    ; Points.
- $CD13 DEFW $CDDD    ; Message.
+ $CD13 DEFW $CDDD    ; "#D(#PEEK(#PC) + #PEEK(#PC + $01) * $100)".
  $CD15 DEFB $00
- $CD16 DEFW $CD3E    ; Message.
+ $CD16 DEFW $CD3E    ; "#D(#PEEK(#PC) + #PEEK(#PC + $01) * $100)".
  $CD18 DEFB $38
  $CD19 DEFW $0250    ; Points.
- $CD1B DEFW $CD56    ; Message.
+ $CD1B DEFW $CD56    ; "#D(#PEEK(#PC) + #PEEK(#PC + $01) * $100)".
  $CD1D DEFB $00
- $CD1E DEFW $CE28    ; Message.
+ $CD1E DEFW $CE28    ; "#D(#PEEK(#PC) + #PEEK(#PC + $01) * $100)".
  $CD20 DEFB $34
  $CD21 DEFW $0150    ; Points.
- $CD23 DEFW $CE4E    ; Message.
+ $CD23 DEFW $CE4E    ; "#D(#PEEK(#PC) + #PEEK(#PC + $01) * $100)".
  $CD25 DEFB $00
- $CD26 DEFW $CE67    ; Message.
+ $CD26 DEFW $CE67    ; "#D(#PEEK(#PC) + #PEEK(#PC + $01) * $100)".
  $CD28 DEFB $34
  $CD29 DEFW $0130    ; Points.
- $CD2B DEFW $CE96    ; Message.
+ $CD2B DEFW $CE96    ; "#D(#PEEK(#PC) + #PEEK(#PC + $01) * $100)".
  $CD2D DEFB $00
- $CD2E DEFW $CEB3    ; Message.
+ $CD2E DEFW $CEB3    ; "#D(#PEEK(#PC) + #PEEK(#PC + $01) * $100)".
  $CD30 DEFB $34
  $CD31 DEFW $0170    ; Points.
- $CD33 DEFW $CEEB    ; Message.
+ $CD33 DEFW $CEEB    ; "#D(#PEEK(#PC) + #PEEK(#PC + $01) * $100)".
  $CD35 DEFB $00
- $CD36 DEFW $CE28    ; Message.
+ $CD36 DEFW $CE28    ; "#D(#PEEK(#PC) + #PEEK(#PC + $01) * $100)".
  $CD38 DEFB $34
  $CD39 DEFW $0150    ; Points.
- $CD3B DEFW $CE4E    ; Message.
+ $CD3B DEFW $CE4E    ; "#D(#PEEK(#PC) + #PEEK(#PC + $01) * $100)".
  $CD3D DEFB $00
 
 ; Messaging: One for the road?
