@@ -1,4 +1,4 @@
-; Copyright New Generation Software 1984, 2023 ArcadeGeek LTD.
+; Copyright New Generation Software 1984, 2026 ArcadeGeek LTD.
 ; NOTE: Disassembly is Work-In-Progress.
 ; Label naming is loosely based on Action_ActionName_SubAction e.g. Print_HighScore_Loop.
 
@@ -16,20 +16,26 @@ b $5CF0
 b $7080
 @ $7080 label=ShadowBuffer_Pixels
 
-b $70BF
+b $70BF Shadow Buffer?
+
+b $73D4 Shadow Buffer?
+  $73D4,$20,$10
 
 b $7840
 @ $7840 label=ShadowBuffer_Attributes
 
-b $785F
+b $785F Shadow Buffer?
 
-b $78A0
+b $78A0 Shadow Buffer?
 
-b $95B0
+b $95B0 Graphics: Game
   $95B0 #UDG(#PC)
-L $95B0,$08,$180
+L $95B0,$08,$1E
 
-b $A200
+b $96A0 Graphics:
+  $96A0,$20,$10 #UDGTABLE { #UDGARRAY$02,scale=$04,step=$02((#PC)-(#PC+$50)-$01-$10)(trashman-01) } UDGTABLE#
+
+b $A200 Graphics: Additional
   $A200 #UDG(#PC)
 L $A200,$08,$72
 
@@ -63,14 +69,14 @@ N $A5C7 The game has ended ... check why.
   $A5CA,$04 Jump to #R$A61D if the bonus/ time counter reached zero.
   $A5CE,$03 #REGhl=#R$C272.
   $A5D1,$03 Call #R$CB22.
-N $A5D4 Check other reasons why the game ended (see #POKE#immunity()).
+N $A5D4 Check other reasons why the game ended (see #POKE(immunity,)).
   $A5D4,$03 #REGa=*#R$B008.
   $A5D7,$05 Jump to #R$A667 if bit 0 is set.
   $A5DC,$03 #REGhl=*#R$AB7E.
 N $A5DF Point to the current players level.
   $A5DF,$01 Increment #REGhl by one.
 N $A5E0 Has the player completed the game?
-  $A5E0,$05 Jump to #R$A5F7 if *#REGhl equals #N$0C.
+  $A5E0,$05 Jump to #R$A5F7 if the current players level is #N$0C.
   $A5E5,$02 Increment *#REGhl by two.
   $A5E7,$03 Call #R$A99F.
   $A5EA,$03 Call #R$A7F5.
@@ -103,7 +109,7 @@ c $A61D Handler: Time Out
 N $A61D Fetch the active player.
   $A61D,$03 #REGhl=*#R$AB7E.
 N $A620 Action, decrease the active players lives by one.
-N $A620 See #POKE#infinite_lives().
+N $A620 See #POKE(infinite_lives,).
   $A620,$01 Decrease *#REGhl by one.
 N $A621 Is the player out of lives?
   $A621,$01 #REGa=*#REGhl.
@@ -141,12 +147,15 @@ N $A63A Who is in play, is it 1UP or 2UP?
   $A65F,$03 Call #R$A9D4.
   $A662,$03 Jump to #R$A5BB if there is still an active player.
   $A665,$02 Jump to #R$A672.
+N $A667 Trashman is killed in action.
+@ $A667 label=GameOver_Dead
   $A667,$03 Call #R$A9C5.
   $A66A,$03 Call #R$AAA9.
   $A66D,$03 Call #R$A8D4.
   $A670,$02 Jump to #R$A63A.
-@ $A672 label=Handler_Fired_BackToMenu
-  $A672,$03 Jump to #R$A5A3.
+N $A672 Just jump back into the game loop.
+@ $A672 label=Alias_JumpGameLoop
+  $A672,$03 Jump back to #R$A5A3.
 
 c $A675 Game Selection Menu
 @ $A675 label=GameMenu
@@ -389,7 +398,7 @@ N $A82C The lower boundrary has been reached, so cycle back to the letter "Z".
   $A836,$01 Restore #REGhl from the stack.
   $A837,$03 Jump to #R$A79B.
 
-c $A83A
+c $A83A Display Player Name
 N $A83A Who is in play, is it 1UP or 2UP?
   $A83A,$02 Test bit 4 of *#REGhl.
 N $A83C Default to using the 1UP name.
@@ -687,7 +696,7 @@ N $AA15 Print the road name.
   $AA18,$03 Call #R$B081.
   $AA1B,$03 #REGhl=*#R$AB7E.
 N $AA1E This assumes the default number of lives is being used, and displays a string for the number of times Trashman has been fired.
-N $AA1E As this only tests bit 0, any poke like #POKE#infinite_lives() will make this behave oddly.
+N $AA1E As this only tests bit 0, any poke like #POKE(infinite_lives,) will make this behave oddly.
   $AA1E,$02 Test bit 0 of *#REGhl.
   $AA20,$03 #REGhl=#R$B009.
   $AA23,$02 Jump to #R$AA28 if this isn't the last life.
@@ -889,11 +898,13 @@ W $AB7E,$02
 @ $AB80 label=1UP_Lives
 @ $AB81 label=1UP_Level
 @ $AB82 label=1UP_Score
-B $AB80,$05,$01
 @ $AB85 label=2UP_Lives
 @ $AB86 label=2UP_Level
 @ $AB87 label=2UP_Score
-B $AB85,$05,$01
+B $AB80,$01
+B $AB81,$01
+B $AB82,$03
+L $AB80,$05,$02
 
 g $AB8A Game Flags
 @ $AB8A label=Game_Flags
@@ -909,151 +920,159 @@ B $AB8A,$01
 t $AB8B Messaging: Selection Screen
 D $AB8B Each string uses #N$80 as a terminator (bit 7 is set).
 @ $AB8B label=Messaging_SelectControl
-  $AB8B,$20,$1F:$01 #FONT:(Please select method of control)$E417,attr=$30(select-01)
+  $AB8B,$20,$1F:$01 #FONT$E417,attr=$30,chars=0(Please select method of control)(select-01)
 @ $ABAB label=Messaging_SelectKeyboard
-  $ABAB,$1D,$1C:$01 #FONT:(1 : Keyboard ( cursor keys ))$E417,attr=$30(select-02)
+  $ABAB,$1D,$1C:$01 #FONT$E417,attr=$30,chars=0(1 : Keyboard ( cursor keys ))(select-02)
 @ $ABC8 label=Messaging_SelectKempston
-  $ABC8,$16,$15:$01 #FONT:(2 : Kempston joystick)$E417,attr=$30(select-03)
+  $ABC8,$16,$15:$01 #FONT$E417,attr=$30,chars=0(2 : Kempston joystick)(select-03)
 @ $ABDE label=Messaging_SelectInterface2
-  $ABDE,$10,$0F:$01 #FONT:(3 : Interface 2)$E417,attr=$30(select-04)
+  $ABDE,$10,$0F:$01 #FONT$E417,attr=$30,chars=0(3 : Interface 2)(select-04)
 @ $ABEE label=Messaging_SelectCursor
-  $ABEE,$1E,$1D:$01 #FONT:(4 : Cursor key type joysticks)$E417,attr=$30(select-05)
+  $ABEE,$1E,$1D:$01 #FONT$E417,attr=$30,chars=0(4 : Cursor key type joysticks)(select-05)
 
 t $AC0C Messaging: Situation Vacant
 @ $AC0C label=Messaging_SituationVacant
   $AC0C,$83,$10,$14,$14,$20,$20,$0B,$0A:$01 #TABLE(default)
-. { #FONT:(SITUATION VACANT)$E417,attr=$30(situation-vacant-1) }
-. { #FONT:(                    )$E417,attr=$30(situation-vacant-2) }
-. { #FONT:(                    )$E417,attr=$30(situation-vacant-2) }
-. { #FONT:(Trashman required: must be alert)$E417,attr=$30(situation-vacant-3) }
-. { #FONT:(nimble footed, and able to  hold)$E417,attr=$30(situation-vacant-4) }
-. { #FONT:(his drink.)$E417,attr=$30(situation-vacant-5) }
+. { #FONT$E417,attr=$30,chars=0(SITUATION VACANT)(situation-vacant-1) }
+. { #FONT$E417,attr=$30,chars=0(                    )(situation-vacant-2) }
+. { #FONT$E417,attr=$30,chars=0(                    )(situation-vacant-2) }
+. { #FONT$E417,attr=$30,chars=0(Trashman required: must be alert)(situation-vacant-3) }
+. { #FONT$E417,attr=$30,chars=0(nimble footed, and able to  hold)(situation-vacant-4) }
+. { #FONT$E417,attr=$30,chars=0(his drink.)(situation-vacant-5) }
 . TABLE#
 
 t $AC8F Messaging: Enter Applicants Name (1UP)
 @ $AC8F label=Messaging_EnterName1UP
-  $AC8F,$21,$17,$08,$01:$01 #FONT:(Enter applicants name (        ))$E417,attr=$30(applicant-name)
+  $AC8F,$21,$17,$08,$01:$01 #FONT$E417,attr=$30,chars=0(Enter applicants name (        ))(applicant-name)
 @ $ACA6 label=Name_1UP
 @ $ACB0 label=Messaging_EnterName2UP
-  $ACB0,$21,$17,$08,$01:$01 #FONT:(Enter applicants name (        ))$E417,attr=$30(applicant-name)
+  $ACB0,$21,$17,$08,$01:$01 #FONT$E417,attr=$30,chars=0(Enter applicants name (        ))(applicant-name)
 @ $ACC7 label=Name_2UP
 @ $ACD1 label=Messaging_AnyMoreApplicants
-  $ACD1,$21,$20:$01 #FONT:(Any more applicants             )$E417,attr=$30(more-applicants)
+  $ACD1,$21,$20:$01 #FONT$E417,attr=$30,chars=0(Any more applicants             )(more-applicants)
 @ $ACF2 label=Messaging_No
-  $ACF2,$04,$03:$01 #FONT:(NO )$E417,attr=$30(no)
+  $ACF2,$04,$03:$01 #FONT$E417,attr=$30,chars=0(NO )(no)
 @ $ACF6 label=Messaging_Yes
-  $ACF6,$04,$03:$01 #FONT:(YES)$E417,attr=$30(yes)
+  $ACF6,$04,$03:$01 #FONT$E417,attr=$30,chars=0(YES)(yes)
 
 t $ACFA Messaging: Street Introduction
 @ $ACFA label=Messaging_Trashman
-  $ACFA,$0A,$09:$01 #FONT:(Trashman )$E417,attr=$30(trashman)
+  $ACFA,$0A,$09:$01 #FONT$E417,attr=$30,chars=0(Trashman )(trashman)
 @ $AD04 label=Messaging_GoCollect
-  $AD04,$10,$0F:$01 #FONT:( go and collect)$E417,attr=$30(go-collect)
+  $AD04,$10,$0F:$01 #FONT$E417,attr=$30,chars=0( go and collect)(go-collect)
 @ $AD14 label=Messaging_BinsFrom
-  $AD14,$0C,$0B:$01 #FONT:( bins from )$E417,attr=$30(bins-from)
+  $AD14,$0C,$0B:$01 #FONT$E417,attr=$30,chars=0( bins from )(bins-from)
 
 t $AD20 Messaging: News Flash
 @ $AD20 label=Messaging_NewsFlash_1
-  $AD20,$0B,$0A:$01 #FONT:(NEWS FLASH)$E417,attr=$30(news-flash)
+  $AD20,$0B,$0A:$01 #FONT$E417,attr=$30,chars=0(NEWS FLASH)(news-flash)
 @ $AD2B label=Messaging_NewsFlash_2
-  $AD2B,$14,$13:$01 #FONT:(Trashman killed in )$E417,attr=$30(trashman-killed)
+  $AD2B,$14,$13:$01 #FONT$E417,attr=$30,chars=0(Trashman killed in )(trashman-killed)
 @ $AD3F label=Messaging_NewsFlash_3
-  $AD3F,$21,$20:$01 #FONT:(Nominee for TRASHMAN of the YEAR)$E417,attr=$30(nominee)
+  $AD3F,$21,$20:$01 #FONT$E417,attr=$30,chars=0(Nominee for TRASHMAN of the YEAR)(nominee)
 @ $AD60 label=Messaging_NewsFlash_4
-  $AD60,$10,$0F:$01 #FONT:(Fred Scrunge, )$E417,attr=$30(fred-scrunge)
+  $AD60,$10,$0F:$01 #FONT$E417,attr=$30,chars=0(Fred Scrunge, )(fred-scrunge)
 @ $AD70 label=Messaging_NewsFlash_5
-  $AD70,$0A,$09:$01 #FONT:(, leaves)$E417,attr=$30(leaves)
+  $AD70,$0A,$09:$01 #FONT$E417,attr=$30,chars=0(, leaves)(leaves)
 @ $AD7A label=Messaging_NewsFlash_6
-  $AD7A,$1E,$1D:$01 #FONT:(wife, 3 kids, and        pts.")$E417,attr=$30(wife)
+  $AD7A,$1E,$1D:$01 #FONT$E417,attr=$30,chars=0(wife, 3 kids, and        pts.")(wife)
 
 t $AD98 Messaging: Finished Street
 @ $AD98 label=Messaging_FinishedStreet_1
-  $AD98,$21,$20:$01 #FONT:( Good days work  there, Trashman)$E417,attr=$30(good-days)
+  $AD98,$21,$20:$01 #FONT$E417,attr=$30,chars=0( Good days work  there, Trashman)(good-days)
 @ $ADB9 label=Messaging_FinishedStreet_2
   $ADB9,$4E,$18,$20,$16:$01 #TABLE(default)
-. { #FONT:(. Tomorrow we've another)$E417,attr=$30(another-street-1) }
-. { #FONT:(street for you.  Let's  see  how)$E417,attr=$30(another-street-2) }
-. { #FONT:(you fair on that one.)$E417,attr=$30(another-street-3) }
+. { #FONT$E417,attr=$30,chars=0(. Tomorrow we've another)(another-street-1) }
+. { #FONT$E417,attr=$30,chars=0(street for you.  Let's  see  how)(another-street-2) }
+. { #FONT$E417,attr=$30,chars=0(you fair on that one.)(another-street-3) }
 . TABLE#
 
 t $AE07 Messaging: Trashman Of The Year Nominations
 @ $AE07 label=Messaging_Nominations
-  $AE07,$21,$20:$01 #FONT:(TRASHMAN OF THE YEAR NOMINATIONS)$E417,attr=$30(nominations)
+  $AE07,$21,$20:$01 #FONT$E417,attr=$30,chars=0(TRASHMAN OF THE YEAR NOMINATIONS)(nominations)
 @ $AE28 label=Messaging_Pts
-  $AE28,$06,$05:$01 #FONT:( pts.)$E417,attr=$30(pts)
-  $AE2E,$05,$04:$01 #FONT:(    )$E417,attr=$30(four-spaces)
+  $AE28,$06,$05:$01 #FONT$E417,attr=$30,chars=0( pts.)(pts)
+  $AE2E,$05,$04:$01 #FONT$E417,attr=$30,chars=0(    )(four-spaces)
 
 t $AE33 Messaging: Fired
 @ $AE33 label=Messaging_Fired_1
   $AE33,$3E,$0F,$20,$0E:$01 #TABLE(default)
-. { #FONT:(, you're  slow.)$E417,attr=$30(complaints-1) }
-. { #FONT:(We've had complaints  about your)$E417,attr=$30(complaints-2) }
-. { #FONT:(activities in )$E417,attr=$30(complaints-3) }
+. { #FONT$E417,attr=$30,chars=0(, you're  slow.)(complaints-1) }
+. { #FONT$E417,attr=$30,chars=0(We've had complaints  about your)(complaints-2) }
+. { #FONT$E417,attr=$30,chars=0(activities in )(complaints-3) }
 . TABLE#
 @ $AE71 label=Messaging_Fired_2
-  $AE71,$18,$17:$01 #FONT:( more and you're fired.)$E417,attr=$30(more)
+  $AE71,$18,$17:$01 #FONT$E417,attr=$30,chars=0( more and you're fired.)(more)
 
 t $AE89 Messaging: YOU'RE FIRED!
 @ $AE89 label=Messaging_Fired
-  $AE89,$0E,$0D:$01 #FONT:(YOU'RE FIRED!)$E417,attr=$30(fired)
+  $AE89,$0E,$0D:$01 #FONT$E417,attr=$30,chars=0(YOU'RE FIRED!)(fired)
 
 t $AE97 Messaging: Trashman Of The Year
 @ $AE97 label=Messaging_TrashmanOfTheYear
   $AE97,$55,$1A,$20,$1A:$01 #TABLE(default)
-. { #FONT:( for  some  unaccountable)$E417,attr=$30(trashman-of-the-year-1) }
-. { #FONT:(reason, you have been  nominated)$E417,attr=$30(trashman-of-the-year-2) }
-. { #FONT:(for TRASHMAN OF THE YEAR )$E417,attr=$30(trashman-of-the-year-3) }
+. { #FONT$E417,attr=$30,chars=0( for  some  unaccountable)(trashman-of-the-year-1) }
+. { #FONT$E417,attr=$30,chars=0(reason, you have been  nominated)(trashman-of-the-year-2) }
+. { #FONT$E417,attr=$30,chars=0(for TRASHMAN OF THE YEAR )(trashman-of-the-year-3) }
 . TABLE#
 
 t $AEEC Messaging: Go! Take Your Pts With You
 @ $AEEC label=Messaging_Go
-  $AEEC,$11,$10:$01 #FONT:( GO!  Take your )$E417,attr=$30(go-1)
+  $AEEC,$11,$10:$01 #FONT$E417,attr=$30,chars=0( GO!  Take your )(go-1)
 @ $AEFD label=Messaging_PtsWithYou
-  $AEFD,$11,$10:$01 #FONT:( Pts  withyou.  )$E417,attr=$30(go-2)
+  $AEFD,$11,$10:$01 #FONT$E417,attr=$30,chars=0( Pts  withyou.  )(go-2)
 
 t $AF0E Messaging: Academy Of Trashmen Diploma
 @ $AF0E label=Messaging_TrashmenDiploma
-  $AF0E,$1C,$1B:$01 #FONT:(ACADEMY OF TRASHMEN DIPLOMA)$E417,attr=$30(diploma)
+  $AF0E,$1C,$1B:$01 #FONT$E417,attr=$30,chars=0(ACADEMY OF TRASHMEN DIPLOMA)(diploma)
 
 t $AF2A Messaging: This Is To Certify
 @ $AF2A label=Messaging_Certify_1
-  $AF2A,$19,$18:$01 #FONT:(This is to certify that )$E417,attr=$30(certify-line-1)
+  $AF2A,$19,$18:$01 #FONT$E417,attr=$30,chars=0(This is to certify that )(certify-line-1)
 @ $AF43 label=Messaging_Certify_2
-  $AF43,$20 #FONT:(has    completed  a  course   in)$E417,attr=$30(certify-line-2)
-  $AF63,$20 #FONT:(TRASHMANSHIP , and may  go forth)$E417,attr=$30(certify-line-3)
-  $AF83,$1B,$1A:$01 #FONT:(to rid the world of trash.)$E417,attr=$30(certify-line-4)
+  $AF43,$20 #FONT$E417,attr=$30,chars=0(has    completed  a  course   in)(certify-line-2)
+  $AF63,$20 #FONT$E417,attr=$30,chars=0(TRASHMANSHIP , and may  go forth)(certify-line-3)
+  $AF83,$1B,$1A:$01 #FONT$E417,attr=$30,chars=0(to rid the world of trash.)(certify-line-4)
 @ $AF9E label=Messaging_Certify_3
-  $AF9E,$10,$0F:$01 #FONT:(Your score was )$E417,attr=$30(certify-line-5)
+  $AF9E,$10,$0F:$01 #FONT$E417,attr=$30,chars=0(Your score was )(certify-line-5)
 @ $AFAE label=Messaging_Certify_4
-  $AFAE,$20 #FONT:(Your  success  has  given you  a)$E417,attr=$30(certify-line-6)
-  $AFCE,$20 #FONT:(well earned  nomination  for the)$E417,attr=$30(certify-line-7)
-  $AFEE,$1A,$19:$01 #FONT:(    TRASHMAN OF THE YEAR.)$E417,attr=$30(certify-line-8)
+  $AFAE,$20 #FONT$E417,attr=$30,chars=0(Your  success  has  given you  a)(certify-line-6)
+  $AFCE,$20 #FONT$E417,attr=$30,chars=0(well earned  nomination  for the)(certify-line-7)
+  $AFEE,$1A,$19:$01 #FONT$E417,attr=$30,chars=0(    TRASHMAN OF THE YEAR.)(certify-line-8)
 
-b $B008
+g $B008 Flag: Game Over
+@ $B008 label=Flag_GameOver
+D $B008 A flag to indicate if the game is still in-play, or what the reason for
+. death is.
+. #TABLE(default,centre,centre)
+. { =h Value | =h Meaning }
+. { #N$00 | Not "Game Over" }
+. TABLE#
+B $B008,$01
 
 t $B009 Messaging: Once
 @ $B009 label=Messaging_Once
-  $B009,$0A,$09:$01 #FONT:(.    Once)$E417,attr=$30(once)
+  $B009,$0A,$09:$01 #FONT$E417,attr=$30,chars=0(.    Once)(once)
 
 t $B013 Messaging: Twice
 @ $B013 label=Messaging_Twice
-  $B013,$0B,$0A:$01 #FONT:(.    Twice)$E417,attr=$30(twice)
+  $B013,$0B,$0A:$01 #FONT$E417,attr=$30,chars=0(.    Twice)(twice)
 
 t $B01E Messaging: Number Of Bins To Collect
 @ $B01E label=Messaging_Five
-  $B01E,$05,$04:$01 #FONT:(five)$E417,attr=$30(five)
+  $B01E,$05,$04:$01 #FONT$E417,attr=$30,chars=0(five)(five)
 @ $B023 label=Messaging_Six
-  $B023,$04,$03:$01 #FONT:(six)$E417,attr=$30(six)
+  $B023,$04,$03:$01 #FONT$E417,attr=$30,chars=0(six)(six)
 @ $B027 label=Messaging_Seven
-  $B027,$06,$05:$01 #FONT:(seven)$E417,attr=$30(seven)
+  $B027,$06,$05:$01 #FONT$E417,attr=$30,chars=0(seven)(seven)
 @ $B02D label=Messaging_Eight
-  $B02D,$06,$05:$01 #FONT:(eight)$E417,attr=$30(eight)
+  $B02D,$06,$05:$01 #FONT$E417,attr=$30,chars=0(eight)(eight)
 @ $B033 label=Messaging_Nine
-  $B033,$05,$04:$01 #FONT:(nine)$E417,attr=$30(nine)
+  $B033,$05,$04:$01 #FONT$E417,attr=$30,chars=0(nine)(nine)
 @ $B038 label=Messaging_Ten
-  $B038,$04,$03:$01 #FONT:(ten)$E417,attr=$30(ten)
+  $B038,$04,$03:$01 #FONT$E417,attr=$30,chars=0(ten)(ten)
 @ $B03C label=Messaging_Twelve
-  $B03C,$07,$06:$01 #FONT:(twelve)$E417,attr=$30(twelve)
+  $B03C,$07,$06:$01 #FONT$E417,attr=$30,chars=0(twelve)(twelve)
 
 g $B043 High Score Table
 @ $B043 label=Table_HighScore
@@ -1125,6 +1144,10 @@ N $B0A1 Write #R$C375 to *#R$C277.
 
 c $B0EA Create Play Window
 @ $B0EA label=Play_Window
+N $B0EA #PUSHS #UDGTABLE {
+.   #SIM(start=$A5AC,stop=$A5B5)#SIM(start=$A5B8,stop=$A5BE)
+.   #SIM(start=$B0EA,stop=$B122)#SCR$02(play-window)
+. } TABLE# #POPS
   $B0EA,$0D Write #N$00 to #N$1800 bytes starting from #N$4000.
 N $B0F7 Paint the top two lines #COLOUR$30.
   $B0F7,$03 #REGhl=#N$5800.
@@ -1158,7 +1181,7 @@ N $B123 Paints two whole lines yellow, from a given attribute buffer address.
   $B128,$02 Decrease counter by one and loop back to #R$B125 until counter is zero.
   $B12A,$01 Return.
 
-c $B12B
+c $B12B Update Timer Display
   $B12B,$03 #REGhl=#R$B146.
   $B12E,$01 Decrease *#REGhl by one.
   $B12F,$03 #REGa=*#R$C386.
@@ -1172,51 +1195,47 @@ c $B12B
   $B140,$03 Return if bit 4 of #REGa is not set.
   $B143,$02 Write #N$01 to *#REGhl.
   $B145,$01 Return.
+g $B146 Timer Display Counter
+@ $B146 label=Timer_DisplayCounter
 B $B146,$01
 
-c $B147
+c $B147 Copy Playarea To Shadow Buffers
   $B147,$04 #REGix=*#R$C277.
   $B14B,$03 #REGl=*#REGix+#N$30.
   $B14E,$03 #REGh=*#REGix+#N$31.
-  $B151,$03 #REGde=#N$0200.
-  $B154,$01 #REGhl+=#REGde.
+  $B151,$04 #REGhl+=#N$0200.
   $B155,$03 #REGde=#R$7840.
   $B158,$03 #REGbc=#N$0410.
   $B15B,$03 Call #R$B1B2.
   $B15E,$03 #REGl=*#REGix+#N$18.
   $B161,$03 #REGh=*#REGix+#N$19.
-  $B164,$03 #REGbc=#N$0180.
-  $B167,$01 #REGhl+=#REGbc.
+  $B164,$04 #REGhl+=#N$0180.
   $B168,$03 #REGbc=#N$0C10.
   $B16B,$03 Call #R$B1B2.
   $B16E,$03 #REGl=*#REGix+#N$00.
   $B171,$03 #REGh=*#REGix+#N$01.
-  $B174,$03 #REGbc=#N$0180.
-  $B177,$01 #REGhl+=#REGbc.
+  $B174,$04 #REGhl+=#N$0180.
   $B178,$03 #REGbc=#N$0410.
   $B17B,$03 Call #R$B1B2.
   $B17E,$03 #REGl=*#REGix+#N$3C.
   $B181,$03 #REGh=*#REGix+#N$3D.
-  $B184,$03 #REGde=#N$0200.
-  $B187,$01 #REGhl+=#REGde.
+  $B184,$04 #REGhl+=#N$0200.
   $B188,$03 #REGde=#R$785F.
   $B18B,$03 #REGbc=#N$0410.
   $B18E,$03 Call #R$B1C3.
   $B191,$03 #REGl=*#REGix+#N$24.
   $B194,$03 #REGh=*#REGix+#N$25.
-  $B197,$03 #REGbc=#N$0180.
-  $B19A,$01 #REGhl+=#REGbc.
+  $B197,$04 #REGhl+=#N$0180.
   $B19B,$03 #REGbc=#N$0C10.
   $B19E,$03 Call #R$B1C3.
   $B1A1,$03 #REGl=*#REGix+#N$0C.
   $B1A4,$03 #REGh=*#REGix+#N$0D.
-  $B1A7,$03 #REGbc=#N$0180.
-  $B1AA,$01 #REGhl+=#REGbc.
+  $B1A7,$04 #REGhl+=#N$0180.
   $B1AB,$03 #REGbc=#N$0410.
   $B1AE,$03 Call #R$B1C3.
   $B1B1,$01 Return.
 
-c $B1B2
+c $B1B2 Copy Pixels To Shadow Buffer
   $B1B2,$02 Stash #REGbc and #REGde on the stack.
   $B1B4,$02 #REGb=#N$00.
   $B1B6,$02 Copy #REGhl to #REGde the number of times held by #REGbc.
@@ -1229,7 +1248,7 @@ c $B1B2
   $B1C0,$02 Decrease counter by one and loop back to #R$B1B2 until counter is zero.
   $B1C2,$01 Return.
 
-c $B1C3
+c $B1C3 Copy Attributes To Shadow Buffer
   $B1C3,$02 Stash #REGbc and #REGde on the stack.
   $B1C5,$01 #REGa=*#REGhl.
   $B1C6,$01 Write #REGa to *#REGde.
@@ -1246,7 +1265,7 @@ c $B1C3
   $B1D4,$02 Decrease counter by one and loop back to #R$B1C3 until counter is zero.
   $B1D6,$01 Return.
 
-c $B1D7
+c $B1D7 Draw Object Sprite
   $B1D7,$03 #REGl=*#REGix+#N$00.
   $B1DA,$03 #REGh=*#REGix+#N$01.
   $B1DD,$02 Jump to #R$B1F2.
@@ -1270,57 +1289,51 @@ c $B1D7
   $B206,$01 Write #REGa to *#REGhl.
   $B207,$01 Return.
 
-c $B208
+c $B208 Copy Playarea To Screen
   $B208,$04 #REGix=*#R$C277.
   $B20C,$03 #REGl=*#REGix+#N$30.
   $B20F,$03 #REGh=*#REGix+#N$31.
-  $B212,$03 #REGde=#N($0100,$04,$04).
-  $B215,$01 #REGhl+=#REGde.
+  $B212,$04 #REGhl+=#N($0100,$04,$04).
   $B216,$03 #REGde=#R$7080.
-  $B219,$03 #REGbc=#N($0420,$04,$04).
+  $B219,$03 #REGbc=#N$0420.
   $B21C,$03 Call #R$B293.
   $B21F,$02 Stash #REGix on the stack.
-  $B221,$03 #REGbc=#N($0032,$04,$04).
-  $B224,$02 #REGix+=#REGbc.
+  $B221,$05 #REGix+=#N($0032,$04,$04).
   $B226,$03 Call #R$B1DF.
   $B229,$02 Restore #REGix from the stack.
   $B22B,$03 #REGl=*#REGix+#N$18.
   $B22E,$03 #REGh=*#REGix+#N$19.
-  $B231,$03 #REGbc=#N($0C20,$04,$04).
+  $B231,$03 #REGbc=#N$0C20.
   $B234,$03 Call #R$B293.
   $B237,$02 Stash #REGix on the stack.
-  $B239,$03 #REGbc=#N($001A,$04,$04).
-  $B23C,$02 #REGix+=#REGbc.
+  $B239,$05 #REGix+=#N($001A,$04,$04).
   $B23E,$03 Call #R$B1D7.
   $B241,$02 Restore #REGix from the stack.
   $B243,$03 #REGl=*#REGix+#N$00.
   $B246,$03 #REGh=*#REGix+#N$01.
-  $B249,$03 #REGbc=#N($0420,$04,$04).
+  $B249,$03 #REGbc=#N$0420.
   $B24C,$03 Call #R$B293.
   $B24F,$03 #REGl=*#REGix+#N$3C.
   $B252,$03 #REGh=*#REGix+#N$3D.
-  $B255,$03 #REGde=#N($0100,$04,$04).
-  $B258,$01 #REGhl+=#REGde.
+  $B255,$04 #REGhl+=#N($0100,$04,$04).
   $B259,$03 #REGde=#R$70BF.
-  $B25C,$03 #REGbc=#N($0410,$04,$04).
+  $B25C,$03 #REGbc=#N$0410.
   $B25F,$03 Call #R$B2A4.
   $B262,$02 Stash #REGix on the stack.
-  $B264,$03 #REGbc=#N($003E,$04,$04).
-  $B267,$02 #REGix+=#REGbc.
+  $B264,$05 #REGix+=#N($003E,$04,$04).
   $B269,$03 Call #R$B1DF.
   $B26C,$02 Restore #REGix from the stack.
   $B26E,$03 #REGl=*#REGix+#N$24.
   $B271,$03 #REGh=*#REGix+#N$25.
-  $B274,$03 #REGbc=#N($0C10,$04,$04).
+  $B274,$03 #REGbc=#N$0C10.
   $B277,$03 Call #R$B2A4.
   $B27A,$02 Stash #REGix on the stack.
-  $B27C,$03 #REGbc=#N($0026,$04,$04).
-  $B27F,$02 #REGix+=#REGbc.
+  $B27C,$05 #REGix+=#N($0026,$04,$04).
   $B281,$03 Call #R$B1D7.
   $B284,$02 Restore #REGix from the stack.
   $B286,$03 #REGl=*#REGix+#N$0C.
   $B289,$03 #REGh=*#REGix+#N$0D.
-  $B28C,$03 #REGbc=#N($0410,$04,$04).
+  $B28C,$03 #REGbc=#N$0410.
   $B28F,$03 Call #R$B2A4.
   $B292,$01 Return.
 
@@ -1340,7 +1353,7 @@ R $B293 HL Source data
   $B2A1,$02 Decrease counter by one and loop back to #R$B293 until counter is zero.
   $B2A3,$01 Return.
 
-c $B2A4
+c $B2A4 Copy And Mirror Attributes
   $B2A4,$02 Stash #REGbc and #REGde on the stack.
   $B2A6,$01 Increment #REGhl by one.
   $B2A7,$01 #REGa=*#REGhl.
@@ -1362,13 +1375,19 @@ c $B2A4
   $B2BD,$02 Decrease counter by one and loop back to #R$B2A4 until counter is zero.
   $B2BF,$01 Return.
 
-c $B2C0
-  $B2C0,$03 #REGl=*#REGix+#N$05.
-  $B2C3,$03 #REGh=*#REGix+#N$06.
-  $B2C6,$03 #REGc=*#REGix+#N$04.
-  $B2C9,$03 #REGb=*#REGix+#N$03.
-  $B2CC,$03 #REGix=#REGhl (using the stack).
+c $B2C0 Trashman Attribute Copier
+@ $B2C0 label=TrashmanAttributes_Copier
+E $B2C0 Continue on to #R$B2D1.
+  $B2C0,$06 Load the attribute buffer location into #REGhl.
+  $B2C6,$06 Load the height/ width into #REGbc.
+  $B2CC,$03 Copy the attribute buffer location into #REGix (using the stack).
   $B2CF,$02 Set bit 5 of #REGh.
+
+c $B2D1 Attributes Copier
+@ $B2D1 label=Attributes_Copier
+R $B2D1 HL Source pointer
+R $B2D1 IX Destination pointer
+R $B2D1 BC Width and height
   $B2D1,$03 #REGde=#N($0020,$04,$04).
   $B2D4,$04 Stash #REGhl, #REGix and #REGbc on the stack.
   $B2D8,$01 #REGa=*#REGhl.
@@ -1384,7 +1403,7 @@ c $B2C0
   $B2EB,$02 Jump to #R$B2D1.
   $B2ED,$01 Return.
 
-c $B2EE
+c $B2EE Draw Street Object
   $B2EE,$03 #REGl=*#REGix+#N$05.
   $B2F1,$03 #REGh=*#REGix+#N$06.
   $B2F4,$03 #REGc=*#REGix+#N$04.
@@ -1408,7 +1427,7 @@ c $B2EE
   $B31F,$02 Jump to #R$B2FF.
   $B321,$01 Return.
 
-c $B322
+c $B322 Draw Street Object Sprite
   $B322,$03 #REGl=*#REGix+#N$05.
   $B325,$03 #REGa=*#REGix+#N$06.
   $B328,$02,b$01 Keep only bits 0-1.
@@ -1450,19 +1469,23 @@ N $B36E
   $B36E,$04 #REGd+=#N$08.
   $B372,$02 Jump to #R$B34E.
 
-c $B374
+c $B374 Draw Trashman Sprite
+@ $B374 label=DrawTrashmanSprite
+E $B374 Continue on to #R$B38C.
+N $B374 Calculate Trashmans sprite graphics pointer.
   $B374,$03 #REGl=*#REGix+#N$05.
   $B377,$03 #REGa=*#REGix+#N$06.
   $B37A,$02,b$01 Keep only bits 0-1.
-  $B37C,$02,b$01 Set bits 3-5.
-  $B37E,$01 #REGh=#REGa.
-  $B37F,$01 #REGhl+=#REGhl.
-  $B380,$03 #REGe=*#REGix+#N$01.
-  $B383,$03 #REGd=*#REGix+#N$02.
-  $B386,$03 #REGc=*#REGix+#N$03.
-  $B389,$03 #REGb=*#REGix+#N$04.
+  $B37C,$03,b$01 Set bits 3-5 to add the graphics address base.
+  $B37F,$01 Double the value in #REGhl.
+  $B380,$06 Load Trashmans screen address into #REGde.
+  $B386,$06 Set the sprite height/ width in #REGbc.
 
-@ $B38C label=Copier
+c $B38C Pixels Copier
+@ $B38C label=Copier_Pixels
+R $B38C HL Source pointer
+R $B38C DE Destination pointer
+R $B38C BC Width and height
   $B38C,$04 Stash #REGbc, #REGde, #REGhl and #REGhl on the stack.
   $B390,$01 #REGb=*#REGhl.
   $B391,$01 Increment #REGhl by one.
@@ -1492,7 +1515,7 @@ c $B374
   $B3BB,$02 Decrease counter by one and loop back to #R$B38C until counter is zero.
   $B3BD,$01 Return.
 
-c $B3BE
+c $B3BE Update Street Object Attributes
   $B3BE,$04 #REGix=#R$C2EE.
   $B3C2,$02 #REGb=#N$08.
   $B3C4,$01 Stash #REGbc on the stack.
@@ -1511,32 +1534,37 @@ c $B3BE
   $B3E3,$01 #REGhl+=#REGbc.
   $B3E4,$01 Decrease #REGa by one.
   $B3E5,$02 Jump to #R$B3DE if {} is not zero.
-  $B3E7,$03 #REGbc=#N($000D,$04,$04).
-  $B3EA,$02 #REGix+=#REGbc.
+  $B3E7,$05 #REGix+=#N($000D,$04,$04).
   $B3EC,$01 Restore #REGbc from the stack.
   $B3ED,$02 Decrease counter by one and loop back to #R$B3C4 until counter is zero.
   $B3EF,$01 Return.
 
-c $B3F0
+c $B3F0 Handler: Street Objects
+@ $B3F0 label=Handler_StreetObjects
   $B3F0,$04 #REGix=#R$C293.
-  $B3F4,$02 #REGb=#N$07.
-  $B3F6,$01 Stash #REGbc on the stack.
+  $B3F4,$02 Set a counter in #REGb for the number of street objects (#N$07).
+@ $B3F6 label=StreetObjects_Loop
+  $B3F6,$01 Stash the street objects counter on the stack.
   $B3F7,$03 #REGa=*#REGix+#N$00.
   $B3FA,$03 Compare #REGa with *#REGix+#N$0B.
   $B3FD,$03 Call #R$B409 is lower.
-  $B400,$03 #REGbc=#N($000D,$04,$04).
-  $B403,$02 #REGix+=#REGbc.
-  $B405,$01 Restore #REGbc from the stack.
-  $B406,$02 Decrease counter by one and loop back to #R$B3F6 until counter is zero.
+  $B400,$05 Add #N($000D,$04,$04) to the street objects pointer to move to the
+. next object.
+  $B405,$01 Restore the street objects counter from the stack.
+  $B406,$02 Decrease the street objects counter by one and loop back to #R$B3F6
+. until all of the street objects have been processed.
   $B408,$01 Return.
-  $B409,$02 Stash #REGix on the stack.
+N $B409 Time for the street object to update.
+@ $B409 label=StreetObjects_Action
+  $B409,$02 Stash the street objects pointer on the stack.
   $B40B,$03 Call #R$B2EE.
-  $B40E,$02 Restore #REGix from the stack.
+  $B40E,$02 Restore the street objects pointer from the stack.
   $B410,$03 Call #R$B322.
   $B413,$02 #REGa=#N$17.
   $B415,$01 Return.
 
-c $B416
+c $B416 Place Trashman
+@ $B416 label=PlaceTrashman
   $B416,$04 #REGix=#R$C36E.
   $B41A,$06 Jump to #R$B425 if bit 0 of *#REGix+#N$18 is not set.
   $B420,$05 Return if bit 7 of *#REGix+#N$18 is set.
@@ -1552,7 +1580,7 @@ c $B416
   $B445,$04 Set bit 7 of *#REGix+#N$18.
   $B449,$01 Return.
 
-c $B44A
+c $B44A Place Secondary Character
   $B44A,$04 #REGix=#R$C356.
   $B44E,$05 Return if bit 3 of *#REGix+#N$17 is not set.
   $B453,$03 Call #R$B2C0.
@@ -1563,7 +1591,7 @@ c $B44A
   $B465,$03 Call #R$B469.
   $B468,$01 Return.
 
-c $B469
+c $B469 Draw Character Mask
   $B469,$03 #REGe=*#REGix+#N$08.
   $B46C,$03 #REGd=*#REGix+#N$09.
   $B46F,$03 #REGl=*#REGix+#N$0E.
@@ -1607,7 +1635,7 @@ c $B469
   $B4B5,$02 Decrease counter by one and loop back to #R$B4B1 until counter is zero.
   $B4B7,$01 Return.
 
-c $B4B8
+c $B4B8 Check Character Collision
   $B4B8,$03 #REGb=*#REGix+#N$0B.
   $B4BB,$03 #REGl=*#REGix+#N$0C.
   $B4BE,$03 #REGh=*#REGix+#N$0D.
@@ -1699,7 +1727,12 @@ c $B4B8
   $B58B,$03 #REGhl=#R$C1FB.
   $B58E,$03 Jump to #R$BC9E.
 
-c $B591
+c $B591 Scroll Playarea
+N $B591 #PUSHS #SIM(start=$A5AC,stop=$A5B5)#SIM(start=$A5B8,stop=$A5BE)
+. #SIM(start=$B0A1,stop=$B646)
+. #UDGTABLE
+. { #SCR$02(gameplay) }
+. TABLE# #POPS
   $B591,$03 #REGa=*#R$C279.
   $B594,$05 Jump to #R$B56F if #REGa is lower than *#REGix+#N$07.
   $B599,$03 #REGde=#N($0018,$04,$04).
@@ -1750,14 +1783,12 @@ c $B591
   $B610,$02 #REGb=#N$07.
   $B612,$01 Stash #REGbc on the stack.
   $B613,$03 Call #R$C057.
-  $B616,$03 #REGbc=#N($000D,$04,$04).
-  $B619,$02 #REGix+=#REGbc.
+  $B616,$05 #REGix+=#N($000D,$04,$04).
   $B61B,$01 Restore #REGbc from the stack.
   $B61C,$02 Decrease counter by one and loop back to #R$B612 until counter is zero.
   $B61E,$04 #REGix=#R$C2D4.
   $B622,$03 Call #R$BD27.
-  $B625,$03 #REGbc=#N($000D,$04,$04).
-  $B628,$02 #REGix+=#REGbc.
+  $B625,$05 #REGix+=#N($000D,$04,$04).
   $B62A,$03 Call #R$BD27.
   $B62D,$03 #REGhl=#R$7080.
   $B630,$03 #REGbc=#N$2014.
@@ -1770,7 +1801,7 @@ c $B591
   $B646,$03 Call #R$B416.
   $B649,$03 Jump to #R$B0BB.
 
-c $B64C
+c $B64C Reposition Trashman
   $B64C,$02 Stash #REGix on the stack.
   $B64E,$04 #REGix=*#R$C277.
   $B652,$04 Reset bit 1 of *#REGix+#N$21.
@@ -1910,7 +1941,7 @@ N $B721 Handle no action.
   $B721,$02 #REGe=#N$C0.
   $B723,$01 Return.
 
-c $B724
+c $B724 Handle Trashman Movement
   $B724,$03 #REGde=#R$C36E.
   $B727,$03 #REGhl=#R$C375.
   $B72A,$03 #REGbc=#N($0007,$04,$04).
@@ -2303,7 +2334,7 @@ c $B724
   $BAB3,$02 Reset bit 5 of #REGh.
   $BAB5,$01 Set flags.
   $BAB6,$02 #REGhl-=#REGde (with carry).
-  $BAB8,$04 #REGde=*#R$C2CC.
+  $BAB8,$04 #REGde=*#N$C2CC.
   $BABC,$02 #REGhl-=#REGde (with carry).
   $BABE,$02 Jump to #R$BAC7 if {} is zero.
   $BAC0,$03 #REGde=#N($0001,$04,$04).
@@ -2320,7 +2351,7 @@ c $B724
   $BAD7,$03 Call #R$BA9F.
   $BADA,$03 Jump to #R$B8A9.
 
-c $BADD
+c $BADD Update Trashman Display
   $BADD,$04 #REGix=#R$C36E.
   $BAE1,$03 #REGb=*#REGix+#N$0A.
   $BAE4,$03 #REGc=*#REGix+#N$0B.
@@ -2367,7 +2398,7 @@ c $BADD
   $BB33,$02 Jump to #R$BB1C if {} is not zero.
   $BB35,$01 Return.
 
-c $BB36
+c $BB36 Initialise Characters
   $BB36,$04 #REGix=#R$C2D4.
   $BB3A,$03 #REGde=#N($000D,$04,$04).
   $BB3D,$02 #REGb=#N$02 (counter).
@@ -2394,7 +2425,7 @@ c $BB36
   $BB6F,$03 #REGa=#R$BB24(#N$BB25).
   $BB72,$01 Return.
 
-c $BB73
+c $BB73 Trigger Bonus Messaging
   $BB73,$04 #REGix=*#R$C277.
   $BB77,$07 Call #R$BC04 if bit 2 of *#REGix+#N$21 is set.
   $BB7E,$07 Call #R$BBCE if bit 3 of *#REGix+#N$21 is set.
@@ -2537,7 +2568,7 @@ N $BCB4 Keep going until the end of the screen is reached.
   $BCB4,$02 Jump to #R$BCAA if #REGl is not zero.
   $BCB6,$01 Return.
 
-c $BCB7
+c $BCB7 Draw Bonus Sprites
   $BCB7,$04 #REGix=*#R$C277.
   $BCBB,$04
   $BCBF,$04
@@ -2574,18 +2605,19 @@ c $BCB7
   $BD09,$01 #REGd=#REGa.
   $BD0A,$03 Jump to #R$B38C.
 
-c $BD0D
+c $BD0D Update Characters
   $BD0D,$04 #REGix=#R$C2D4.
   $BD11,$02 #REGb=#N$02 (counter).
   $BD13,$01 Stash #REGbc on the stack.
   $BD14,$02 Stash #REGix on the stack.
   $BD16,$03 Call #R$BD24.
   $BD19,$02 Restore #REGix from the stack.
-  $BD1B,$03 #REGbc=#N($000D,$04,$04).
-  $BD1E,$02 #REGix+=#REGbc.
+  $BD1B,$05 #REGix+=#N($000D,$04,$04).
   $BD20,$01 Restore #REGbc from the stack.
   $BD21,$02 Decrease counter by one and loop back to #R$BD13 until counter is zero.
   $BD23,$01 Return.
+
+c $BD24 Draw Character
   $BD24,$03 Call #R$C023.
   $BD27,$03 #REGa=*#REGix+#N$00.
   $BD2A,$03 Return if #REGa is higher than #N$17.
@@ -2602,7 +2634,7 @@ c $BD0D
   $BD45,$02 Decrease counter by one and loop back to #R$BD42 until counter is zero.
   $BD47,$01 Return.
 
-c $BD48
+c $BD48 Update Timer Counter
   $BD48,$04 #REGix=#R$C2C7.
   $BD4C,$03 #REGa=*#REGix+#N$07.
   $BD4F,$02,b$01 Reset bits 6.
@@ -2631,7 +2663,7 @@ c $BD48
   $BD85,$03 Write #REGa to *#R$C27F.
   $BD88,$01 Return.
 
-c $BD89
+c $BD89 Handle Character Collision
   $BD89,$04 #REGix=#R$C356.
   $BD8D,$03 #REGhl=*#R$C277.
   $BD90,$04 Test bit 4 of *#REGix+#N$10.
@@ -2713,93 +2745,156 @@ c $BD89
 
 c $BE59 Handler: Bitten By Dog
 @ $BE59 label=Handler_BittenByDog
-  $BE59,$03 #REGl=*#REGix+#N$10.
-  $BE5C,$03 #REGh=*#REGix+#N$11.
-  $BE5F,$03 #REGe=*#REGix+#N$28.
-  $BE62,$03 #REGd=*#REGix+#N$29.
-  $BE65,$01 Set flags.
-  $BE66,$02 #REGhl-=#REGde (with carry).
-  $BE68,$01 Return if the result is not zero.
-  $BE69,$05 Write #N$64 to *#R$C290.
-  $BE6E,$03 #REGhl=#R$C221.
-  $BE71,$03 Call #R$BC9E.
+D $BE59 Checks if Trashman has collided with a dog by comparing their screen
+. positions. If they are at the same location, this handler triggers the
+. "bitten by dog" sound effect and displays the message "#STR($C221,$03,$20)
+. #STR($C241,$03,$08)" to inform the player that a collision has occurred.
+R $BE59 IX Pointer to the game state data
+N $BE59 Check if Trashman's position matches the dog's position on the street.
+  $BE59,$03 Get Trashman's current horizontal position on the street.
+  $BE5C,$03 Get Trashman's current vertical position on the street.
+  $BE5F,$03 Get the dog's horizontal position on the street.
+  $BE62,$03 Get the dog's vertical position on the street.
+  $BE65,$03 Compare positions by subtracting the dog's position from Trashman's.
+  $BE68,$01 Exit if Trashman and the dog are not at the same location.
+@ $BE69 label=Handler_BittenByDog_Trigger
+N $BE69 Trashman has been caught by a dog. Trigger the sound effect and display the message.
+  $BE69,$05 Set the sound counter to #N$64 frames to play the "bitten by dog" sound.
+  $BE6E,$06 Using #R$BC9E print: #UDGTABLE
+. { #FONT:(Ouch!  Scat, before I bite  YOUR)$E417,attr=$30(leg-orf-1) }
+. { #FONT:(leg orf.)$E417,attr=$30(leg-orf-2) }
+. TABLE#
   $BE74,$01 Return.
 
-c $BE75
-  $BE75,$04 Reset bit 5 of *#REGix+#N$17.
-  $BE79,$06 Jump to #R$BE83 if bit 3 of *#REGix+#N$13 is not set.
-  $BE7F,$04 Set bit 5 of *#REGix+#N$17.
-  $BE83,$03 #REGhl=#R$C1E7.
-  $BE86,$02 #REGd=#N$00.
-  $BE88,$03 #REGa=*#REGix+#N$13.
-  $BE8B,$02,b$01 Keep only bits 3-4.
-  $BE8D,$01 RRCA.
-  $BE8E,$01 RRCA.
-  $BE8F,$01 #REGe=#REGa.
-  $BE90,$01 #REGhl+=#REGde.
-  $BE91,$01 #REGe=*#REGhl.
-  $BE92,$01 Increment #REGhl by one.
-  $BE93,$01 #REGd=*#REGhl.
-  $BE94,$03 #REGl=*#REGix+#N$10.
-  $BE97,$03 #REGh=*#REGix+#N$11.
-  $BE9A,$01 #REGhl+=#REGde.
-  $BE9B,$06 Jump to #R$BEB8 if bit 3 of *#REGix+#N$13 is set.
-  $BEA1,$01 #REGa=#REGl.
-  $BEA2,$06 Jump to #R$BEB2 if bit 4 of *#REGix+#N$13 is not set.
-  $BEA8,$02,b$01 Keep only bits 0-4.
-  $BEAA,$03 Return if #REGa is equal to #N$1F.
-  $BEAD,$03 Return if #REGa is equal to #N$15.
-  $BEB0,$02 Jump to #R$BEB8.
-  $BEB2,$02,b$01 Keep only bits 0-4.
-  $BEB4,$01 Return if the result is zero.
-  $BEB5,$03 Return if #REGa is equal to #N$0A.
-  $BEB8,$04 Jump to #R$BEF9 if bit 7 of *#REGhl is set.
-  $BEBC,$04 Test bit 5 of *#REGix+#N$30.
-  $BEC0,$04 Reset bit 5 of *#REGix+#N$30.
-  $BEC4,$02 Jump to #R$BEE0 if bit 5 of *#REGix+#N$30 is not set.
-  $BEC6,$06 Jump to #R$BED6 if bit 4 of *#REGix+#N$13 is not set.
-  $BECC,$04 Reset bit 1 of *#REGix+#N$17.
-  $BED0,$04 Set bit 0 of *#REGix+#N$17.
-  $BED4,$02 Jump to #R$BEE8.
-  $BED6,$04 Reset bit 1 of *#REGix+#N$17.
-  $BEDA,$04 Set bit 2 of *#REGix+#N$17.
-  $BEDE,$02 Jump to #R$BEE8.
-  $BEE0,$04 Reset bit 2 of *#REGix+#N$17.
-  $BEE4,$04 Reset bit 0 of *#REGix+#N$17.
-  $BEE8,$01 Restore #REGde from the stack.
-  $BEE9,$01 Stash #REGhl on the stack.
-  $BEEA,$03 Call #R$BE59.
-  $BEED,$03 #REGhl=#R$CC3D.
-  $BEF0,$02 Set bit 1 of *#REGhl.
-  $BEF2,$01 Restore #REGhl from the stack.
-  $BEF3,$03 #REGb=*#REGix+#N$13.
-  $BEF6,$03 Jump to #R$B88A.
-  $BEF9,$03 #REGa=*#R$B918.
-  $BEFC,$06 Jump to #R$BF0B if bit 3 of *#REGix+#N$13 is not set.
-  $BF02,$01 Increment #REGa by one.
-  $BF03,$06 Jump to #R$BF0B if bit 4 of *#REGix+#N$13 is not set.
-  $BF09,$02 #REGa-=#N$02.
-  $BF0B,$04 Return if #REGa with *#REGix+#N$07 is not zero.
-  $BF0F,$04 Set bit 5 of *#REGix+#N$30.
-  $BF13,$06 Jump to #R$BEE8 if bit 1 of *#REGix+#N$17 is set.
-  $BF19,$05 Return if bit 3 of *#REGix+#N$13 is set.
-  $BF1E,$06 Jump to #R$BF3A if bit 4 of *#REGix+#N$13 is set.
-  $BF24,$06 Jump to #R$BF30 if bit 0 of *#REGix+#N$17 is set.
-  $BF2A,$04 Set bit 0 of *#REGix+#N$17.
-  $BF2E,$02 Jump to #R$BEE8.
-  $BF30,$04 Reset bit 0 of *#REGix+#N$17.
-  $BF34,$04 Set bit 1 of *#REGix+#N$17.
-  $BF38,$02 Jump to #R$BEE8.
-  $BF3A,$06 Jump to #R$BF46 if bit 2 of *#REGix+#N$17 is set.
-  $BF40,$04 Set bit 2 of *#REGix+#N$17.
-  $BF44,$02 Jump to #R$BEE8.
-  $BF46,$04 Reset bit 2 of *#REGix+#N$17.
-  $BF4A,$04 Set bit 1 of *#REGix+#N$17.
-  $BF4E,$02 Jump to #R$BEE8.
+c $BE75 Update Trashman Position
+@ $BE75 label=Trashman_UpdatePosition
+D $BE75 Updates Trashman's position on the street based on the player's input direction. This routine
+. handles movement calculations, screen boundary checking, collision detection with objects and dogs,
+. and manages Trashman's walking animation cycle. The routine ensures Trashman cannot move through
+. solid objects or off the edges of the playable area.
+R $BE75 IX Pointer to Trashman's data structure containing position, direction, and animation state
+N $BE75 Determine which direction Trashman is facing based on his current sprite state.
+  $BE75,$04 Clear the "facing right" flag.
+  $BE79,$06 Skip setting the flag if Trashman is not moving horizontally.
+  $BE7F,$04 Mark that Trashman is facing right.
+@ $BE83 label=Trashman_UpdatePosition_LookupOffset
+N $BE83 Look up how far Trashman should move in this direction from the movement table. The table
+. at #R$C1E7 contains pixel offsets for each of the four possible directions (up, down, left, right).
+  $BE83,$03 Point to #R$C1E7.
+  $BE86,$02 Prepare to read the movement offset.
+  $BE88,$03 Get Trashman's current movement direction.
+  $BE8B,$02,b$01 Extract just the direction bits (up/down/left/right).
+  $BE8D,$02 Convert direction to table index.
+  $BE8F,$01 Store the table index.
+  $BE90,$01 Point to the correct entry in the movement table.
+  $BE91,$01 Read the horizontal movement offset.
+  $BE92,$01 Move to the next byte in the table.
+  $BE93,$01 Read the vertical movement offset.
+N $BE94 Calculate where Trashman will be after moving. Add the movement offset to his current
+. screen position to get the new location.
+  $BE94,$03 Get Trashman's current horizontal position on the street.
+  $BE97,$03 Get Trashman's current vertical position on the street.
+  $BE9A,$01 Move Trashman to his new position by adding the movement offset.
+N $BE9B Check if Trashman is trying to move off the edge of the street. The playable area has
+. boundaries that prevent Trashman from walking into the gutter or off-screen.
+  $BE9B,$06 Skip boundary check if Trashman is moving vertically.
+  $BEA1,$01 Get Trashman's horizontal position for boundary checking.
+  $BEA2,$06 Check left boundary if Trashman is moving left.
+N $BEA8 Trashman has reached the right edge of the street. Stop movement if he's at column 31
+. (far right) or column 21 (near right edge of play area).
+  $BEA8,$02,b$01 Get just the column number (ignore screen row).
+  $BEAA,$06 Stop movement if Trashman has reached the far right edge of the
+. street or the right edge of the play area.
+  $BEB0,$02 Continue to collision check.
+@ $BEB2 label=Trashman_UpdatePosition_CheckLeftBoundary
+N $BEB2 Trashman has reached the left edge of the street. Stop movement if he's at column 0
+. (far left) or column 10 (near left edge of play area).
+  $BEB2,$02,b$01 Get just the column number (ignore screen row).
+  $BEB4,$01 Stop movement if Trashman has reached the far left edge of the street.
+  $BEB5,$03 Stop movement if Trashman has reached the near left edge of the play area.
+@ $BEB8 label=Trashman_UpdatePosition_CheckCollision
+N $BEB8 Check if Trashman is trying to walk into a solid object like a bin, barrel, or building.
+. If bit 7 of the screen data is set, there's a solid object blocking the way.
+  $BEB8,$04 Skip to animation handling if Trashman has hit a solid object.
+N $BEBC Update Trashman's facing direction based on his movement. This affects which sprite
+. frame is displayed and determines his walking animation sequence.
+  $BEBC,$04 Check if Trashman needs to change his facing direction.
+  $BEC0,$04 Clear the direction change flag.
+  $BEC4,$02 Face up if no direction change is needed.
+  $BEC6,$06 Face down if Trashman is moving down the street.
+N $BECC Trashman is moving right along the street. Set the direction flags to show he's
+. facing and walking to the right.
+  $BECC,$04 Clear the "moving up" flag.
+  $BED0,$04 Set the "moving right" flag.
+  $BED4,$02 Continue to check for dog collision.
+@ $BED6 label=Trashman_UpdatePosition_SetMovingDown
+N $BED6 Trashman is moving down the street (away from the camera). Set the direction flags
+. to show he's walking down the road.
+  $BED6,$04 Clear the "moving up" flag.
+  $BEDA,$04 Set the "moving down" flag.
+  $BEDE,$02 Continue to check for dog collision.
+@ $BEE0 label=Trashman_UpdatePosition_SetMovingUp
+N $BEE0 Trashman is moving up the street (towards the camera). Set the direction flags to
+. show he's walking up the road.
+  $BEE0,$04 Clear the "moving down" flag.
+  $BEE4,$04 Clear the "moving right" flag.
+@ $BEE8 label=Trashman_UpdatePosition_CheckDogCollision
+N $BEE8 Check if Trashman has walked into a dog. If he has, trigger the "bitten by dog"
+. handler which plays a sound effect and displays a message. Then update Trashman's
+. position and animation state.
+  $BEE8,$01 Restore the movement offset from the stack.
+  $BEE9,$01 Save Trashman's new position on the stack.
+  $BEEA,$03 Check if Trashman has collided with a dog at this position.
+  $BEED,$03 Point to the sound effects control register.
+  $BEF0,$02 Trigger the dog bite sound effect.
+  $BEF2,$01 Restore Trashman's position from the stack.
+  $BEF3,$03 Get Trashman's movement direction state.
+  $BEF6,$03 Update Trashman's position and continue with movement processing.
+@ $BEF9 label=Trashman_UpdatePosition_CheckAnimationFrame
+N $BEF9 Manage Trashman's walking animation. Adjust the animation frame counter based on
+. which direction he's moving to create the walking effect.
+  $BEF9,$03 Get the current animation frame counter.
+  $BEFC,$06 Use normal animation speed if Trashman is not moving left.
+  $BF02,$01 Speed up animation when moving left.
+  $BF03,$06 Use normal animation speed if Trashman is not moving right.
+  $BF09,$02 Slow down animation when moving right.
+@ $BF0B label=Trashman_UpdatePosition_CheckFrameSync
+N $BF0B Check if it's time to advance to the next animation frame. When the animation timer
+. matches the sprite frame, cycle through the walking animation states to create smooth
+. movement animation.
+  $BF0B,$04 Don't advance animation if the frame timer hasn't reached the target yet.
+  $BF0F,$04 Mark that the animation frame has advanced.
+  $BF13,$06 Continue movement if Trashman is already in mid-animation.
+  $BF19,$05 Don't change animation if Trashman is moving left.
+  $BF1E,$06 Continue to next animation state if Trashman is moving right.
+N $BF24 Start the walking animation cycle. This is the first frame where Trashman's legs
+. are in the initial position for horizontal movement.
+  $BF24,$06 Skip to next animation frame if already in cycle 1.
+  $BF2A,$04 Start the first walking animation frame.
+  $BF2E,$02 Continue to check for dog collision.
+@ $BF30 label=Trashman_UpdatePosition_SetAnimationCycle2
+N $BF30 Advance to the second animation frame. Trashman's legs are now in the mid-stride
+. position for vertical movement.
+  $BF30,$04 Clear the first animation frame flag.
+  $BF34,$04 Set the second animation frame flag.
+  $BF38,$02 Continue to check for dog collision.
+@ $BF3A label=Trashman_UpdatePosition_SetAnimationCycle3
+N $BF3A Continue to the third animation frame. Trashman's legs alternate to the opposite
+. position for horizontal movement, creating the walking effect.
+  $BF3A,$06 Skip to final animation frame if already in cycle 3.
+  $BF40,$04 Start the third walking animation frame.
+  $BF44,$02 Continue to check for dog collision.
+@ $BF46 label=Trashman_UpdatePosition_SetAnimationCycle4
+N $BF46 Complete the animation cycle and return to the vertical movement frame. This creates
+. a continuous loop of walking animation frames that make Trashman appear to be walking
+. along the street.
+  $BF46,$04 Clear the third animation frame flag.
+  $BF4A,$04 Return to the second animation frame to complete the cycle.
+  $BF4E,$02 Continue to check for dog collision.
 
-c $BF50
+c $BF50 Check Game Over Conditions
   $BF50,$04 #REGix=#R$C36E.
-N $BF54 Check for Game Over "reasons" (see #POKE#immunity()).
+N $BF54 Check for Game Over "reasons" (see #POKE(immunity,)).
   $BF54,$03 #REGa=*#REGix+#N$17.
   $BF57,$02,b$01 Keep only bits 0-2.
   $BF59,$01 Return if #REGa is not zero.
@@ -2825,14 +2920,17 @@ N $BF54 Check for Game Over "reasons" (see #POKE#immunity()).
 
 c $BF8E Handler: Hit By Bike
 @ $BF8E label=Handler_HitByBike
-  $BF8E,$05 Write #N$50 to *#R$C290.
-  $BF93,$03 #REGhl=#R$CC3D.
-  $BF96,$02 Set bit 5 of *#REGhl.
-  $BF98,$03 #REGhl=#R$C24A.
-  $BF9B,$03 Call #R$BC9E.
+D $BF8E Trigger the sound effect and display the message when Trashman is hit
+. by a bike.
+  $BF8E,$05 Set #R$C290 to #N$50 frames to play the "hit by bike" sound.
+  $BF93,$05 Update #R$CC3D to enable the "hit by bike" sound effect.
+  $BF98,$06 Using #R$BC9E print: #UDGTABLE
+. { #FONT:(Ouch!    Ge'orf the pavement you)$E417,attr=$30(brat-1) }
+. { #FONT:(brat.)$E417,attr=$30(brat-2) }
+. TABLE#
   $BF9E,$01 Return.
 
-c $BF9F
+c $BF9F Flash Trashman On Death
   $BF9F,$02 #REGe=#N$42.
   $BFA1,$03 #REGbc=#N($0000,$04,$04).
   $BFA4,$01 Increment #REGb by one.
@@ -2872,34 +2970,42 @@ c $BF9F
   $BFE9,$02 Jump to #R$BFA4.
   $BFEB,$01 Return.
 
-c $BFEC
-  $BFEC,$04 #REGix=#R$C293.
-  $BFF0,$02 #REGb=#N$04 (counter).
-  $BFF2,$01 Stash #REGbc on the stack.
-  $BFF3,$03 Call #R$C023.
-  $BFF6,$03 #REGbc=#N($000D,$04,$04).
-  $BFF9,$02 #REGix+=#REGbc.
-  $BFFB,$01 Restore #REGbc from the stack.
-  $BFFC,$02 Decrease counter by one and loop back to #R$BFF2 until counter is zero.
-  $BFFE,$04 #REGix=#R$C293.
-  $C002,$02 #REGb=#N$04 (counter).
-  $C004,$01 Stash #REGbc on the stack.
-  $C005,$03 Call #R$C14C.
-  $C008,$03 #REGbc=#N($000D,$04,$04).
-  $C00B,$02 #REGix+=#REGbc.
-  $C00D,$01 Restore #REGbc from the stack.
-  $C00E,$02 Decrease counter by one and loop back to #R$C004 until counter is zero.
-  $C010,$04 #REGix=#R$C293.
-  $C014,$02 #REGb=#N$04 (counter).
-  $C016,$01 Stash #REGbc on the stack.
-  $C017,$03 Call #R$C178.
-  $C01A,$03 #REGbc=#N($000D,$04,$04).
-  $C01D,$02 #REGix+=#REGbc.
-  $C01F,$01 Restore #REGbc from the stack.
-  $C020,$02 Decrease counter by one and loop back to #R$C016 until counter is zero.
+c $BFEC Update Street Objects
+@ $BFEC label=Update_StreetObjects
+D $BFEC Updates all street objects (bins, barrels, bikes) on the street. This routine processes
+. each of the four street objects in three passes: first updating their positions based on
+. movement patterns, then handling screen wrapping when objects move off the edges, and
+. finally adjusting their positions based on screen wrap settings. This ensures objects
+. move smoothly across the street and reappear on the opposite side when they reach an edge.
+N $BFEC Process all four street objects to update their positions on the street.
+  $BFEC,$04 Point to the first street object in #R$C293.
+  $BFF0,$02 Process all four street objects (bins, barrels, bikes).
+  $BFF2,$01 Save the loop counter on the stack.
+  $BFF3,$03 Update this street object's position based on its movement pattern.
+  $BFF6,$05 Move to the next street object (each object takes #N$0D bytes).
+  $BFFB,$01 Restore the loop counter from the stack.
+  $BFFC,$02 Continue processing the next street object until all four are done.
+@ $BFFE label=Update_StreetObjects_Wrapping
+N $BFFE Handle screen wrapping for all street objects when they move off the edges.
+  $BFFE,$04 Point back to #R$C293.
+  $C002,$02 Process all four street objects again.
+  $C004,$01 Save the loop counter on the stack.
+  $C005,$03 Handle screen wrapping for this object if it has moved off the edge.
+  $C008,$05 Move to the next street object (each object takes #N$0D bytes).
+  $C00D,$01 Restore the loop counter from the stack.
+  $C00E,$02 Continue processing the next street object until all four are done.
+@ $C010 label=Update_StreetObjects_Reposition
+N $C010 Adjust object positions based on screen wrap settings to ensure smooth transitions.
+  $C010,$04 Point back to #R$C293.
+  $C014,$02 Process all four street objects one final time.
+  $C016,$01 Save the loop counter on the stack.
+  $C017,$03 Adjust this object's position based on screen wrap settings.
+  $C01A,$05 Move to the next street object (each object takes #N$0D bytes).
+  $C01F,$01 Restore the loop counter from the stack.
+  $C020,$02 Continue processing the next street object until all four are done.
   $C022,$01 Return.
 
-c $C023
+c $C023 Update Object Position
   $C023,$03 #REGa=*#REGix+#N$07.
   $C026,$04 Jump to #R$C03B if bit 7 of #REGa is not set.
   $C02A,$03 #REGa-=*#REGix+#N$08.
@@ -3026,7 +3132,7 @@ c $C023
   $C13B,$02 Decrease counter by one and loop back to #R$C121 until counter is zero.
   $C13D,$01 Return.
 
-c $C13E
+c $C13E Calculate Screen Address
   $C13E,$03 #REGh=*#REGix+#N$06.
   $C141,$03 #REGl=*#REGix+#N$05.
   $C144,$01 #REGhl*=#N$02.
@@ -3036,7 +3142,7 @@ c $C13E
   $C14A,$01 #REGh=#REGa.
   $C14B,$01 Return.
 
-c $C14C
+c $C14C Handle Object Wrapping
   $C14C,$04 Test bit 7 of *#REGix+#N$07.
   $C150,$03 #REGhl=#R$C38C.
   $C153,$02 Jump to #R$C15A if bit 7 of *#REGix+#N$07 is set.
@@ -3100,36 +3206,41 @@ c $C14C
   $C1DC,$04 Rotate *#REGix+#N$00 left.
   $C1E0,$04 Rotate *#REGix+#N$01 left.
   $C1E4,$01 Return.
+
+g $C1E5
 B $C1E5
-B $C1E7
+
+g $C1E7 Movement Offsets
+@ $C1E7 label=MovementOffsets
+B $C1E7,$08
 
 t $C1EF Messaging: Bonus
 @ $C1EF label=Messaging_Bonus
-  $C1EF,$06,$05:$01 #FONT:(Bonus)$E417,attr=$30(bonus)
+  $C1EF,$06,$05:$01 #FONT$E417,attr=$30,chars=0(Bonus)(bonus)
 
 t $C1F5 Messaging: Score
 @ $C1F5 label=Messaging_Score
-  $C1F5,$06,$05:$01 #FONT:(Score)$E417,attr=$30(score)
+  $C1F5,$06,$05:$01 #FONT$E417,attr=$30,chars=0(Score)(score)
 
 t $C1FB Messaging: You have not collected all the bins
 @ $C1FB label=Messaging_NotAllTheBins
   $C1FB,$26,$20,$05:$01 #TABLE(default)
-. { #FONT:(You have not collected  all  the)$E417,attr=$30(all-the-bins-1) }
-. { #FONT:(bins.)$E417,attr=$30(all-the-bins-2) }
+. { #FONT$E417,attr=$30,chars=0(You have not collected  all  the)(all-the-bins-1) }
+. { #FONT$E417,attr=$30,chars=0(bins.)(all-the-bins-2) }
 . TABLE#
 
 t $C221 Messaging: Ouch! Scat, before I bite YOUR leg orf
 @ $C221 label=Messaging_LegOrf
   $C221,$29,$20,$08:$01 #TABLE(default)
-. { #FONT:(Ouch!  Scat, before I bite  YOUR)$E417,attr=$30(leg-orf-1) }
-. { #FONT:(leg orf.)$E417,attr=$30(leg-orf-2) }
+. { #FONT$E417,attr=$30,chars=0(Ouch!  Scat, before I bite  YOUR)(leg-orf-1) }
+. { #FONT$E417,attr=$30,chars=0(leg orf.)(leg-orf-2) }
 . TABLE#
 
 t $C24A Messaging: Ouch! Ge'orf the pavement youbrat
 @ $C24A label=Messaging_Brat
   $C24A,$26,$20,$05:$01 #TABLE(default)
-. { #FONT:(Ouch!    Ge'orf the pavement you)$E417,attr=$30(brat-1) }
-. { #FONT:(brat.)$E417,attr=$30(brat-2) }
+. { #FONT$E417,attr=$30,chars=0(Ouch!    Ge'orf the pavement you)(brat-1) }
+. { #FONT$E417,attr=$30,chars=0(brat.)(brat-2) }
 . TABLE#
 
 g $C270 Number Of Bins String
@@ -3149,135 +3260,169 @@ D $C272 Time Remaining equates to how much bonus the player receives when the le
 . TABLE#
 .
 . For "250" seconds/ bonus points remaining.
-N $C272 See #POKE#timeLeft().
+N $C272 See #POKE(timeLeft,).
 B $C272,$02,$01
 
-g $C274
+g $C274 Scroll Counter
 
-g $C276
+g $C276 Timer
 
-g $C277
+g $C277 Playarea Pointer
 W $C277,$02
 
-g $C279
-g $C27A
-g $C27B
+g $C279 Scroll Threshold
+g $C27A Scroll Speed
+g $C27B Timer Reset Value
 
-g $C27D
+g $C27D Timer Counter
 W $C27D,$02
 
-g $C27F
+g $C27F Timer Threshold
 
 t $C280 Messaging: Road Name
 @ $C280 label=Messaging_RoadName
   $C280,$0E,$0D:$01
 
-g $C28E
+g $C28E Scroll Direction
 
-g $C290
+g $C290 Sound Counter
+@ $C290 label=SoundCounter
+B $C290,$01
 
-g $C291
+g $C291 Bonus Flash Counter
 
-g $C292
+g $C292 Bonus Display Flag
 
-g $C293
+g $C293 Table: Street Objects
+@ $C293 label=Table_StreetObjects
+N $C293 Object #N($01+(#PC-$C293)/$0D).
+B $C293,$0D
+L $C293,$0D,$07
 
-g $C2C7
+g $C2EE Table: Bonus Sprites
+@ $C2EE label=Table_BonusSprites
+N $C2EE Object #N($01+(#PC-$C2EE)/$0D).
+B $C2EE,$0D
+L $C2EE,$0D,$08
 
-g $C2CC
+g $C356 Secondary Character Data
 
-g $C2D4
+g $C35D Secondary Character Backup
 
-g $C2EE
+g $C36E Player Data
+@ $C36E label=Player_Data
+B $C36E,$01
+@ $C36F label=Player_ScreenXPosition
+B $C36F,$01
+@ $C370 label=Player_ScreenYPosition
+B $C370,$01
+@ $C371 label=Player_SpriteHeight
+B $C371,$01
+@ $C372 label=Player_SpriteWidth
+B $C372,$01
+@ $C373 label=Player_SpriteGraphics
+B $C373,$02
+B $C375,$01
+@ $C376 label=Player_ScreenBuffer
+B $C376,$02
+@ $C386 label=Player_
+B $C386,$01
 
-g $C35D
-
-g $C36E
-
-g $C375
-
-g $C386
-g $C387
-g $C388
-g $C389
+g $C387 Character Animation Counter
+g $C388 Bonus Message Timer
+g $C389 Sound Flags
 
 g $C38A Bonus Messaging
 @ $C38A label=BonusMessaging
 W $C38A,$02
 
-g $C38C
-g $C38D
+g $C38C Screen Wrapping Left
+g $C38D Screen Wrapping Right
 
 c $CAB3 Print Numbers
 @ $CAB3 label=PrintNumbers
+R $CAB3 B Number of characters to print
+R $CAB3 DE Screen buffer pointer
+R $CAB3 HL Pointer to end of number string data
   $CAB3,$02 #REGa=#N$00.
-  $CAB5,$02 RLD.
-  $CAB7,$01 Stash #REGaf on the stack.
+  $CAB5,$02 Extract the first digit into #REGa.
+  $CAB7,$01 Stash the result on the stack.
   $CAB8,$04 Jump to #R$CADA if #REGa is not #N$00.
-  $CABC,$02 #REGa=#N$20.
+N $CABC The highest digit is zero, so instead of printing an ASCII zero, print an ASCII space character instead.
+  $CABC,$02 #REGa=ASCII "space" character (#N$20).
   $CABE,$03 Call #R$CAEF.
+N $CAC1 Move onto the next digit extraction.
   $CAC1,$01 Restore #REGaf from the stack.
-  $CAC2,$02 RLD.
-  $CAC4,$01 Stash #REGaf on the stack.
+  $CAC2,$02 Extract the next digit into #REGa.
+  $CAC4,$01 Stash the result on the stack.
   $CAC5,$04 Jump to #R$CAE3 if #REGa is not #N$00.
-  $CAC9,$02 #REGa=#N$20.
+N $CAC9 The next digit is also zero, so again print an ASCII space character.
+  $CAC9,$02 #REGa=ASCII "space" character (#N$20).
   $CACB,$03 Call #R$CAEF.
+N $CACE Housekeeping, and loop control.
   $CACE,$01 Restore #REGaf from the stack.
-  $CACF,$02 RLD.
-  $CAD1,$01 Decrease #REGhl by one.
-  $CAD2,$02 Decrease counter by one and loop back to #R$CAB3 until counter is zero.
+  $CACF,$02 Restore the original byte value back to *#REGhl.
+  $CAD1,$01 Decrease the string pointer by one - move to the next number character.
+  $CAD2,$02 Decrease the length counter by one and loop back to #R$CAB3 until the counter is zero.
   $CAD4,$01 Return.
+N $CAD5 Note; the above doesn't jump straight to this, as it's already processing the first RLD result.
+@ $CAD5 label=PrintNumbers_Loop
   $CAD5,$02 #REGa=#N$00.
-  $CAD7,$02 RLD.
-  $CAD9,$01 Stash #REGaf on the stack.
-  $CADA,$02 #REGa+=#N$30.
+  $CAD7,$02 Extract the first digit into #REGa.
+  $CAD9,$01 Stash the result on the stack.
+@ $CADA label=PrintNumbers_BigNumber
+  $CADA,$02 #REGa contains the number character to be printed - add ASCII zero to it (#N$30).
   $CADC,$03 Call #R$CAEF.
   $CADF,$01 Restore #REGaf from the stack.
-  $CAE0,$02 RLD.
-  $CAE2,$01 Stash #REGaf on the stack.
-  $CAE3,$02 #REGa+=#N$30.
+  $CAE0,$02 Extract the next digit into #REGa.
+  $CAE2,$01 Stash the result on the stack.
+@ $CAE3 label=PrintNumbers_LittleNumber
+  $CAE3,$02 #REGa contains the number character to be printed - add ASCII zero to it (#N$30).
   $CAE5,$03 Call #R$CAEF.
   $CAE8,$01 Restore #REGaf from the stack.
-  $CAE9,$02 RLD.
-  $CAEB,$01 Decrease #REGhl by one.
-  $CAEC,$02 Decrease counter by one and loop back to #R$CAD5 until counter is zero.
+  $CAE9,$02 Restore the original byte value back to *#REGhl.
+  $CAEB,$01 Decrease the string pointer by one - move to the next number character.
+  $CAEC,$02 Decrease the length counter by one and loop back to #R$CAD5 until the counter is zero.
   $CAEE,$01 Return.
 N $CAEF This is similar in functionality to #R$B081.
 .       It differs as it doesn't use a terminator rather the length is known.
 @ $CAEF label=PrintNumbers_Print
-  $CAEF,$02 Stash #REGhl and #REGbc on the stack.
+  $CAEF,$02 Stash pointer to the string and the length counter on the stack.
+N $CAF1 Create an offset in #REGhl using #REGa - which contains the number value we want to print.
   $CAF1,$01 #REGl=#REGa.
   $CAF2,$02 #REGh=#N$00.
   $CAF4,$03 #REGhl*=#N$08.
+M $CAF1,$06 #REGhl=#REGa*$08 (as each font character is made up of 8 bytes).
   $CAF7,$03 #REGbc=#R$E417.
   $CAFA,$01 Decrease #REGb by one.
   $CAFB,$01 #REGhl+=#REGbc.
-  $CAFC,$01 Stash #REGde on the stack.
-  $CAFD,$02 #REGb=#N$08 (counter).
+  $CAFC,$01 Stash the current screen buffer pointer on the stack.
+  $CAFD,$02 #REGb=#N$08 (because each font character is 8 bytes).
 @ $CAFF label=PrintNumbers_Print_Loop
-  $CAFF,$01 #REGa=*#REGhl.
-  $CB00,$01 Write #REGa to *#REGde.
-  $CB01,$01 Increment #REGhl by one.
-  $CB02,$01 Increment #REGd by one.
-  $CB03,$02 Decrease counter by one and loop back to #R$CAFF until counter is zero.
-  $CB05,$01 Restore #REGde from the stack.
-  $CB06,$01 Increment #REGde by one.
-  $CB07,$02 Restore #REGbc and #REGhl from the stack.
+  $CAFF,$01 Fetch a byte from the custom font.
+  $CB00,$01 Write the byte to the screen buffer.
+  $CB01,$01 Move onto the next byte of the custom font.
+  $CB02,$01 Adjust the screen buffer position down one row.
+  $CB03,$02 Decrease the byte counter by one and loop back to #R$CAFF until the counter is zero
+.           (all 8 bytes have been copied to the screen buffer).
+  $CB05,$01 Restore the original screen buffer pointer from the stack.
+  $CB06,$01 Move the screen buffer pointer right one character block ready for printing the next character.
+  $CB07,$02 Restore the length counter and pointer to the string from the stack.
   $CB09,$01 Return.
 
 c $CB0A Print Bonus/ Score
 @ $CB0A label=Print_Bonus
 N $CB0A Print the current "Bonus" value.
-  $CB0A,$02 #REGb=#N$02 (counter).
+  $CB0A,$02 #REGb=#N$02 (number of characters stored for #R$C272).
   $CB0C,$03 #REGde=#N$403B (screen buffer location).
+N $CB0F Work backwards - the data is stored back-to-front e.g. #N$50,#N$02 for outputting "250".
   $CB0F,$03 #REGhl=#R$C272.
-N $CB12 Work backwards.
   $CB12,$01 Increment #REGhl by one.
   $CB13,$03 Call #R$CAB3.
 N $CB16 Print the current score.
   $CB16,$03 #REGde=#N$4020 (screen buffer location).
 @ $CB19 label=Print_Score
-  $CB19,$02 #REGb=#N$03 (counter).
+  $CB19,$02 #REGb=#N$03 (number of characters in the players score).
   $CB1B,$03 #REGhl=#R$CB98 (last digit of #R$CB96).
   $CB1E,$03 Call #R$CAB3.
   $CB21,$01 Return.
@@ -3308,7 +3453,7 @@ c $CB40 Handler: Time
   $CB40,$03 #REGhl=#R$C272.
 N $CB43 Fetch the small unit of time (e.g. for "250" this is "50").
   $CB43,$01 #REGa=*#REGhl.
-N $CB44 Take off one unit of time (see #POKE#infinite_time()).
+N $CB44 Take off one unit of time (see #POKE(infinite_time,)).
   $CB44,$03 #REGa-=#N$01 with BCD conversion.
   $CB47,$01 Write #REGa to *#REGhl.
   $CB48,$01 Return if #REGa is higher than #N$00.
@@ -3337,7 +3482,7 @@ N $CB5D There's no time left, signify the game is over.
   $CB62,$02 Set bit 2 of *#REGhl.
   $CB64,$01 Return.
 
-c $CB65
+c $CB65 Add To Bonus Counter
   $CB65,$02 Stash #REGix on the stack.
   $CB67,$04 #REGix=#R$C272.
   $CB6B,$03 #REGa=*#REGix+#N$00.
@@ -3378,7 +3523,7 @@ g $CB99 Inactive Players Score
 D $CB99 See #R$CB96 for explanation.
 B $CB99,$03,$01
 
-c $CB9C
+c $CB9C Handle Sound Effects
   $CB9C,$03 #REGhl=#R$CC3D.
   $CB9F,$02 Reset bit 7 of *#REGhl.
   $CBA1,$01 #REGa=*#REGhl.
@@ -3449,6 +3594,20 @@ c $CB9C
   $CC38,$02 Reset bit 7 of *#REGhl.
   $CC3A,$01 Return.
 W $CC3B,$02
+
+g $CC3D Sound Effect
+@ $CC3D label=SoundEffect
+D $CC3D #TABLE(default,centre,centre)
+.   { =h Bit | =h Sound Effect }
+.   { #N$00 |  }
+.   { #N$01 |  }
+.   { #N$02 |  }
+.   { #N$03 |  }
+.   { #N$04 |  }
+.   { #N$05 | Hit By Bike }
+.   { #N$06 |  }
+.   { #N$07 |  }
+. TABLE#
 B $CC3D,$01
 
 b $CC3E Table: In-Game Messaging
@@ -3460,333 +3619,336 @@ W $CC43,$02 "#D(#PEEK(#PC) + #PEEK(#PC + $01) * $100)".
   $CC45,$01
 L $CC3E,$08,$20
 
-t $CD3E Messaging: One for the road?
-  $CD3E,$18,$17:$01 #FONT:(One for the road? (250))$E417,attr=$30(one-for-the-road)
+t $CD3E Messaging: One For The Road?
+@ $CD3E label=Messaging_OneForTheRoad
+  $CD3E,$18,$17:$01 #FONT$E417,attr=$30,chars=0(One for the road? (250))(one-for-the-road)
 
-t $CD56 Messaging: You're supposed to empty the bin
+t $CD56 Messaging: You're Supposed To Empty The Bin
+@ $CD56 label=Messaging_SupposedToEmptyTheBin
   $CD56,$30,$20,$0F:$01 #TABLE(default)
-. { #FONT:(You're supposed to empty the bin)$E417,attr=$30(empty-the-bin-1) }
-. { #FONT:(not the barrel.)$E417,attr=$30(empty-the-bin-2) }
+. { #FONT$E417,attr=$30,chars=0(You're supposed to empty the bin)(empty-the-bin-1) }
+. { #FONT$E417,attr=$30,chars=0(not the barrel.)(empty-the-bin-2) }
 . TABLE#
 
-t $CD86 Messaging: Come in for a quick pint
-  $CD86,$20,$1F:$01 #FONT:(Come in for a quick pint. (230))$E417,attr=$30(quick-pint)
+t $CD86 Messaging: Come In For A Quick Pint
+@ $CD86 label=Messaging_QuickPint
+  $CD86,$20,$1F:$01 #FONT$E417,attr=$30,chars=0(Come in for a quick pint. (230))(quick-pint)
 
 t $CDA6 Messaging: Well, milk's better for you
-  $CDA6,$1D,$1C:$01 #FONT:(Well, milk's better for you.)$E417,attr=$30(milk)
+  $CDA6,$1D,$1C:$01 #FONT$E417,attr=$30,chars=0(Well, milk's better for you.)(milk)
 
 t $CDC3 Messaging: Fancy a swift 'arf?
-  $CDC3,$1A,$19:$01 #FONT:(Fancy a swift 'arf? (270))$E417,attr=$30(swift-arf)
+  $CDC3,$1A,$19:$01 #FONT$E417,attr=$30,chars=0(Fancy a swift 'arf? (270))(swift-arf)
 
 t $CDDD Messaging: Last time I saw Trashman
   $CDDD,$3A,$20,$19:$01 #TABLE(default)
-. { #FONT:(Last time I saw Trashman 'e were)$E417,attr=$30(saw-trashman-1) }
-. { #FONT:(pi-eyed and wiv a sailor.)$E417,attr=$30(saw-trashman-2) }
+. { #FONT$E417,attr=$30,chars=0(Last time I saw Trashman 'e were)(saw-trashman-1) }
+. { #FONT$E417,attr=$30,chars=0(pi-eyed and wiv a sailor.)(saw-trashman-2) }
 . TABLE#
 
 t $CE17 Messaging: Hic! *%&#'@ Hic!
 @ $CE17 label=Messaging_HicHic
-  $CE17,$11,$10:$01 #FONT:(Hic! *%&#'@ Hic!)$E417,attr=$30(hic)
+  $CE17,$11,$10:$01 #FONT$E417,attr=$30,chars=0(Hic! *%&#'@ Hic!)(hic)
 
 t $CE28 Messaging: Would you like a Quick Byte?
   $CE28,$26,$20,$05:$01 #TABLE(default)
-. { #FONT:(Would you like a Quick Byte?)$E417,attr=$30(quick-byte-1) }
-. { #FONT:((150))$E417,attr=$30(quick-byte-2) }
+. { #FONT$E417,attr=$30,chars=0(Would you like a Quick Byte?)(quick-byte-1) }
+. { #FONT$E417,attr=$30,chars=0((150))(quick-byte-2) }
 . TABLE#
 
 t $CE4E Messaging: Good grief!
-  $CE4E,$19,$18:$01 #FONT:(Good grief! He liked it.)$E417,attr=$30(good-grief)
+  $CE4E,$19,$18:$01 #FONT$E417,attr=$30,chars=0(Good grief! He liked it.)(good-grief)
 
 t $CE67 Messaging: Come here, I've got something for you
   $CE67,$2F,$20,$0E:$01 #TABLE(default)
-. { #FONT:(Come  here,  I've got  something)$E417,attr=$30(got-something-1) }
-. { #FONT:(for you. (130))$E417,attr=$30(got-something-2) }
+. { #FONT$E417,attr=$30,chars=0(Come  here,  I've got  something)(got-something-1) }
+. { #FONT$E417,attr=$30,chars=0(for you. (130))(got-something-2) }
 . TABLE#
 
 t $CE96 Messaging: I didn't mean you to eat it
-  $CE96,$1D,$1C:$01 #FONT:(I didn't mean you to eat it.)$E417,attr=$30(eat-it)
+  $CE96,$1D,$1C:$01 #FONT$E417,attr=$30,chars=0(I didn't mean you to eat it.)(eat-it)
 
 t $CEB3 Messaging: Trashman. Try today's special
   $CEB3,$38,$20,$17:$01 #TABLE(default)
-. { #FONT:(Trashman.  Try today's  special,)$E417,attr=$30(todays-special-1) }
-. { #FONT:(" Paradise Isle " (170))$E417,attr=$30(todays-special-2) }
+. { #FONT$E417,attr=$30,chars=0(Trashman.  Try today's  special,)(todays-special-1) }
+. { #FONT$E417,attr=$30,chars=0(" Paradise Isle " (170))(todays-special-2) }
 . TABLE#
 
 t $CEEB Messaging: But some like fried egg floating in a sea of grease
   $CEEB,$34,$20,$13:$01 #TABLE(default)
-. { #FONT:(But some like fried egg floating)$E417,attr=$30(fried-egg-1) }
-. { #FONT:(in a sea of grease.)$E417,attr=$30(fried-egg-2) }
+. { #FONT$E417,attr=$30,chars=0(But some like fried egg floating)(fried-egg-1) }
+. { #FONT$E417,attr=$30,chars=0(in a sea of grease.)(fried-egg-2) }
 . TABLE#
 
 t $CF1F Messaging: Wolfing that lot down like that will slow you down
 @ $CF1F label=Messaging_WolfingThatLotDown
   $CF1F,$3A,$20,$19:$01 #TABLE(default)
-. { #FONT:(Wolfing that lot  down like that)$E417,attr=$30(wolfing-1) }
-. { #FONT:(will slow you down, mate.)$E417,attr=$30(wolfing-2) }
+. { #FONT$E417,attr=$30,chars=0(Wolfing that lot  down like that)(wolfing-1) }
+. { #FONT$E417,attr=$30,chars=0(will slow you down, mate.)(wolfing-2) }
 . TABLE#
 
 t $CF59 Messaging: Help! My pet llama's running amok upstairs
   $CF59,$34,$20,$13:$01 #TABLE(default)
-. { #FONT:(Help!   My pet  llama's  running)$E417,attr=$30(llama-1) }
-. { #FONT:(amok upstairs. (80))$E417,attr=$30(llama-2) }
+. { #FONT$E417,attr=$30,chars=0(Help!   My pet  llama's  running)(llama-1) }
+. { #FONT$E417,attr=$30,chars=0(amok upstairs. (80))(llama-2) }
 . TABLE#
 
 t $CF8D Messaging: That was an awesome experience
-  $CF8D,$20,$1F:$01 #FONT:(That was an awesome experience.)$E417,attr=$30(awesome-experience)
+  $CF8D,$20,$1F:$01 #FONT$E417,attr=$30,chars=0(That was an awesome experience.)(awesome-experience)
 
 t $CFAD Messaging: Want a tip?
-  $CFAD,$11,$10:$01 #FONT:(Want a tip? (45))$E417,attr=$30(tip)
+  $CFAD,$11,$10:$01 #FONT$E417,attr=$30,chars=0(Want a tip? (45))(tip)
 
 t $CFBE Messaging: Keep off the grass
   $CFBE,$3B,$20,$1A:$01 #TABLE(default)
-. { #FONT:(Keep off the  grass.  I've taken)$E417,attr=$30(keep-off-the-grass-1) }
-. { #FONT:(the bover to use my hover.)$E417,attr=$30(keep-off-the-grass-2) }
+. { #FONT$E417,attr=$30,chars=0(Keep off the  grass.  I've taken)(keep-off-the-grass-1) }
+. { #FONT$E417,attr=$30,chars=0(the bover to use my hover.)(keep-off-the-grass-2) }
 . TABLE#
 
 t $CFF9 Messaging: Want a quick game of Scrabble?
   $CFF9,$26,$20,$05:$01 #TABLE(default)
-. { #FONT:(Want a quick  game of  Scrabble?)$E417,attr=$30(scrabble-1) }
-. { #FONT:((100))$E417,attr=$30(scrabble-2) }
+. { #FONT$E417,attr=$30,chars=0(Want a quick  game of  Scrabble?)(scrabble-1) }
+. { #FONT$E417,attr=$30,chars=0((100))(scrabble-2) }
 . TABLE#
 
 t $D01F Messaging: O.K. I give in. TRASHMAN is a proper name
   $D01F,$2D,$20,$0C:$01 #TABLE(default)
-. { #FONT:(O.K.   I give in.  TRASHMAN is a)$E417,attr=$30(give-in-1) }
-. { #FONT:(proper name.)$E417,attr=$30(give-in-2) }
+. { #FONT$E417,attr=$30,chars=0(O.K.   I give in.  TRASHMAN is a)(give-in-1) }
+. { #FONT$E417,attr=$30,chars=0(proper name.)(give-in-2) }
 . TABLE#
 
 t $D04C Messaging: Could you look at my T.V.?
-  $D04C,$20,$1F:$01 #FONT:(Could you look at my T.V.? (50))$E417,attr=$30(tv)
+  $D04C,$20,$1F:$01 #FONT$E417,attr=$30,chars=0(Could you look at my T.V.? (50))(tv)
 
 t $D06C Messaging: I meant mend it, not watch it
-  $D06C,$1F,$1E:$01 #FONT:(I meant mend it, not watch it.)$E417,attr=$30(mend-it)
+  $D06C,$1F,$1E:$01 #FONT$E417,attr=$30,chars=0(I meant mend it, not watch it.)(mend-it)
 
 t $D08B Messaging: Take this thing away. My son is obsessed with it
   $D08B,$37,$20,$16:$01 #TABLE(default)
-. { #FONT:(Take this thing away.  My son is)$E417,attr=$30(take-away-1) }
-. { #FONT:(obsessed with it. (50))$E417,attr=$30(take-away-2) }
+. { #FONT$E417,attr=$30,chars=0(Take this thing away.  My son is)(take-away-1) }
+. { #FONT$E417,attr=$30,chars=0(obsessed with it. (50))(take-away-2) }
 . TABLE#
 
 t $D0C2 Messaging: No one will ever believe I've picked up a Spectrum
   $D0C2,$36,$20,$15:$01 #TABLE(default)
-. { #FONT:(No one  will ever  believe  I've)$E417,attr=$30(believe-1) }
-. { #FONT:(picked up a Spectrum.)$E417,attr=$30(believe-2) }
+. { #FONT$E417,attr=$30,chars=0(No one  will ever  believe  I've)(believe-1) }
+. { #FONT$E417,attr=$30,chars=0(picked up a Spectrum.)(believe-2) }
 . TABLE#
 
 t $D0F8 Messaging: D'you want a quick game of Space Invaders?
   $D0F8,$2F,$20,$0E:$01 #TABLE(default)
-. { #FONT:(D'you want a quick game of Space)$E417,attr=$30(quick-game-1) }
-. { #FONT:(Invaders? (70))$E417,attr=$30(quick-game-2) }
+. { #FONT$E417,attr=$30,chars=0(D'you want a quick game of Space)(quick-game-1) }
+. { #FONT$E417,attr=$30,chars=0(Invaders? (70))(quick-game-2) }
 . TABLE#
 
 t $D127 Messaging: Get out! Zapping the cat is not part of the game
   $D127,$32,$20,$11:$01 #TABLE(default)
-. { #FONT:(Get out!  Zapping the cat is not)$E417,attr=$30(get-out-1) }
-. { #FONT:(part of the game.)$E417,attr=$30(get-out-2) }
+. { #FONT$E417,attr=$30,chars=0(Get out!  Zapping the cat is not)(get-out-1) }
+. { #FONT$E417,attr=$30,chars=0(part of the game.)(get-out-2) }
 . TABLE#
 
 t $D159 Messaging: Can you help with an anagram? It's I, ENIGMA
   $D159,$36,$20,$15:$01 #TABLE(default)
-. { #FONT:(Can you  help with  an  anagram?)$E417,attr=$30(anagram-1) }
-. { #FONT:(It's  I, ENIGMA. (55))$E417,attr=$30(anagram-2) }
+. { #FONT$E417,attr=$30,chars=0(Can you  help with  an  anagram?)(anagram-1) }
+. { #FONT$E417,attr=$30,chars=0(It's  I, ENIGMA. (55))(anagram-2) }
 . TABLE#
 
 t $D18F Messaging: I'm no good at anagrams. I can't even imagine the answer
   $D18F,$39,$20,$18:$01 #TABLE(default)
-. { #FONT:(I'm no good at anagrams. I can't)$E417,attr=$30(no-good-anagrams-1) }
-. { #FONT:(even imagine the answer.)$E417,attr=$30(no-good-anagrams-2) }
+. { #FONT$E417,attr=$30,chars=0(I'm no good at anagrams. I can't)(no-good-anagrams-1) }
+. { #FONT$E417,attr=$30,chars=0(even imagine the answer.)(no-good-anagrams-2) }
 . TABLE#
 
 t $D1C8 Messaging: Could you have a look at my COMMODORE 64?
   $D1C8,$33,$20,$12:$01 #TABLE(default)
-. { #FONT:(Could  you  have  a look  at  my)$E417,attr=$30(look-at-my-1) }
-. { #FONT:(COMMODORE 64? (95))$E417,attr=$30(look-at-my-2) }
+. { #FONT$E417,attr=$30,chars=0(Could  you  have  a look  at  my)(look-at-my-1) }
+. { #FONT$E417,attr=$30,chars=0(COMMODORE 64? (95))(look-at-my-2) }
 . TABLE#
 
 t $D1FB Messaging: Sorry, but I think the elephant got there first
   $D1FB,$31,$20,$10:$01 #TABLE(default)
-. { #FONT:(Sorry, but I think the  elephant)$E417,attr=$30(elephant-1) }
-. { #FONT:(got there first.)$E417,attr=$30(elephant-2) }
+. { #FONT$E417,attr=$30,chars=0(Sorry, but I think the  elephant)(elephant-1) }
+. { #FONT$E417,attr=$30,chars=0(got there first.)(elephant-2) }
 . TABLE#
 
 t $D22C Messaging: Do you want a copy of 3D Monster Maze?
   $D22C,$2B,$20,$0A:$01 #TABLE(default)
-. { #FONT:(Do you want a copy of 3D Monster)$E417,attr=$30(monster-1) }
-. { #FONT:(Maze? (55))$E417,attr=$30(monster-2) }
+. { #FONT$E417,attr=$30,chars=0(Do you want a copy of 3D Monster)(monster-1) }
+. { #FONT$E417,attr=$30,chars=0(Maze? (55))(monster-2) }
 . TABLE#
 
 t $D257 Messaging: What on earth did you expect? An original!
   $D257,$2D,$20,$0C:$01 #TABLE(default)
-. { #FONT:(What  on earth  did you  expect?)$E417,attr=$30(earth-1) }
-. { #FONT:(An original!)$E417,attr=$30(earth-2) }
+. { #FONT$E417,attr=$30,chars=0(What  on earth  did you  expect?)(earth-1) }
+. { #FONT$E417,attr=$30,chars=0(An original!)(earth-2) }
 . TABLE#
 
 t $D284 Messaging: Come and see our new puppy
   $D284,$25,$20,$04:$01 #TABLE(default)
-. { #FONT:(Come  and  see  our  new   puppy)$E417,attr=$30(puppy-1) }
-. { #FONT:((70))$E417,attr=$30(puppy-2) }
+. { #FONT$E417,attr=$30,chars=0(Come  and  see  our  new   puppy)(puppy-1) }
+. { #FONT$E417,attr=$30,chars=0((70))(puppy-2) }
 . TABLE#
 
 t $D2A9 Messaging: We had our old dog put down when the last Trashman bit him
   $D2A9,$3B,$20,$1A:$01 #TABLE(default)
-. { #FONT:(We had our old dog put down when)$E417,attr=$30(put-down-1) }
-. { #FONT:(the last Trashman bit him.)$E417,attr=$30(put-down-2) }
+. { #FONT$E417,attr=$30,chars=0(We had our old dog put down when)(put-down-1) }
+. { #FONT$E417,attr=$30,chars=0(the last Trashman bit him.)(put-down-2) }
 . TABLE#
 
 t $D2E4 Messaging: Do you think I'm a megalomaniac?
   $D2E4,$25,$20,$04:$01 #TABLE(default)
-. { #FONT:(Do you think I'm a megalomaniac?)$E417,attr=$30(megalomaniac-1) }
-. { #FONT:((50))$E417,attr=$30(megalomaniac-2) }
+. { #FONT$E417,attr=$30,chars=0(Do you think I'm a megalomaniac?)(megalomaniac-1) }
+. { #FONT$E417,attr=$30,chars=0((50))(megalomaniac-2) }
 . TABLE#
 
 t $D309 Messaging: Just give me a ZX81, and I'll control the world
   $D309,$33,$20,$12:$01 #TABLE(default)
-. { #FONT:(Just  give  me a  ZX81, and I'll)$E417,attr=$30(zx81-1) }
-. { #FONT:(control the world.)$E417,attr=$30(zx81-2) }
+. { #FONT$E417,attr=$30,chars=0(Just  give  me a  ZX81, and I'll)(zx81-1) }
+. { #FONT$E417,attr=$30,chars=0(control the world.)(zx81-2) }
 . TABLE#
 
 t $D33C Messaging: Do you want to play some games on my Spectrum?
   $D33C,$35,$20,$14:$01 #TABLE(default)
-. { #FONT:(Do you want to  play some  games)$E417,attr=$30(play-games-1) }
-. { #FONT:(on my Spectrum? (95))$E417,attr=$30(play-games-2) }
+. { #FONT$E417,attr=$30,chars=0(Do you want to  play some  games)(play-games-1) }
+. { #FONT$E417,attr=$30,chars=0(on my Spectrum? (95))(play-games-2) }
 . TABLE#
 
 t $D371 Messaging: That game was Virgin on the impossible !!!!
   $D371,$30,$20,$0F:$01 #TABLE(default)
-. { #FONT:(That  game  was  Virgin  on  the)$E417,attr=$30(virgin-1) }
-. { #FONT:(impossible !!!!)$E417,attr=$30(virgin-2) }
+. { #FONT$E417,attr=$30,chars=0(That  game  was  Virgin  on  the)(virgin-1) }
+. { #FONT$E417,attr=$30,chars=0(impossible !!!!)(virgin-2) }
 . TABLE#
 
 t $D3A1 Messaging: Have you seen that delinquent son of mine?
   $D3A1,$32,$20,$11:$01 #TABLE(default)
-. { #FONT:(Have you  seen  that  delinquent)$E417,attr=$30(delinquent-1) }
-. { #FONT:(son of mine? (55))$E417,attr=$30(delinquent-2) }
+. { #FONT$E417,attr=$30,chars=0(Have you  seen  that  delinquent)(delinquent-1) }
+. { #FONT$E417,attr=$30,chars=0(son of mine? (55))(delinquent-2) }
 . TABLE#
 
 t $D3D3 Messaging: Yes,you're right. You could call him a Maniac Minor
   $D3D3,$34,$20,$13:$01 #TABLE(default)
-. { #FONT:(Yes,you're right. You could call)$E417,attr=$30(right-1) }
-. { #FONT:(him a Maniac Minor.)$E417,attr=$30(right-2) }
+. { #FONT$E417,attr=$30,chars=0(Yes,you're right. You could call)(right-1) }
+. { #FONT$E417,attr=$30,chars=0(him a Maniac Minor.)(right-2) }
 . TABLE#
 
 t $D407 Messaging: Come and look at my Spectrum with 4 megabyte memory
   $D407,$3D,$20,$1C:$01 #TABLE(default)
-. { #FONT:(Come  and look  at  my  Spectrum)$E417,attr=$30(spectrum-1) }
-. { #FONT:(with 4 megabyte memory. (60))$E417,attr=$30(spectrum-2) }
+. { #FONT$E417,attr=$30,chars=0(Come  and look  at  my  Spectrum)(spectrum-1) }
+. { #FONT$E417,attr=$30,chars=0(with 4 megabyte memory. (60))(spectrum-2) }
 . TABLE#
 
 t $D444 Messaging: Only trouble is, I've forgotten what I wanted it for
   $D444,$36,$20,$15:$01 #TABLE(default)
-. { #FONT:(Only trouble is,  I've forgotten)$E417,attr=$30(forgotten-1) }
-. { #FONT:(what I wanted it for.)$E417,attr=$30(forgotten-2) }
+. { #FONT$E417,attr=$30,chars=0(Only trouble is,  I've forgotten)(forgotten-1) }
+. { #FONT$E417,attr=$30,chars=0(what I wanted it for.)(forgotten-2) }
 . TABLE#
 
 t $D47A Messaging: Help!! The curtains are on fire!
   $D47A,$25,$20,$04:$01 #TABLE(default)
-. { #FONT:(Help!! The curtains are on fire!)$E417,attr=$30(curtains-1) }
-. { #FONT:((75))$E417,attr=$30(curtains-2) }
+. { #FONT$E417,attr=$30,chars=0(Help!! The curtains are on fire!)(curtains-1) }
+. { #FONT$E417,attr=$30,chars=0((75))(curtains-2) }
 . TABLE#
 
 t $D49F Messaging: A tongue of flame came out of my Dragon
   $D49F,$28,$20,$07:$01 #TABLE(default)
-. { #FONT:(A tongue of flame came out of my)$E417,attr=$30(tongue-1) }
-. { #FONT:(Dragon.)$E417,attr=$30(tongue-2) }
+. { #FONT$E417,attr=$30,chars=0(A tongue of flame came out of my)(tongue-1) }
+. { #FONT$E417,attr=$30,chars=0(Dragon.)(tongue-2) }
 . TABLE#
 
 t $D4C7 Messaging: Oh dear, what shall I do? My husband's been taken away
   $D4C7,$3F,$20,$1E:$01 #TABLE(default)
-. { #FONT:(Oh  dear,  what shall  I do?  My)$E417,attr=$30(shall-i-do-1) }
-. { #FONT:(husband's been taken away.(75))$E417,attr=$30(shall-i-do-2) }
+. { #FONT$E417,attr=$30,chars=0(Oh  dear,  what shall  I do?  My)(shall-i-do-1) }
+. { #FONT$E417,attr=$30,chars=0(husband's been taken away.(75))(shall-i-do-2) }
 . TABLE#
 
 t $D506 Messaging: He was a Schizoid
-  $D506,$13,$12:$01 #FONT:(He was a Schizoid.)$E417,attr=$30(schizoid)
+  $D506,$13,$12:$01 #FONT$E417,attr=$30,chars=0(He was a Schizoid.)(schizoid)
 
 t $D519 Messaging: Do you want a tip?
-  $D519,$18,$17:$01 #FONT:(Do you want a tip? (50))$E417,attr=$30(want-tip)
+  $D519,$18,$17:$01 #FONT$E417,attr=$30,chars=0(Do you want a tip? (50))(want-tip)
 
 t $D531 Messaging: That's got Trashman worried. I'm his tax inspector
   $D531,$33,$20,$12:$01 #TABLE(default)
-. { #FONT:(That's got Trashman worried. I'm)$E417,attr=$30(worried-1) }
-. { #FONT:(his tax inspector.)$E417,attr=$30(worried-2) }
+. { #FONT$E417,attr=$30,chars=0(That's got Trashman worried. I'm)(worried-1) }
+. { #FONT$E417,attr=$30,chars=0(his tax inspector.)(worried-2) }
 . TABLE#
 
 t $D564 Messaging: Give us a hand mate
-  $D564,$1A,$19:$01 #FONT:(Give us a hand mate. (60))$E417,attr=$30(hand)
+  $D564,$1A,$19:$01 #FONT$E417,attr=$30,chars=0(Give us a hand mate. (60))(hand)
 
 t $D57E Messaging: That was NOT funny. Applauding while everything collapsed
   $D57E,$3C,$20,$1B:$01 #TABLE(default)
-. { #FONT:(That  was NOT funny.  Applauding)$E417,attr=$30(not-funny-1) }
-. { #FONT:(while everything collapsed.)$E417,attr=$30(not-funny-2) }
+. { #FONT$E417,attr=$30,chars=0(That  was NOT funny.  Applauding)(not-funny-1) }
+. { #FONT$E417,attr=$30,chars=0(while everything collapsed.)(not-funny-2) }
 . TABLE#
 
 t $D5BA Messaging: Please help find my little doggy woggy
   $D5BA,$2C,$20,$0B:$01 #TABLE(default)
-. { #FONT:(Please help find my little doggy)$E417,attr=$30(doggy-1) }
-. { #FONT:(woggy. (65))$E417,attr=$30(doggy-2) }
+. { #FONT$E417,attr=$30,chars=0(Please help find my little doggy)(doggy-1) }
+. { #FONT$E417,attr=$30,chars=0(woggy. (65))(doggy-2) }
 . TABLE#
 
 t $D5E6 Messaging: You've been a great help. At least I know where he's been
   $D5E6,$3E,$20,$1D:$01 #TABLE(default)
-. { #FONT:(You've  been  a great  help.  At)$E417,attr=$30(great-help-1) }
-. { #FONT:(least I know where he's been.)$E417,attr=$30(great-help-2) }
+. { #FONT$E417,attr=$30,chars=0(You've  been  a great  help.  At)(great-help-1) }
+. { #FONT$E417,attr=$30,chars=0(least I know where he's been.)(great-help-2) }
 . TABLE#
 
 t $D624 Messaging: Are you the chimney sweep?
-  $D624,$20,$1F:$01 #FONT:(Are you the chimney sweep? (80))$E417,attr=$30(chimney-sweep)
+  $D624,$20,$1F:$01 #FONT$E417,attr=$30,chars=0(Are you the chimney sweep? (80))(chimney-sweep)
 
 t $D644 Messaging: Sorry, but you must admit you do have the same complexion
   $D644,$3A,$20,$19:$01 #TABLE(default)
-. { #FONT:(Sorry, but you must admit you do)$E417,attr=$30(admit-1) }
-. { #FONT:(have the same complexion.)$E417,attr=$30(admit-2) }
+. { #FONT$E417,attr=$30,chars=0(Sorry, but you must admit you do)(admit-1) }
+. { #FONT$E417,attr=$30,chars=0(have the same complexion.)(admit-2) }
 . TABLE#
 
 t $D67E Messaging: Hallo Trashman. Your move this week, I think?
   $D67E,$34,$20,$13:$01 #TABLE(default)
-. { #FONT:(Hallo Trashman.  Your move  this)$E417,attr=$30(hallo-1) }
-. { #FONT:(week, I think? (65))$E417,attr=$30(hallo-2) }
+. { #FONT$E417,attr=$30,chars=0(Hallo Trashman.  Your move  this)(hallo-1) }
+. { #FONT$E417,attr=$30,chars=0(week, I think? (65))(hallo-2) }
 . TABLE#
 
 t $D6B2 Messaging: You know, it might be quicker playing chess with a computer
   $D6B2,$3F,$20,$1E:$01 #TABLE(default)
-. { #FONT:(You know,  it  might be  quicker)$E417,attr=$30(quicker-1) }
-. { #FONT:(playing chess with a computer.)$E417,attr=$30(quicker-2) }
+. { #FONT$E417,attr=$30,chars=0(You know,  it  might be  quicker)(quicker-1) }
+. { #FONT$E417,attr=$30,chars=0(playing chess with a computer.)(quicker-2) }
 . TABLE#
 
 t $D6F1 Messaging: Come and see the computer my Auntie gave me
   $D6F1,$35,$20,$14:$01 #TABLE(default)
-. { #FONT:(Come  and  see the  computer  my)$E417,attr=$30(computer-1) }
-. { #FONT:(Auntie gave me. (45))$E417,attr=$30(computer-2) }
+. { #FONT$E417,attr=$30,chars=0(Come  and  see the  computer  my)(computer-1) }
+. { #FONT$E417,attr=$30,chars=0(Auntie gave me. (45))(computer-2) }
 . TABLE#
 
 t $D726 Messaging: Oh good! I thought I might need a licence for it
   $D726,$32,$20,$11:$01 #TABLE(default)
-. { #FONT:(Oh good!  I thought I might need)$E417,attr=$30(oh-good-1) }
-. { #FONT:(a licence for it.)$E417,attr=$30(oh-good-2) }
+. { #FONT$E417,attr=$30,chars=0(Oh good!  I thought I might need)(oh-good-1) }
+. { #FONT$E417,attr=$30,chars=0(a licence for it.)(oh-good-2) }
 . TABLE#
 
 t $D758 Messaging: Hey, Bilbo, help me solve this adventure
   $D758,$31,$20,$10:$01 #TABLE(default)
-. { #FONT:(Hey, Bilbo,  help me  solve this)$E417,attr=$30(bilbo-1) }
-. { #FONT:(adventure. (100))$E417,attr=$30(bilbo-2) }
+. { #FONT$E417,attr=$30,chars=0(Hey, Bilbo,  help me  solve this)(bilbo-1) }
+. { #FONT$E417,attr=$30,chars=0(adventure. (100))(bilbo-2) }
 . TABLE#
 
 t $D789 Messaging: You're no help. HOPPIT!
-  $D789,$18,$17:$01 #FONT:(You're no help. HOPPIT!)$E417,attr=$30(no-help)
+  $D789,$18,$17:$01 #FONT$E417,attr=$30,chars=0(You're no help. HOPPIT!)(no-help)
 
 t $D7A1 Messaging: Help me! Sophie's drowning. Can you revive her?
   $D7A1,$35,$20,$14:$01 #TABLE(default)
-. { #FONT:(Help  me! Sophie's drowning. Can)$E417,attr=$30(drowning-1) }
-. { #FONT:(you revive her? (85))$E417,attr=$30(drowning-2) }
+. { #FONT$E417,attr=$30,chars=0(Help  me! Sophie's drowning. Can)(drowning-1) }
+. { #FONT$E417,attr=$30,chars=0(you revive her? (85))(drowning-2) }
 . TABLE#
 
 t $D7D6 Messaging: If you hadn't laughed, the gold-fish might still be alive
   $D7D6,$3B,$20,$1A:$01 #TABLE(default)
-. { #FONT:(If you hadn't laughed, the gold-)$E417,attr=$30(laughed-1) }
-. { #FONT:(fish might still be alive.)$E417,attr=$30(laughed-2) }
+. { #FONT$E417,attr=$30,chars=0(If you hadn't laughed, the gold-)(laughed-1) }
+. { #FONT$E417,attr=$30,chars=0(fish might still be alive.)(laughed-2) }
 . TABLE#
 
-b $D811
+b $D811 Data: Bonus Messaging Pointers
 
 b $D813 Data: Level 1
 @ $D813 label=Data_Level1

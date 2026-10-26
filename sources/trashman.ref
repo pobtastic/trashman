@@ -1,3 +1,5 @@
+; Copyright 2026 Paul Maddern (paul@arcadegeek.co.uk)
+
 ;
 ; SkoolKit ref file for Trashman
 ;
@@ -14,7 +16,7 @@ GameDir=trashman
 [Game]
 Game=Trashman
 Logo=#SCR$01,$0B,$0A,$0A,$05(/images/logo)
-Copyright=&copy; 1984 New Generation Software; 2023 ArcadeGeek LTD.
+Copyright=&copy; 1984 New Generation Software<br />&copy; 2026 ArcadeGeek LTD.
 Repository=https://github.com/pobtastic/trashman/
 StyleSheet=skoolkit.css;skoolkit-dark.css
 LinkInternalOperands=1
@@ -56,4 +58,4 @@ Reference
   #LET(bright=$id&$40)#IF({bright}>$00)((BRIGHT))
   #LET(flash=$id&$80)#IF({flash}>$00)(FLASH: ON))
 
-#DEF(#POKE #LINK:Pokes)
+#DEF(#POKE()(anchor,text) #LINK(Pokes#$anchor)($text))
