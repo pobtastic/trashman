@@ -43,6 +43,23 @@ Next: <a href="51978.html">51978</a>
 Used by the routines at <a href="43625.html">Print_HighScoreTable</a>, <a href="43794.html">Messaging_GameOver</a> and <a href="51978.html">Print_Bonus</a>.
 </div>
 </div>
+<table class="input">
+<tr class="asm-input-header">
+<th colspan="2">Input</th>
+</tr>
+<tr>
+<td class="register">B</td>
+<td class="register-desc">Number of characters to print</td>
+</tr>
+<tr>
+<td class="register">DE</td>
+<td class="register-desc">Screen buffer pointer</td>
+</tr>
+<tr>
+<td class="register">HL</td>
+<td class="register-desc">Pointer to end of number string data</td>
+</tr>
+</table>
 </td>
 </tr>
 <tr>
@@ -55,36 +72,56 @@ Used by the routines at <a href="43625.html">Print_HighScoreTable</a>, <a href="
 <td class="asm-label"></td>
 <td class="address-1"><span id="51893"></span>51893</td>
 <td class="instruction">RLD</td>
-<td class="comment-1" rowspan="1">RLD.</td>
+<td class="comment-1" rowspan="1">Extract the first digit into <span class="register">A</span>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="51895"></span>51895</td>
 <td class="instruction">PUSH AF</td>
-<td class="comment-1" rowspan="1">Stash <span class="register">AF</span> on the stack.</td>
+<td class="comment-1" rowspan="1">Stash the result on the stack.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="51896"></span>51896</td>
 <td class="instruction">CP 0</td>
-<td class="comment-1" rowspan="2">Jump to <a href="51891.html#51930">PrintNumbers_1</a> if <span class="register">A</span> is not 0.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="51891.html#51930">PrintNumbers_BigNumber</a> if <span class="register">A</span> is not 0.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="51898"></span>51898</td>
-<td class="instruction">JR NZ,<a href="51891.html#51930">PrintNumbers_1</a></td>
+<td class="instruction">JR NZ,<a href="51891.html#51930">PrintNumbers_BigNumber</a></td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="51900"></span>
+<div class="comments">
+<div class="paragraph">
+The highest digit is zero, so instead of printing an ASCII zero, print an ASCII space character instead.
+</div>
+</div>
+</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="51900"></span>51900</td>
 <td class="instruction">LD A,32</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=32.</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=ASCII "space" character (32).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="51902"></span>51902</td>
 <td class="instruction">CALL <a href="51891.html#51951">PrintNumbers_Print</a></td>
 <td class="comment-1" rowspan="1">Call <a href="51891.html#51951">PrintNumbers_Print</a>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="51905"></span>
+<div class="comments">
+<div class="paragraph">
+Move onto the next digit extraction.
+</div>
+</div>
+</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -96,36 +133,56 @@ Used by the routines at <a href="43625.html">Print_HighScoreTable</a>, <a href="
 <td class="asm-label"></td>
 <td class="address-1"><span id="51906"></span>51906</td>
 <td class="instruction">RLD</td>
-<td class="comment-1" rowspan="1">RLD.</td>
+<td class="comment-1" rowspan="1">Extract the next digit into <span class="register">A</span>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="51908"></span>51908</td>
 <td class="instruction">PUSH AF</td>
-<td class="comment-1" rowspan="1">Stash <span class="register">AF</span> on the stack.</td>
+<td class="comment-1" rowspan="1">Stash the result on the stack.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="51909"></span>51909</td>
 <td class="instruction">CP 0</td>
-<td class="comment-1" rowspan="2">Jump to <a href="51891.html#51939">PrintNumbers_2</a> if <span class="register">A</span> is not 0.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="51891.html#51939">PrintNumbers_LittleNumber</a> if <span class="register">A</span> is not 0.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="51911"></span>51911</td>
-<td class="instruction">JR NZ,<a href="51891.html#51939">PrintNumbers_2</a></td>
+<td class="instruction">JR NZ,<a href="51891.html#51939">PrintNumbers_LittleNumber</a></td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="51913"></span>
+<div class="comments">
+<div class="paragraph">
+The next digit is also zero, so again print an ASCII space character.
+</div>
+</div>
+</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="51913"></span>51913</td>
 <td class="instruction">LD A,32</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=32.</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=ASCII "space" character (32).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="51915"></span>51915</td>
 <td class="instruction">CALL <a href="51891.html#51951">PrintNumbers_Print</a></td>
 <td class="comment-1" rowspan="1">Call <a href="51891.html#51951">PrintNumbers_Print</a>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="51918"></span>
+<div class="comments">
+<div class="paragraph">
+Housekeeping, and loop control.
+</div>
+</div>
+</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -137,19 +194,19 @@ Used by the routines at <a href="43625.html">Print_HighScoreTable</a>, <a href="
 <td class="asm-label"></td>
 <td class="address-1"><span id="51919"></span>51919</td>
 <td class="instruction">RLD</td>
-<td class="comment-1" rowspan="1">RLD.</td>
+<td class="comment-1" rowspan="1">Restore the original byte value back to *<span class="register">HL</span>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="51921"></span>51921</td>
 <td class="instruction">DEC HL</td>
-<td class="comment-1" rowspan="1">Decrease <span class="register">HL</span> by one.</td>
+<td class="comment-1" rowspan="1">Decrease the string pointer by one - move to the next number character.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="51922"></span>51922</td>
 <td class="instruction">DJNZ <a href="51891.html#51891">PrintNumbers</a></td>
-<td class="comment-1" rowspan="1">Decrease counter by one and loop back to <a href="51891.html">PrintNumbers</a> until counter is zero.</td>
+<td class="comment-1" rowspan="1">Decrease the length counter by one and loop back to <a href="51891.html">PrintNumbers</a> until the counter is zero.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -158,7 +215,17 @@ Used by the routines at <a href="43625.html">Print_HighScoreTable</a>, <a href="
 <td class="comment-1" rowspan="1">Return.</td>
 </tr>
 <tr>
-<td class="asm-label">PrintNumbers_0</td>
+<td class="routine-comment" colspan="5">
+<span id="51925"></span>
+<div class="comments">
+<div class="paragraph">
+Note; the above doesn't jump straight to this, as it's already processing the first RLD result.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">PrintNumbers_Loop</td>
 <td class="address-2"><span id="51925"></span>51925</td>
 <td class="instruction">LD A,0</td>
 <td class="comment-1" rowspan="1"><span class="register">A</span>=0.</td>
@@ -167,19 +234,19 @@ Used by the routines at <a href="43625.html">Print_HighScoreTable</a>, <a href="
 <td class="asm-label"></td>
 <td class="address-1"><span id="51927"></span>51927</td>
 <td class="instruction">RLD</td>
-<td class="comment-1" rowspan="1">RLD.</td>
+<td class="comment-1" rowspan="1">Extract the first digit into <span class="register">A</span>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="51929"></span>51929</td>
 <td class="instruction">PUSH AF</td>
-<td class="comment-1" rowspan="1">Stash <span class="register">AF</span> on the stack.</td>
+<td class="comment-1" rowspan="1">Stash the result on the stack.</td>
 </tr>
 <tr>
-<td class="asm-label">PrintNumbers_1</td>
+<td class="asm-label">PrintNumbers_BigNumber</td>
 <td class="address-2"><span id="51930"></span>51930</td>
 <td class="instruction">ADD A,48</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>+=48.</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span> contains the number character to be printed - add ASCII zero to it (48).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -197,19 +264,19 @@ Used by the routines at <a href="43625.html">Print_HighScoreTable</a>, <a href="
 <td class="asm-label"></td>
 <td class="address-1"><span id="51936"></span>51936</td>
 <td class="instruction">RLD</td>
-<td class="comment-1" rowspan="1">RLD.</td>
+<td class="comment-1" rowspan="1">Extract the next digit into <span class="register">A</span>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="51938"></span>51938</td>
 <td class="instruction">PUSH AF</td>
-<td class="comment-1" rowspan="1">Stash <span class="register">AF</span> on the stack.</td>
+<td class="comment-1" rowspan="1">Stash the result on the stack.</td>
 </tr>
 <tr>
-<td class="asm-label">PrintNumbers_2</td>
+<td class="asm-label">PrintNumbers_LittleNumber</td>
 <td class="address-2"><span id="51939"></span>51939</td>
 <td class="instruction">ADD A,48</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>+=48.</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span> contains the number character to be printed - add ASCII zero to it (48).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -227,19 +294,19 @@ Used by the routines at <a href="43625.html">Print_HighScoreTable</a>, <a href="
 <td class="asm-label"></td>
 <td class="address-1"><span id="51945"></span>51945</td>
 <td class="instruction">RLD</td>
-<td class="comment-1" rowspan="1">RLD.</td>
+<td class="comment-1" rowspan="1">Restore the original byte value back to *<span class="register">HL</span>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="51947"></span>51947</td>
 <td class="instruction">DEC HL</td>
-<td class="comment-1" rowspan="1">Decrease <span class="register">HL</span> by one.</td>
+<td class="comment-1" rowspan="1">Decrease the string pointer by one - move to the next number character.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="51948"></span>51948</td>
-<td class="instruction">DJNZ <a href="51891.html#51925">PrintNumbers_0</a></td>
-<td class="comment-1" rowspan="1">Decrease counter by one and loop back to <a href="51891.html#51925">PrintNumbers_0</a> until counter is zero.</td>
+<td class="instruction">DJNZ <a href="51891.html#51925">PrintNumbers_Loop</a></td>
+<td class="comment-1" rowspan="1">Decrease the length counter by one and loop back to <a href="51891.html#51925">PrintNumbers_Loop</a> until the counter is zero.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -261,7 +328,7 @@ This is similar in functionality to <a href="45185.html">PrintString</a>. It dif
 <td class="asm-label">PrintNumbers_Print</td>
 <td class="address-2"><span id="51951"></span>51951</td>
 <td class="instruction">PUSH HL</td>
-<td class="comment-1" rowspan="2">Stash <span class="register">HL</span> and <span class="register">BC</span> on the stack.</td>
+<td class="comment-1" rowspan="2">Stash pointer to the string and the length counter on the stack.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -269,22 +336,30 @@ This is similar in functionality to <a href="45185.html">PrintString</a>. It dif
 <td class="instruction">PUSH BC</td>
 </tr>
 <tr>
+<td class="routine-comment" colspan="5">
+<span id="51953"></span>
+<div class="comments">
+<div class="paragraph">
+Create an offset in <span class="register">HL</span> using <span class="register">A</span> - which contains the number value we want to print.
+</div>
+</div>
+</td>
+</tr>
+<tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="51953"></span>51953</td>
 <td class="instruction">LD L,A</td>
-<td class="comment-1" rowspan="1"><span class="register">L</span>=<span class="register">A</span>.</td>
+<td class="comment-1" rowspan="5"><span class="register">HL</span>=<span class="register">A</span>*$08 (as each font character is made up of 8 bytes).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="51954"></span>51954</td>
 <td class="instruction">LD H,0</td>
-<td class="comment-1" rowspan="1"><span class="register">H</span>=0.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="51956"></span>51956</td>
 <td class="instruction">ADD HL,HL</td>
-<td class="comment-1" rowspan="3"><span class="register">HL</span>*=8.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -318,61 +393,61 @@ This is similar in functionality to <a href="45185.html">PrintString</a>. It dif
 <td class="asm-label"></td>
 <td class="address-1"><span id="51964"></span>51964</td>
 <td class="instruction">PUSH DE</td>
-<td class="comment-1" rowspan="1">Stash <span class="register">DE</span> on the stack.</td>
+<td class="comment-1" rowspan="1">Stash the current screen buffer pointer on the stack.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="51965"></span>51965</td>
 <td class="instruction">LD B,8</td>
-<td class="comment-1" rowspan="1"><span class="register">B</span>=8 (counter).</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=8 (because each font character is 8 bytes).</td>
 </tr>
 <tr>
 <td class="asm-label">PrintNumbers_Print_Loop</td>
 <td class="address-2"><span id="51967"></span>51967</td>
 <td class="instruction">LD A,(HL)</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=*<span class="register">HL</span>.</td>
+<td class="comment-1" rowspan="1">Fetch a byte from the custom font.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="51968"></span>51968</td>
 <td class="instruction">LD (DE),A</td>
-<td class="comment-1" rowspan="1">Write <span class="register">A</span> to *<span class="register">DE</span>.</td>
+<td class="comment-1" rowspan="1">Write the byte to the screen buffer.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="51969"></span>51969</td>
 <td class="instruction">INC HL</td>
-<td class="comment-1" rowspan="1">Increment <span class="register">HL</span> by one.</td>
+<td class="comment-1" rowspan="1">Move onto the next byte of the custom font.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="51970"></span>51970</td>
 <td class="instruction">INC D</td>
-<td class="comment-1" rowspan="1">Increment <span class="register">D</span> by one.</td>
+<td class="comment-1" rowspan="1">Adjust the screen buffer position down one row.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="51971"></span>51971</td>
 <td class="instruction">DJNZ <a href="51891.html#51967">PrintNumbers_Print_Loop</a></td>
-<td class="comment-1" rowspan="1">Decrease counter by one and loop back to <a href="51891.html#51967">PrintNumbers_Print_Loop</a> until counter is zero.</td>
+<td class="comment-1" rowspan="1">Decrease the byte counter by one and loop back to <a href="51891.html#51967">PrintNumbers_Print_Loop</a> until the counter is zero (all 8 bytes have been copied to the screen buffer).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="51973"></span>51973</td>
 <td class="instruction">POP DE</td>
-<td class="comment-1" rowspan="1">Restore <span class="register">DE</span> from the stack.</td>
+<td class="comment-1" rowspan="1">Restore the original screen buffer pointer from the stack.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="51974"></span>51974</td>
 <td class="instruction">INC DE</td>
-<td class="comment-1" rowspan="1">Increment <span class="register">DE</span> by one.</td>
+<td class="comment-1" rowspan="1">Move the screen buffer pointer right one character block ready for printing the next character.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="51975"></span>51975</td>
 <td class="instruction">POP BC</td>
-<td class="comment-1" rowspan="2">Restore <span class="register">BC</span> and <span class="register">HL</span> from the stack.</td>
+<td class="comment-1" rowspan="2">Restore the length counter and pointer to the string from the stack.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -399,8 +474,8 @@ Next: <a href="51978.html">51978</a>
 </table>
 <footer>
 <div class="release"></div>
-<div class="copyright">&copy; 1984 New Generation Software; 2023 ArcadeGeek LTD.</div>
-<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.0.</div>
+<div class="copyright">&copy; 1984 New Generation Software<br />&copy; 2026 ArcadeGeek LTD.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 10.1.</div>
 <div class="repository">Link to <a href="https://github.com/pobtastic/trashman/">Source code</a>.</div>
 <div><a href="../../asm/CAB3.html">Switch to hexadecimal</a>.</div>
 </footer>

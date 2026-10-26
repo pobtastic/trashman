@@ -30,11 +30,11 @@ Prev: <a href="C35D.html">C35D</a>
 </td>
 <td class="up">Up: <a href="../maps/all.html#c36e">Map</a></td>
 <td class="next">
-Next: <a href="C375.html">C375</a>
+Next: <a href="C387.html">C387</a>
 </td>
 </tr>
 </table>
-<div class="description">C36E: Game status buffer entry at C36E</div>
+<div class="description">C36E: Player Data</div>
 <table class="disassembly">
 <tr>
 <td class="routine-comment" colspan="5">
@@ -43,8 +43,69 @@ Next: <a href="C375.html">C375</a>
 </td>
 </tr>
 <tr>
+<td class="asm-label">Player_Data</td>
 <td class="address-1"><span id="c36e"></span>C36E</td>
-<td class="instruction">DEFB $00,$00,$00,$00,$00,$00,$00</td>
+<td class="instruction">DEFB $00</td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label">Player_ScreenXPosition</td>
+<td class="address-1"><span id="c36f"></span>C36F</td>
+<td class="instruction">DEFB $00</td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label">Player_ScreenYPosition</td>
+<td class="address-1"><span id="c370"></span>C370</td>
+<td class="instruction">DEFB $00</td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label">Player_SpriteHeight</td>
+<td class="address-1"><span id="c371"></span>C371</td>
+<td class="instruction">DEFB $00</td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label">Player_SpriteWidth</td>
+<td class="address-1"><span id="c372"></span>C372</td>
+<td class="instruction">DEFB $00</td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label">Player_SpriteGraphics</td>
+<td class="address-1"><span id="c373"></span>C373</td>
+<td class="instruction">DEFB $00,$00</td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="c375"></span>C375</td>
+<td class="instruction">DEFB $00</td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label">Player_ScreenBuffer</td>
+<td class="address-1"><span id="c376"></span>C376</td>
+<td class="instruction">DEFB $00,$00</td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="c378"></span>C378</td>
+<td class="instruction">DEFB $00,$00,$00,$00,$00,$00,$00,$00</td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="c380"></span>C380</td>
+<td class="instruction">DEFB $00,$00,$00,$00,$00,$00</td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label">Player_</td>
+<td class="address-1"><span id="c386"></span>C386</td>
+<td class="instruction">DEFB $00</td>
 <td class="comment-0" rowspan="1"></td>
 </tr>
 </table>
@@ -55,14 +116,14 @@ Prev: <a href="C35D.html">C35D</a>
 </td>
 <td class="up">Up: <a href="../maps/all.html#c36e">Map</a></td>
 <td class="next">
-Next: <a href="C375.html">C375</a>
+Next: <a href="C387.html">C387</a>
 </td>
 </tr>
 </table>
 <footer>
 <div class="release"></div>
-<div class="copyright">&copy; 1984 New Generation Software; 2023 ArcadeGeek LTD.</div>
-<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.0.</div>
+<div class="copyright">&copy; 1984 New Generation Software<br />&copy; 2026 ArcadeGeek LTD.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 10.1.</div>
 <div class="repository">Link to <a href="https://github.com/pobtastic/trashman/">Source code</a>.</div>
 <div><a href="../dec/asm/50030.html">Switch to decimal</a>.</div>
 </footer>

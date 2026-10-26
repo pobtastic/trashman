@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Trashman: Data at B008</title>
+<title>Trashman: Game status buffer entry at B008</title>
 <meta charset="utf-8" />
 <link rel="stylesheet" type="text/css" href="../skoolkit.css" />
 <link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
@@ -16,11 +16,11 @@ gtag('js', new Date());
 gtag('config', 'G-75RERFCHBG');
 </script>
 </head>
-<body class="Asm-b">
+<body class="Asm-g">
 <table class="header">
 <tr>
 <td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
-<td class="page-header">Data</td>
+<td class="page-header">Game status buffer</td>
 </tr>
 </table>
 <table class="asm-navigation">
@@ -34,15 +34,28 @@ Next: <a href="B009.html">B009</a>
 </td>
 </tr>
 </table>
-<div class="description">B008: Data block at B008</div>
+<div class="description">B008: Flag: Game Over</div>
 <table class="disassembly">
 <tr>
 <td class="routine-comment" colspan="5">
 <div class="details">
+<div class="paragraph">
+A flag to indicate if the game is still in-play, or what the reason for death is. <table class="default">
+<tr>
+<th colspan="1" rowspan="1">Value</th>
+<th colspan="1" rowspan="1">Meaning</th>
+</tr>
+<tr>
+<td class="centre" colspan="1" rowspan="1">00</td>
+<td class="centre" colspan="1" rowspan="1">Not "Game Over"</td>
+</tr>
+</table>
+</div>
 </div>
 </td>
 </tr>
 <tr>
+<td class="asm-label">Flag_GameOver</td>
 <td class="address-1"><span id="b008"></span>B008</td>
 <td class="instruction">DEFB $00</td>
 <td class="comment-0" rowspan="1"></td>
@@ -61,8 +74,8 @@ Next: <a href="B009.html">B009</a>
 </table>
 <footer>
 <div class="release"></div>
-<div class="copyright">&copy; 1984 New Generation Software; 2023 ArcadeGeek LTD.</div>
-<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.0.</div>
+<div class="copyright">&copy; 1984 New Generation Software<br />&copy; 2026 ArcadeGeek LTD.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 10.1.</div>
 <div class="repository">Link to <a href="https://github.com/pobtastic/trashman/">Source code</a>.</div>
 <div><a href="../dec/asm/45064.html">Switch to decimal</a>.</div>
 </footer>

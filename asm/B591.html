@@ -46,6 +46,20 @@ Used by the routines at <a href="B0A1.html">StartGame</a> and <a href="B724.html
 </td>
 </tr>
 <tr>
+<td class="routine-comment" colspan="5">
+<span id="b591"></span>
+<div class="comments">
+<div class="paragraph">
+<table class="">
+<tr>
+<td class="" colspan="1" rowspan="1"><img alt="gameplay" src="../images/scr/gameplay.png" /></td>
+</tr>
+</table>
+</div>
+</div>
+</td>
+</tr>
+<tr>
 <td class="address-2"><span id="b591"></span>B591</td>
 <td class="instruction">LD A,($C279)</td>
 <td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="C279.html">C279</a>.</td>
@@ -132,7 +146,7 @@ Used by the routines at <a href="B0A1.html">StartGame</a> and <a href="B724.html
 <tr>
 <td class="address-1"><span id="b5be"></span>B5BE</td>
 <td class="instruction">LD IX,$C2EE</td>
-<td class="comment-1" rowspan="1"><span class="register">IX</span>=<a href="C2EE.html">C2EE</a>.</td>
+<td class="comment-1" rowspan="1"><span class="register">IX</span>=<a href="C2EE.html">Table_</a>.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="b5c2"></span>B5C2</td>
@@ -172,7 +186,7 @@ Used by the routines at <a href="B0A1.html">StartGame</a> and <a href="B724.html
 <tr>
 <td class="address-1"><span id="b5d3"></span>B5D3</td>
 <td class="instruction">LD IX,$C293</td>
-<td class="comment-1" rowspan="1"><span class="register">IX</span>=<a href="C293.html">C293</a>.</td>
+<td class="comment-1" rowspan="1"><span class="register">IX</span>=<a href="C293.html">Table_StreetObjects</a>.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="b5d7"></span>B5D7</td>
@@ -300,7 +314,7 @@ This entry point is used by the routine at <a href="B4B8.html">B4B8</a>.
 <tr>
 <td class="address-1"><span id="b60c"></span>B60C</td>
 <td class="instruction">LD IX,$C293</td>
-<td class="comment-1" rowspan="1"><span class="register">IX</span>=<a href="C293.html">C293</a>.</td>
+<td class="comment-1" rowspan="1"><span class="register">IX</span>=<a href="C293.html">Table_StreetObjects</a>.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="b610"></span>B610</td>
@@ -320,12 +334,11 @@ This entry point is used by the routine at <a href="B4B8.html">B4B8</a>.
 <tr>
 <td class="address-1"><span id="b616"></span>B616</td>
 <td class="instruction">LD BC,$000D</td>
-<td class="comment-1" rowspan="1"><span class="register">BC</span>=000D.</td>
+<td class="comment-1" rowspan="2"><span class="register">IX</span>+=000D.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="b619"></span>B619</td>
 <td class="instruction">ADD IX,BC</td>
-<td class="comment-1" rowspan="1"><span class="register">IX</span>+=<span class="register">BC</span>.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="b61b"></span>B61B</td>
@@ -340,27 +353,26 @@ This entry point is used by the routine at <a href="B4B8.html">B4B8</a>.
 <tr>
 <td class="address-1"><span id="b61e"></span>B61E</td>
 <td class="instruction">LD IX,$C2D4</td>
-<td class="comment-1" rowspan="1"><span class="register">IX</span>=<a href="C2D4.html">C2D4</a>.</td>
+<td class="comment-1" rowspan="1"><span class="register">IX</span>=<a href="C293.html#c2d4">C2D4</a>.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="b622"></span>B622</td>
-<td class="instruction">CALL <a href="BD0D.html#bd27">$BD27</a></td>
-<td class="comment-1" rowspan="1">Call <a href="BD0D.html#bd27">BD27</a>.</td>
+<td class="instruction">CALL <a href="BD24.html#bd27">$BD27</a></td>
+<td class="comment-1" rowspan="1">Call <a href="BD24.html#bd27">BD27</a>.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="b625"></span>B625</td>
 <td class="instruction">LD BC,$000D</td>
-<td class="comment-1" rowspan="1"><span class="register">BC</span>=000D.</td>
+<td class="comment-1" rowspan="2"><span class="register">IX</span>+=000D.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="b628"></span>B628</td>
 <td class="instruction">ADD IX,BC</td>
-<td class="comment-1" rowspan="1"><span class="register">IX</span>+=<span class="register">BC</span>.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="b62a"></span>B62A</td>
-<td class="instruction">CALL <a href="BD0D.html#bd27">$BD27</a></td>
-<td class="comment-1" rowspan="1">Call <a href="BD0D.html#bd27">BD27</a>.</td>
+<td class="instruction">CALL <a href="BD24.html#bd27">$BD27</a></td>
+<td class="comment-1" rowspan="1">Call <a href="BD24.html#bd27">BD27</a>.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="b62d"></span>B62D</td>
@@ -379,8 +391,8 @@ This entry point is used by the routine at <a href="B4B8.html">B4B8</a>.
 </tr>
 <tr>
 <td class="address-1"><span id="b636"></span>B636</td>
-<td class="instruction">CALL <a href="B374.html#b38c">Copier</a></td>
-<td class="comment-1" rowspan="1">Call <a href="B374.html#b38c">Copier</a>.</td>
+<td class="instruction">CALL <a href="B38C.html">Copier_Pixels</a></td>
+<td class="comment-1" rowspan="1">Call <a href="B38C.html">Copier_Pixels</a>.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="b639"></span>B639</td>
@@ -399,13 +411,13 @@ This entry point is used by the routine at <a href="B4B8.html">B4B8</a>.
 </tr>
 <tr>
 <td class="address-1"><span id="b643"></span>B643</td>
-<td class="instruction">CALL <a href="B2C0.html#b2d1">$B2D1</a></td>
-<td class="comment-1" rowspan="1">Call <a href="B2C0.html#b2d1">B2D1</a>.</td>
+<td class="instruction">CALL <a href="B2D1.html">Attributes_Copier</a></td>
+<td class="comment-1" rowspan="1">Call <a href="B2D1.html">Attributes_Copier</a>.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="b646"></span>B646</td>
-<td class="instruction">CALL <a href="B416.html">$B416</a></td>
-<td class="comment-1" rowspan="1">Call <a href="B416.html">B416</a>.</td>
+<td class="instruction">CALL <a href="B416.html">PlaceTrashman</a></td>
+<td class="comment-1" rowspan="1">Call <a href="B416.html">PlaceTrashman</a>.</td>
 </tr>
 <tr>
 <td class="address-1"><span id="b649"></span>B649</td>
@@ -426,8 +438,8 @@ Next: <a href="B64C.html">B64C</a>
 </table>
 <footer>
 <div class="release"></div>
-<div class="copyright">&copy; 1984 New Generation Software; 2023 ArcadeGeek LTD.</div>
-<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.0.</div>
+<div class="copyright">&copy; 1984 New Generation Software<br />&copy; 2026 ArcadeGeek LTD.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 10.1.</div>
 <div class="repository">Link to <a href="https://github.com/pobtastic/trashman/">Source code</a>.</div>
 <div><a href="../dec/asm/46481.html">Switch to decimal</a>.</div>
 </footer>

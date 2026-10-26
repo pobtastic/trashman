@@ -200,7 +200,7 @@ The game has ended ... check why.
 <td class="asm-label"></td>
 <td class="address-1"><span id="42439"></span>42439</td>
 <td class="instruction">LD A,(45064)</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="45064.html">45064</a>.</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="45064.html">Flag_GameOver</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -239,18 +239,18 @@ Check other reasons why the game ended (see <a href="../reference/pokes.html#imm
 <td class="asm-label"></td>
 <td class="address-1"><span id="42452"></span>42452</td>
 <td class="instruction">LD A,(45064)</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="45064.html">45064</a>.</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="45064.html">Flag_GameOver</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="42455"></span>42455</td>
 <td class="instruction">BIT 0,A</td>
-<td class="comment-1" rowspan="2">Jump to <a href="42542.html#42599">Handler_Fired_0</a> if bit 0 is set.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="42542.html#42599">GameOver_Dead</a> if bit 0 is set.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="42457"></span>42457</td>
-<td class="instruction">JP NZ,<a href="42542.html#42599">Handler_Fired_0</a></td>
+<td class="instruction">JP NZ,<a href="42542.html#42599">GameOver_Dead</a></td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -288,7 +288,7 @@ Has the player completed the game?
 <td class="asm-label"></td>
 <td class="address-1"><span id="42464"></span>42464</td>
 <td class="instruction">LD A,12</td>
-<td class="comment-1" rowspan="3">Jump to <a href="42384.html#42487">Game_Complete</a> if *<span class="register">HL</span> equals 12.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="42384.html#42487">Game_Complete</a> if the current players level is 12.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -470,8 +470,8 @@ Next: <a href="42525.html">42525</a>
 </table>
 <footer>
 <div class="release"></div>
-<div class="copyright">&copy; 1984 New Generation Software; 2023 ArcadeGeek LTD.</div>
-<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.0.</div>
+<div class="copyright">&copy; 1984 New Generation Software<br />&copy; 2026 ArcadeGeek LTD.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 10.1.</div>
 <div class="repository">Link to <a href="https://github.com/pobtastic/trashman/">Source code</a>.</div>
 <div><a href="../../asm/A590.html">Switch to hexadecimal</a>.</div>
 </footer>

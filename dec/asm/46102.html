@@ -34,7 +34,7 @@ Next: <a href="46154.html">46154</a>
 </td>
 </tr>
 </table>
-<div class="description">46102: Routine at B416</div>
+<div class="description">46102: Place Trashman</div>
 <table class="disassembly">
 <tr>
 <td class="routine-comment" colspan="5">
@@ -46,87 +46,105 @@ Used by the routines at <a href="45217.html">StartGame</a>, <a href="46481.html"
 </td>
 </tr>
 <tr>
+<td class="asm-label">PlaceTrashman</td>
 <td class="address-2"><span id="46102"></span>46102</td>
 <td class="instruction">LD IX,50030</td>
-<td class="comment-1" rowspan="1"><span class="register">IX</span>=<a href="50030.html">50030</a>.</td>
+<td class="comment-1" rowspan="1"><span class="register">IX</span>=<a href="50030.html">Player_Data</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="46106"></span>46106</td>
 <td class="instruction">BIT 0,(IX+24)</td>
-<td class="comment-1" rowspan="2">Jump to <a href="46102.html#46117">46117</a> if bit 0 of *<span class="register">IX</span>+24 is not set.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="46102.html#46117">PlaceTrashman_0</a> if bit 0 of *<span class="register">IX</span>+24 is not set.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="46110"></span>46110</td>
-<td class="instruction">JR Z,<a href="46102.html#46117">46117</a></td>
+<td class="instruction">JR Z,<a href="46102.html#46117">PlaceTrashman_0</a></td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="46112"></span>46112</td>
 <td class="instruction">BIT 7,(IX+24)</td>
 <td class="comment-1" rowspan="2">Return if bit 7 of *<span class="register">IX</span>+24 is set.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="46116"></span>46116</td>
 <td class="instruction">RET NZ</td>
 </tr>
 <tr>
+<td class="asm-label">PlaceTrashman_0</td>
 <td class="address-2"><span id="46117"></span>46117</td>
 <td class="instruction">RES 7,(IX+24)</td>
 <td class="comment-1" rowspan="1">Reset bit 7 of *<span class="register">IX</span>+24.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="46121"></span>46121</td>
-<td class="instruction">CALL <a href="45760.html">45760</a></td>
-<td class="comment-1" rowspan="1">Call <a href="45760.html">45760</a>.</td>
+<td class="instruction">CALL <a href="45760.html">TrashmanAttributes_Copier</a></td>
+<td class="comment-1" rowspan="1">Call <a href="45760.html">TrashmanAttributes_Copier</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="46124"></span>46124</td>
 <td class="instruction">LD IX,50030</td>
-<td class="comment-1" rowspan="1"><span class="register">IX</span>=<a href="50030.html">50030</a>.</td>
+<td class="comment-1" rowspan="1"><span class="register">IX</span>=<a href="50030.html">Player_Data</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="46128"></span>46128</td>
-<td class="instruction">CALL <a href="45940.html">45940</a></td>
-<td class="comment-1" rowspan="1">Call <a href="45940.html">45940</a>.</td>
+<td class="instruction">CALL <a href="45940.html">DrawTrashmanSprite</a></td>
+<td class="comment-1" rowspan="1">Call <a href="45940.html">DrawTrashmanSprite</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="46131"></span>46131</td>
 <td class="instruction">BIT 1,(IX+23)</td>
-<td class="comment-1" rowspan="2">Jump to <a href="46102.html#46144">46144</a> if bit 1 of *<span class="register">IX</span>+23 is set.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="46102.html#46144">PlaceTrashman_1</a> if bit 1 of *<span class="register">IX</span>+23 is set.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="46135"></span>46135</td>
-<td class="instruction">JR NZ,<a href="46102.html#46144">46144</a></td>
+<td class="instruction">JR NZ,<a href="46102.html#46144">PlaceTrashman_1</a></td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="46137"></span>46137</td>
 <td class="instruction">CALL <a href="46264.html">46264</a></td>
 <td class="comment-1" rowspan="1">Call <a href="46264.html">46264</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="46140"></span>46140</td>
 <td class="instruction">CALL <a href="46185.html">46185</a></td>
 <td class="comment-1" rowspan="1">Call <a href="46185.html">46185</a>.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="46143"></span>46143</td>
 <td class="instruction">RET</td>
 <td class="comment-1" rowspan="1">Return.</td>
 </tr>
 <tr>
+<td class="asm-label">PlaceTrashman_1</td>
 <td class="address-2"><span id="46144"></span>46144</td>
 <td class="instruction">BIT 0,(IX+24)</td>
 <td class="comment-1" rowspan="2">Return if bit 0 of *<span class="register">IX</span>+24 is not set.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="46148"></span>46148</td>
 <td class="instruction">RET Z</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="46149"></span>46149</td>
 <td class="instruction">SET 7,(IX+24)</td>
 <td class="comment-1" rowspan="1">Set bit 7 of *<span class="register">IX</span>+24.</td>
 </tr>
 <tr>
+<td class="asm-label"></td>
 <td class="address-1"><span id="46153"></span>46153</td>
 <td class="instruction">RET</td>
 <td class="comment-1" rowspan="1">Return.</td>
@@ -145,8 +163,8 @@ Next: <a href="46154.html">46154</a>
 </table>
 <footer>
 <div class="release"></div>
-<div class="copyright">&copy; 1984 New Generation Software; 2023 ArcadeGeek LTD.</div>
-<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.0.</div>
+<div class="copyright">&copy; 1984 New Generation Software<br />&copy; 2026 ArcadeGeek LTD.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 10.1.</div>
 <div class="repository">Link to <a href="https://github.com/pobtastic/trashman/">Source code</a>.</div>
 <div><a href="../../asm/B416.html">Switch to hexadecimal</a>.</div>
 </footer>

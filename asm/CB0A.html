@@ -59,7 +59,7 @@ Print the current "Bonus" value.
 <td class="asm-label">Print_Bonus</td>
 <td class="address-2"><span id="cb0a"></span>CB0A</td>
 <td class="instruction">LD B,$02</td>
-<td class="comment-1" rowspan="1"><span class="register">B</span>=02 (counter).</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=02 (number of characters stored for <a href="C272.html">Time_Remaining</a>).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -68,20 +68,20 @@ Print the current "Bonus" value.
 <td class="comment-1" rowspan="1"><span class="register">DE</span>=403B (screen buffer location).</td>
 </tr>
 <tr>
+<td class="routine-comment" colspan="5">
+<span id="cb0f"></span>
+<div class="comments">
+<div class="paragraph">
+Work backwards - the data is stored back-to-front e.g. 5002 for outputting "250".
+</div>
+</div>
+</td>
+</tr>
+<tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="cb0f"></span>CB0F</td>
 <td class="instruction">LD HL,$C272</td>
 <td class="comment-1" rowspan="1"><span class="register">HL</span>=<a href="C272.html">Time_Remaining</a>.</td>
-</tr>
-<tr>
-<td class="routine-comment" colspan="5">
-<span id="cb12"></span>
-<div class="comments">
-<div class="paragraph">
-Work backwards.
-</div>
-</div>
-</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -125,7 +125,7 @@ This entry point is used by the routine at <a href="A8D4.html">Handler_NewsFlash
 <td class="asm-label">Print_Score</td>
 <td class="address-2"><span id="cb19"></span>CB19</td>
 <td class="instruction">LD B,$03</td>
-<td class="comment-1" rowspan="1"><span class="register">B</span>=03 (counter).</td>
+<td class="comment-1" rowspan="1"><span class="register">B</span>=03 (number of characters in the players score).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -159,8 +159,8 @@ Next: <a href="CB22.html">CB22</a>
 </table>
 <footer>
 <div class="release"></div>
-<div class="copyright">&copy; 1984 New Generation Software; 2023 ArcadeGeek LTD.</div>
-<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.0.</div>
+<div class="copyright">&copy; 1984 New Generation Software<br />&copy; 2026 ArcadeGeek LTD.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 10.1.</div>
 <div class="repository">Link to <a href="https://github.com/pobtastic/trashman/">Source code</a>.</div>
 <div><a href="../dec/asm/51978.html">Switch to decimal</a>.</div>
 </footer>

@@ -80,6 +80,27 @@ gtag('config', 'G-75RERFCHBG');
 </td>
 </tr>
 <tr>
+<td class="map-g"><span id="b008"></span><a href="../asm/B008.html">B008</a></td>
+<td class="map-length">1</td>
+<td class="map-g-desc">
+<div class="map-entry-title-11"><a class="map-entry-title" href="../asm/B008.html">Flag: Game Over</a></div>
+<div class="map-entry-desc">
+<div class="paragraph">
+A flag to indicate if the game is still in-play, or what the reason for death is. <table class="default">
+<tr>
+<th colspan="1" rowspan="1">Value</th>
+<th colspan="1" rowspan="1">Meaning</th>
+</tr>
+<tr>
+<td class="centre" colspan="1" rowspan="1">00</td>
+<td class="centre" colspan="1" rowspan="1">Not "Game Over"</td>
+</tr>
+</table>
+</div>
+</div>
+</td>
+</tr>
+<tr>
 <td class="map-g"><span id="b043"></span><a href="../asm/B043.html">B043</a></td>
 <td class="map-length">48</td>
 <td class="map-g-desc">
@@ -263,45 +284,27 @@ For "250" seconds/ bonus points remaining.
 </tr>
 <tr>
 <td class="map-g"><span id="c293"></span><a href="../asm/C293.html">C293</a></td>
-<td class="map-length">52</td>
+<td class="map-length">91</td>
 <td class="map-g-desc">
-<div class="map-entry-title-11"><a class="map-entry-title" href="../asm/C293.html">Game status buffer entry at C293</a></div>
-<div class="map-entry-desc">
-</div>
-</td>
-</tr>
-<tr>
-<td class="map-g"><span id="c2c7"></span><a href="../asm/C2C7.html">C2C7</a></td>
-<td class="map-length">5</td>
-<td class="map-g-desc">
-<div class="map-entry-title-11"><a class="map-entry-title" href="../asm/C2C7.html">Game status buffer entry at C2C7</a></div>
-<div class="map-entry-desc">
-</div>
-</td>
-</tr>
-<tr>
-<td class="map-g"><span id="c2cc"></span><a href="../asm/C2CC.html">C2CC</a></td>
-<td class="map-length">8</td>
-<td class="map-g-desc">
-<div class="map-entry-title-11"><a class="map-entry-title" href="../asm/C2CC.html">Game status buffer entry at C2CC</a></div>
-<div class="map-entry-desc">
-</div>
-</td>
-</tr>
-<tr>
-<td class="map-g"><span id="c2d4"></span><a href="../asm/C2D4.html">C2D4</a></td>
-<td class="map-length">26</td>
-<td class="map-g-desc">
-<div class="map-entry-title-11"><a class="map-entry-title" href="../asm/C2D4.html">Game status buffer entry at C2D4</a></div>
+<div class="map-entry-title-11"><a class="map-entry-title" href="../asm/C293.html">Table: Street Objects</a></div>
 <div class="map-entry-desc">
 </div>
 </td>
 </tr>
 <tr>
 <td class="map-g"><span id="c2ee"></span><a href="../asm/C2EE.html">C2EE</a></td>
-<td class="map-length">111</td>
+<td class="map-length">104</td>
 <td class="map-g-desc">
-<div class="map-entry-title-11"><a class="map-entry-title" href="../asm/C2EE.html">Game status buffer entry at C2EE</a></div>
+<div class="map-entry-title-11"><a class="map-entry-title" href="../asm/C2EE.html">Table:</a></div>
+<div class="map-entry-desc">
+</div>
+</td>
+</tr>
+<tr>
+<td class="map-g"><span id="c356"></span><a href="../asm/C356.html">C356</a></td>
+<td class="map-length">7</td>
+<td class="map-g-desc">
+<div class="map-entry-title-11"><a class="map-entry-title" href="../asm/C356.html">Game status buffer entry at C356</a></div>
 <div class="map-entry-desc">
 </div>
 </td>
@@ -317,27 +320,9 @@ For "250" seconds/ bonus points remaining.
 </tr>
 <tr>
 <td class="map-g"><span id="c36e"></span><a href="../asm/C36E.html">C36E</a></td>
-<td class="map-length">7</td>
+<td class="map-length">25</td>
 <td class="map-g-desc">
-<div class="map-entry-title-11"><a class="map-entry-title" href="../asm/C36E.html">Game status buffer entry at C36E</a></div>
-<div class="map-entry-desc">
-</div>
-</td>
-</tr>
-<tr>
-<td class="map-g"><span id="c375"></span><a href="../asm/C375.html">C375</a></td>
-<td class="map-length">17</td>
-<td class="map-g-desc">
-<div class="map-entry-title-11"><a class="map-entry-title" href="../asm/C375.html">Game status buffer entry at C375</a></div>
-<div class="map-entry-desc">
-</div>
-</td>
-</tr>
-<tr>
-<td class="map-g"><span id="c386"></span><a href="../asm/C386.html">C386</a></td>
-<td class="map-length">1</td>
-<td class="map-g-desc">
-<div class="map-entry-title-11"><a class="map-entry-title" href="../asm/C386.html">Game status buffer entry at C386</a></div>
+<div class="map-entry-title-11"><a class="map-entry-title" href="../asm/C36E.html">Player Data</a></div>
 <div class="map-entry-desc">
 </div>
 </td>
@@ -446,8 +431,8 @@ See <a href="../asm/CB96.html">ActivePlayer_Score</a> for explanation.
 </table>
 <footer>
 <div class="release"></div>
-<div class="copyright">&copy; 1984 New Generation Software; 2023 ArcadeGeek LTD.</div>
-<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.0.</div>
+<div class="copyright">&copy; 1984 New Generation Software<br />&copy; 2026 ArcadeGeek LTD.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 10.1.</div>
 <div class="repository">Link to <a href="https://github.com/pobtastic/trashman/">Source code</a>.</div>
 <div><a href="../dec/buffers/gbuffer.html">Switch to decimal</a>.</div>
 </footer>

@@ -152,8 +152,8 @@ Who is in play, is it 1UP or 2UP?
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="a657"></span>A657</td>
-<td class="instruction">JR <a href="A62E.html#a672">Handler_Fired_BackToMenu</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="A62E.html#a672">Handler_Fired_BackToMenu</a>.</td>
+<td class="instruction">JR <a href="A62E.html#a672">Alias_JumpGameLoop</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="A62E.html#a672">Alias_JumpGameLoop</a>.</td>
 </tr>
 <tr>
 <td class="asm-label">Handler_Fired_HighScore</td>
@@ -182,8 +182,8 @@ Who is in play, is it 1UP or 2UP?
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="a665"></span>A665</td>
-<td class="instruction">JR <a href="A62E.html#a672">Handler_Fired_BackToMenu</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="A62E.html#a672">Handler_Fired_BackToMenu</a>.</td>
+<td class="instruction">JR <a href="A62E.html#a672">Alias_JumpGameLoop</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="A62E.html#a672">Alias_JumpGameLoop</a>.</td>
 </tr>
 <tr>
 <td class="routine-comment" colspan="5">
@@ -192,11 +192,14 @@ Who is in play, is it 1UP or 2UP?
 <div class="paragraph">
 This entry point is used by the routine at <a href="A590.html">GameEntryPoint</a>.
 </div>
+<div class="paragraph">
+Trashman is killed in action.
+</div>
 </div>
 </td>
 </tr>
 <tr>
-<td class="asm-label">Handler_Fired_0</td>
+<td class="asm-label">GameOver_Dead</td>
 <td class="address-2"><span id="a667"></span>A667</td>
 <td class="instruction">CALL <a href="A99F.html#a9c5">CopyScore_ActiveScore</a></td>
 <td class="comment-1" rowspan="1">Call <a href="A99F.html#a9c5">CopyScore_ActiveScore</a>.</td>
@@ -220,10 +223,20 @@ This entry point is used by the routine at <a href="A590.html">GameEntryPoint</a
 <td class="comment-1" rowspan="1">Jump to <a href="A62E.html#a63a">Handler_Fired_PlayerCheck</a>.</td>
 </tr>
 <tr>
-<td class="asm-label">Handler_Fired_BackToMenu</td>
+<td class="routine-comment" colspan="5">
+<span id="a672"></span>
+<div class="comments">
+<div class="paragraph">
+Just jump back into the game loop.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">Alias_JumpGameLoop</td>
 <td class="address-2"><span id="a672"></span>A672</td>
 <td class="instruction">JP <a href="A590.html#a5a3">Game_Loop</a></td>
-<td class="comment-1" rowspan="1">Jump to <a href="A590.html#a5a3">Game_Loop</a>.</td>
+<td class="comment-1" rowspan="1">Jump back to <a href="A590.html#a5a3">Game_Loop</a>.</td>
 </tr>
 </table>
 <table class="asm-navigation">
@@ -239,8 +252,8 @@ Next: <a href="A675.html">A675</a>
 </table>
 <footer>
 <div class="release"></div>
-<div class="copyright">&copy; 1984 New Generation Software; 2023 ArcadeGeek LTD.</div>
-<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.0.</div>
+<div class="copyright">&copy; 1984 New Generation Software<br />&copy; 2026 ArcadeGeek LTD.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 10.1.</div>
 <div class="repository">Link to <a href="https://github.com/pobtastic/trashman/">Source code</a>.</div>
 <div><a href="../dec/asm/42542.html">Switch to decimal</a>.</div>
 </footer>

@@ -200,7 +200,7 @@ The game has ended ... check why.
 <td class="asm-label"></td>
 <td class="address-1"><span id="a5c7"></span>A5C7</td>
 <td class="instruction">LD A,($B008)</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="B008.html">B008</a>.</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="B008.html">Flag_GameOver</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -239,18 +239,18 @@ Check other reasons why the game ended (see <a href="../reference/pokes.html#imm
 <td class="asm-label"></td>
 <td class="address-1"><span id="a5d4"></span>A5D4</td>
 <td class="instruction">LD A,($B008)</td>
-<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="B008.html">B008</a>.</td>
+<td class="comment-1" rowspan="1"><span class="register">A</span>=*<a href="B008.html">Flag_GameOver</a>.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="a5d7"></span>A5D7</td>
 <td class="instruction">BIT 0,A</td>
-<td class="comment-1" rowspan="2">Jump to <a href="A62E.html#a667">Handler_Fired_0</a> if bit 0 is set.</td>
+<td class="comment-1" rowspan="2">Jump to <a href="A62E.html#a667">GameOver_Dead</a> if bit 0 is set.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
 <td class="address-1"><span id="a5d9"></span>A5D9</td>
-<td class="instruction">JP NZ,<a href="A62E.html#a667">Handler_Fired_0</a></td>
+<td class="instruction">JP NZ,<a href="A62E.html#a667">GameOver_Dead</a></td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -288,7 +288,7 @@ Has the player completed the game?
 <td class="asm-label"></td>
 <td class="address-1"><span id="a5e0"></span>A5E0</td>
 <td class="instruction">LD A,$0C</td>
-<td class="comment-1" rowspan="3">Jump to <a href="A590.html#a5f7">Game_Complete</a> if *<span class="register">HL</span> equals 0C.</td>
+<td class="comment-1" rowspan="3">Jump to <a href="A590.html#a5f7">Game_Complete</a> if the current players level is 0C.</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
@@ -470,8 +470,8 @@ Next: <a href="A61D.html">A61D</a>
 </table>
 <footer>
 <div class="release"></div>
-<div class="copyright">&copy; 1984 New Generation Software; 2023 ArcadeGeek LTD.</div>
-<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.0.</div>
+<div class="copyright">&copy; 1984 New Generation Software<br />&copy; 2026 ArcadeGeek LTD.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 10.1.</div>
 <div class="repository">Link to <a href="https://github.com/pobtastic/trashman/">Source code</a>.</div>
 <div><a href="../dec/asm/42384.html">Switch to decimal</a>.</div>
 </footer>
