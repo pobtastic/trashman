@@ -6,7 +6,7 @@
 ; To build the HTML disassembly, run these commands:
 ;   tap2sna.py @trashman.t2s
 ;   sna2skool.py -H -c trashman.ctl trashman.z80 > trashman.skool
-;   skool2html.py -H trashman.skool -T dark
+;   skool2html.py -H trashman.skool -T dark -T wide -toOa
 
 [Config]
 Expand=#INCLUDE(Expand)
@@ -18,6 +18,9 @@ Game=Trashman
 Logo=#SCR$01,$0B,$0A,$0A,$05(/images/logo)
 Copyright=&copy; 1984 New Generation Software<br />&copy; 2026 ArcadeGeek LTD.
 Repository=https://github.com/pobtastic/trashman/
+Canonical=https://skoolkit.arcadegeek.co.uk/trashman/
+GameIndexUrl=https://skoolkit.arcadegeek.co.uk/trashman/
+OgImage=https://skoolkit.arcadegeek.co.uk/trashman/images/logo.png
 StyleSheet=skoolkit.css;skoolkit-dark.css
 LinkInternalOperands=1
 AddressAnchor={address#IF({base}==16)(:04x)}
